@@ -1,0 +1,102 @@
+package com.seok.seok.wowsup;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import com.kakao.auth.ISessionCallback;
+import com.kakao.auth.Session;
+import com.kakao.network.ErrorResult;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.MeResponseCallback;
+import com.kakao.usermgmt.response.model.UserProfile;
+import com.kakao.util.exception.KakaoException;
+import com.kakao.util.helper.log.Logger;
+
+public class LoginActivity extends AppCompatActivity {
+    private SessionCallback callback;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+
+
+        /**카카오톡 로그아웃 요청**/
+        //한번 로그인이 성공하면 세션 정보가 남아있어서 로그인창이 뜨지 않고 바로 onSuccess()메서드를 호출합니다.
+        //테스트 하시기 편하라고 매번 로그아웃 요청을 수행하도록 코드를 넣었습니다 ^^
+        /*
+        UserManagement.requestLogout(new LogoutResponseCallback() {
+            @Override
+            public void onCompleteLogout() {
+                //로그아웃 성공 후 하고싶은 내용 코딩
+            }
+        });*/
+        //Log.d("key: ", getKeyHash(this)+ " < ");
+
+        callback = new SessionCallback();
+        Session.getCurrentSession().addCallback(callback);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
+            // Log.d("KAKAO", "session opend1");
+            //requestMe();
+            return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Session.getCurrentSession().removeCallback(callback);
+    }
+    private class SessionCallback implements ISessionCallback {
+
+        @Override
+        public void onSessionOpened() {
+            Log.d("KAKAO", "session opend2");
+            requestMe();
+        }
+
+        @Override
+        public void onSessionOpenFailed(KakaoException exception) {
+            Log.d("KAKAO", "session failed");
+            if(exception != null) {
+                Logger.e(exception);
+                Log.d("KAKAO", "session failed2 "+ exception);
+            }
+        }
+    }
+    private void requestMe() {
+        UserManagement.getInstance().requestMe(new MeResponseCallback() {
+            @Override
+            public void onFailure(ErrorResult errorResult) {
+                String message = "failed to get user info. msg=" + errorResult;
+                Log.d("KAKAO ERR" , message);
+                Logger.d(message);
+            }
+
+            @Override
+            public void onSessionClosed(ErrorResult errorResult) {
+                Log.d("KAKAO ERR" ,"session closed" + errorResult);
+            }
+
+            @Override
+            public void onSuccess(UserProfile userProfile) {
+                Log.d("KAKAO userProfile_" , userProfile.getNickname()+"");
+                Log.d("KAKAO userProfile_" , userProfile.getEmail()+"");
+                Log.d("KAKAO userProfile_" , userProfile.getId()+"");
+                Log.d("KAKAO userProfile_" , userProfile.getServiceUserId()+"");
+                Log.d("KAKAO userProfile_" , userProfile.getUUID()+"");
+
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            }
+
+            @Override
+            public void onNotSignedUp() {
+                Log.d("KAKAO ERR" ," NOT SINGED UP");
+            }
+        });
+    }
+}
