@@ -15,6 +15,7 @@ import android.util.Base64;
 import android.util.Log;
 
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class LauncherActivity extends AppCompatActivity {
     private Context mContext;
@@ -36,6 +37,29 @@ public class LauncherActivity extends AppCompatActivity {
         }
     };
 
+
+
+
+
+
+
+
+
+    // 프로젝트의 해시키를 반환 Facebook 해시키 반환 코드 getHashKey();
+//    private void getHashKey() {
+//        try {
+//            PackageInfo info = getPackageManager().getPackageInfo(this.getPackageName(), PackageManager.GET_SIGNATURES);
+//            for (Signature signature : info.signatures) {
+//                MessageDigest md = MessageDigest.getInstance("SHA");
+//                md.update(signature.toByteArray());
+//                Log.d("facebook Key???", "key_hash=" + Base64.encodeToString(md.digest(), Base64.DEFAULT));
+//            }
+//        } catch (PackageManager.NameNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (NoSuchAlgorithmException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     // 프로젝트의 해시키를 반환 Kakao 해시키 반환 코드 getHashKey(mContext);
 //    @Nullable

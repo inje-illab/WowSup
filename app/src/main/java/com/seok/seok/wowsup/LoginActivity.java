@@ -4,6 +4,16 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.Profile;
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
@@ -15,7 +25,8 @@ import com.kakao.util.helper.log.Logger;
 
 public class LoginActivity extends AppCompatActivity {
     private SessionCallback callback;
-
+    private CallbackManager callbackManager;
+    private LoginButton facebook_login;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,19 +43,48 @@ public class LoginActivity extends AppCompatActivity {
                 //로그아웃 성공 후 하고싶은 내용 코딩
             }
         });*/
-        //Log.d("key: ", getKeyHash(this)+ " < ");
-
         callback = new SessionCallback();
         Session.getCurrentSession().addCallback(callback);
-    }
 
+        //facebook
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
+        callbackManager = CallbackManager.Factory.create();
+
+        facebook_login = findViewById(R.id.login_button);
+
+        facebook_login.setReadPermissions("email");
+
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        // App code
+                        Log.d("onSuccess","onSucces LoginResult="+loginResult);
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        // App code
+                        Log.d("onCancel","onCancel");
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        // App code
+                        Log.d("onError","onError");
+                    }
+                });
+    }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
-            // Log.d("KAKAO", "session opend1");
-            //requestMe();
+        super.onActivityResult(requestCode, resultCode, data);
+
+        //카카오톡, 페이스북 result
+        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data) || callbackManager.onActivityResult(requestCode, resultCode, data)) {
+            Log.d("Login Session", "session opend1");
+            requestMe();
             return;
         }
-        super.onActivityResult(requestCode, resultCode, data);
     }
     @Override
     protected void onDestroy() {
@@ -90,7 +130,13 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d("KAKAO userProfile_" , userProfile.getServiceUserId()+"");
                 Log.d("KAKAO userProfile_" , userProfile.getUUID()+"");
 
+                Log.d("FACEBOOK userProfile_" , Profile.getCurrentProfile().getId());
+                Log.d("FACEBOOK userProfile_" , Profile.getCurrentProfile().getFirstName());
+                Log.d("FACEBOOK userProfile_" , Profile.getCurrentProfile().getMiddleName());
+                Log.d("FACEBOOK userProfile_" , Profile.getCurrentProfile().getLastName());
+                Log.d("FACEBOOK userProfile_" , Profile.getCurrentProfile().getName());
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
             }
 
             @Override

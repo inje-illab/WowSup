@@ -10,8 +10,15 @@
     <com.kakao.usermgmt.LoginButton
         android:id="@+id/com_kakao_login"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_margin="20dp" />
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_margin="20dp" />
 
 </LinearLayout>
