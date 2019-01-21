@@ -12,3 +12,12 @@
 
 # 데이터베이스 구상도 시안
 ![preview4](./app/src/main/res/drawable/database_concepts.jpg)
+
+
+## 안드로이드와 서버간의 HTTP 통신을 위한 테스트 데이터베이스 구조
+    create table user_manage(
+        user_id varchar(32) not null,
+        user_pw varchar(32) not null,
+        user_email varchar(32) not null unique,
+        primary key (user_id)
+    );
