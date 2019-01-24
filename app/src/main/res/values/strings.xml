@@ -1,6 +1,6 @@
 <resources>
-    <!-- 카카오톡 키값 -->
     <string name="app_name">WowSup</string>
+    <!-- 카카오톡 키값 -->
     <string name="kakao_app_key">b7536b606a86d08028f86ce3e514e8f4</string>
 
     <!-- 페이스북 키값 -->

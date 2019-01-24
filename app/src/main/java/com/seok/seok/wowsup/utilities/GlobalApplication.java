@@ -1,4 +1,4 @@
-package com.seok.seok.wowsup;
+package com.seok.seok.wowsup.utilities;
 
 import android.app.Application;
 import android.content.Context;

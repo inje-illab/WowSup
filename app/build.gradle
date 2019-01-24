@@ -27,7 +27,14 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //KaKaoTalk, FaceBook 로그인 라이브러리
     implementation group: project.KAKAO_SDK_GROUP, name: 'usermgmt', version: project.KAKAO_SDK_VERSION
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.facebook.android:facebook-android-sdk:4.+'
+
+    //Retrofit2 HTTP 통신 라이브러리
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.google.code.gson:gson:2.8.0'
 }

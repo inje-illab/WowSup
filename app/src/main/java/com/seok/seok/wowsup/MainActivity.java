@@ -8,6 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.seok.seok.wowsup.fragments.fragchat.FragmentChat;
+import com.seok.seok.wowsup.fragments.fraghelp.FragmentHelp;
+import com.seok.seok.wowsup.fragments.fragprofile.FragmentProfile;
+import com.seok.seok.wowsup.fragments.fragstroy.FragmentStory;
+
 public class MainActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager = getSupportFragmentManager();

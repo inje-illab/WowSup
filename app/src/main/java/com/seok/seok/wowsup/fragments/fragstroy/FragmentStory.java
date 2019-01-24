@@ -1,6 +1,5 @@
-package com.seok.seok.wowsup;
+package com.seok.seok.wowsup.fragments.fragstroy;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,16 +7,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.seok.seok.wowsup.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link FragmentChat.OnFragmentInteractionListener} interface
+ * {@link FragmentStory.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link FragmentChat#newInstance} factory method to
+ * Use the {@link FragmentStory#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentChat extends Fragment {
+public class FragmentStory extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,7 +30,7 @@ public class FragmentChat extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public FragmentChat() {
+    public FragmentStory() {
         // Required empty public constructor
     }
 
@@ -39,11 +40,11 @@ public class FragmentChat extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentChat.
+     * @return A new instance of fragment FragmentStory.
      */
     // TODO: Rename and change types and number of parameters
-    public static FragmentChat newInstance(String param1, String param2) {
-        FragmentChat fragment = new FragmentChat();
+    public static FragmentStory newInstance(String param1, String param2) {
+        FragmentStory fragment = new FragmentStory();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,7 +65,7 @@ public class FragmentChat extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragment_chat, container, false);
+        return inflater.inflate(R.layout.fragment_fragment_story, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
