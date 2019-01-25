@@ -80,6 +80,8 @@ public class LoginActivity extends AppCompatActivity {
                                 ResponseLoginObj body = response.body();
                                 if (body.getState() == 1) {
                                     Toast.makeText(LoginActivity.this, "Login 성공", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                    //finish();
                                 } else if (body.getState() == 2) {
                                     Toast.makeText(LoginActivity.this, "Login 실패", Toast.LENGTH_SHORT).show();
                                 }
@@ -95,6 +97,15 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+        //회원가입 버튼을 눌렀을 경우
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                //finish();
+            }
+        });
+
         callback = new SessionCallback();
         Session.getCurrentSession().addCallback(callback);
 

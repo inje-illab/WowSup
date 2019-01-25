@@ -20,14 +20,28 @@
             android:text="ID"
             android:textSize="24sp" />
 
-        <EditText
-            android:id="@+id/register_edittext_id"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name"
-            android:textSize="24sp" />
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/register_edittext_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/register_button_confirm_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Confirm" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/register_text_pwd"

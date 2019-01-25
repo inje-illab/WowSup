@@ -1,6 +1,7 @@
 package com.seok.seok.wowsup.retrofit.remote;
 
 import com.seok.seok.wowsup.retrofit.model.ResponseLoginObj;
+import com.seok.seok.wowsup.retrofit.model.ResponseRegisterObj;
 
 import java.util.List;
 
@@ -22,8 +23,11 @@ public interface LoginService {
                                         @Query("Email") String email);
 
     @POST("Login/register.php")
-    Call<ResponseLoginObj> requestRegister(@Query("ID") String id,
+    Call<ResponseRegisterObj> requestRegister(@Query("ID") String id,
                                            @Query("PW") String pwd,
                                            @Query("Email") String email);
+
+    @POST("Login/confirmID.php")
+    Call<ResponseRegisterObj> requestConfirmID(@Query("ID") String id);
 
 }
