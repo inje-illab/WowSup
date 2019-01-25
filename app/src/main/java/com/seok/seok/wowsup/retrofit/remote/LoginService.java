@@ -20,4 +20,10 @@ public interface LoginService {
     Call<ResponseLoginObj> requestSnsLogin(@Query("ID") String id,
                                         @Query("PW") String pwd,
                                         @Query("Email") String email);
+
+    @POST("Login/register.php")
+    Call<ResponseLoginObj> requestRegister(@Query("ID") String id,
+                                           @Query("PW") String pwd,
+                                           @Query("Email") String email);
+
 }

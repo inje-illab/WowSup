@@ -51,17 +51,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        retrofitCallback = new Callback() {
-            @Override
-            public void onResponse(Call call, Response response) {
-
-            }
-
-            @Override
-            public void onFailure(Call call, Throwable t) {
-
-            }
-        };
         // Layout에서 id 값 받아오기
         btnLogin = findViewById(R.id.login_button_login);
         btnRegister = findViewById(R.id.login_button_register);
@@ -138,6 +127,17 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("onError", "onError");
                     }
                 });
+        retrofitCallback = new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+            }
+        };
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
