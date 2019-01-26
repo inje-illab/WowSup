@@ -10,12 +10,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.kakao.auth.AuthType;
 import com.kakao.auth.Session;
-import com.kakao.usermgmt.LoginButton;
 import com.seok.seok.wowsup.retrofit.model.ResponseLoginObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
-import com.seok.seok.wowsup.utilities.SessionCallback;
+import com.seok.seok.wowsup.utilities.SessionCallbackFacebook;
+import com.seok.seok.wowsup.utilities.SessionCallbackKakaoTalk;
+
+import org.json.JSONObject;
+
+import java.util.Arrays;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,11 +35,13 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     private Context mContext;
-    private Button btn_custom_login;
-    private LoginButton btn_kakao_login;
-    private SessionCallback sessionCallback;
+    private Button btnCustomKakaoLogin, btnCustomFacebookLogin;
+    private SessionCallbackKakaoTalk sessionCallbackKakaoTalk;
+    private SessionCallbackFacebook sessionCallbackFacebook;
+    private CallbackManager callbackManager;
     private Button btnLogin, btnRegister;
     private EditText edtID, edtPW;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,18 +52,28 @@ public class LoginActivity extends AppCompatActivity {
         edtID = findViewById(R.id.login_edittext_id);
         edtPW = findViewById(R.id.login_edittext_pwd);
 
-        sessionCallback = new SessionCallback();
+        btnCustomFacebookLogin = findViewById(R.id.btn_custom_facebook_login);
+        btnCustomKakaoLogin = findViewById(R.id.btn_custom_kakao_login);
 
-        btn_custom_login = (Button) findViewById(R.id.btn_custom_login);
-        btn_custom_login.setOnClickListener(new View.OnClickListener() {
+        sessionCallbackKakaoTalk = new SessionCallbackKakaoTalk();
+        sessionCallbackFacebook = new SessionCallbackFacebook();
+        btnCustomFacebookLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FacebookSdk.sdkInitialize(getApplicationContext());
+                callbackManager = CallbackManager.Factory.create();
+                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile", "email"));
+                LoginManager.getInstance().registerCallback(callbackManager, sessionCallbackFacebook);
+                onSuccess(sessionCallbackFacebook.getLoginSuccess());
+            }
+        });
+        btnCustomKakaoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Session session = Session.getCurrentSession();
-                session.addCallback(sessionCallback);
+                session.addCallback(sessionCallbackKakaoTalk);
                 session.open(AuthType.KAKAO_LOGIN_ALL, LoginActivity.this);
-                if(sessionCallback.getLoginSuccess()){
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                }
+                onSuccess(sessionCallbackKakaoTalk.getLoginSuccess());
             }
         });
 
@@ -116,6 +140,14 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
+    // Session Result Kakao, Facebook
+    public void onSuccess(boolean sessionCallback){
+        if (sessionCallback) {
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        }
+    }
+
     //카카오톡 세션 Result 반환
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -123,5 +155,6 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
         super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 }

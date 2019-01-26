@@ -13,7 +13,7 @@ import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.exception.KakaoException;
 import com.seok.seok.wowsup.MainActivity;
 
-public class SessionCallback implements ISessionCallback {
+public class SessionCallbackKakaoTalk implements ISessionCallback {
 
     private boolean loginSuccess = false;
 
@@ -47,18 +47,12 @@ public class SessionCallback implements ISessionCallback {
             @Override
             public void onSuccess(UserProfile userProfile) {
                 Log.e("SessionCallback :: ", "onSuccess");
-                String nickname = userProfile.getNickname();
-                String email = userProfile.getEmail();
-                String profileImagePath = userProfile.getProfileImagePath();
-                String thumnailPath = userProfile.getThumbnailImagePath();
-                String UUID = userProfile.getUUID();
-                long id = userProfile.getId();
-                Log.e("Profile : ", nickname + "");
-                Log.e("Profile : ", email + "");
-                Log.e("Profile : ", profileImagePath  + "");
-                Log.e("Profile : ", thumnailPath + "");
-                Log.e("Profile : ", UUID + "");
-                Log.e("Profile : ", id + "");
+                Log.d("Profile : ", userProfile.getNickname()+"");
+                Log.d("Profile : ",  userProfile.getEmail()+"");
+                Log.d("Profile : ", userProfile.getProfileImagePath()+"");
+                Log.d("Profile : ", userProfile.getThumbnailImagePath()+"");
+                Log.d("Profile : ", userProfile.getUUID()+"");
+                Log.d("Profile : ", userProfile.getId()+"");
             }
             // 사용자 정보 요청 실패
             @Override

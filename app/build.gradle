@@ -33,6 +33,7 @@ dependencies {
 
     //KaKaoTalk, FaceBook 로그인 라이브러리
     implementation group: project.KAKAO_SDK_GROUP, name: 'usermgmt', version: project.KAKAO_SDK_VERSION
+    implementation 'com.facebook.android:facebook-android-sdk:4.+'
 
     //Retrofit2 HTTP 통신 라이브러리
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
