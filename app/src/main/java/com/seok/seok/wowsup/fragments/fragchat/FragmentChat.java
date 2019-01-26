@@ -115,12 +115,16 @@ public class FragmentChat extends Fragment {
             textView = view.findViewById(R.id.textView2);
             ApiUtils.getProfileService().requestImageURL(GlobalWowToken.getInstance().getIdToken()).enqueue(new Callback<ResponseProfileObj>() {
                 @Override
+                //통신후 이미지 받아오기
                 public void onResponse(Call<ResponseProfileObj> call, Response<ResponseProfileObj> response) {
                     if(response.isSuccessful()){
                         ResponseProfileObj body = response.body();
-                        if(!body.getImageURL().equals(null)){
-                            Glide.with(getActivity()).load(body.getImageURL()).into(imageView);
-                            // 이미지 입히기
+                        try {
+                            if (!body.getImageURL().equals(null)) {
+                                Glide.with(getActivity()).load(body.getImageURL()).into(imageView);
+                            }
+                        }catch (Exception e){
+                            Glide.with(getActivity()).load(Common.USER_IMAGE_BASE_URL).into(imageView);
                         }
                     }
                 }
