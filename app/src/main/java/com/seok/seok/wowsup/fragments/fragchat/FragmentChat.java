@@ -120,6 +120,7 @@ public class FragmentChat extends Fragment {
                         ResponseProfileObj body = response.body();
                         if(!body.getImageURL().equals(null)){
                             Glide.with(getActivity()).load(body.getImageURL()).into(imageView);
+                            // 이미지 입히기
                         }
                     }
                 }
