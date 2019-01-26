@@ -92,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (validateLogin(edtID.getText().toString(), edtPW.getText().toString())) {
+
                     ApiUtils.getUserService().requestLogin(edtID.getText().toString(), edtPW.getText().toString()).enqueue(new Callback<ResponseLoginObj>() {
                         @Override
                         public void onResponse(Call<ResponseLoginObj> call, Response<ResponseLoginObj> response) {
@@ -141,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     // Session Result Kakao, Facebook
-    public void onSuccess(boolean sessionCallback){
+    public void onSuccess(boolean sessionCallback) {
         if (sessionCallback) {
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
