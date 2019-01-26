@@ -19,16 +19,17 @@ public interface LoginService {
 
     @POST("Login/snsLogin.php")
     Call<ResponseLoginObj> requestSnsLogin(@Query("ID") String id,
-                                        @Query("PW") String pwd,
-                                        @Query("Email") String email,
+                                           @Query("PW") String pwd,
+                                           @Query("Email") String email,
+                                           @Query("ImageURL") String imageURL,
                                            @Query("Type") int type);
 
     @POST("Login/register.php")
     Call<ResponseRegisterObj> requestRegister(@Query("ID") String id,
-                                           @Query("PW") String pwd,
-                                           @Query("Email") String email);
+                                              @Query("PW") String pwd,
+                                              @Query("Email") String email);
 
     @POST("Login/confirmID.php")
     Call<ResponseRegisterObj> requestConfirmID(@Query("ID") String id);
-
+    
 }

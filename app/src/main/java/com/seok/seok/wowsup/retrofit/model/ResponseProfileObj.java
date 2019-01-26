@@ -1,9 +1,8 @@
 package com.seok.seok.wowsup.retrofit.model;
 
-public class ResponseLoginObj {
-
+public class ResponseProfileObj {
     private int state;
-    private String id;
+    private String imageURL;
 
     public int getState() {
         return state;
@@ -13,11 +12,11 @@ public class ResponseLoginObj {
         this.state = state;
     }
 
-    public String getId() {
-        return id;
+    public String getImageURL() {
+        return imageURL;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 }

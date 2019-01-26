@@ -35,6 +35,7 @@ public class SessionCallbackKakaoTalk implements ISessionCallback {
             public void onResponse(Call<ResponseLoginObj> call, Response<ResponseLoginObj> response) {
                 if(response.isSuccessful()){
                     ResponseLoginObj body = response.body();
+                    GlobalWowToken.getInstance().setIdToken(body.getId());
                     if(body.getState() == 1){
                         Log.d("snsRegister_", "success < ");
                     }else if(body.getState() == 0){
@@ -81,13 +82,13 @@ public class SessionCallbackKakaoTalk implements ISessionCallback {
                 Log.d("Profile : ", userProfile.getUUID()+"");
                 Log.d("Profile : ", userProfile.getId()+"");
                 LoginService loginService = ApiUtils.getUserService();
-                if((userProfile.getEmail()).equals("null")) {
+                if((userProfile.getEmail()+"").equals("null")) {
                     loginService.requestSnsLogin(userProfile.getId() + "",
-                            userProfile.getId() + "", userProfile.getId() + "@kakao.com", 1).enqueue(callback);
+                            userProfile.getId() + "", userProfile.getId() + "@kakao.com",userProfile.getThumbnailImagePath(),1).enqueue(callback);
                 }
                 else {
                     loginService.requestSnsLogin(userProfile.getId() + "",
-                            userProfile.getId() + "", userProfile.getEmail(), 1).enqueue(callback);
+                            userProfile.getId() + "", userProfile.getEmail(),userProfile.getThumbnailImagePath()+"", 1).enqueue(callback);
                 }
             }
             // 사용자 정보 요청 실패

@@ -31,15 +31,16 @@ public class SessionCallbackFacebook implements FacebookCallback<LoginResult> {
         Log.d("Profile : ", Profile.getCurrentProfile().getProfilePictureUri(300, 300) + "");
         this.loginSuccess = true;
         ApiUtils.getUserService().requestSnsLogin(Profile.getCurrentProfile().getId() + "",
-                Profile.getCurrentProfile().getId() + "", Profile.getCurrentProfile().getId() + "@facebook.com",2)
+                Profile.getCurrentProfile().getId() + "", Profile.getCurrentProfile().getId() + "@facebook.com",Profile.getCurrentProfile().getProfilePictureUri(300, 300) + "", 2)
                 .enqueue(new Callback<ResponseLoginObj>() {
                     @Override
                     public void onResponse(Call<ResponseLoginObj> call, Response<ResponseLoginObj> response) {
-                        if(response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             ResponseLoginObj body = response.body();
-                            if(body.getState() == 1){
+                            GlobalWowToken.getInstance().setIdToken(body.getId());
+                            if (body.getState() == 1) {
                                 Log.d("snsRegister_", "success < ");
-                            }else if(body.getState() == 0){
+                            } else if (body.getState() == 0) {
                                 Log.d("snsRegister_", "fail < ");
                             }
                         }

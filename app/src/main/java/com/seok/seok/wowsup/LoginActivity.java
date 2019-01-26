@@ -22,6 +22,7 @@ import com.kakao.auth.AuthType;
 import com.kakao.auth.Session;
 import com.seok.seok.wowsup.retrofit.model.ResponseLoginObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
+import com.seok.seok.wowsup.utilities.GlobalWowToken;
 import com.seok.seok.wowsup.utilities.SessionCallbackFacebook;
 import com.seok.seok.wowsup.utilities.SessionCallbackKakaoTalk;
 
@@ -102,13 +103,13 @@ public class LoginActivity extends AppCompatActivity {
                                 if (body.getState() == 1) {
                                     Toast.makeText(LoginActivity.this, "Login 성공", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                    GlobalWowToken.getInstance().setIdToken(body.getId());
                                     //finish();
                                 } else if (body.getState() == 2) {
                                     Toast.makeText(LoginActivity.this, "Login 실패", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
-
                         @Override
                         public void onFailure(Call<ResponseLoginObj> call, Throwable t) {
                             Toast.makeText(LoginActivity.this, "통신오류", Toast.LENGTH_SHORT).show();
