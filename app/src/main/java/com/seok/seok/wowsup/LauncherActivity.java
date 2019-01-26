@@ -17,6 +17,8 @@ import android.util.Log;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import static com.kakao.util.helper.Utility.getPackageInfo;
+
 public class LauncherActivity extends AppCompatActivity {
     private Context mContext;
 
@@ -26,6 +28,8 @@ public class LauncherActivity extends AppCompatActivity {
         setContentView(R.layout.activity_launcher);
         mHandler.sendEmptyMessageDelayed(0, 500);
         mContext = getApplicationContext();
+        Log.d("tagtag : " ,getKeyHash(LauncherActivity.this));
+
     }
 
     private Handler mHandler = new Handler() {
@@ -38,10 +42,22 @@ public class LauncherActivity extends AppCompatActivity {
     };
 
 
+    public static String getKeyHash(final Context context) {
+        PackageInfo packageInfo = getPackageInfo(context, PackageManager.GET_SIGNATURES);
+        if (packageInfo == null)
+            return null;
 
-
-
-
+        for (Signature signature : packageInfo.signatures) {
+            try {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                return Base64.encodeToString(md.digest(), Base64.NO_WRAP);
+            } catch (NoSuchAlgorithmException e) {
+                Log.w("tagtag", "Unable to get MessageDigest. signature=" + signature, e);
+            }
+        }
+        return null;
+    }
 
 
 
