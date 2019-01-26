@@ -1,8 +1,7 @@
 package com.seok.seok.wowsup;
 
-import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,40 +10,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.Profile;
-import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
-import com.kakao.auth.ISessionCallback;
+import com.kakao.auth.AuthType;
 import com.kakao.auth.Session;
-import com.kakao.network.ErrorResult;
-import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.MeResponseCallback;
-import com.kakao.usermgmt.response.model.UserProfile;
-import com.kakao.util.exception.KakaoException;
-import com.kakao.util.helper.log.Logger;
+import com.kakao.usermgmt.LoginButton;
 import com.seok.seok.wowsup.retrofit.model.ResponseLoginObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
-import com.seok.seok.wowsup.retrofit.remote.LoginService;
-import com.seok.seok.wowsup.utilities.Common;
-
-import java.util.List;
+import com.seok.seok.wowsup.utilities.SessionCallback;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class LoginActivity extends AppCompatActivity {
-    private SessionCallback callback;
-    private Callback retrofitCallback;
-    private CallbackManager callbackManager;
-    private LoginButton facebook_login;
+    private Context mContext;
+    private Button btn_custom_login;
+    private LoginButton btn_kakao_login;
+
     private Button btnLogin, btnRegister;
     private EditText edtID, edtPW;
     @Override
@@ -58,6 +39,15 @@ public class LoginActivity extends AppCompatActivity {
         edtPW = findViewById(R.id.login_edittext_pwd);
 
 
+        btn_custom_login = (Button) findViewById(R.id.btn_custom_login);
+        btn_custom_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Session session = Session.getCurrentSession();
+                session.addCallback(new SessionCallback());
+                session.open(AuthType.KAKAO_LOGIN_ALL, LoginActivity.this);
+            }
+        });
 
 
 
@@ -123,126 +113,6 @@ public class LoginActivity extends AppCompatActivity {
                 //finish();
             }
         });
-
-        callback = new SessionCallback();
-        Session.getCurrentSession().addCallback(callback);
-
-        //facebook
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(this);
-        callbackManager = CallbackManager.Factory.create();
-
-        facebook_login = findViewById(R.id.login_button);
-
-        facebook_login.setReadPermissions("email");
-
-        LoginManager.getInstance().registerCallback(callbackManager,
-                new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        Common.loginForm = "FaceBook";
-                        Log.d("onSuccess", "onSucces LoginResult=" + loginResult);
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        // App code
-                        Log.d("onCancel", "onCancel");
-                    }
-
-                    @Override
-                    public void onError(FacebookException exception) {
-                        // App code
-                        Log.d("onError", "onError");
-                    }
-                });
-        retrofitCallback = new Callback() {
-            @Override
-            public void onResponse(Call call, Response response) {
-
-            }
-
-            @Override
-            public void onFailure(Call call, Throwable t) {
-
-            }
-        };
-    }
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        //카카오톡, 페이스북 result
-        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data) || callbackManager.onActivityResult(requestCode, resultCode, data)) {
-            requestMe();
-            return;
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Session.getCurrentSession().removeCallback(callback);
-    }
-
-    private class SessionCallback implements ISessionCallback {
-        @Override
-        public void onSessionOpened() {
-            Common.loginForm = "KakaoTalk";
-            requestMe();
-        }
-
-        @Override
-        public void onSessionOpenFailed(KakaoException exception) {
-            if (exception != null) {
-                Logger.e(exception);
-            }
-        }
-    }
-
-    private void requestMe() {
-        UserManagement.getInstance().requestMe(new MeResponseCallback() {
-            @Override
-            public void onFailure(ErrorResult errorResult) {
-                String message = "failed to get user info. msg=" + errorResult;
-                Log.d("KAKAO ERR", message);
-                Logger.d(message);
-            }
-
-            @Override
-            public void onSessionClosed(ErrorResult errorResult) {
-                Log.d("KAKAO ERR", "session closed" + errorResult);
-            }
-
-            @Override
-            public void onSuccess(UserProfile userProfile) {
-                if (Common.loginForm == "KakaoTalk") {
-                    Log.d("KAKAO userProfile_", userProfile.getNickname() + "");
-                    Log.d("KAKAO userProfile_", userProfile.getEmail() + "");
-                    Log.d("KAKAO userProfile_", userProfile.getId() + "");
-                    Log.d("KAKAO userProfile_", userProfile.getServiceUserId() + "");
-                    Log.d("KAKAO userProfile_", userProfile.getUUID() + "");
-                    snsRegister(userProfile.getId()+"", userProfile.getId()+"", userProfile.getEmail());
-                } else if (Common.loginForm == "FaceBook") {
-                    Log.d("FACEBOOK userProfile_", Profile.getCurrentProfile().getId());
-                    Log.d("FACEBOOK userProfile_", Profile.getCurrentProfile().getFirstName());
-                    Log.d("FACEBOOK userProfile_", Profile.getCurrentProfile().getMiddleName());
-                    Log.d("FACEBOOK userProfile_", Profile.getCurrentProfile().getLastName());
-                    Log.d("FACEBOOK userProfile_", Profile.getCurrentProfile().getName());
-                    snsRegister(Profile.getCurrentProfile().getId(), Profile.getCurrentProfile().getId(), Profile.getCurrentProfile().getId());
-                }
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            }
-
-            @Override
-            public void onNotSignedUp() {
-
-            }
-        });
-    }
-
-    public void snsRegister(String id, String pwd, String email) {
-        ApiUtils.getUserService().requestSnsLogin(id, pwd, email).enqueue(retrofitCallback);
     }
 
     public boolean validateLogin(String id, String pwd) {
@@ -255,5 +125,13 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
