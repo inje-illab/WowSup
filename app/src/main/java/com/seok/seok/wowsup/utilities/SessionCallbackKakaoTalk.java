@@ -81,7 +81,7 @@ public class SessionCallbackKakaoTalk implements ISessionCallback {
                 Log.d("Profile : ", userProfile.getUUID()+"");
                 Log.d("Profile : ", userProfile.getId()+"");
                 LoginService loginService = ApiUtils.getUserService();
-                if((userProfile.getEmail()+"").equals("null")) {
+                if((userProfile.getEmail()).equals("null")) {
                     loginService.requestSnsLogin(userProfile.getId() + "",
                             userProfile.getId() + "", userProfile.getId() + "@kakao.com", 1).enqueue(callback);
                 }
