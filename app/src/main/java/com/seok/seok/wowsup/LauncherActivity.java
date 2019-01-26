@@ -28,8 +28,18 @@ public class LauncherActivity extends AppCompatActivity {
         setContentView(R.layout.activity_launcher);
         mHandler.sendEmptyMessageDelayed(0, 500);
         mContext = getApplicationContext();
-        Log.d("tagtag : " ,getKeyHash(LauncherActivity.this));
 
+
+        try{
+            PackageInfo info = getPackageManager().getPackageInfo("com.seok.seok.wowsup",PackageManager.GET_SIGNATURES);
+            for(Signature signature : info.signatures){
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.e("KeyHash: ", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private Handler mHandler = new Handler() {
@@ -40,25 +50,6 @@ public class LauncherActivity extends AppCompatActivity {
             LauncherActivity.this.finish();
         }
     };
-
-
-    public static String getKeyHash(final Context context) {
-        PackageInfo packageInfo = getPackageInfo(context, PackageManager.GET_SIGNATURES);
-        if (packageInfo == null)
-            return null;
-
-        for (Signature signature : packageInfo.signatures) {
-            try {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                return Base64.encodeToString(md.digest(), Base64.NO_WRAP);
-            } catch (NoSuchAlgorithmException e) {
-                Log.w("tagtag", "Unable to get MessageDigest. signature=" + signature, e);
-            }
-        }
-        return null;
-    }
-
 
 
     // 프로젝트의 해시키를 반환 Facebook 해시키 반환 코드 getHashKey();
@@ -77,29 +68,5 @@ public class LauncherActivity extends AppCompatActivity {
 //        }
 //    }
 
-    // 프로젝트의 해시키를 반환 Kakao 해시키 반환 코드 getHashKey(mContext);
-//    @Nullable
-//    public static String getHashKey(Context context) {
-//        final String TAG = "KeyHash";
-//        String keyHash = null;
-//        try {
-//            PackageInfo info =
-//                    context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
-//            for (Signature signature : info.signatures) {
-//                MessageDigest md;
-//                md = MessageDigest.getInstance("SHA");
-//                md.update(signature.toByteArray());
-//                keyHash = new String(Base64.encode(md.digest(), 0));
-//                Log.d(TAG, keyHash);
-//            }
-//        } catch (Exception e) {
-//            Log.e("name not found", e.toString());
-//        }
-//        if (keyHash != null) {
-//            return keyHash;
-//        } else {
-//            return null;
-//        }
-//    }
 }
 
