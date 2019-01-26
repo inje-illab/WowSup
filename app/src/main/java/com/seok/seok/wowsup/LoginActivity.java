@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     private Context mContext;
     private Button btn_custom_login;
     private LoginButton btn_kakao_login;
-
+    private SessionCallback sessionCallback;
     private Button btnLogin, btnRegister;
     private EditText edtID, edtPW;
     @Override
@@ -38,32 +38,20 @@ public class LoginActivity extends AppCompatActivity {
         edtID = findViewById(R.id.login_edittext_id);
         edtPW = findViewById(R.id.login_edittext_pwd);
 
+        sessionCallback = new SessionCallback();
 
         btn_custom_login = (Button) findViewById(R.id.btn_custom_login);
         btn_custom_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Session session = Session.getCurrentSession();
-                session.addCallback(new SessionCallback());
+                session.addCallback(sessionCallback);
                 session.open(AuthType.KAKAO_LOGIN_ALL, LoginActivity.this);
+                if(sessionCallback.getLoginSuccess()){
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                }
             }
         });
-
-
-
-
-
-
-
-        //로그인 페이지 다시 코드 작성 필요
-
-
-
-
-
-
-
-
 
         /**카카오톡 로그아웃 요청**/
         //한번 로그인이 성공하면 세션 정보가 남아있어서 로그인창이 뜨지 않고 바로 onSuccess()메서드를 호출
@@ -115,6 +103,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    // 아이디 패스워드 입력란 코드
     public boolean validateLogin(String id, String pwd) {
         if (id == null || id.trim().length() == 0) {
             Toast.makeText(this, "Username is required", Toast.LENGTH_SHORT).show();
@@ -127,6 +116,7 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
+    //카카오톡 세션 Result 반환
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {

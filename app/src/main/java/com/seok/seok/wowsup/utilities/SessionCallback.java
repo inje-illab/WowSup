@@ -1,5 +1,6 @@
 package com.seok.seok.wowsup.utilities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
@@ -10,13 +11,19 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeResponseCallback;
 import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.exception.KakaoException;
+import com.seok.seok.wowsup.MainActivity;
 
 public class SessionCallback implements ISessionCallback {
+
+    private boolean loginSuccess = false;
+
     // 로그인에 성공한 상태
     @Override
     public void onSessionOpened() {
+        loginSuccess = true;
         requestMe();
     }
+
     // 로그인에 실패한 상태
     @Override
     public void onSessionOpenFailed(KakaoException exception) {
@@ -60,4 +67,8 @@ public class SessionCallback implements ISessionCallback {
             }
         });
     }
+    public boolean getLoginSuccess(){
+        return loginSuccess;
+    }
+
 }
