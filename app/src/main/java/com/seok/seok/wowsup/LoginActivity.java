@@ -57,6 +57,24 @@ public class LoginActivity extends AppCompatActivity {
         edtID = findViewById(R.id.login_edittext_id);
         edtPW = findViewById(R.id.login_edittext_pwd);
 
+
+
+
+
+
+
+
+
+        //로그인 페이지 다시 코드 작성 필요
+
+
+
+
+
+
+
+
+
         /**카카오톡 로그아웃 요청**/
         //한번 로그인이 성공하면 세션 정보가 남아있어서 로그인창이 뜨지 않고 바로 onSuccess()메서드를 호출
         /*

@@ -27,8 +27,7 @@
             android:ems="10"
             android:hint="ID를 입력해주세요"
             android:inputType="textPersonName"
-            android:textSize="24sp"
-            tools:text="test1" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/login_text_pwd"
@@ -44,7 +43,6 @@
             android:ems="10"
             android:hint="PW를 입력해주세요"
             android:inputType="textPersonName"
-            android:text="test1"
             android:textSize="24sp" />
 
         <LinearLayout

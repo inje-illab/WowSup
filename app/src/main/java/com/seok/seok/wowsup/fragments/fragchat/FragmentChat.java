@@ -3,6 +3,7 @@ package com.seok.seok.wowsup.fragments.fragchat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,8 @@ public class FragmentChat extends Fragment {
 
     public FragmentChat() {
         // Required empty public constructor
+        // 제일 처음 로그인 했을때 뜨는 인터넷 연결 창 해야함
+        Log.d("Fragments__", "<< FragmentChat");
     }
 
     /**
@@ -55,6 +58,7 @@ public class FragmentChat extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("Fragments__", "<< onCreateFragments");
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -64,6 +68,7 @@ public class FragmentChat extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d("Fragments__", "<< onCreateViewFragments");
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_fragment_chat, container, false);
     }
@@ -78,6 +83,7 @@ public class FragmentChat extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+        Log.d("Fragments__", "<< onDetachFragments");
         mListener = null;
     }
 
@@ -91,6 +97,7 @@ public class FragmentChat extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
