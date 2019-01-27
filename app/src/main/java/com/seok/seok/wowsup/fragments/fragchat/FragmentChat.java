@@ -1,28 +1,29 @@
 package com.seok.seok.wowsup.fragments.fragchat;
 
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.seok.seok.wowsup.R;
+import com.seok.seok.wowsup.retrofit.model.ResponseChatObj;
 import com.seok.seok.wowsup.retrofit.model.ResponseProfileObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 import com.seok.seok.wowsup.utilities.Common;
 import com.seok.seok.wowsup.utilities.GlobalWowToken;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,27 +31,20 @@ import retrofit2.Response;
 
 
 /**
-   * 단순한 하위 클래스.
-   * 이 단편을 포함하는 활동은
-   * FragmentChat.OnFragmentInteractionListener 인터페이스
-   * 상호 작용 이벤트를 처리합니다.
-   * FragmentChat # newInstance 팩토리 메소드를 사용해,
-   * 이 조각의 인스턴스를 만듭니다.
+ * 단순한 하위 클래스.
+ *   * 이 단편을 포함하는 활동은
+ *   * FragmentChat.OnFragmentInteractionListener 인터페이스
+ *   * 상호 작용 이벤트를 처리합니다.
+ *   * FragmentChat # newInstance 팩토리 메소드를 사용해,
+ *   * 이 조각의 인스턴스를 만듭니다.
  */
 
 public class FragmentChat extends Fragment {
 
-    private ImageView imageView;
-    private TextView textView;
-    private ListView listView;
-    private Bitmap[] bitmaps;
-    //이미지 배열 선언
-    ArrayList<Bitmap> picArr = new ArrayList<Bitmap>();
-    //텍스트 배열 선언
-    ArrayList<String> textArr = new ArrayList<String>();
-
     private View view;
-
+    private RecyclerView recyclerView;
+    private ImageView chatUserImage;
+    private TextView chatUserID;
     // TODO : 매개 변수 인수 이름 바꾸기, 일치하는 이름 선택
 
     // 조각 초기화 매개 변수 (예 : ARG_ITEM_NUMBER)
@@ -70,8 +64,9 @@ public class FragmentChat extends Fragment {
     }
 
     /**
-     *이 팩토리 메서드를 사용하여의 새 인스턴스를 만듭니다.
-     *이 단편은 제공된 매개 변수를 사용합니다.
+     * 이 팩토리 메서드를 사용하여의 새 인스턴스를 만듭니다.
+     * 이 단편은 제공된 매개 변수를 사용합니다.
+     *
      * @param param1 매개 변수 1.
      * @param param2 매개 변수 2.
      * @return 프래그먼트 FragmentChat의 새로운 인스턴스.
@@ -99,32 +94,28 @@ public class FragmentChat extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // 이 단편에 대한 레이아웃을 팽창시킵니다.
-        if(Common.fragmentChatTab) {
+        if (Common.fragmentChatTab) {
             Log.d("Fragments__", "<< onCreateViewFragments");
             view = inflater.inflate(R.layout.fragment_fragment_chat, container, false);
-
-            bitmaps = new Bitmap[10];
-            for(int i = 0 ; i< 10;i++){
-                bitmaps[i] = BitmapFactory.decodeResource(getResources(), R.drawable.test);
-                picArr.add(bitmaps[i]);
-                textArr.add("숫자" + Integer.toString(i));
-            }
-            listView = view.findViewById(R.id.fragment_chat_listview);
-            listView.setAdapter(new Adapter());
-            imageView = view.findViewById(R.id.imageView);
-            textView = view.findViewById(R.id.textView2);
+            recyclerView = view.findViewById(R.id.fragment_chat_listview);
+            chatUserImage = view.findViewById(R.id.fragment_chat_user_image);
+            chatUserID = view.findViewById(R.id.fragment_chat_user_id);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+            recyclerView.setLayoutManager(linearLayoutManager);
+            recyclerView.setHasFixedSize(true);
             ApiUtils.getProfileService().requestImageURL(GlobalWowToken.getInstance().getIdToken()).enqueue(new Callback<ResponseProfileObj>() {
                 @Override
-                //통신후 이미지 받아오기
                 public void onResponse(Call<ResponseProfileObj> call, Response<ResponseProfileObj> response) {
                     if(response.isSuccessful()){
                         ResponseProfileObj body = response.body();
-                        try {
-                            if (!body.getImageURL().equals(null)) {
-                                Glide.with(getActivity()).load(body.getImageURL()).into(imageView);
+                        if(response.isSuccessful()){
+                            try {
+                                if (!body.getImageURL().equals(null))
+                                    Glide.with(getActivity()).load(body.getImageURL()).into(chatUserImage);
+                            }catch (Exception e){
+                                Glide.with(getActivity()).load(Common.USER_IMAGE_BASE_URL).into(chatUserImage);
                             }
-                        }catch (Exception e){
-                            Glide.with(getActivity()).load(Common.USER_IMAGE_BASE_URL).into(imageView);
+                            chatUserID.setText("User ID : " + GlobalWowToken.getInstance().getIdToken());
                         }
                     }
                 }
@@ -134,7 +125,20 @@ public class FragmentChat extends Fragment {
 
                 }
             });
-            textView.setText("User ID : " + GlobalWowToken.getInstance().getIdToken());
+            ApiUtils.getChatService().requestChatFriend(GlobalWowToken.getInstance().getIdToken()).enqueue(new Callback<List<ResponseChatObj>>() {
+                @Override
+                public void onResponse(Call<List<ResponseChatObj>> call, Response<List<ResponseChatObj>> response) {
+                    if(response.isSuccessful()){
+                        List<ResponseChatObj> body = response.body();
+                        ChatAdapter chatAdapter = new ChatAdapter(getActivity(), body);
+                        recyclerView.setAdapter(chatAdapter);
+                    }
+                }
+                @Override
+                public void onFailure(Call<List<ResponseChatObj>> call, Throwable t) {
+                    Log.d("fragmentChat_err : ", t.getMessage() + " < ");
+                }
+            });
             Common.fragmentChatTab = false;
         }
         return view;
@@ -169,50 +173,5 @@ public class FragmentChat extends Fragment {
         // TODO : 인수 유형 및 이름 업데이트
         void onFragmentInteraction(Uri uri);
     }
-    public class Adapter extends BaseAdapter {
-        LayoutInflater inflater;
-
-        public Adapter() {
-            inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
-
-        @Override
-        public int getCount() {
-            // TODO Auto-generated method stub
-            return picArr.size();    //그리드뷰에 출력할 목록 수
-        }
-
-        @Override
-        public Object getItem(int position) {
-            // TODO Auto-generated method stub
-            return picArr.get(position);    //아이템을 호출할 때 사용하는 메소드
-        }
-
-        @Override
-        public long getItemId(int position) {
-            // TODO Auto-generated method stub
-            return position;    //아이템의 아이디를 구할 때 사용하는 메소드
-        }
-
-        @Override
-        public View getView(final int position, View convertView, ViewGroup parent) {
-            // TODO Auto-generated method stub
-            if (convertView == null) {
-                convertView = inflater.inflate(R.layout.fragment_chat_list, parent, false);
-            }
-            ImageView imageView = (ImageView) convertView.findViewById(R.id.imageView1);
-            TextView textView = (TextView) convertView.findViewById(R.id.textView1);
-            imageView.setImageBitmap(picArr.get(position));
-            textView.setText(textArr.get(position));
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // TODO Auto-generated method stub
-                    //이미지를 터치했을때 동작하는 곳
-                    Log.d("touch Count", position + "");
-                }
-            });
-            return convertView;
-        }
-    }
 }
+

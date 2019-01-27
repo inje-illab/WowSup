@@ -26,7 +26,7 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/fragment_chat_user_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:srcCompat="@drawable/test" />
@@ -40,7 +40,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/fragment_chat_user_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="TextView" />
@@ -55,10 +55,12 @@
             android:layout_weight="4"
             android:orientation="vertical">
 
-            <ListView
+            <android.support.v7.widget.RecyclerView
                 android:id="@+id/fragment_chat_listview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent">
+            </android.support.v7.widget.RecyclerView>
+
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
