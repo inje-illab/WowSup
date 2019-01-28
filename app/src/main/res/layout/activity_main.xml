@@ -20,6 +20,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="?android:attr/windowBackground"
-        app:menu="@menu/fragment_menu_bottom"/>
+        app:menu="@menu/fragment_menu_bottom" />
 
 </android.support.design.widget.CoordinatorLayout>
