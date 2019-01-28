@@ -1,4 +1,4 @@
-package com.seok.seok.wowsup.fragments.fragprofile;
+package com.seok.seok.wowsup.fragments.fragstroy;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
