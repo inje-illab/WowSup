@@ -5,4 +5,7 @@ public class ApiUtils {
     public static LoginService getUserService(){
         return RetrofitClient.getClient(BASE_URL).create(LoginService.class);
     }
+    public static WriteService getWriteServie(){
+        return  RetrofitClient.getClient(BASE_URL).create(WriteService.class);
+    }
 }

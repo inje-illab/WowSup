@@ -11,13 +11,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
+
 import com.facebook.FacebookSdk;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
+
 import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
+
 import com.kakao.auth.AuthType;
 import com.kakao.auth.Session;
 import com.seok.seok.wowsup.retrofit.model.ResponseLoginObj;
@@ -25,13 +23,13 @@ import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 import com.seok.seok.wowsup.utilities.SessionCallbackFacebook;
 import com.seok.seok.wowsup.utilities.SessionCallbackKakaoTalk;
 
-import org.json.JSONObject;
 
 import java.util.Arrays;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 
 public class LoginActivity extends AppCompatActivity {
     private Context mContext;
@@ -46,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         // Layout에서 id 값 받아오기
         btnLogin = findViewById(R.id.login_button_login);
         btnRegister = findViewById(R.id.login_button_register);
@@ -108,7 +107,6 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             }
                         }
-
                         @Override
                         public void onFailure(Call<ResponseLoginObj> call, Throwable t) {
                             Toast.makeText(LoginActivity.this, "통신오류", Toast.LENGTH_SHORT).show();
