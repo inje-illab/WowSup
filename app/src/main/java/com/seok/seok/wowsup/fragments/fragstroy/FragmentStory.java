@@ -5,15 +5,22 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.seok.seok.wowsup.R;
-import com.seok.seok.wowsup.fragments.fragprofile.CardAdapter;
-import com.seok.seok.wowsup.fragments.fragprofile.CardData;
+import com.seok.seok.wowsup.retrofit.model.ResponseStoryObj;
+import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FragmentStory extends Fragment {
     private View view;
@@ -21,8 +28,7 @@ public class FragmentStory extends Fragment {
     // Card 관련
     private RecyclerView mRecyclerView;
     private CardAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<CardData> TestData;
+    private ArrayList<CardData> cardViewData;
 
     public FragmentStory() {
         // Required empty public constructor
@@ -30,108 +36,53 @@ public class FragmentStory extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        initDataset();
         super.onCreate(savedInstanceState);
+        cardViewData = new ArrayList<>();
+        mAdapter = new CardAdapter(cardViewData);
+        initDataset();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_fragment_story, container, false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.fragment_story_view);
         mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new GridLayoutManager(getActivity(),3);
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
         mRecyclerView.scrollToPosition(0);
-        mAdapter = new CardAdapter(TestData);
-        mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         return view;
     }
     private void initDataset() {
-        //for Test
-        TestData = new ArrayList<>();
-        TestData.add(new CardData("1111", "TEST1"));
-        TestData.add(new CardData("2222", "TEST2"));
-        TestData.add(new CardData("3333", "TEST3"));
-        TestData.add(new CardData("4444", "TEST4"));
-        TestData.add(new CardData("5555", "TEST5"));
-        TestData.add(new CardData("6666", "TEST6"));
-        TestData.add(new CardData("7777", "TEST7"));
-        TestData.add(new CardData("2222", "TEST8"));
-        TestData.add(new CardData("3333", "TEST9"));
-        TestData.add(new CardData("1111", "TEST"));
-        TestData.add(new CardData("2222", "TEST2"));
-        TestData.add(new CardData("3333", "TEST3"));
-        TestData.add(new CardData("1111", "TEST1"));
-        TestData.add(new CardData("2222", "TEST2"));
-        TestData.add(new CardData("3333", "TEST3"));
-
-        TestData.add(new CardData("6666", "TEST6"));
-        TestData.add(new CardData("7777", "TEST7"));
-        TestData.add(new CardData("2222", "TEST8"));
-        TestData.add(new CardData("3333", "TEST9"));
-        TestData.add(new CardData("1111", "TEST"));
-        TestData.add(new CardData("2222", "TEST2"));
-        TestData.add(new CardData("3333", "TEST3"));
-        TestData.add(new CardData("1111", "TEST1"));
-        TestData.add(new CardData("2222", "TEST2"));
-        TestData.add(new CardData("3333", "TEST3"));
-        TestData.add(new CardData("3333", "TEST3"));
-        TestData.add(new CardData("6666", "TEST6"));
-        TestData.add(new CardData("7777", "TEST7"));
-        TestData.add(new CardData("2222", "TEST8"));
-        TestData.add(new CardData("3333", "TEST9"));
-        TestData.add(new CardData("1111", "TEST"));
-        TestData.add(new CardData("2222", "TEST2"));
-        TestData.add(new CardData("3333", "TEST3"));
-        TestData.add(new CardData("1111", "TEST1"));
-        TestData.add(new CardData("2222", "TEST2"));
-        TestData.add(new CardData("3333", "TEST3"));
-        TestData.add(new CardData("3333", "TEST3"));
-        TestData.add(new CardData("6666", "TEST6"));
-        TestData.add(new CardData("7777", "TEST7"));
-        TestData.add(new CardData("2222", "TEST8"));
-        TestData.add(new CardData("3333", "TEST9"));
-        TestData.add(new CardData("1111", "TEST"));
-        TestData.add(new CardData("2222", "TEST2"));
-        TestData.add(new CardData("3333", "TEST3"));
-        TestData.add(new CardData("1111", "TEST1"));
-        TestData.add(new CardData("2222", "TEST2"));
-        TestData.add(new CardData("3333", "TEST3"));
-        TestData.add(new CardData("3333", "TEST3"));
-        TestData.add(new CardData("6666", "TEST6"));
-        TestData.add(new CardData("7777", "TEST7"));
-        TestData.add(new CardData("2222", "TEST8"));
-        TestData.add(new CardData("3333", "TEST9"));
-        TestData.add(new CardData("1111", "TEST"));
-        TestData.add(new CardData("2222", "TEST2"));
-        TestData.add(new CardData("3333", "TEST3"));
-        TestData.add(new CardData("1111", "TEST1"));
-        TestData.add(new CardData("2222", "TEST2"));
-        TestData.add(new CardData("3333", "TEST3"));
-        TestData.add(new CardData("3333", "TEST3"));
-        TestData.add(new CardData("6666", "TEST6"));
-        TestData.add(new CardData("7777", "TEST7"));
-        TestData.add(new CardData("2222", "TEST8"));
-        TestData.add(new CardData("3333", "TEST9"));
-        TestData.add(new CardData("1111", "TEST"));
-        TestData.add(new CardData("2222", "TEST2"));
-        TestData.add(new CardData("3333", "TEST3"));
-        TestData.add(new CardData("1111", "TEST1"));
-        TestData.add(new CardData("2222", "TEST2"));
-        TestData.add(new CardData("3333", "TEST3"));
-        TestData.add(new CardData("3333", "TEST3"));
-        TestData.add(new CardData("6666", "TEST6"));
-        TestData.add(new CardData("7777", "TEST7"));
-        TestData.add(new CardData("2222", "TEST8"));
-        TestData.add(new CardData("3333", "TEST9"));
-        TestData.add(new CardData("1111", "TEST"));
-        TestData.add(new CardData("2222", "TEST2"));
-        TestData.add(new CardData("3333", "TEST3"));
-        TestData.add(new CardData("1111", "TEST1"));
-        TestData.add(new CardData("2222", "TEST2"));
-        TestData.add(new CardData("3333", "TEST3"));
+        ApiUtils.getStoryService().requestStoryView().enqueue(new Callback<List<ResponseStoryObj>>() {
+            @Override
+            public void onResponse(Call<List<ResponseStoryObj>> call, Response<List<ResponseStoryObj>> response) {
+                if(response.isSuccessful()){
+                    List <ResponseStoryObj> body = response.body();
+                    Log.d("asdf", body.size()+"");
+                    for(int i = 0;  i< body.size(); i++){
+                        cardViewData.add(new CardData(body.get(i).getStoryID()+"",
+                                body.get(i).getUserID()+"", body.get(i).getTitle()+"",
+                                body.get(i).getBody()+"", body.get(i).getCntLike()+""));
+                        Log.d("cardView StoryID: " , body.get(i).getStoryID()+"");
+                        Log.d("cardView UserID: " , body.get(i).getUserID()+"");
+                        Log.d("cardView Title: " , body.get(i).getTitle()+"");
+                        Log.d("cardView Body: " , body.get(i).getBody()+"");
+                        Log.d("cardView Like: " , body.get(i).getCntLike()+"");
+                        if(mAdapter.getItemCount() == body.size()){
+                            Log.d("asdfasdf", mAdapter.getItemCount()+"");
+                            mRecyclerView.setAdapter(mAdapter);
+                        }
+                    }
+                } else {
+                    Log.d("FILE", "server contact failed");
+                }
+            }
+            @Override
+            public void onFailure(Call<List<ResponseStoryObj>> call, Throwable t) {
+                Toast.makeText(getActivity(), "통신오류", Toast.LENGTH_SHORT).show();
+                Log.d("fragments_Story", t.getMessage() + " < ");
+            }
+        });
     }
     @Override
     public void onDetach() {
