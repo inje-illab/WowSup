@@ -33,7 +33,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ChatViewHolder holder, final int position) {
+    public void onBindViewHolder(final ChatViewHolder holder, final int position) {
         final ResponseChatObj apiObject = chatApiObject.get(position);
         try {
             if (!apiObject.getImageURL().equals(null))
@@ -47,7 +47,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatViewHolder> {
         holder.chatFriendOption.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String stFriendID = apiObject.getUserID() + "@naver.com";
+                String stFriendID = apiObject.getFriendNick();
+                Log.d("aaa", stFriendID);
                 Intent intent = new Intent(ChatAdapter.this.context, ChatActivity.class);
                 intent.putExtra("friendUid", stFriendID);
                 context.startActivity(intent);
