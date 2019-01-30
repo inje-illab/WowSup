@@ -16,4 +16,7 @@ public interface StoryService {
 
     @GET("Login/searchTag.php")
     Call<List<ResponseStoryObj>> requestStoryTagView(@Query("text") String text);
+
+    @GET("Login/oneStory.php")
+    Call<ResponseStoryObj> requestOneStoryView(@Query("storyID") String storyID);
 }

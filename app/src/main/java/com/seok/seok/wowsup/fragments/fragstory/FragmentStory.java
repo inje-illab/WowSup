@@ -42,7 +42,7 @@ public class FragmentStory extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         cardViewData = new ArrayList<>();
-        mAdapter = new CardAdapter(cardViewData);
+        mAdapter = new CardAdapter(cardViewData, this.getContext());
         initDataSet();
     }
 
