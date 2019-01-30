@@ -1,4 +1,4 @@
-package com.seok.seok.wowsup.fragments.fragstroy;
+package com.seok.seok.wowsup.fragments.fragstory;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.seok.seok.wowsup.R;
+import com.seok.seok.wowsup.fragments.fragprofile.CardAdapter;
+import com.seok.seok.wowsup.fragments.CardData;
 import com.seok.seok.wowsup.retrofit.model.ResponseStoryObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 
@@ -52,6 +54,7 @@ public class FragmentStory extends Fragment {
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         return view;
     }
+
     private void initDataset() {
         ApiUtils.getStoryService().requestStoryView().enqueue(new Callback<List<ResponseStoryObj>>() {
             @Override
@@ -84,6 +87,7 @@ public class FragmentStory extends Fragment {
             }
         });
     }
+
     @Override
     public void onDetach() {
         super.onDetach();
