@@ -117,7 +117,6 @@ public class LoginActivity extends AppCompatActivity {
                             if (response.isSuccessful()) {
                                 ResponseLoginObj body = response.body();
                                 if (body.getState() == 1) {
-
                                     //sein Test
                                     emailTest = edtID.getText().toString()+"@naver.com";//이거 이메일로 바꿔서 집어넣어야 돌아감 이거찾느라 뒤질뻔
                                     passwordTest = edtPW.getText().toString();
@@ -126,6 +125,15 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.makeText(LoginActivity.this, "Login 성공", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                     GlobalWowToken.getInstance().setIdToken(body.getId());
+                                    GlobalWowToken.getInstance().setUserEmail(body.getEmail());
+
+
+                                    //세인아 이거 이메일 확인해 로그!
+                                    //로그인 되면 GlobalWowToken.getInstance().getUserEmail(); 쓰면돼!
+                                    Log.d("User Email : " , body.getEmail());
+
+
+
                                     //finish();
                                 } else if (body.getState() == 2) {
                                     Toast.makeText(LoginActivity.this, "Login 실패", Toast.LENGTH_SHORT).show();
