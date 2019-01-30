@@ -52,21 +52,14 @@ public class StoryActivity extends AppCompatActivity {
                 ResponseStoryObj body = response.body();
                 if(response.isSuccessful()){
                     try{
-                        Log.d("Storrr","1");
                         storyTextBody.setText(body.getBody());
-                        Log.d("Storrr","2");
                         storyTextTag1.setText(body.getTag1());
-                        Log.d("Storrr", body.getImageURL());
                         storyTextTag2.setText(body.getTag2());
-                        Log.d("Storrr", body.getImageURL());
                         storyTextTag3.setText(body.getTag3());
-                        Log.d("Storrr", body.getImageURL());
                         storyTextTag4.setText(body.getTag4());
-                        Log.d("Storrr", body.getImageURL());
                         storyTextTag5.setText(body.getTag5());
-                        Log.d("Storrr", body.getImageURL());
                         storyTextcntlike.setText(body.getCntLike()+"");
-                        Log.d("Storrr", body.getImageURL());
+                        Log.d("Storrr", Common.API_IMAGE_BASE_URL+body.getImageURL());
                         if(!body.getImageURL().equals(null)){
                             Glide.with(getApplicationContext()).load(Common.API_IMAGE_BASE_URL+body.getImageURL()).into(new SimpleTarget<GlideDrawable>() {
                                 @Override
