@@ -52,14 +52,14 @@ public class LoginActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
     private Button btnLogin, btnRegister;
     private EditText edtID, edtPW;
-    private String user_id,email, strUid;
+
     //sein test
     private String emailTest, passwordTest;
     private String TAG = "LoginActivity";
     private FirebaseAuth mAuth;
+    private String email, strUid;
     private FirebaseDatabase database;
     private FirebaseUser user;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +68,6 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
-
         // Layout에서 id 값 받아오기
         btnLogin = findViewById(R.id.login_button_login);
         btnRegister = findViewById(R.id.login_button_register);
@@ -127,23 +126,13 @@ public class LoginActivity extends AppCompatActivity {
                                     emailTest = edtID.getText().toString()+"@naver.com";//이거 이메일로 바꿔서 집어넣어야 돌아감 이거찾느라 뒤질뻔
                                     passwordTest = edtPW.getText().toString();
                                     userLogin(emailTest, passwordTest);
-
                                     if (user != null) {
-                                        user_id =edtID.getText().toString();
                                         email = user.getEmail();
                                         strUid = user.getUid();
-
-                                    }
-
-
-                                    DatabaseReference myRef = database.getReference("users").child(user_id);
-                                    Hashtable<String, String> users = new Hashtable<String, String>();
-                                    users.put("user_id", user_id);
-                                    users.put("email", email);
-                                    users.put("key", strUid);
-
-                                    if(!(myRef.getDatabase().getReference().equals(myRef)))
-                                    {
+                                        DatabaseReference myRef = database.getReference("users").child(strUid);
+                                        Hashtable<String, String> users = new Hashtable<String, String>();
+                                        users.put("email", email);
+                                        users.put("key", strUid);
                                         myRef.setValue(users);
                                     }
 
@@ -152,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
                                     GlobalWowToken.getInstance().setIdToken(body.getId());
                                     GlobalWowToken.getInstance().setUserEmail(body.getEmail());
 
-
+                                    https://github.com/Inje-Database-Lab/WowSup/projects/1
                                     //세인아 이거 이메일 확인해 로그!
                                     //로그인 되면 GlobalWowToken.getInstance().getUserEmail(); 쓰면돼!
                                     Log.d("User Email : " , body.getEmail());
