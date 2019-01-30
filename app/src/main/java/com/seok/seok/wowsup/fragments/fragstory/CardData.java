@@ -1,27 +1,27 @@
-package com.seok.seok.wowsup.fragments.fragstroy;
+package com.seok.seok.wowsup.fragments.fragstory;
 
 public class CardData {
 
-    private String stroyID;
+    private String storyID;
     private String userID;
     private String title;
     private String body;
     private String cntLike;
 
-    public CardData(String stroyID, String userID, String title, String body, String cntLike) {
-        this.stroyID = stroyID;
+    public CardData(String storyID, String userID, String title, String body, String cntLike) {
+        this.storyID = storyID;
         this.userID = userID;
         this.title = title;
         this.body = body;
         this.cntLike = cntLike;
     }
 
-    public String getStroyID() {
-        return stroyID;
+    public String getStoryID() {
+        return storyID;
     }
 
-    public void setStroyID(String stroyID) {
-        this.stroyID = stroyID;
+    public void setStoryID(String storyID) {
+        this.storyID = storyID;
     }
 
     public String getUserID() {

@@ -1,4 +1,4 @@
-package com.seok.seok.wowsup.fragments.fragstroy;
+package com.seok.seok.wowsup.fragments.fragstory;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -33,7 +33,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         CardData item = items.get(position);
-        title.setText(item.getTitle());
+        title.setText(item.getTitle() + "\n" +  item.getStoryID());
         like.setText(item.getCntLike());
     }
 

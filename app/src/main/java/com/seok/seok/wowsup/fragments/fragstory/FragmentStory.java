@@ -1,4 +1,4 @@
-package com.seok.seok.wowsup.fragments.fragstroy;
+package com.seok.seok.wowsup.fragments.fragstory;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.seok.seok.wowsup.R;
@@ -24,6 +26,8 @@ import retrofit2.Response;
 
 public class FragmentStory extends Fragment {
     private View view;
+    private EditText editTextSearch;
+    private Button buttonSearch;
 
     // Card 관련
     private RecyclerView mRecyclerView;
@@ -39,7 +43,7 @@ public class FragmentStory extends Fragment {
         super.onCreate(savedInstanceState);
         cardViewData = new ArrayList<>();
         mAdapter = new CardAdapter(cardViewData);
-        initDataset();
+        initDataSet();
     }
 
     @Override
@@ -50,9 +54,48 @@ public class FragmentStory extends Fragment {
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
         mRecyclerView.scrollToPosition(0);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        editTextSearch = view.findViewById(R.id.fragment_stroy_edittext_search);
+        buttonSearch = view.findViewById(R.id.fragment_stroy_button_search);
+        buttonSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cardViewData.clear();
+                ApiUtils.getStoryService().requestStoryTagView(editTextSearch.getText().toString()).enqueue(new Callback<List<ResponseStoryObj>>() {
+                    @Override
+                    public void onResponse(Call<List<ResponseStoryObj>> call, Response<List<ResponseStoryObj>> response) {
+                        if(response.isSuccessful()){
+                            List <ResponseStoryObj> body = response.body();
+                            Log.d("asdf", body.size()+"");
+                            for(int i = 0;  i< body.size(); i++){
+                                cardViewData.add(new CardData(body.get(i).getStoryID()+"",
+                                        body.get(i).getUserID()+"", body.get(i).getTitle()+"",
+                                        body.get(i).getBody()+"", body.get(i).getCntLike()+""));
+                                Log.d("cardView StoryID: " , body.get(i).getStoryID()+"");
+                                Log.d("cardView UserID: " , body.get(i).getUserID()+"");
+                                Log.d("cardView Title: " , body.get(i).getTitle()+"");
+                                Log.d("cardView Body: " , body.get(i).getBody()+"");
+                                Log.d("cardView Like: " , body.get(i).getCntLike()+"");
+                                if(mAdapter.getItemCount() == body.size()){
+                                    Log.d("asdfasdf", mAdapter.getItemCount()+"");
+                                    mRecyclerView.setAdapter(mAdapter);
+                                }
+                            }
+                        } else {
+                            Log.d("FILE", "server contact failed");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<ResponseStoryObj>> call, Throwable t) {
+                        Toast.makeText(getActivity(), "통신오류", Toast.LENGTH_SHORT).show();
+                        Log.d("fragments_Story", t.getMessage() + " < ");
+                    }
+                });
+            }
+        });
         return view;
     }
-    private void initDataset() {
+    private void initDataSet() {
         ApiUtils.getStoryService().requestStoryView().enqueue(new Callback<List<ResponseStoryObj>>() {
             @Override
             public void onResponse(Call<List<ResponseStoryObj>> call, Response<List<ResponseStoryObj>> response) {
