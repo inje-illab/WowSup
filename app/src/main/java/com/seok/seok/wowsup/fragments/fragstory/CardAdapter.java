@@ -4,9 +4,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.seok.seok.wowsup.R;
+import com.seok.seok.wowsup.utilities.BackgroundViewDialog;
+import com.seok.seok.wowsup.utilities.Common;
 
 import java.util.ArrayList;
 
@@ -16,6 +19,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     private ViewHolder viewHolder;
     private TextView title;
     private TextView like;
+    private LinearLayout layoutStoryBackground;
     public CardAdapter(ArrayList<CardData> DataSet){
         items = DataSet;
     }
@@ -26,6 +30,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
         title = view.findViewById(R.id.story_view_title);
         like = view.findViewById(R.id.story_view_like);
+        layoutStoryBackground = view.findViewById(R.id.layout_story_background);
         viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -35,6 +40,13 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         CardData item = items.get(position);
         title.setText(item.getTitle() + "\n" +  item.getStoryID());
         like.setText(item.getCntLike());
+        layoutStoryBackground.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BackgroundViewDialog dialog = new BackgroundViewDialog(view.getContext(), Common.STORY_IMAGE_BASE_URL);
+                dialog.show();
+            }
+        });
     }
 
     @Override
