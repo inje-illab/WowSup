@@ -47,7 +47,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatViewHolder> {
         holder.chatFriendOption.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String stFriendID = apiObject.getUserID() + "@naver.com";
+                String stFriendID = apiObject.getUserID();
                 Intent intent = new Intent(ChatAdapter.this.context, ChatActivity.class);
                 intent.putExtra("friendUid", stFriendID);
                 context.startActivity(intent);
