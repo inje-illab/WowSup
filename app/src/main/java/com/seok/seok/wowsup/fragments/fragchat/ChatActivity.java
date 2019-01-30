@@ -78,7 +78,7 @@ public class ChatActivity extends AppCompatActivity {
                     String formattedDate = df.format(c.getTime());
 
 
-                    DatabaseReference myRef = database.getReference().child(strFriendUid).child("chat").child(formattedDate);
+                    DatabaseReference myRef = database.getReference("users").child(strFriendUid).child("chat").child(formattedDate);
 
                     Hashtable<String, String> chat = new Hashtable<String, String>();
                     chat.put("email", email);
@@ -108,7 +108,7 @@ public class ChatActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
 
 
-        DatabaseReference myRef = database.getReference().child(strFriendUid).child("chat");
+        DatabaseReference myRef = database.getReference("users").child(strFriendUid).child("chat");
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
