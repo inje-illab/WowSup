@@ -2,12 +2,14 @@ package com.seok.seok.wowsup;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
@@ -18,6 +20,13 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.kakao.auth.AuthType;
 import com.kakao.auth.Session;
 import com.seok.seok.wowsup.retrofit.model.ResponseLoginObj;
@@ -29,6 +38,7 @@ import com.seok.seok.wowsup.utilities.SessionCallbackKakaoTalk;
 import org.json.JSONObject;
 
 import java.util.Arrays;
+import java.util.Hashtable;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,10 +53,21 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin, btnRegister;
     private EditText edtID, edtPW;
 
+    //sein test
+    private String emailTest, passwordTest;
+    private String TAG = "LoginActivity";
+    private FirebaseAuth mAuth;
+    private String email, strUid;
+    private FirebaseDatabase database;
+    private FirebaseUser user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        //sein test
+        mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
         // Layout에서 id 값 받아오기
         btnLogin = findViewById(R.id.login_button_login);
         btnRegister = findViewById(R.id.login_button_register);
@@ -101,9 +122,32 @@ public class LoginActivity extends AppCompatActivity {
                             if (response.isSuccessful()) {
                                 ResponseLoginObj body = response.body();
                                 if (body.getState() == 1) {
+                                    //sein Test
+                                    emailTest = edtID.getText().toString()+"@naver.com";//이거 이메일로 바꿔서 집어넣어야 돌아감 이거찾느라 뒤질뻔
+                                    passwordTest = edtPW.getText().toString();
+                                    userLogin(emailTest, passwordTest);
+                                    if (user != null) {
+                                        email = user.getEmail();
+                                        strUid = user.getUid();
+                                        DatabaseReference myRef = database.getReference("users").child(strUid);
+                                        Hashtable<String, String> users = new Hashtable<String, String>();
+                                        users.put("email", email);
+                                        users.put("key", strUid);
+                                        myRef.setValue(users);
+                                    }
+
                                     Toast.makeText(LoginActivity.this, "Login 성공", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                     GlobalWowToken.getInstance().setIdToken(body.getId());
+                                    GlobalWowToken.getInstance().setUserEmail(body.getEmail());
+
+
+                                    //세인아 이거 이메일 확인해 로그!
+                                    //로그인 되면 GlobalWowToken.getInstance().getUserEmail(); 쓰면돼!
+                                    Log.d("User Email : " , body.getEmail());
+
+
+
                                     //finish();
                                 } else if (body.getState() == 2) {
                                     Toast.makeText(LoginActivity.this, "Login 실패", Toast.LENGTH_SHORT).show();
@@ -158,5 +202,40 @@ public class LoginActivity extends AppCompatActivity {
         }
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+    }
+    private void updateUI(FirebaseUser currentUser) {
+
+    }
+
+    public void userLogin(String email, String password)
+    {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("aaa", "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("aaa", "signInWithEmail:failure", task.getException());
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+
+                        // ...
+                    }
+         });
     }
 }

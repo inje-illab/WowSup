@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1073225025816",
+    "firebase_url": "https://wowsup-cc601.firebaseio.com",
+    "project_id": "wowsup-cc601",
+    "storage_bucket": "wowsup-cc601.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1073225025816:android:d2f5aed82cc91c3e",
+        "android_client_info": {
+          "package_name": "com.seok.seok.wowsup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1073225025816-jst63v3dbcesc023tpnb43lo348gagg2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.seok.seok.wowsup",
+            "certificate_hash": "4642444185d5fcf3e61b79f93140ccd60fb0e168"
+          }
+        },
+        {
+          "client_id": "1073225025816-0c0nbm98m466e1g2nm0k2knn6o5j394n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtwLo4txl8XYmRhLP6LqDjmQqTjgyZQzs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1073225025816-0c0nbm98m466e1g2nm0k2knn6o5j394n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

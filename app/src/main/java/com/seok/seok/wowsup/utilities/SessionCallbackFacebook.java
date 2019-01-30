@@ -38,6 +38,7 @@ public class SessionCallbackFacebook implements FacebookCallback<LoginResult> {
                         if (response.isSuccessful()) {
                             ResponseLoginObj body = response.body();
                             GlobalWowToken.getInstance().setIdToken(body.getId());
+                            GlobalWowToken.getInstance().setIdToken(body.getEmail());
                             if (body.getState() == 1) {
                                 Log.d("snsRegister_", "success < ");
                             } else if (body.getState() == 0) {
