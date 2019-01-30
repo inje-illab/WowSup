@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import com.seok.seok.wowsup.fragments.fragchat.FragmentChat;
 import com.seok.seok.wowsup.fragments.fraghelp.FragmentHelp;
 import com.seok.seok.wowsup.fragments.fragprofile.FragmentProfile;
-import com.seok.seok.wowsup.fragments.fragstroy.FragmentStory;
+import com.seok.seok.wowsup.fragments.fragstory.FragmentStory;
 
 public class MainActivity extends AppCompatActivity {
 

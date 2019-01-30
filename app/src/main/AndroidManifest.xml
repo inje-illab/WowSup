@@ -12,12 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RegisterActivity"></activity>
-        <!-- 카카오톡 메타데이터 -->
+        <activity android:name=".fragments.fragchat.ChatActivity"></activity>
+        <activity android:name=".RegisterActivity" /> <!-- 카카오톡 메타데이터 -->
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="@string/kakao_app_key" />
-        <!-- 페이스북 메타데이터 -->
+            android:value="@string/kakao_app_key" /> <!-- 페이스북 메타데이터 -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />

@@ -1,6 +1,7 @@
 package com.seok.seok.wowsup.fragments.fragchat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.kakao.auth.helper.StartActivityWrapper;
 import com.seok.seok.wowsup.R;
 import com.seok.seok.wowsup.retrofit.model.ResponseChatObj;
 import com.seok.seok.wowsup.utilities.Common;
@@ -41,6 +43,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatViewHolder> {
         }
         holder.chatFriend.setText(apiObject.getFriendNick());
         holder.chatFriendOption.setText(apiObject.getFriend());
+
+        holder.chatFriendOption.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChatAdapter.this.context, ChatActivity.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
