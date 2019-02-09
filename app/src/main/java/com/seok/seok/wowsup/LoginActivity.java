@@ -122,14 +122,17 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d("login_in", "success2 < ");
                             if (response.isSuccessful()) {
                                 ResponseLoginObj body = response.body();
+                                GlobalWowToken.getInstance().setIdToken(body.getId());
+                                GlobalWowToken.getInstance().setUserEmail(body.getEmail());
                                 if (body.getState() == 1) {
                                     //sein Test
-                                    emailTest = edtID.getText().toString()+"@naver.com";//이거 이메일로 바꿔서 집어넣어야 돌아감 이거찾느라 뒤질뻔
+
+                                    emailTest = body.getEmail();//이거 이메일로 바꿔서 집어넣어야 돌아감 이거찾느라 뒤질뻔
                                     passwordTest = edtPW.getText().toString();
                                     userLogin(emailTest, passwordTest);
 
                                     if (user != null) {
-                                        user_id =edtID.getText().toString();
+                                        user_id = body.getId();
                                         email = user.getEmail();
                                         strUid = user.getUid();
 
@@ -141,16 +144,15 @@ public class LoginActivity extends AppCompatActivity {
                                     users.put("user_id", user_id);
                                     users.put("email", email);
                                     users.put("key", strUid);
+                                    myRef.setValue(users);
+                                    //if(!(myRef.getDatabase().getReference().equals(myRef)))
+                                    //{
 
-                                    if(!(myRef.getDatabase().getReference().equals(myRef)))
-                                    {
-                                        myRef.setValue(users);
-                                    }
+                                    //}
 
                                     Toast.makeText(LoginActivity.this, "Login 성공", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                                    GlobalWowToken.getInstance().setIdToken(body.getId());
-                                    GlobalWowToken.getInstance().setUserEmail(body.getEmail());
+
 
 
                                     //세인아 이거 이메일 확인해 로그!
