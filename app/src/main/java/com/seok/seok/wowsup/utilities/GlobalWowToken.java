@@ -4,7 +4,7 @@ import android.util.Log;
 
 public class GlobalWowToken {
     private static GlobalWowToken globalWowToken = new GlobalWowToken();
-    private String idToken;
+    private String id;
     private String userEmail;
     private String imageURL;
 
@@ -16,12 +16,12 @@ public class GlobalWowToken {
         return globalWowToken;
     }
 
-    public String getIdToken() {
-        return idToken;
+    public String getId() {
+        return id;
     }
 
-    public void setIdToken(String idToken) {
-        this.idToken = idToken;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUserEmail() {

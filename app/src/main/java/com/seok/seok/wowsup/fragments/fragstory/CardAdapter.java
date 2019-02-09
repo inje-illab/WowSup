@@ -8,16 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.seok.seok.wowsup.MainActivity;
 import com.seok.seok.wowsup.R;
 import com.seok.seok.wowsup.StoryActivity;
-import com.seok.seok.wowsup.utilities.BackgroundViewDialog;
-import com.seok.seok.wowsup.utilities.Common;
-
 import java.util.ArrayList;
 
-import static android.support.v4.content.ContextCompat.startActivity;
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     private Context context;
@@ -46,8 +40,13 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         final CardData item = items.get(position);
+
+        // 서버에서 받아온 테스트 데이터 삽입
         title.setText(item.getTitle() + "\n" +  item.getStoryID());
+
         like.setText(item.getCntLike());
+
+        //레이아웃 제목을 클릭할 경우 해당 storyID 값을 다음 엑티비티에 넘겨줌
         layoutStoryTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

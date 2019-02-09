@@ -43,12 +43,10 @@ public class StoryActivity extends AppCompatActivity {
 
         Intent intent  = getIntent();
         storyID = intent.getStringExtra("storyID");
-        Log.d("gggg", storyID);
 
         ApiUtils.getStoryService().requestOneStoryView(storyID).enqueue(new Callback<ResponseStoryObj>() {
             @Override
             public void onResponse(Call<ResponseStoryObj> call, Response<ResponseStoryObj> response) {
-                Log.d("Storrr", storyID);
                 ResponseStoryObj body = response.body();
                 if(response.isSuccessful()){
                     try{
@@ -59,7 +57,6 @@ public class StoryActivity extends AppCompatActivity {
                         storyTextTag4.setText(body.getTag4());
                         storyTextTag5.setText(body.getTag5());
                         storyTextcntlike.setText(body.getCntLike()+"");
-                        Log.d("Storrr", Common.API_IMAGE_BASE_URL+body.getImageURL());
                         if(!body.getImageURL().equals(null)){
                             Glide.with(getApplicationContext()).load(Common.API_IMAGE_BASE_URL+body.getImageURL()).into(new SimpleTarget<GlideDrawable>() {
                                 @Override
@@ -81,7 +78,7 @@ public class StoryActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseStoryObj> call, Throwable t) {
-                Log.d("Storrr", t.getMessage());
+                Log.d("StoryFragments_err ", t.getMessage());
             }
         });
     }

@@ -11,12 +11,12 @@ import retrofit2.http.Query;
 public interface StoryService {
     //서버 요청 URL
 
-    @GET("Login/showStory.php")
+    @GET("Story/showListStory.php")
     Call<List<ResponseStoryObj>> requestStoryView();
 
-    @GET("Login/searchTag.php")
+    @GET("Story/searchTag.php")
     Call<List<ResponseStoryObj>> requestStoryTagView(@Query("text") String text);
 
-    @GET("Login/oneStory.php")
+    @GET("Story/pickStory.php")
     Call<ResponseStoryObj> requestOneStoryView(@Query("storyID") String storyID);
 }

@@ -12,7 +12,7 @@ import retrofit2.http.Query;
 public interface ProfileService {
     //서버 요청 URL
 
-    @GET("Login/image.php")
+    @GET("Profile/profileImage.php")
     Call<ResponseProfileObj> requestImageURL(@Query("ID") String id);
 
 }
