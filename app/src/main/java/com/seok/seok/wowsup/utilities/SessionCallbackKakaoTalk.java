@@ -1,18 +1,13 @@
 package com.seok.seok.wowsup.utilities;
 
-import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 
-import com.facebook.Profile;
 import com.kakao.auth.ISessionCallback;
-import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeResponseCallback;
 import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.exception.KakaoException;
-import com.seok.seok.wowsup.MainActivity;
 import com.seok.seok.wowsup.retrofit.model.ResponseLoginObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 import com.seok.seok.wowsup.retrofit.remote.LoginService;
@@ -20,7 +15,6 @@ import com.seok.seok.wowsup.retrofit.remote.LoginService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class SessionCallbackKakaoTalk implements ISessionCallback {
 
@@ -35,10 +29,11 @@ public class SessionCallbackKakaoTalk implements ISessionCallback {
             public void onResponse(Call<ResponseLoginObj> call, Response<ResponseLoginObj> response) {
                 if(response.isSuccessful()){
                     ResponseLoginObj body = response.body();
-                    GlobalWowToken.getInstance().setIdToken(body.getId());
-                    GlobalWowToken.getInstance().setIdToken(body.getEmail());
+                    GlobalWowToken.getInstance().setId(body.getId());
+                    GlobalWowToken.getInstance().setId(body.getEmail());
                     if(body.getState() == 1){
                         Log.d("snsRegister_", "success < ");
+                        Common.setTabFlag();
                     }else if(body.getState() == 0){
                         Log.d("snsRegister_", "fail < ");
                     }
