@@ -124,32 +124,9 @@ public class LoginActivity extends AppCompatActivity {
                                     passwordTest = edtPW.getText().toString();
                                     userLogin(emailTest, passwordTest);
 
-                                    if (user != null) {
-                                        user_id = body.getId();
-                                        email = user.getEmail();
-                                        strUid = user.getUid();
-
-                                    }
-
-
-                                    DatabaseReference myRef = database.getReference("users").child(user_id);
-                                    Hashtable<String, String> users = new Hashtable<String, String>();
-                                    users.put("user_id", user_id);
-                                    users.put("email", email);
-                                    users.put("key", strUid);
-
-                                    if(!(myRef.getDatabase().getReference().equals(myRef)))
-                                    {
-                                        myRef.setValue(users);
-                                    }
 
                                     Toast.makeText(LoginActivity.this, "Login 성공", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
-
-
-                                    //세인아 이거 이메일 확인해 로그!
-                                    //로그인 되면 GlobalWowToken.getInstance().getUserEmail(); 쓰면돼!
-                                    Log.d("User Email : " , body.getEmail());
 
 
                                     Common.setTabFlag();
