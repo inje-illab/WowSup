@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.seok.seok.wowsup.R;
+import com.seok.seok.wowsup.utilities.GlobalWowToken;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -78,13 +79,14 @@ public class ChatActivity extends AppCompatActivity {
                     String formattedDate = df.format(c.getTime());
 
 
-                    DatabaseReference myRef = database.getReference("users").child(strFriendUid).child("chat").child(formattedDate);
-
+                    DatabaseReference myRef = database.getReference("users").child(GlobalWowToken.getInstance().getId()).child("friends").child(strFriendUid).child("chat").child(formattedDate);
+                    DatabaseReference myRef1 = database.getReference("users").child(strFriendUid).child("friends").child(GlobalWowToken.getInstance().getId()).child("chat").child(formattedDate);
                     Hashtable<String, String> chat = new Hashtable<String, String>();
                     chat.put("email", email);
                     chat.put("text", strText);
 
                     myRef.setValue(chat);
+                    myRef1.setValue(chat);
 
                     txtText.setText("");
 
@@ -108,7 +110,7 @@ public class ChatActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
 
 
-        DatabaseReference myRef = database.getReference("users").child(strFriendUid).child("chat");
+        DatabaseReference myRef = database.getReference("users").child(GlobalWowToken.getInstance().getId()).child("friends").child(strFriendUid).child("chat");
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {

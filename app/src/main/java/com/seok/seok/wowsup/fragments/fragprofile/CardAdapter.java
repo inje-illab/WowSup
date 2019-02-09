@@ -29,8 +29,10 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         viewHolder = new ViewHolder(view);
         return viewHolder;
     }
+
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
+
         CardData item = items.get(position);
         title.setText(item.getTitle());
         like.setText(item.getCntLike());

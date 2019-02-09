@@ -8,7 +8,7 @@ public class Chat {
         //Default
     }
 
-    public Chat(String email, String author, String text){
+    public Chat(String email, String text){
         this.email = email;
         this.text = text;
     }
@@ -25,8 +25,5 @@ public class Chat {
         this.text = text;
     }
 
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public void setEmail(String email) { this.email = email;}
 }
