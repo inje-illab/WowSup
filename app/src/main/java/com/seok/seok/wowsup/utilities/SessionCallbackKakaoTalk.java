@@ -29,8 +29,6 @@ public class SessionCallbackKakaoTalk implements ISessionCallback {
             public void onResponse(Call<ResponseLoginObj> call, Response<ResponseLoginObj> response) {
                 if(response.isSuccessful()){
                     ResponseLoginObj body = response.body();
-                    GlobalWowToken.getInstance().setId(body.getId());
-                    GlobalWowToken.getInstance().setId(body.getEmail());
                     if(body.getState() == 1){
                         Log.d("snsRegister_", "success < ");
                         Common.setTabFlag();
