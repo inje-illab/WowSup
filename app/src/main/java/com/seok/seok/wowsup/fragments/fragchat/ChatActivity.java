@@ -1,5 +1,6 @@
 package com.seok.seok.wowsup.fragments.fragchat;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -32,7 +33,7 @@ public class ChatActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private Button btnFinish, btnSend;
     private EditText txtText;
-    private String email, strUid;
+    private String email, strUid, strFriendUid;
     private FirebaseDatabase database;
     private List<Chat> mChat;
     @Override
@@ -40,9 +41,10 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        setContentView(R.layout.activity_chat);
         database = FirebaseDatabase.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        Intent intent  = getIntent();
+        strFriendUid = intent.getStringExtra("friendUid");
 
         if (user != null) {
             email = user.getEmail();
@@ -76,7 +78,7 @@ public class ChatActivity extends AppCompatActivity {
                     String formattedDate = df.format(c.getTime());
 
 
-                    DatabaseReference myRef = database.getReference("chats").child(formattedDate);
+                    DatabaseReference myRef = database.getReference("users").child(strFriendUid).child("chat").child(formattedDate);
 
                     Hashtable<String, String> chat = new Hashtable<String, String>();
                     chat.put("email", email);
@@ -106,7 +108,7 @@ public class ChatActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
 
 
-        DatabaseReference myRef = database.getReference("chats");
+        DatabaseReference myRef = database.getReference("users").child(strFriendUid).child("chat");
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {

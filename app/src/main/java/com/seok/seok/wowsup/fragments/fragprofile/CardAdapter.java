@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.seok.seok.wowsup.R;
-import com.seok.seok.wowsup.fragments.CardData;
 
 import java.util.ArrayList;
 

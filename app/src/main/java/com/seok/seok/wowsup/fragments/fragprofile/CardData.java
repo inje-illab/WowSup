@@ -1,4 +1,4 @@
-package com.seok.seok.wowsup.fragments;
+package com.seok.seok.wowsup.fragments.fragprofile;
 
 public class CardData {
 
@@ -16,11 +16,11 @@ public class CardData {
         this.cntLike = cntLike;
     }
 
-    public String getstoryID() {
+    public String getStoryID() {
         return storyID;
     }
 
-    public void setstoryID(String storyID) {
+    public void setStoryID(String storyID) {
         this.storyID = storyID;
     }
 

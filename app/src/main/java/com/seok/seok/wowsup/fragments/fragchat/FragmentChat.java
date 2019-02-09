@@ -1,6 +1,5 @@
 package com.seok.seok.wowsup.fragments.fragchat;
 
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -22,7 +20,6 @@ import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 import com.seok.seok.wowsup.utilities.Common;
 import com.seok.seok.wowsup.utilities.GlobalWowToken;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -103,7 +100,7 @@ public class FragmentChat extends Fragment {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
             recyclerView.setLayoutManager(linearLayoutManager);
             recyclerView.setHasFixedSize(true);
-            ApiUtils.getProfileService().requestImageURL(GlobalWowToken.getInstance().getIdToken()).enqueue(new Callback<ResponseProfileObj>() {
+            ApiUtils.getProfileService().requestImageURL(GlobalWowToken.getInstance().getId()).enqueue(new Callback<ResponseProfileObj>() {
                 @Override
                 public void onResponse(Call<ResponseProfileObj> call, Response<ResponseProfileObj> response) {
                     if(response.isSuccessful()){
@@ -115,7 +112,7 @@ public class FragmentChat extends Fragment {
                             }catch (Exception e){
                                 Glide.with(getActivity()).load(Common.USER_IMAGE_BASE_URL).into(chatUserImage);
                             }
-                            chatUserID.setText("User ID : " + GlobalWowToken.getInstance().getIdToken());
+                            chatUserID.setText("User ID : " + GlobalWowToken.getInstance().getId());
                         }
                     }
                 }
@@ -125,7 +122,7 @@ public class FragmentChat extends Fragment {
 
                 }
             });
-            ApiUtils.getChatService().requestChatFriend(GlobalWowToken.getInstance().getIdToken()).enqueue(new Callback<List<ResponseChatObj>>() {
+            ApiUtils.getChatService().requestChatFriend(GlobalWowToken.getInstance().getId()).enqueue(new Callback<List<ResponseChatObj>>() {
                 @Override
                 public void onResponse(Call<List<ResponseChatObj>> call, Response<List<ResponseChatObj>> response) {
                     if(response.isSuccessful()){

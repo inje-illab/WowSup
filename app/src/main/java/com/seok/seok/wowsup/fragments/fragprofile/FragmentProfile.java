@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.seok.seok.wowsup.R;
-import com.seok.seok.wowsup.fragments.CardData;
 import com.seok.seok.wowsup.retrofit.model.ResponseStoryObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 
@@ -63,7 +62,7 @@ public class FragmentProfile extends Fragment {
                     List <ResponseStoryObj> body = response.body();
                     Log.d("fragment_Profile : ", body.size()+"");
                     for(int i = 0;  i< body.size(); i++){
-                        cardViewData.add(new com.seok.seok.wowsup.fragments.CardData(body.get(i).getStoryID()+"",
+                        cardViewData.add(new CardData(body.get(i).getStoryID()+"",
                                 body.get(i).getUserID()+"", body.get(i).getTitle()+"",
                                 body.get(i).getBody()+"", body.get(i).getCntLike()+""));
                         Log.d("cardView ProfileID: " , body.get(i).getStoryID()+"");

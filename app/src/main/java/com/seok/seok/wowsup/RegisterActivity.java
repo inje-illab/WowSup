@@ -15,9 +15,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.seok.seok.wowsup.retrofit.model.ResponseLoginObj;
 import com.seok.seok.wowsup.retrofit.model.ResponseRegisterObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
+
+import java.util.Hashtable;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,12 +37,17 @@ public class RegisterActivity extends AppCompatActivity {
     private String TAG = "RegisterActivity";
     private FirebaseAuth mAuth;
     private String emailTest, passwordTest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
         mAuth = FirebaseAuth.getInstance();
+
+
+
+
         edtID = findViewById(R.id.register_edittext_id);
         edtPW = findViewById(R.id.register_edittext_pwd);
         edtEmail = findViewById(R.id.register_edittext_email);
@@ -64,7 +73,6 @@ public class RegisterActivity extends AppCompatActivity {
                         emailTest = edtEmail.getText().toString();
                         passwordTest = edtPW.getText().toString();
                         userRegist(emailTest, passwordTest);
-
 
                         Toast.makeText(RegisterActivity.this, "가입 성공", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
@@ -118,6 +126,7 @@ public class RegisterActivity extends AppCompatActivity {
         updateUI(currentUser);
     }
     private void updateUI(FirebaseUser currentUser) {
+
     }
 
     public void userRegist(String email, String password){

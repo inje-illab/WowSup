@@ -9,33 +9,29 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.kakao.auth.AuthType;
 import com.kakao.auth.Session;
 import com.seok.seok.wowsup.retrofit.model.ResponseLoginObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
+import com.seok.seok.wowsup.utilities.Common;
 import com.seok.seok.wowsup.utilities.GlobalWowToken;
 import com.seok.seok.wowsup.utilities.SessionCallbackFacebook;
 import com.seok.seok.wowsup.utilities.SessionCallbackKakaoTalk;
 
-import org.json.JSONObject;
-
 import java.util.Arrays;
+import java.util.Hashtable;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,12 +45,13 @@ public class LoginActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
     private Button btnLogin, btnRegister;
     private EditText edtID, edtPW;
-
+    private String user_id,email, strUid;
     //sein test
     private String emailTest, passwordTest;
     private String TAG = "LoginActivity";
     private FirebaseAuth mAuth;
-
+    private FirebaseDatabase database;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +59,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         //sein test
         mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
         // Layout에서 id 값 받아오기
         btnLogin = findViewById(R.id.login_button_login);
@@ -117,15 +116,42 @@ public class LoginActivity extends AppCompatActivity {
                             if (response.isSuccessful()) {
                                 ResponseLoginObj body = response.body();
                                 if (body.getState() == 1) {
-
                                     //sein Test
                                     emailTest = edtID.getText().toString()+"@naver.com";//이거 이메일로 바꿔서 집어넣어야 돌아감 이거찾느라 뒤질뻔
                                     passwordTest = edtPW.getText().toString();
-                                    userLigin(emailTest, passwordTest);
+                                    userLogin(emailTest, passwordTest);
+
+                                    if (user != null) {
+                                        user_id =edtID.getText().toString();
+                                        email = user.getEmail();
+                                        strUid = user.getUid();
+
+                                    }
+
+
+                                    DatabaseReference myRef = database.getReference("users").child(user_id);
+                                    Hashtable<String, String> users = new Hashtable<String, String>();
+                                    users.put("user_id", user_id);
+                                    users.put("email", email);
+                                    users.put("key", strUid);
+
+                                    if(!(myRef.getDatabase().getReference().equals(myRef)))
+                                    {
+                                        myRef.setValue(users);
+                                    }
 
                                     Toast.makeText(LoginActivity.this, "Login 성공", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                                    GlobalWowToken.getInstance().setIdToken(body.getId());
+                                    GlobalWowToken.getInstance().setId(body.getId());
+                                    GlobalWowToken.getInstance().setUserEmail(body.getEmail());
+
+
+                                    //세인아 이거 이메일 확인해 로그!
+                                    //로그인 되면 GlobalWowToken.getInstance().getUserEmail(); 쓰면돼!
+                                    Log.d("User Email : " , body.getEmail());
+
+
+                                    Common.setTabFlag();
                                     //finish();
                                 } else if (body.getState() == 2) {
                                     Toast.makeText(LoginActivity.this, "Login 실패", Toast.LENGTH_SHORT).show();
@@ -190,9 +216,10 @@ public class LoginActivity extends AppCompatActivity {
         updateUI(currentUser);
     }
     private void updateUI(FirebaseUser currentUser) {
+
     }
 
-    public void userLigin(String email, String password)
+    public void userLogin(String email, String password)
     {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

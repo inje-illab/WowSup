@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".fragments.fragchat.ChatActivity"></activity>
+        <activity android:name=".StoryActivity"></activity>
+        <activity android:name=".fragments.fragchat.ChatActivity" />
         <activity android:name=".RegisterActivity" /> <!-- 카카오톡 메타데이터 -->
         <meta-data
             android:name="com.kakao.sdk.AppKey"
@@ -21,21 +22,21 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-            <activity android:name=".LoginActivity" />
-            <activity android:name=".LauncherActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".LauncherActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-    <activity android:name=".MainActivity" />
-    <activity
-        android:name="com.facebook.FacebookActivity"
-        android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-        android:label="@string/app_name" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
         <activity
             android:name=".fragments.fragprofile.WriteActivity" />
-</application>
+    </application>
 
-    </manifest>
+</manifest>

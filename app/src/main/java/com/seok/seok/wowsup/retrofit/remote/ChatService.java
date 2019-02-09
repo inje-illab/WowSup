@@ -12,7 +12,7 @@ import retrofit2.http.Query;
 public interface ChatService {
     //서버 요청 URL
 
-    @POST("Login/chatList.php")
+    @POST("Chat/chatList.php")
     Call<List<ResponseChatObj>> requestChatFriend(@Query("ID") String id);
 
 }
