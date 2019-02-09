@@ -56,8 +56,8 @@ public class FragmentStory extends Fragment {
             mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
             mRecyclerView.scrollToPosition(0);
             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-            editTextSearch = view.findViewById(R.id.fragment_stroy_edittext_search);
-            buttonSearch = view.findViewById(R.id.fragment_stroy_button_search);
+            editTextSearch = view.findViewById(R.id.fragment_story_edittext_search);
+            buttonSearch = view.findViewById(R.id.fragment_story_button_search);
             buttonSearch.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

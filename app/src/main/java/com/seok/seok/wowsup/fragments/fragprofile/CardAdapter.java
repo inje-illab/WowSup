@@ -12,29 +12,28 @@ import java.util.ArrayList;
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     private ArrayList<CardData> items;
-
+    private View view;
+    private ViewHolder viewHolder;
+    private TextView title;
+    private TextView like;
     public CardAdapter(ArrayList<CardData> DataSet){
         items = DataSet;
     }
 
     @Override
     public CardAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_card, parent, false);
-        ViewHolder viewHolder = new ViewHolder(itemView);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_story_list, parent, false);
+
+        title = view.findViewById(R.id.story_view_title);
+        like = view.findViewById(R.id.story_view_like);
+        viewHolder = new ViewHolder(view);
         return viewHolder;
     }
-
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         CardData item = items.get(position);
-        viewHolder.TV_text.setText(item.getText());
-
-        viewHolder.TV_text.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // click 시 필요한 동작 정의
-            }
-        });
+        title.setText(item.getTitle());
+        like.setText(item.getCntLike());
     }
 
     @Override
@@ -48,10 +47,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView TV_text;
         ViewHolder(View itemView) {
             super(itemView);
-            TV_text= itemView.findViewById(R.id.TV_text);
         }
     }
 }

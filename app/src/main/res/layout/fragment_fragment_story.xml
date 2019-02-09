@@ -18,7 +18,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/fragment_stroy_edittext_search"
+                android:id="@+id/fragment_story_edittext_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -33,7 +33,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/fragment_stroy_button_search"
+                android:id="@+id/fragment_story_button_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="search" />
@@ -55,7 +55,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/fragment_stroy_textview_topic"
+                android:id="@+id/fragment_story_textview_topic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="# Fire"
