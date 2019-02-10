@@ -47,7 +47,8 @@ public class FragmentProfile extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         cardViewData = new ArrayList<>();
-        mAdapter = new CardAdapter(cardViewData);
+        cardViewData.add(new CardData("","","","",""));
+        mAdapter = new CardAdapter(cardViewData, this.getContext());
         initDataSet();
     }
 
@@ -74,7 +75,6 @@ public class FragmentProfile extends Fragment {
                         }
                     }
                 }
-
                 @Override
                 public void onFailure(Call<ResponseProfileObj> call, Throwable t) {
 
@@ -84,11 +84,8 @@ public class FragmentProfile extends Fragment {
             mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
             mRecyclerView.scrollToPosition(0);
             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-
-
             Common.fragmentProfileTab = false;
         }
-
         return view;
     }
 

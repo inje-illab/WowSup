@@ -45,7 +45,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         title.setText(item.getTitle() + "\n" +  item.getStoryID());
 
         like.setText(item.getCntLike());
-
         //레이아웃 제목을 클릭할 경우 해당 storyID 값을 다음 엑티비티에 넘겨줌
         layoutStoryTitle.setOnClickListener(new View.OnClickListener() {
             @Override
