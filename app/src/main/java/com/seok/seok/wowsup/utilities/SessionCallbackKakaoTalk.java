@@ -23,7 +23,6 @@ public class SessionCallbackKakaoTalk implements ISessionCallback {
     // 로그인에 성공한 상태
     @Override
     public void onSessionOpened() {
-        loginSuccess = true;
         callback = new Callback<ResponseLoginObj>() {
             @Override
             public void onResponse(Call<ResponseLoginObj> call, Response<ResponseLoginObj> response) {
@@ -84,6 +83,7 @@ public class SessionCallbackKakaoTalk implements ISessionCallback {
                     loginService.requestSnsLogin(userProfile.getId() + "",
                             userProfile.getId() + "", userProfile.getEmail(),userProfile.getThumbnailImagePath()+"", 1).enqueue(callback);
                 }
+                loginSuccess = true;
             }
             // 사용자 정보 요청 실패
             @Override

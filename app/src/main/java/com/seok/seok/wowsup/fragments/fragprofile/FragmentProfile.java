@@ -58,7 +58,7 @@ public class FragmentProfile extends Fragment {
             mRecyclerView = (RecyclerView) view.findViewById(R.id.fragment_profile_view);
             profileImage = view.findViewById(R.id.fragment_profile_image);
             //서버에서 이미지 받아올것
-            ApiUtils.getProfileService().requestImageURL("1010043861").enqueue(new Callback<ResponseProfileObj>() {
+            ApiUtils.getProfileService().requestImageURL(GlobalWowToken.getInstance().getId()).enqueue(new Callback<ResponseProfileObj>() {
                 @Override
                 public void onResponse(Call<ResponseProfileObj> call, Response<ResponseProfileObj> response) {
                     if(response.isSuccessful()){
@@ -66,7 +66,7 @@ public class FragmentProfile extends Fragment {
                         if(response.isSuccessful()){
                             try {
                                 if (!body.getImageURL().equals(null)) {
-                                    Glide.with(getActivity()).load(body.getImageURL()).centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).override(300, 300).into(profileImage);
+                                    Glide.with(getActivity()).load(Common.API_IMAGE_BASE_URL+body.getImageURL()).centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).override(300, 300).into(profileImage);
                                 }
                             }catch (Exception e){
                                 Glide.with(getActivity()).load(Common.USER_IMAGE_BASE_URL).centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).override(300, 300).into(profileImage);

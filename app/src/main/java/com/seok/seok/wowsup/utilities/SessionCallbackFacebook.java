@@ -26,7 +26,6 @@ public class SessionCallbackFacebook implements FacebookCallback<LoginResult> {
         Log.d("Profile : ", Profile.getCurrentProfile().getName() + "");
         Log.d("Profile : ", Profile.getCurrentProfile().getLinkUri() + "");
         Log.d("Profile : ", Profile.getCurrentProfile().getProfilePictureUri(300, 300) + "");
-        this.loginSuccess = true;
         ApiUtils.getUserService().requestSnsLogin(Profile.getCurrentProfile().getId() + "",
                 Profile.getCurrentProfile().getId() + "", Profile.getCurrentProfile().getId() + "@facebook.com",Profile.getCurrentProfile().getProfilePictureUri(300, 300) + "", 2)
                 .enqueue(new Callback<ResponseLoginObj>() {
@@ -50,6 +49,7 @@ public class SessionCallbackFacebook implements FacebookCallback<LoginResult> {
                         Log.d("snsRegister_err", t.getMessage() + " < ");
                     }
                 });
+        this.loginSuccess = true;
     }
 
     @Override

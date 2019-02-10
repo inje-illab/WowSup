@@ -108,7 +108,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (validateLogin(edtID.getText().toString(), edtPW.getText().toString())) {
-
                     ApiUtils.getUserService().requestLogin(edtID.getText().toString(), edtPW.getText().toString()).enqueue(new Callback<ResponseLoginObj>() {
                         @Override
                         public void onResponse(Call<ResponseLoginObj> call, Response<ResponseLoginObj> response) {
