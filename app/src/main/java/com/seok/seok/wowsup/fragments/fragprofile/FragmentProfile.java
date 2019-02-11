@@ -57,6 +57,7 @@ public class FragmentProfile extends Fragment {
         if (Common.fragmentProfileTab) {
             view = inflater.inflate(R.layout.fragment_fragment_profile, container, false);
             mRecyclerView = (RecyclerView) view.findViewById(R.id.fragment_profile_view);
+            mRecyclerView.setAdapter(mAdapter);
             profileImage = view.findViewById(R.id.fragment_profile_image);
             //서버에서 이미지 받아올것
             ApiUtils.getProfileService().requestImageURL(GlobalWowToken.getInstance().getId()).enqueue(new Callback<ResponseProfileObj>() {
@@ -90,7 +91,7 @@ public class FragmentProfile extends Fragment {
     }
 
     private void initDataSet() {
-        ApiUtils.getStoryService().requestStoryView().enqueue(new Callback<List<ResponseStoryObj>>() {
+        ApiUtils.getProfileService().requestMyStory(GlobalWowToken.getInstance().getId()).enqueue(new Callback<List<ResponseStoryObj>>() {
             @Override
             public void onResponse(Call<List<ResponseStoryObj>> call, Response<List<ResponseStoryObj>> response) {
                 if (response.isSuccessful()) {
@@ -105,7 +106,7 @@ public class FragmentProfile extends Fragment {
                         Log.d("cardView Title: ", body.get(i).getTitle() + "");
                         Log.d("cardView Body: ", body.get(i).getBody() + "");
                         Log.d("cardView Like: ", body.get(i).getCntLike() + "");
-                        if (mAdapter.getItemCount() == body.size()) {
+                        if (mAdapter.getItemCount()-1 == body.size()) {
                             Log.d("profile Adapter : ", mAdapter.getItemCount() + "");
                             mRecyclerView.setAdapter(mAdapter);
                         }

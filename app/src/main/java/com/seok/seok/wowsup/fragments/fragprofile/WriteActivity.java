@@ -33,33 +33,33 @@ public class WriteActivity extends AppCompatActivity {
         writeTest_text = (EditText)findViewById(R.id.wirteTest_text);
        // lvWrite = (v)findViewById(R.id.lvWrite);
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ApiUtils.getWriteServie().requestText(writeTest_id.getText().toString(),writeTest_text.getText().toString()).enqueue(new Callback<ResponseWriteObj>(){
-                    @Override
-                    public void onResponse(Call<ResponseWriteObj> call, Response<ResponseWriteObj> response) {
-                        ResponseWriteObj Rw = response.body();
-                        Log.d("onResponse ", Rw.getId() + " <<< " + Rw.getText());
-                        if (Rw.getId()+"" != "") {
-                            Toast.makeText(WriteActivity.this, "저장성공", Toast.LENGTH_SHORT).show();
-                        }
-                        Log.i("wirteSave_Ok", "OK");
-                    }
-                    @Override
-                    public void onFailure(Call<ResponseWriteObj> call, Throwable t) {
-                        Toast.makeText(WriteActivity.this, "저장실패", Toast.LENGTH_SHORT).show();
-                        Log.i("wirteSave_err", t.getMessage());
-                    }
-                });
-            }
-        });
-        btnGet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                lvWrite.setVisibility(View.VISIBLE);
-            }
-        });
+//        btnSave.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ApiUtils.getWriteServie().requestWriteStory(writeTest_id.getText().toString(),writeTest_text.getText().toString()).enqueue(new Callback<ResponseWriteObj>(){
+//                    @Override
+//                    public void onResponse(Call<ResponseWriteObj> call, Response<ResponseWriteObj> response) {
+//                        ResponseWriteObj Rw = response.body();
+//                        Log.d("onResponse ", Rw.getId() + " <<< " + Rw.getText());
+//                        if (Rw.getId()+"" != "") {
+//                            Toast.makeText(WriteActivity.this, "저장성공", Toast.LENGTH_SHORT).show();
+//                        }
+//                        Log.i("wirteSave_Ok", "OK");
+//                    }
+//                    @Override
+//                    public void onFailure(Call<ResponseWriteObj> call, Throwable t) {
+//                        Toast.makeText(WriteActivity.this, "저장실패", Toast.LENGTH_SHORT).show();
+//                        Log.i("wirteSave_err", t.getMessage());
+//                    }
+//                });
+//            }
+//        });
+//        btnGet.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                lvWrite.setVisibility(View.VISIBLE);
+//            }
+//        });
     }
 }
 

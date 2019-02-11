@@ -1,6 +1,9 @@
 package com.seok.seok.wowsup.retrofit.remote;
 
 import com.seok.seok.wowsup.retrofit.model.ResponseProfileObj;
+import com.seok.seok.wowsup.retrofit.model.ResponseStoryObj;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -12,6 +15,7 @@ public interface ProfileService {
     @GET("Profile/profileImage.php")
     Call<ResponseProfileObj> requestImageURL(@Query("ID") String id);
 
-
+    @GET("Profile/myStory.php")
+    Call<List<ResponseStoryObj>> requestMyStory(@Query("ID") String id);
 
 }

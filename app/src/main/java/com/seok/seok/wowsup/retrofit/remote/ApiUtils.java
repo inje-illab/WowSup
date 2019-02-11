@@ -12,7 +12,7 @@ public class ApiUtils {
     public static ChatService getChatService(){
         return RetrofitClient.getClient(BASE_URL).create(ChatService.class);
     }
-    public static WriteService getWriteServie(){
+    public static WriteService getWriteService(){
         return  RetrofitClient.getClient(BASE_URL).create(WriteService.class);
     }
     public static StoryService getStoryService(){
