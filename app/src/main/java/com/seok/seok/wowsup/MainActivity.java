@@ -6,15 +6,26 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.seok.seok.wowsup.fragments.fragchat.FragmentChat;
 import com.seok.seok.wowsup.fragments.fraghelp.FragmentHelp;
 import com.seok.seok.wowsup.fragments.fragprofile.FragmentProfile;
 import com.seok.seok.wowsup.fragments.fragstory.FragmentStory;
+import com.seok.seok.wowsup.retrofit.model.ResponseStoryObj;
+import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
+import com.seok.seok.wowsup.utilities.Common;
+
+import java.util.Random;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-
+    private Random randTag;
     private FragmentManager fragmentManager = getSupportFragmentManager();
 
     private FragmentProfile menu1Fragment = new FragmentProfile();
@@ -26,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_view);
 
         // 첫 화면 지정
@@ -55,6 +67,22 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 return true;
+            }
+        });
+        randTag = new Random();
+        ApiUtils.getStoryService().requestRecommendTag(randTag.nextInt(5)).enqueue(new Callback<ResponseStoryObj>() {
+            @Override
+            public void onResponse(Call<ResponseStoryObj> call, Response<ResponseStoryObj> response) {
+                if(response.isSuccessful()){
+                    ResponseStoryObj body = response.body();
+                    Common.searchTagText = body.getTag1();
+                    Toast.makeText(MainActivity.this, Common.searchTagText, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseStoryObj> call, Throwable t) {
+                Log.d("MainActivity_ERROR ", t.getMessage() + " << ");
             }
         });
     }

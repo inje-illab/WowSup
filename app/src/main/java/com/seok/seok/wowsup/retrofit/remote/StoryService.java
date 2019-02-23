@@ -19,4 +19,7 @@ public interface StoryService {
 
     @GET("Story/pickStory.php")
     Call<ResponseStoryObj> requestOneStoryView(@Query("storyID") String storyID);
+
+    @GET("Story/recommendTag.php")
+    Call<ResponseStoryObj> requestRecommendTag(@Query("number") int number);
 }

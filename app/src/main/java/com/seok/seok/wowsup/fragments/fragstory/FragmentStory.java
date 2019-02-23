@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.seok.seok.wowsup.R;
@@ -29,6 +31,8 @@ public class FragmentStory extends Fragment {
     private View view;
     private EditText editTextSearch;
     private Button buttonSearch;
+    private LinearLayout layoutTagTitle;
+    private TextView textTagTitle;
 
     // Card 관련
     private RecyclerView mRecyclerView;
@@ -52,6 +56,8 @@ public class FragmentStory extends Fragment {
         if(Common.fragmentStoryTab) {
             view = inflater.inflate(R.layout.fragment_fragment_story, container, false);
             mRecyclerView = (RecyclerView) view.findViewById(R.id.fragment_story_view);
+            layoutTagTitle = view.findViewById(R.id.fragment_story_layout_topic);
+            textTagTitle = view.findViewById(R.id.fragment_story_textview_topic);
             mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
             mRecyclerView.scrollToPosition(0);
@@ -67,19 +73,24 @@ public class FragmentStory extends Fragment {
                         public void onResponse(Call<List<ResponseStoryObj>> call, Response<List<ResponseStoryObj>> response) {
                             if (response.isSuccessful()) {
                                 List<ResponseStoryObj> body = response.body();
-                                Log.d("asdf", body.size() + "");
-                                for (int i = 0; i < body.size(); i++) {
-                                    cardViewData.add(new CardData(body.get(i).getStoryID() + "",
-                                            body.get(i).getUserID() + "", body.get(i).getTitle() + "",
-                                            body.get(i).getBody() + "", body.get(i).getCntLike() + ""));
-                                    Log.d("cardView StoryID: ", body.get(i).getStoryID() + "");
-                                    Log.d("cardView UserID: ", body.get(i).getUserID() + "");
-                                    Log.d("cardView Title: ", body.get(i).getTitle() + "");
-                                    Log.d("cardView Body: ", body.get(i).getBody() + "");
-                                    Log.d("cardView Like: ", body.get(i).getCntLike() + "");
-                                    if (mAdapter.getItemCount() == body.size()) {
-                                        Log.d("asdfasdf", mAdapter.getItemCount() + "");
-                                        mRecyclerView.setAdapter(mAdapter);
+                                Log.d("DataSize", body.size() + "");
+                                if(body.size()==0){
+                                    textTagTitle.setText("Topic Tag : # " + Common.searchTagText);
+                                    layoutTagTitle.setVisibility(View.VISIBLE);
+                                }else {
+                                    for (int i = 0; i < body.size(); i++) {
+                                        cardViewData.add(new CardData(body.get(i).getStoryID() + "",
+                                                body.get(i).getUserID() + "", body.get(i).getTitle() + "",
+                                                body.get(i).getBody() + "", body.get(i).getCntLike() + ""));
+                                        Log.d("cardView StoryID: ", body.get(i).getStoryID() + "");
+                                        Log.d("cardView UserID: ", body.get(i).getUserID() + "");
+                                        Log.d("cardView Title: ", body.get(i).getTitle() + "");
+                                        Log.d("cardView Body: ", body.get(i).getBody() + "");
+                                        Log.d("cardView Like: ", body.get(i).getCntLike() + "");
+                                        if (mAdapter.getItemCount() == body.size()) {
+                                            Log.d("asdfasdf", mAdapter.getItemCount() + "");
+                                            mRecyclerView.setAdapter(mAdapter);
+                                        }
                                     }
                                 }
                             } else {

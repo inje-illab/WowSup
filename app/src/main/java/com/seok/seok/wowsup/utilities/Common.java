@@ -17,6 +17,9 @@ public class Common {
     public static boolean fragmentStoryTab = true;
     public static boolean fragmentHelpTab = true;
 
+    public static String searchTagText = null;
+
+
     public static void setTabFlag(){
         fragmentProfileTab = true;
         fragmentChatTab = true;
