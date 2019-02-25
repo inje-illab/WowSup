@@ -100,17 +100,33 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/story_write_layout_back"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="6"
+            android:gravity="center"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/story_write_edit_body"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textMultiLine" />
+                android:layout_height="match_parent"
+                android:layout_margin="50dp"
+                android:background="@drawable/story_write_layout_background"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/story_write_edit_body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -136,36 +152,59 @@
                         android:gravity="center"
                         android:orientation="horizontal">
 
-                        <Button
-                            android:id="@+id/button9"
-                            android:layout_width="match_parent"
+                        <ImageView
+                            android:id="@+id/story_write_imageview_back1"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitCenter"
+                            app:srcCompat="@drawable/test_background" />
+
+
+                        <ImageView
+                            android:id="@+id/story_write_imageview_back2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitCenter"
+                            app:srcCompat="@drawable/test_background1" />
+
+
+                        <ImageView
+                            android:id="@+id/story_write_imageview_back3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitCenter"
+                            app:srcCompat="@drawable/test_background2" />
+
+                        <ImageView
+                            android:id="@+id/story_write_imageview_back4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitCenter"
+                            app:srcCompat="@drawable/test_background3" />
+
+                        <ImageView
+                            android:id="@+id/story_write_imageview_back5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
                             android:layout_weight="1"
-                            android:text="Button" />
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitCenter"
+                            app:srcCompat="@drawable/test" />
 
-                        <Button
-                            android:id="@+id/button8"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Button" />
-
-                        <Button
-                            android:id="@+id/button7"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Button" />
-
-                        <Button
-                            android:id="@+id/button6"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Button" />
-
-                        <Button
-                            android:id="@+id/button5"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Button" />
                     </LinearLayout>
                 </HorizontalScrollView>
             </LinearLayout>
@@ -190,7 +229,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="9"
-            android:orientation="vertical"></LinearLayout>
+            android:orientation="vertical">
+
+            <com.tylersuehr.chips.ChipsInputLayout
+                android:id="@+id/chips_input"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Start typing for Tags... "
+                android:textColor="#212121"
+                android:textColorHint="#757575"
+                app:chip_showDetails="true" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

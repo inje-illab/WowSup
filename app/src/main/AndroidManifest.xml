@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".fragments.fragprofile.StoryWriteActivity"></activity>
+        <activity android:name=".fragments.fragprofile.StoryWriteActivity"
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name=".StoryActivity" />
         <activity android:name=".fragments.fragchat.ChatActivity" />
         <activity android:name=".RegisterActivity" /> <!-- 카카오톡 메타데이터 -->

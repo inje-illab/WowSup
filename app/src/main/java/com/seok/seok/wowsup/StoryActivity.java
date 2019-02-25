@@ -57,7 +57,7 @@ public class StoryActivity extends AppCompatActivity {
                         storyTextTag5.setText(body.getTag5());
                         storyTextcntlike.setText(body.getCntLike()+"");
                         if(!body.getImageURL().equals(null)){
-                            Glide.with(getApplicationContext()).load(Common.API_IMAGE_BASE_URL+body.getImageURL()).into(new SimpleTarget<GlideDrawable>() {
+                            Glide.with(getApplicationContext()).load(Common.STORY_IMAGE_BASE_URL+body.getImageURL()).into(new SimpleTarget<GlideDrawable>() {
                                 @Override
                                 public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
                                     storyLayoutBackground.setBackground(resource);
@@ -65,7 +65,7 @@ public class StoryActivity extends AppCompatActivity {
                             });
                         }
                     }catch(Exception e){
-                        Glide.with(getApplicationContext()).load(Common.STORY_IMAGE_BASE_URL).into(new SimpleTarget<GlideDrawable>() {
+                        Glide.with(getApplicationContext()).load(Common.STORY_IMAGE_BASE_URL+"test_background.jpg").into(new SimpleTarget<GlideDrawable>() {
                             @Override
                             public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
                                 storyLayoutBackground.setBackground(resource);
