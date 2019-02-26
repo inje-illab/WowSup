@@ -1,11 +1,11 @@
 package com.seok.seok.wowsup;
 
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,6 +15,7 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.seok.seok.wowsup.retrofit.model.ResponseStoryObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
+import com.seok.seok.wowsup.utilities.BackgroundViewDialog;
 import com.seok.seok.wowsup.utilities.Common;
 
 import retrofit2.Call;
@@ -22,23 +23,15 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class StoryActivity extends AppCompatActivity {
-    private String storyID;
-    private TextView storyTextBody, storyTextTag1, storyTextTag2, storyTextTag3, storyTextTag4, storyTextTag5, storyTextcntlike;
+    private String storyID, imageURL;
+    private TextView storyTextBody, storyTextTag1, storyTextTag2, storyTextTag3, storyTextTag4, storyTextTag5, storyTextCntLike;
     private LinearLayout storyLayoutBackground;
+    private Button storyBtnChat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story);
-
-        storyLayoutBackground = findViewById(R.id.story_laytout_background);
-        storyTextBody = findViewById(R.id.story_text_body);
-        storyTextTag1 = findViewById(R.id.story_text_tag1);
-        storyTextTag2 = findViewById(R.id.story_text_tag2);
-        storyTextTag3 = findViewById(R.id.story_text_tag3);
-        storyTextTag4 = findViewById(R.id.story_text_tag4);
-        storyTextTag5 = findViewById(R.id.story_text_tag5);
-        storyTextcntlike = findViewById(R.id.story_text_cntlike);
-
+        init();
 
         Intent intent  = getIntent();
         storyID = intent.getStringExtra("storyID");
@@ -55,9 +48,10 @@ public class StoryActivity extends AppCompatActivity {
                         storyTextTag3.setText(body.getTag3());
                         storyTextTag4.setText(body.getTag4());
                         storyTextTag5.setText(body.getTag5());
-                        storyTextcntlike.setText(body.getCntLike()+"");
+                        storyTextCntLike.setText(body.getCntLike()+"");
                         if(!body.getImageURL().equals(null)){
-                            Glide.with(getApplicationContext()).load(Common.STORY_IMAGE_BASE_URL+body.getImageURL()).into(new SimpleTarget<GlideDrawable>() {
+                            imageURL = Common.STORY_IMAGE_BASE_URL+body.getImageURL();
+                            Glide.with(getApplicationContext()).load(imageURL).into(new SimpleTarget<GlideDrawable>() {
                                 @Override
                                 public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
                                     storyLayoutBackground.setBackground(resource);
@@ -65,7 +59,8 @@ public class StoryActivity extends AppCompatActivity {
                             });
                         }
                     }catch(Exception e){
-                        Glide.with(getApplicationContext()).load(Common.STORY_IMAGE_BASE_URL+"test_background.jpg").into(new SimpleTarget<GlideDrawable>() {
+                        imageURL = Common.STORY_IMAGE_BASE_URL+"test_background.jpg";
+                        Glide.with(getApplicationContext()).load(imageURL).into(new SimpleTarget<GlideDrawable>() {
                             @Override
                             public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
                                 storyLayoutBackground.setBackground(resource);
@@ -80,5 +75,33 @@ public class StoryActivity extends AppCompatActivity {
                 Log.d("StoryFragments_err ", t.getMessage());
             }
         });
+    }
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.story_laytout_background:
+                    BackgroundViewDialog dialog = new BackgroundViewDialog(StoryActivity.this, imageURL);
+                    dialog.show();
+                    break;
+                case R.id.story_btn_chat:
+
+                    break;
+            }
+        }
+    };
+    public void init(){
+        storyLayoutBackground = findViewById(R.id.story_laytout_background);
+        storyTextBody = findViewById(R.id.story_text_body);
+        storyTextTag1 = findViewById(R.id.story_text_tag1);
+        storyTextTag2 = findViewById(R.id.story_text_tag2);
+        storyTextTag3 = findViewById(R.id.story_text_tag3);
+        storyTextTag4 = findViewById(R.id.story_text_tag4);
+        storyTextTag5 = findViewById(R.id.story_text_tag5);
+        storyTextCntLike = findViewById(R.id.story_text_cntlike);
+        storyBtnChat = findViewById(R.id.story_btn_chat);
+
+        storyLayoutBackground.setOnClickListener(onClickListener);
+        storyBtnChat.setOnClickListener(onClickListener);
     }
 }

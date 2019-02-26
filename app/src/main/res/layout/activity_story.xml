@@ -44,25 +44,35 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/story_laytout_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="5"
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/story_laytout_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/story_text_body"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="text"
-                android:textSize="30sp" />
+                android:layout_margin="50dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/story_text_body"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/story_write_layout_background"
+                    android:gravity="center"
+                    android:text="text"
+                    android:textColor="@android:color/white"
+                    android:textSize="30sp" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout

@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     ResponseStoryObj body = response.body();
                     Common.searchTagText = body.getTag1();
-                    Toast.makeText(MainActivity.this, Common.searchTagText, Toast.LENGTH_SHORT).show();
                 }
             }
 

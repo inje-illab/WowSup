@@ -4,17 +4,14 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputEditText;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.seok.seok.wowsup.R;
 
 public class BackgroundViewDialog extends Dialog implements View.OnClickListener{
-    private static final int LAYOUT = R.layout.layout_dialog;
+    private static final int LAYOUT = R.layout.layout_story_background_dialog;
 
     private Context context;
     private String imageURL;
