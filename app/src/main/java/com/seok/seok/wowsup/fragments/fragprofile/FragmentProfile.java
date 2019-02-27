@@ -1,5 +1,6 @@
 package com.seok.seok.wowsup.fragments.fragprofile;
 
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -31,7 +33,7 @@ import retrofit2.Response;
 
 public class FragmentProfile extends Fragment {
     private View view;
-
+    private Button button;
     // Card 관련
     private RecyclerView mRecyclerView;
     private CardAdapter mAdapter;
@@ -59,6 +61,15 @@ public class FragmentProfile extends Fragment {
             mRecyclerView = (RecyclerView) view.findViewById(R.id.fragment_profile_view);
             mRecyclerView.setAdapter(mAdapter);
             profileImage = view.findViewById(R.id.fragment_profile_image);
+
+            button = view.findViewById(R.id.button2);   // 알림 버튼 눌르기 구현
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getActivity().getApplication(), NoticeActivity.class));
+                }
+            });
+
             //서버에서 이미지 받아올것
             ApiUtils.getProfileService().requestImageURL(GlobalWowToken.getInstance().getId()).enqueue(new Callback<ResponseProfileObj>() {
                 @Override
