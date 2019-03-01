@@ -15,15 +15,16 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.seok.seok.wowsup.retrofit.model.ResponseStoryObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
-import com.seok.seok.wowsup.utilities.BackgroundViewDialog;
+import com.seok.seok.wowsup.utilities.ViewDialog;
 import com.seok.seok.wowsup.utilities.Common;
+import com.seok.seok.wowsup.utilities.GlobalWowToken;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class StoryActivity extends AppCompatActivity {
-    private String storyID, imageURL;
+    private String storyID, imageURL, otherUserID;
     private TextView storyTextBody, storyTextTag1, storyTextTag2, storyTextTag3, storyTextTag4, storyTextTag5, storyTextCntLike;
     private LinearLayout storyLayoutBackground;
     private Button storyBtnChat;
@@ -42,6 +43,7 @@ public class StoryActivity extends AppCompatActivity {
                 ResponseStoryObj body = response.body();
                 if(response.isSuccessful()){
                     try{
+                        otherUserID = body.getUserID();
                         storyTextBody.setText(body.getBody());
                         storyTextTag1.setText(body.getTag1());
                         storyTextTag2.setText(body.getTag2());
@@ -67,6 +69,8 @@ public class StoryActivity extends AppCompatActivity {
                             }
                         });
                     }
+                    if(!otherUserID.equals(GlobalWowToken.getInstance().getId()))
+                        storyBtnChat.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -81,11 +85,14 @@ public class StoryActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.story_laytout_background:
-                    BackgroundViewDialog dialog = new BackgroundViewDialog(StoryActivity.this, imageURL);
-                    dialog.show();
+                    ViewDialog backgroundViewDialog = new ViewDialog(StoryActivity.this, imageURL);
+                    backgroundViewDialog.show();
                     break;
                 case R.id.story_btn_chat:
-
+                    ViewDialog applyFriendViewDialog = new ViewDialog(StoryActivity.this);
+                    applyFriendViewDialog.requestApplyFriend(GlobalWowToken.getInstance().getId(), otherUserID);
+                    applyFriendViewDialog.setButtonText("취소", "요청");
+                    applyFriendViewDialog.show();
                     break;
             }
         }

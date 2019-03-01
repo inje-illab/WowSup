@@ -37,7 +37,8 @@
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
-        <activity android:name=".fragments.fragprofile.NoticeActivity"/>
+        <activity android:name=".fragments.fragprofile.NoticeActivity"
+            android:theme="@style/noticeTheme" android:screenOrientation="unspecified"/>
     </application>
 
 </manifest>

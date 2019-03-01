@@ -108,7 +108,7 @@ public class FragmentProfile extends Fragment {
                 if (response.isSuccessful()) {
                     List<ResponseStoryObj> body = response.body();
                     Log.d("fragment_Profile : ", body.size() + "");
-                    for (int i = 0; i < body.size(); i++) {
+                    for (int i = 0; i <body.size(); i++) {
                         cardViewData.add(new CardData(body.get(i).getStoryID() + "",
                                 body.get(i).getUserID() + "", body.get(i).getTitle() + "",
                                 body.get(i).getBody() + "", body.get(i).getCntLike() + ""));

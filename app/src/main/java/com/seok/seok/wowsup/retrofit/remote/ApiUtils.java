@@ -15,7 +15,10 @@ public class ApiUtils {
     public static WriteService getWriteService(){
         return  RetrofitClient.getClient(BASE_URL).create(WriteService.class);
     }
-    public static StoryService getStoryService(){
-        return  RetrofitClient.getClient(BASE_URL).create(StoryService.class);
+    public static StoryService getStoryService() {
+        return RetrofitClient.getClient(BASE_URL).create(StoryService.class);
+    }
+    public static CommonService getCommonService(){
+        return RetrofitClient.getClient(BASE_URL).create(CommonService.class);
     }
 }

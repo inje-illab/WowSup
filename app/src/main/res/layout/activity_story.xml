@@ -38,7 +38,8 @@
                 android:id="@+id/story_btn_chat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="chat" />
+                android:text="chat"
+                android:visibility="invisible" />
         </LinearLayout>
 
     </LinearLayout>
