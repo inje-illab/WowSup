@@ -42,15 +42,13 @@ public class NoticeActivity extends AppCompatActivity {
             public void onResponse(Call<List<ResponseCommonObj>> call, Response<List<ResponseCommonObj>> response) {
                 if(response.isSuccessful()){
                     List<ResponseCommonObj> body = response.body();
-                    Log.d("asdfasdf1", body.size()+"");
                     for(int i = 0; i<body.size(); i++){
                         if(body.get(i).getStatus()==1) {
+                            count++;
                             cardData.add(new NoticeData(body.get(i).getApplyer(), body.get(i).getStatus()));
                         }
                     }
-                    if (adapter.getItemCount() == body.size()) {
-                        Log.d("asdfasdf2", adapter.getItemCount()+"");
-                        Log.d("asdfasdf3", (body.size()-count)+"");
+                    if (adapter.getItemCount() == count) {
                         recyclerView.setAdapter(adapter);
                     }
                 }
