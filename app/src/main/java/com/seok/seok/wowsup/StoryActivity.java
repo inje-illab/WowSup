@@ -89,7 +89,7 @@ public class StoryActivity extends AppCompatActivity {
                     backgroundViewDialog.show();
                     break;
                 case R.id.story_btn_chat:
-                    ViewDialog applyFriendViewDialog = new ViewDialog(StoryActivity.this);
+                    ViewDialog applyFriendViewDialog = new ViewDialog(StoryActivity.this, 0);
                     applyFriendViewDialog.requestApplyFriend(GlobalWowToken.getInstance().getId(), otherUserID);
                     applyFriendViewDialog.setButtonText("취소", "요청");
                     applyFriendViewDialog.show();

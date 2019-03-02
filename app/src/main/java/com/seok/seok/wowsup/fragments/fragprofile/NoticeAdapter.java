@@ -10,10 +10,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.seok.seok.wowsup.R;
 import com.seok.seok.wowsup.StoryActivity;
 import com.seok.seok.wowsup.utilities.Common;
+import com.seok.seok.wowsup.utilities.GlobalWowToken;
+import com.seok.seok.wowsup.utilities.ViewDialog;
 
 import java.util.ArrayList;
 
@@ -32,16 +35,29 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
     @Override
     public NoticeAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_notice_list, parent, false);
-        textView = view.findViewById(R.id.textView2);
-        button = view.findViewById(R.id.button3);
         viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
+        textView = viewHolder.itemView.findViewById(R.id.textView2);
+        button = viewHolder.itemView.findViewById(R.id.button3);
         final NoticeData item = items.get(position);
-        textView.setText(item.getUserID() + "님이 친구 신청을 했습니다.");
+        if(item.getStatus()==1) {
+            textView.setText(item.getUserID() + "님이 친구 신청을 했습니다.");
+        }
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, item.getUserID(), Toast.LENGTH_SHORT).show();
+                ViewDialog viewDialog = new ViewDialog(context, 1);
+                viewDialog.setButtonText("거절", "수락");
+                viewDialog.requestApplyFriend(GlobalWowToken.getInstance().getId(),item.getUserID());
+                viewDialog.show();
+            }
+        });
     }
 
     @Override
