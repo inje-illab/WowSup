@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.seok.seok.wowsup.R;
+import com.seok.seok.wowsup.TranslateActivity;
 import com.seok.seok.wowsup.utilities.GlobalWowToken;
 
 import java.text.SimpleDateFormat;
@@ -32,8 +33,8 @@ public class ChatActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private Button btnFinish, btnSend;
-    private EditText txtText;
+    private Button btnTrans, btnSend;
+    public static EditText txtText;
     private String email, strUid, strFriendUid;
     private FirebaseDatabase database;
     private List<Chat> mChat;
@@ -44,7 +45,7 @@ public class ChatActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        Intent intent  = getIntent();
+        final Intent intent  = getIntent();
         strFriendUid = intent.getStringExtra("friendUid");
 
         if (user != null) {
@@ -54,11 +55,12 @@ public class ChatActivity extends AppCompatActivity {
         //UserInfomation
         txtText = (EditText)findViewById(R.id.txtText);
 
-        btnFinish = (Button)findViewById(R.id.btnFinish);
-        btnFinish.setOnClickListener(new View.OnClickListener() {
+        btnTrans = (Button)findViewById(R.id.btnTrans);
+        btnTrans.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(ChatActivity.this, TranslateActivity.class);
+                startActivity(intent);
             }
         });
         btnSend = (Button)findViewById(R.id.btnSend);
