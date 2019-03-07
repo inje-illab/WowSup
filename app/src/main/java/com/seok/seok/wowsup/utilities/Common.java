@@ -7,10 +7,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 public class Common {
-    public static final String API_BASE_URL = "http://203.241.228.121/";
-    public static final String API_IMAGE_BASE_URL = "http://203.241.228.121/WowSup/Image/";
-    public static final String USER_IMAGE_BASE_URL = "http://203.241.228.121/WowSup/Image/basic.png";
-    public static final String STORY_IMAGE_BASE_URL = "http://203.241.228.121/WowSup/Image/Background/";
+    public static final String API_BASE_URL = "http://www.heywowsup.com/";
+    public static final String API_IMAGE_BASE_URL = "http://www.heywowsup.com/wowsup/Image/";
+    public static final String USER_IMAGE_BASE_URL = "http://www.heywowsup.com/wowsup/Image/basic.png";
+    public static final String STORY_IMAGE_BASE_URL = "http://www.heywowsup.com/wowsup/Image/Background/";
 
     public static boolean fragmentProfileTab = true;
     public static boolean fragmentChatTab = true;
