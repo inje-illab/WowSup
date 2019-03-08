@@ -13,7 +13,9 @@ import android.widget.Toast;
 import com.seok.seok.wowsup.R;
 import com.seok.seok.wowsup.retrofit.model.ResponseWriteObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
+import com.seok.seok.wowsup.utilities.Common;
 import com.seok.seok.wowsup.utilities.GlobalWowToken;
+import com.seok.seok.wowsup.utilities.ViewDialog;
 import com.tylersuehr.chips.Chip;
 import com.tylersuehr.chips.ChipDataSource;
 import com.tylersuehr.chips.ChipsInputLayout;
@@ -30,6 +32,7 @@ public class StoryWriteActivity extends AppCompatActivity {
     private Button btnSave;
     private EditText editTextTitle, editTextBody;
     private ChipsInputLayout chipsInputLayout;
+    private int imageOption = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,45 +93,43 @@ public class StoryWriteActivity extends AppCompatActivity {
                 while (tagSize < 5) {
                     tag[tagSize++] = "";
                 }
-                //서버 통신
-                ApiUtils.getWriteService().requestWriteStory(GlobalWowToken.getInstance().getId(), editTextTitle.getText().toString(), editTextBody.getText().toString(), imageBackgroundURL,
-                        tag[0], tag[1], tag[2], tag[3], tag[4]).enqueue(new Callback<ResponseWriteObj>() {
-                    @Override
-                    public void onResponse(Call<ResponseWriteObj> call, Response<ResponseWriteObj> response) {
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseWriteObj> call, Throwable t) {
-
-                    }
-                });
+                ViewDialog viewDialog = new ViewDialog(StoryWriteActivity.this, 2);
+                viewDialog.setButtonText("No", "Yes");
+                viewDialog.requestStoryUpload(GlobalWowToken.getInstance().getId(), editTextTitle.getText().toString(), editTextBody.getText().toString(),
+                        Common.API_IMAGE_BASE_URL + imageBackgroundURL, tag[0], tag[1], tag[2], tag[3], tag[4], imageOption);
+                viewDialog.show();
             }
         });
     }
-    ImageView.OnClickListener onClickListener = new ImageView.OnClickListener(){
+
+    ImageView.OnClickListener onClickListener = new ImageView.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.story_write_imageview_back1:
                     layoutBackground.setBackgroundResource(R.drawable.test_background);
                     imageBackgroundURL = "test_background.jpg";
+                    imageOption = 0;
                     break;
                 case R.id.story_write_imageview_back2:
                     layoutBackground.setBackgroundResource(R.drawable.test_background1);
                     imageBackgroundURL = "test_background1.jpg";
+                    imageOption = 0;
                     break;
                 case R.id.story_write_imageview_back3:
                     layoutBackground.setBackgroundResource(R.drawable.test_background2);
                     imageBackgroundURL = "test_background2.jpg";
+                    imageOption = 0;
                     break;
                 case R.id.story_write_imageview_back4:
                     layoutBackground.setBackgroundResource(R.drawable.test_background3);
                     imageBackgroundURL = "test_background3.jpg";
+                    imageOption = 0;
                     break;
                 case R.id.story_write_imageview_back5:
                     layoutBackground.setBackgroundResource(R.drawable.test);
                     imageBackgroundURL = "test.png";
+                    imageOption = 0;
                     break;
             }
         }

@@ -52,8 +52,7 @@ public class StoryActivity extends AppCompatActivity {
                         storyTextTag5.setText(body.getTag5());
                         storyTextCntLike.setText(body.getCntLike()+"");
                         if(!body.getImageURL().equals(null)){
-                            imageURL = Common.STORY_IMAGE_BASE_URL+body.getImageURL();
-                            Glide.with(getApplicationContext()).load(imageURL).into(new SimpleTarget<GlideDrawable>() {
+                            Glide.with(getApplicationContext()).load(body.getImageURL()).into(new SimpleTarget<GlideDrawable>() {
                                 @Override
                                 public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
                                     storyLayoutBackground.setBackground(resource);

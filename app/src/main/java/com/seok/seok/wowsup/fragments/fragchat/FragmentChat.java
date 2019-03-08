@@ -22,6 +22,7 @@ import com.seok.seok.wowsup.utilities.GlobalWowToken;
 
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -107,10 +108,11 @@ public class FragmentChat extends Fragment {
                         ResponseProfileObj body = response.body();
                         if(response.isSuccessful()){
                             try {
-                                if (!body.getImageURL().equals(null))
-                                    Glide.with(getActivity()).load(body.getImageURL()).into(chatUserImage);
+                                if (!body.getImageURL().equals(null)) {
+                                    Glide.with(getActivity()).load(body.getImageURL()).centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).override(300, 300).into(chatUserImage);
+                                }
                             }catch (Exception e){
-                                Glide.with(getActivity()).load(Common.USER_IMAGE_BASE_URL).into(chatUserImage);
+                                Glide.with(getActivity()).load(Common.USER_IMAGE_BASE_URL+"basic.png").centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).override(300, 300).into(chatUserImage);
                             }
                             chatUserID.setText("User ID : " + GlobalWowToken.getInstance().getId());
                         }
