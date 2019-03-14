@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.seok.seok.wowsup.R;
 import com.seok.seok.wowsup.retrofit.model.ResponseCommonObj;
+import com.seok.seok.wowsup.retrofit.model.ResponseWriteObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 
 import retrofit2.Call;
@@ -19,9 +20,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ViewDialog extends Dialog implements View.OnClickListener {
-    private static int LAYOUT;
-    private Context context;
-    private String imageURL, userID, otherUserID, leftText, rightText;
+    private static int LAYOUT;  // 다이얼로그 보여줄 레이아웃
+    private Context context;    // 다이얼로그 보여줄 레이아웃
+    private String imageURL, userID, otherUserID, leftText, rightText;  // 친구요청 관련
+    private String id, title, body, image, tag1, tag2, tag3, tag4, tag5;    // 스토리 업로드
+    private int storyOption;
     private int contextNumber;
     private ImageView dialogImage;
     private Button btnConfirmNo, btnConfirmYes;
@@ -77,8 +80,20 @@ public class ViewDialog extends Dialog implements View.OnClickListener {
         this.rightText = rightText;
     }
 
-    public void optionViewRequest(int option) {
+    public void requestStoryUpload(String id, String title, String body, String image, String tag1, String tag2, String tag3, String tag4, String tag5, int storyOption) {
+        this.id = id;
+        this.title = title;
+        this.body = body;
+        this.image = image;
+        this.tag1 = tag1;
+        this.tag2 = tag2;
+        this.tag3 = tag3;
+        this.tag4 = tag4;
+        this.tag5 = tag5;
+        this.storyOption = storyOption;
+    }
 
+    public void optionViewRequest(int option) {
         if (option == 0) {
             txtConfirmQna.setText("친구 요청 하시겠습니까?");
             btnConfirmYes.setOnClickListener(new View.OnClickListener() {
@@ -114,11 +129,11 @@ public class ViewDialog extends Dialog implements View.OnClickListener {
                     ApiUtils.getCommonService().requestConfirmFriend(userID, otherUserID).enqueue(new Callback<ResponseCommonObj>() {
                         @Override
                         public void onResponse(Call<ResponseCommonObj> call, Response<ResponseCommonObj> response) {
-                            if(response.isSuccessful()){
+                            if (response.isSuccessful()) {
                                 ResponseCommonObj body = response.body();
-                                if(body.getStatus()==2){
+                                if (body.getStatus() == 2) {
                                     Toast.makeText(context, "수락 성공", Toast.LENGTH_SHORT).show();
-                                }else{
+                                } else {
                                     Toast.makeText(context, "실패", Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -131,6 +146,29 @@ public class ViewDialog extends Dialog implements View.OnClickListener {
                             dismiss();
                         }
                     });
+                }
+            });
+        } else if (option == 2) {
+            txtConfirmQna.setText("작성 완료했습니까?");
+            btnConfirmYes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(storyOption == 0) {
+                        ApiUtils.getWriteService().requestWriteStory(GlobalWowToken.getInstance().getId(), title,body, image,
+                                tag1, tag2, tag3, tag4, tag5).enqueue(new Callback<ResponseWriteObj>() {
+                            @Override
+                            public void onResponse(Call<ResponseWriteObj> call, Response<ResponseWriteObj> response) {
+                                dismiss();
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseWriteObj> call, Throwable t) {
+                                dismiss();
+                            }
+                        });
+                    }else{
+
+                    }
                 }
             });
         }

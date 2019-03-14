@@ -79,10 +79,10 @@ public class FragmentProfile extends Fragment {
                         if(response.isSuccessful()){
                             try {
                                 if (!body.getImageURL().equals(null)) {
-                                    Glide.with(getActivity()).load(Common.API_IMAGE_BASE_URL+body.getImageURL()).centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).override(300, 300).into(profileImage);
+                                    Glide.with(getActivity()).load(body.getImageURL()).centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).override(300, 300).into(profileImage);
                                 }
                             }catch (Exception e){
-                                Glide.with(getActivity()).load(Common.USER_IMAGE_BASE_URL).centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).override(300, 300).into(profileImage);
+                                Glide.with(getActivity()).load(Common.USER_IMAGE_BASE_URL+"basic.png").centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).override(300, 300).into(profileImage);
                             }
                         }
                     }
