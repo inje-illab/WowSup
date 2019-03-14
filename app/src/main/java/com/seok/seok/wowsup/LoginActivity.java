@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     private SessionCallbackKakaoTalk sessionCallbackKakaoTalk;
     private SessionCallbackFacebook sessionCallbackFacebook;
     private CallbackManager callbackManager;
-    private Button btnLogin, btnRegister;
+    private Button btnLogin, btnLost;
     private EditText edtID, edtPW;
     private String user_id,email, strUid;
     //sein test
@@ -64,16 +64,16 @@ public class LoginActivity extends AppCompatActivity {
 
         // Layout에서 id 값 받아오기
         btnLogin = findViewById(R.id.login_button_login);
-        btnRegister = findViewById(R.id.login_button_register);
+        btnLost = findViewById(R.id.login_button_lost);
         edtID = findViewById(R.id.login_edittext_id);
         edtPW = findViewById(R.id.login_edittext_pwd);
 
-        btnCustomFacebookLogin = findViewById(R.id.btn_custom_facebook_login);
+       // btnCustomFacebookLogin = findViewById(R.id.btn_custom_facebook_login);
         btnCustomKakaoLogin = findViewById(R.id.btn_custom_kakao_login);
 
         sessionCallbackKakaoTalk = new SessionCallbackKakaoTalk();
         sessionCallbackFacebook = new SessionCallbackFacebook();
-        btnCustomFacebookLogin.setOnClickListener(new View.OnClickListener() {
+        /*btnCustomFacebookLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FacebookSdk.sdkInitialize(getApplicationContext());
@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                 LoginManager.getInstance().registerCallback(callbackManager, sessionCallbackFacebook);
                 onSuccess(sessionCallbackFacebook.getLoginSuccess());
             }
-        });
+        });*/
         btnCustomKakaoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -145,13 +145,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         //회원가입 버튼을 눌렀을 경우
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+        /*btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                 //finish();
             }
-        });
+        });*/
     }
 
     // 아이디 패스워드 입력란 코드

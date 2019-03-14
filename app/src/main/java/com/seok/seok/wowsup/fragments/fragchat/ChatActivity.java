@@ -33,7 +33,7 @@ public class ChatActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private Button btnTrans, btnSend;
+    private Button btnTrans, btnSend, btnBack;
     public static EditText txtText;
     private String email, strUid, strFriendUid;
     private FirebaseDatabase database;
@@ -54,8 +54,10 @@ public class ChatActivity extends AppCompatActivity {
         }
         //UserInfomation
         txtText = (EditText)findViewById(R.id.txtText);
-
         btnTrans = (Button)findViewById(R.id.btnTrans);
+        btnSend = (Button)findViewById(R.id.btnSend);
+        btnBack =(Button)findViewById(R.id.btnBack);
+
         btnTrans.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +65,7 @@ public class ChatActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        btnSend = (Button)findViewById(R.id.btnSend);
+
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,6 +95,13 @@ public class ChatActivity extends AppCompatActivity {
                     txtText.setText("");
 
                 }
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);

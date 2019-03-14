@@ -11,108 +11,106 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="10"
+        android:background="#808183"
         android:orientation="horizontal">
 
-        <LinearLayout
+        <Button
+            android:id="@+id/story_write_btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:background="@drawable/back" />
+
+        <TextView
+            android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="10"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/story_write_btn_back"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="10"
-                android:text="back" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="5"
+            android:layout_weight="9"
             android:gravity="center"
-            android:orientation="vertical">
+            android:text="TextView"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/story_write_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Write"
-                android:textSize="35sp" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/story_write_btn_help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:background="@drawable/help_button"
+            android:textSize="18sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="10"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/story_write_btn_help"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Help" />
-        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="11"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="10"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/story_write_text_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Title"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <EditText
-                    android:id="@+id/story_write_edit_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textPersonName" />
-            </LinearLayout>
-        </LinearLayout>
+            android:layout_weight="10"
+            android:orientation="vertical"></LinearLayout>
 
         <LinearLayout
-            android:id="@+id/story_write_layout_back"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="6"
-            android:gravity="center"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="50dp"
-                android:background="@drawable/story_write_layout_background"
-                android:gravity="center"
+                android:layout_weight="11"
+                android:orientation="horizontal"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="10"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/story_write_text_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Title"
+                        android:textColor="#808183"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:background="@drawable/title_feid"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/story_write_edit_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="textPersonName" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/story_write_layout_back"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                android:background="@drawable/text_feild"
+                android:gravity="center|top"
                 android:orientation="vertical">
 
                 <EditText
@@ -125,134 +123,152 @@
                     android:inputType="textMultiLine"
                     android:scrollbars="vertical"
                     android:textColor="@android:color/white" />
+
             </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="11"
-            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:gravity="center"
+                android:layout_weight="11"
+                android:orientation="horizontal"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="10.5"
+                android:background="@drawable/photo"
                 android:orientation="horizontal">
 
-                <HorizontalScrollView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                        <ImageView
-                            android:id="@+id/story_write_imageview_back1"
+                        <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:adjustViewBounds="true"
-                            android:scaleType="fitCenter"
-                            app:srcCompat="@drawable/test_background" />
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/story_write_imageview_back1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:adjustViewBounds="true"
+                                android:scaleType="fitCenter"
+                                app:srcCompat="@drawable/test_background" />
 
 
-                        <ImageView
-                            android:id="@+id/story_write_imageview_back2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:adjustViewBounds="true"
-                            android:scaleType="fitCenter"
-                            app:srcCompat="@drawable/test_background1" />
+                            <ImageView
+                                android:id="@+id/story_write_imageview_back2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:adjustViewBounds="true"
+                                android:scaleType="fitCenter"
+                                app:srcCompat="@drawable/test_background1" />
 
 
-                        <ImageView
-                            android:id="@+id/story_write_imageview_back3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:adjustViewBounds="true"
-                            android:scaleType="fitCenter"
-                            app:srcCompat="@drawable/test_background2" />
+                            <ImageView
+                                android:id="@+id/story_write_imageview_back3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:adjustViewBounds="true"
+                                android:scaleType="fitCenter"
+                                app:srcCompat="@drawable/test_background2" />
 
-                        <ImageView
-                            android:id="@+id/story_write_imageview_back4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:adjustViewBounds="true"
-                            android:scaleType="fitCenter"
-                            app:srcCompat="@drawable/test_background3" />
+                            <ImageView
+                                android:id="@+id/story_write_imageview_back4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:adjustViewBounds="true"
+                                android:scaleType="fitCenter"
+                                app:srcCompat="@drawable/test_background3" />
 
-                        <ImageView
-                            android:id="@+id/story_write_imageview_back5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_weight="1"
-                            android:adjustViewBounds="true"
-                            android:scaleType="fitCenter"
-                            app:srcCompat="@drawable/test" />
+                            <ImageView
+                                android:id="@+id/story_write_imageview_back5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_weight="1"
+                                android:adjustViewBounds="true"
+                                android:scaleType="fitCenter"
+                                app:srcCompat="@drawable/test" />
 
-                    </LinearLayout>
-                </HorizontalScrollView>
+                        </LinearLayout>
+                    </HorizontalScrollView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/story_write_btn_picture"
+                        android:layout_width="33.3dp"
+                        android:layout_height="33.3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/camera_icon" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:orientation="vertical">
+
+                <com.tylersuehr.chips.ChipsInputLayout
+                    android:id="@+id/chips_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Start typing for Tags... "
+                    android:textColor="#212121"
+                    android:textColorHint="#757575"
+                    app:chip_showDetails="true" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent "
                 android:layout_weight="10"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/story_write_btn_picture"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/story_write_btn_save"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="picture" />
+                    android:background="@drawable/save_button"
+                    android:text="Save"
+                    android:textColor="#f0f4f4"
+                    android:textSize="21sp" />
             </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="9"
-            android:orientation="vertical">
-
-            <com.tylersuehr.chips.ChipsInputLayout
-                android:id="@+id/chips_input"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Start typing for Tags... "
-                android:textColor="#212121"
-                android:textColorHint="#757575"
-                app:chip_showDetails="true" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="11"
-            android:orientation="vertical">
+            android:layout_weight="10"
+            android:orientation="vertical"></LinearLayout>
 
-            <Button
-                android:id="@+id/story_write_btn_save"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Save" />
-        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

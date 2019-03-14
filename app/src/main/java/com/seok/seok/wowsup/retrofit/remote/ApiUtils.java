@@ -21,4 +21,8 @@ public class ApiUtils {
     public static CommonService getCommonService(){
         return RetrofitClient.getClient(BASE_URL).create(CommonService.class);
     }
+    public static ImageService getImageService(){
+        return RetrofitClient.getClient(BASE_URL).create(ImageService.class);
+    }
+
 }
