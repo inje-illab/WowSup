@@ -67,6 +67,7 @@
                     app:mtf_labelColor="#808183">
 
                     <EditText
+                        android:id="@+id/lostinfo_edit_id_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Your Email"
@@ -95,7 +96,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Forgot your Password?"
-                    android:textColor="#f0f4f4"
+                    android:textColor="#808183"
                     android:textSize="15.3sp" />
 
                 <com.github.florent37.materialtextfield.MaterialTextField
@@ -109,6 +110,7 @@
                     app:mtf_labelColor="#808183">
 
                     <EditText
+                        android:id="@+id/lostinfo_edit_pw_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Your ID"
@@ -128,6 +130,7 @@
                     app:mtf_labelColor="#808183">
 
                     <EditText
+                        android:id="@+id/lostinfo_edit_pw_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Your Email"
@@ -137,7 +140,7 @@
                 </com.github.florent37.materialtextfield.MaterialTextField>
 
                 <Button
-                    android:id="@+id/button5"
+                    android:id="@+id/lostinfo_btn_pw"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@mipmap/short_button"
