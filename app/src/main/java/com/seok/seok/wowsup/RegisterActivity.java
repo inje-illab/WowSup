@@ -7,7 +7,9 @@ import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -42,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText edtID, edtPW, edtEmail;
     private Callback retrofitCallback;
     private boolean confirmID = false;
+    private boolean confirmEmail = false;
 
     //sein Test
     private String TAG = "RegisterActivity";
@@ -67,16 +70,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_register);
 
         mAuth = FirebaseAuth.getInstance();
-
-        edtID = findViewById(R.id.register_edittext_id);
-        edtPW = findViewById(R.id.register_edittext_pwd);
-        edtEmail = findViewById(R.id.register_edittext_email);
-        btnJoin = findViewById(R.id.register_button_join);
-        btnConfirmID = findViewById(R.id.register_button_confirm_id);
-        btnConfirmEmail = findViewById(R.id.register_button_confirm_email);
-        btnConfirmEmail.setOnClickListener(this);
-        btnConfirmID.setOnClickListener(this);
-        btnJoin.setOnClickListener(this);
+        init();
 
         //콜백 메서드 구현 틀 : ResponseRegisterObj.class
         retrofitCallback = new Callback<ResponseRegisterObj>() {
@@ -154,45 +148,54 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.register_button_confirm_email:
-                //이메일 성공했으면 다시 못넣게해야함.
-                rand = new Random();
-                randNum = rand.nextInt(999999 - 100000 + 1) + 100000;
-                dialog = LayoutInflater.from(this);
-                dialogLayout = dialog.inflate(R.layout.layout_email_auth_dialog, null); // LayoutInflater를 통해 XML에 정의된 Resource들을 View의 형태로 반환 시켜 줌
-                authDialog = new Dialog(this); //Dialog 객체 생성
-                authDialog.setContentView(dialogLayout); //Dialog에 inflate한 View를 탑재 하여줌
-                authDialog.setCanceledOnTouchOutside(false); //Dialog 바깥 부분을 선택해도 닫히지 않게 설정함.
-                authDialog.setOnCancelListener(this); //다이얼로그를 닫을 때 일어날 일을 정의하기 위해 onCancelListener 설정
-                authDialog.show(); //Dialog를 나타내어 준다.
-                countDownTimer();
-                ApiUtils.getEmailService().requestEmailAuthentication(edtEmail.getText().toString(), randNum).enqueue(new Callback<ResponseMailObj>() {
-                    @Override
-                    public void onResponse(Call<ResponseMailObj> call, Response<ResponseMailObj> response) {
-                        if (response.isSuccessful()) {
-                            ResponseMailObj body = response.body();
-                            if (body.getState() == 0) {
-                                Toast.makeText(RegisterActivity.this, "Email not Send!", Toast.LENGTH_SHORT).show();
-                            } else if (body.getState() == 1) {
-                                Toast.makeText(RegisterActivity.this, "Email Send!", Toast.LENGTH_SHORT).show();
+                String userEmail = edtEmail.getText().toString();
+                if(!TextUtils.isEmpty(userEmail) && Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()) {
+                    // 이메일 인증 안되어있을 시
+                    if (!confirmEmail) {
+                        rand = new Random();
+                        randNum = rand.nextInt(999999 - 100000 + 1) + 100000;
+                        dialog = LayoutInflater.from(this);
+                        dialogLayout = dialog.inflate(R.layout.layout_email_auth_dialog, null); // LayoutInflater를 통해 XML에 정의된 Resource들을 View의 형태로 반환 시켜 줌
+                        authDialog = new Dialog(this); //Dialog 객체 생성
+                        authDialog.setContentView(dialogLayout); //Dialog에 inflate한 View를 탑재 하여줌
+                        authDialog.setCanceledOnTouchOutside(false); //Dialog 바깥 부분을 선택해도 닫히지 않게 설정함.
+                        authDialog.setOnCancelListener(this); //다이얼로그를 닫을 때 일어날 일을 정의하기 위해 onCancelListener 설정
+                        authDialog.show(); //Dialog를 나타내어 준다.
+                        countDownTimer();
+                        ApiUtils.getEmailService().requestEmailAuthentication(userEmail, randNum).enqueue(new Callback<ResponseMailObj>() {
+                            @Override
+                            public void onResponse(Call<ResponseMailObj> call, Response<ResponseMailObj> response) {
+                                if (response.isSuccessful()) {
+                                    ResponseMailObj body = response.body();
+                                    if (body.getState() == 0) {
+                                        Toast.makeText(RegisterActivity.this, "Email not Send!", Toast.LENGTH_SHORT).show();
+                                    } else if (body.getState() == 1) {
+                                        Toast.makeText(RegisterActivity.this, "Email Send!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
                             }
-                        }
+
+                            @Override
+                            public void onFailure(Call<ResponseMailObj> call, Throwable t) {
+                                Log.d("RegisterActivity_ERROR", t.getMessage() + " <<");
+                            }
+                        });
                     }
-                    @Override
-                    public void onFailure(Call<ResponseMailObj> call, Throwable t) {
-                        Log.d("RegisterActivity_ERROR", t.getMessage() + " <<");
-                    }
-                });
+                }else{
+                    Toast.makeText(RegisterActivity.this, "Please enter a valid email format.", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.emailAuth_btn: //다이얼로그 내의 인증번호 인증 버튼을 눌렀을 시
                 try {
                     int user_answer = Integer.parseInt(emailAuthNumber.getText().toString());
                     if (user_answer == randNum) {
                         Toast.makeText(this, "이메일 인증 성공", Toast.LENGTH_SHORT).show();
+                        confirmEmail = true;
                         countDownTimer.cancel();
                         authDialog.cancel();
                     } else {
-
                         Toast.makeText(this, "이메일 인증 실패", Toast.LENGTH_SHORT).show();
+                        confirmEmail = false;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -202,9 +205,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             case R.id.register_button_join: //Join 버튼 클릭시
                 String userPassword = edtPW.getText().toString();
                 if (userPassword.isEmpty() || userPassword.length() < 6) {
-                    Toast.makeText(RegisterActivity.this, "비밀번호는 필히 6자 이상이어야 합니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "The PW field requires at least six characters.", Toast.LENGTH_SHORT).show();
                 } else {
-                    if (confirmID) {
+                    if (confirmID && confirmEmail) {
                         ApiUtils.getUserService().requestRegister(edtID.getText().toString(), edtPW.getText().toString(), edtEmail.getText().toString()).enqueue(retrofitCallback);
                     } else {
                         Toast.makeText(RegisterActivity.this, "ID 확인 요망", Toast.LENGTH_SHORT).show();
@@ -212,7 +215,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 }
                 break;
             case R.id.register_button_confirm_id:   //ID 확인
-                ApiUtils.getUserService().requestConfirmID(edtID.getText().toString()).enqueue(retrofitCallback);
+                String userID = edtID.getText().toString();
+                if(userID.isEmpty() || userID.length() < 4){
+                    Toast.makeText(RegisterActivity.this, "The ID field requires at least four characters.", Toast.LENGTH_SHORT).show();
+                }else{
+                    ApiUtils.getUserService().requestConfirmID(userID).enqueue(retrofitCallback);
+                }
                 break;
         }
     }
@@ -249,5 +257,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onCancel(DialogInterface dialog) {
         countDownTimer.cancel();
+    }
+    public void init(){
+        edtID = findViewById(R.id.register_edittext_id);
+        edtPW = findViewById(R.id.register_edittext_pwd);
+        edtEmail = findViewById(R.id.register_edittext_email);
+        btnJoin = findViewById(R.id.register_button_join);
+        btnConfirmID = findViewById(R.id.register_button_confirm_id);
+        btnConfirmEmail = findViewById(R.id.register_button_confirm_email);
+        btnConfirmEmail.setOnClickListener(this);
+        btnConfirmID.setOnClickListener(this);
+        btnJoin.setOnClickListener(this);
+
     }
 }

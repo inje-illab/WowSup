@@ -60,5 +60,8 @@ dependencies {
 
     //MaterialChips
     implementation 'com.github.tylersuehr7:chips-input-layout:2.3'
+
+    //MaterialTextField
+    implementation 'com.github.florent37:materialtextfield:1.0.7'
 }
 apply plugin: 'com.google.gms.google-services'
