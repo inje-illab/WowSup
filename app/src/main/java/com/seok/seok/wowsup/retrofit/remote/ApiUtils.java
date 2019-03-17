@@ -25,6 +25,9 @@ public class ApiUtils {
     public static ImageService getImageService(){
         return RetrofitClient.getClient(BASE_URL).create(ImageService.class);
     }
+    public static ChatWordChart getWordService(){
+        return RetrofitClient.getClient(BASE_URL).create(ChatWordChart.class);
+    }
     public static MailService getEmailService(){
         return RetrofitClient.getClient(BASE_MAIL_URL).create(MailService.class);
     }
