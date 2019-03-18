@@ -72,20 +72,16 @@ public class FragmentHelp extends Fragment {
                 ApiUtils.getWordService().requestChatWord(wordMap).enqueue(new Callback<List<ResponseChatWordObj>>() {
                     @Override
                     public void onResponse(Call<List<ResponseChatWordObj>> call, Response<List<ResponseChatWordObj>> response) {
-                        if (response.isSuccessful()) {
-                            List<ResponseChatWordObj> body = response.body();
-                            for(int i = 0 ; i < body.size(); i++) {
-                                Log.d("asdffdsa", body.get(i).getKey() + "    " + body.get(i).getValue());
-                            }
-                        }
+                        Log.d("mapTrans", "map trans success");
                     }
 
                     @Override
                     public void onFailure(Call<List<ResponseChatWordObj>> call, Throwable t) {
-                        Log.d("asdffdsa" , t.getMessage());
+                        Log.d("mapTrans" , t.getMessage());
                     }
                 });
                 wordCount = 0;
+                wordMap.clear();
             }
         });
         return view;
