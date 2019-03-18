@@ -63,5 +63,8 @@ dependencies {
 
     //MaterialTextField
     implementation 'com.github.florent37:materialtextfield:1.0.7'
+
+    //MaterialSheetFab
+    implementation 'com.gordonwong:material-sheet-fab:1.2.1'
 }
 apply plugin: 'com.google.gms.google-services'
