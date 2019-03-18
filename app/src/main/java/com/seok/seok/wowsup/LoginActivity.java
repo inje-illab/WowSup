@@ -152,6 +152,12 @@ public class LoginActivity extends AppCompatActivity {
                 //finish();
             }
         });*/
+        btnLost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, LostInfoActivity.class));
+            }
+        });
     }
 
     // 아이디 패스워드 입력란 코드
