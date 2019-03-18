@@ -19,7 +19,7 @@ import static com.seok.seok.wowsup.fragments.fragchat.ChatActivity.txtText;
 
 public class TranslateActivity extends AppCompatActivity {
 
-    private Button btnTrans, btnSendtext;
+    private Button btnTrans, btnSendtext, btnBack;
     private EditText editText;
     private TextView textView;
     private String clientId = "_8DFZRFsspTZCrfikUzn";//애플리케이션 클라이언트 아이디값";
@@ -30,6 +30,14 @@ public class TranslateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_translate);editText = (EditText)findViewById(R.id.editText);
         textView = (TextView)findViewById(R.id.txtTrans);
+
+        btnBack = (Button)findViewById(R.id.translate_btn_back);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         btnSendtext = (Button)findViewById(R.id.btnSendtext);
         btnSendtext.setOnClickListener(new View.OnClickListener() {
             @Override

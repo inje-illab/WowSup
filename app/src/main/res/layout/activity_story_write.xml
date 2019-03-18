@@ -14,30 +14,38 @@
         android:background="#808183"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/story_write_btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="8"
-            android:background="@drawable/back" />
-
-        <TextView
-            android:id="@+id/textView4"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="9"
-            android:gravity="center"
-            android:text="TextView"
-            android:textColor="#ffffff"
-            android:textSize="18sp" />
+            android:layout_margin="10dp"
+            android:layout_weight="8"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/story_write_btn_help"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:background="@drawable/help_button"
-            android:textSize="18sp" />
+            <Button
+                android:id="@+id/story_write_btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:background="@mipmap/back" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:gravity="center"
+                android:text="Write"
+                android:textColor="#ffffff"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/story_write_btn_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:background="@mipmap/help_button"
+                android:textSize="18sp" />
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -50,25 +58,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="10"
-            android:orientation="vertical"></LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="11"
-                android:orientation="horizontal"></LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_margin="10dp"
                 android:layout_weight="10"
+                android:background="@mipmap/title_feid"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -91,7 +91,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="3"
-                    android:background="@drawable/title_feid"
+
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -108,8 +108,10 @@
                 android:id="@+id/story_write_layout_back"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="10dp"
                 android:layout_weight="6"
-                android:background="@drawable/text_feild"
+
+                android:background="@mipmap/text_feild"
                 android:gravity="center|top"
                 android:orientation="vertical">
 
@@ -129,19 +131,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="11"
-                android:orientation="horizontal"></LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:layout_weight="10.5"
-                android:background="@drawable/photo"
+
+                android:background="@mipmap/photo_tab"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="3dp"
                     android:layout_weight="3"
                     android:gravity="center"
                     android:orientation="horizontal">
@@ -222,17 +220,21 @@
 
                     <Button
                         android:id="@+id/story_write_btn_picture"
-                        android:layout_width="33.3dp"
-                        android:layout_height="33.3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
                         android:layout_weight="1"
-                        android:background="@drawable/camera_icon" />
+                        android:background="@mipmap/camera_icon" />
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="10dp"
                 android:layout_weight="9"
+                android:background="@mipmap/text_feild"
                 android:orientation="vertical">
 
                 <com.tylersuehr.chips.ChipsInputLayout
@@ -248,7 +250,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent "
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
                 android:layout_weight="10"
                 android:orientation="vertical">
 
@@ -256,19 +259,14 @@
                     android:id="@+id/story_write_btn_save"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/save_button"
+
+                    android:background="@mipmap/save_button"
                     android:text="Save"
                     android:textColor="#f0f4f4"
                     android:textSize="21sp" />
             </LinearLayout>
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="10"
-            android:orientation="vertical"></LinearLayout>
 
     </LinearLayout>
 </LinearLayout>

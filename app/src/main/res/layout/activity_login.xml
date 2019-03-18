@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/frist_logo" />
+                app:srcCompat="@mipmap/frist_logo" />
         </LinearLayout>
 
         <LinearLayout
@@ -44,13 +44,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="10"
-                android:orientation="horizontal"></LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -98,14 +93,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="10"
-                android:orientation="horizontal">
-
-            </LinearLayout>
-
         </LinearLayout>
 
     </LinearLayout>
@@ -119,18 +106,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="10"
-            android:orientation="horizontal"></LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:layout_weight="1.5"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_weight="8"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -139,21 +122,17 @@
                     android:id="@+id/btn_custom_kakao_login"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginRight="10dp"
                     android:layout_weight="5.5"
-                    android:background="@drawable/throgh_sns" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="10"
-                    android:orientation="horizontal"></LinearLayout>
+                    android:background="@mipmap/throgh_sns" />
 
                 <Button
                     android:id="@+id/login_button_lost"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_weight="5.5"
-                    android:background="@drawable/lost_id_pw" />
+                    android:background="@mipmap/lost_id_pw" />
 
                 <com.kakao.usermgmt.LoginButton
                     android:id="@+id/btn_kakao_login"
@@ -171,13 +150,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="11"
-                android:orientation="horizontal"></LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="8"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="5"
                 android:orientation="horizontal">
 
                 <Button
@@ -185,25 +160,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:background="@drawable/a1"
+                    android:background="@mipmap/btn_black_bar"
                     android:text="Login"
                     android:textColor="#f0f4f4"
                     android:textSize="21sp" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="9"
-                android:orientation="horizontal"></LinearLayout>
-
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="10"
-            android:orientation="horizontal"></LinearLayout>
 
     </LinearLayout>
 

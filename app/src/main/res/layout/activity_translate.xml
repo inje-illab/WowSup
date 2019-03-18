@@ -10,18 +10,42 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="10"
+        android:background="#808183"
         android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/editText"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="안녕하세요. 제 이름은 세인 입니다." />
+            android:layout_margin="10dp"
+            android:layout_weight="8"
+            android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/translate_btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:background="@mipmap/back" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:gravity="center"
+                android:text="Help"
+                android:textColor="#ffffff"
+                android:textSize="21sp" />
+
+            <Button
+                android:id="@+id/story_write_btn_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:background="#808183"
+                android:textSize="18sp" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -30,32 +54,68 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btnTrans"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="번역" />
+            android:layout_margin="20dp"
+            android:layout_weight="4"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btnSendtext"
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@mipmap/text_feild"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="안녕하세요. 제 이름은 세인 입니다." />
+
+            <TextView
+                android:id="@+id/txtTrans"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@mipmap/text_feild"
+                android:text="TextView" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="채팅 적용" />
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="30dp"
+            android:layout_weight="10"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnTrans"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10sp"
+                android:layout_weight="1"
+                android:background="@mipmap/translation_button"
+                android:text="Translation"
+                android:textColor=" #808183"
+                android:textSize="21sp" />
+
+            <Button
+                android:id="@+id/btnSendtext"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@mipmap/btn_black_bar"
+                android:text="Post for Chattiing"
+                android:textColor="#f0f4f4"
+                android:textSize="21sp" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/txtTrans"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="TextView" />
-    </LinearLayout>
 </LinearLayout>
