@@ -119,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                                 if (body.getState() == 1) {
                                     //sein Test
 
-                                    emailTest = body.getEmail();//이거 이메일로 바꿔서 집어넣어야 돌아감 이거찾느라 뒤질뻔
+                                    emailTest = GlobalWowToken.getInstance().getUserEmail();//이거 이메일로 바꿔서 집어넣어야 돌아감 이거찾느라 뒤질뻔
                                     passwordTest = edtPW.getText().toString();
                                     userLogin(emailTest, passwordTest);
 
@@ -220,7 +220,6 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
-
                         // ...
                     }
          });

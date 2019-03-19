@@ -61,7 +61,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         like.setText(item.getCntLike());
         if(position == 0 && items.get(position).getStoryID().equals("")){
             layoutStoryBackground.setBackgroundColor(Color.WHITE);
-            layoutStoryTitle.setBackgroundResource(R.drawable.createstory);
+            layoutStoryTitle.setBackgroundResource(R.mipmap.write);
         }else{
             Log.d("asdfasdf", items.get(position).getImageURL());
             Glide.with(viewHolder.itemView.getRootView().getContext())

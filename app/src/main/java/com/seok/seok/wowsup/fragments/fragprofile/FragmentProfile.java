@@ -33,7 +33,7 @@ import retrofit2.Response;
 
 public class FragmentProfile extends Fragment {
     private View view;
-    private Button button;
+    private Button btnNotice;
     // Card 관련
     private RecyclerView mRecyclerView;
     private CardAdapter mAdapter;
@@ -61,8 +61,8 @@ public class FragmentProfile extends Fragment {
             mRecyclerView.setAdapter(mAdapter);
             profileImage = view.findViewById(R.id.fragment_profile_image);
 
-            button = view.findViewById(R.id.button2);   // 알림 버튼 눌르기 구현
-            button.setOnClickListener(new View.OnClickListener() {
+            btnNotice = view.findViewById(R.id.fragment_profile_btn_notice);   // 알림 버튼 눌르기 구현
+            btnNotice.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(getActivity().getApplication(), NoticeActivity.class));
@@ -81,7 +81,8 @@ public class FragmentProfile extends Fragment {
                                     Glide.with(getActivity()).load(body.getImageURL()).centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).override(300, 300).into(profileImage);
                                 }
                             }catch (Exception e){
-                                Glide.with(getActivity()).load(Common.USER_IMAGE_BASE_URL+"basic.png").centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).override(300, 300).into(profileImage);
+                                Glide.with(getActivity()).load(Common.USER_IMAGE_BASE_URL+"basic.png").bitmapTransform(new CropCircleTransformation(getActivity())).into(profileImage);
+                                //Glide.with(getActivity()).load(Common.USER_IMAGE_BASE_URL+"basic.png").centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).override(300, 300).into(profileImage);
                             }
                         }
                     }
