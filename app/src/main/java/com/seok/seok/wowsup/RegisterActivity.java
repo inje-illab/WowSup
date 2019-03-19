@@ -17,7 +17,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.api.Api;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -25,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.seok.seok.wowsup.retrofit.model.ResponseMailObj;
 import com.seok.seok.wowsup.retrofit.model.ResponseRegisterObj;
+import com.seok.seok.wowsup.retrofit.remote.ApiMailUtils;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 
 import java.util.Random;
@@ -42,7 +42,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private Button btnJoin, btnConfirmID, btnConfirmEmail;
     private EditText edtID, edtPW, edtEmail;
-    private Callback retrofitCallback;
     private boolean confirmID = false;
     private boolean confirmEmail = false;
 
@@ -72,41 +71,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         mAuth = FirebaseAuth.getInstance();
         init();
 
-        //콜백 메서드 구현 틀 : ResponseRegisterObj.class
-        retrofitCallback = new Callback<ResponseRegisterObj>() {
-            @Override
-            public void onResponse(Call<ResponseRegisterObj> call, Response<ResponseRegisterObj> response) {
-                // Server와 통신 성공 시
-                if (response.isSuccessful()) {
-                    ResponseRegisterObj body = response.body();
-                    if (body.getState() == 0) {
-                        Toast.makeText(RegisterActivity.this, "사용 가능한 ID", Toast.LENGTH_SHORT).show();
-                        confirmID = true;
-                    } else if (body.getState() == 1) {
-                        Toast.makeText(RegisterActivity.this, "이미 사용 중", Toast.LENGTH_SHORT).show();
-                        confirmID = false;
-                    } else if (body.getState() == 2) {
-                        //sein Test
-                        emailTest = edtEmail.getText().toString();
-                        passwordTest = edtPW.getText().toString();
-                        userRegist(emailTest, passwordTest);
-
-                        Toast.makeText(RegisterActivity.this, "가입 성공", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                        finish();
-                    } else if (body.getState() == 3) {
-                        Toast.makeText(RegisterActivity.this, "통신 오류", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseRegisterObj> call, Throwable t) {
-                // Server와 통신 실패시
-                Toast.makeText(RegisterActivity.this, "통신오류", Toast.LENGTH_SHORT).show();
-                Log.d("register_err", t.getMessage() + " < ");
-            }
-        };
     }
 
     @Override
@@ -138,7 +102,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
-
                         // ...
                     }
                 });
@@ -149,7 +112,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId()) {
             case R.id.register_button_confirm_email:
                 String userEmail = edtEmail.getText().toString();
-                if(!TextUtils.isEmpty(userEmail) && Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()) {
+                if (!TextUtils.isEmpty(userEmail) && Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()) {
                     // 이메일 인증 안되어있을 시
                     if (!confirmEmail) {
                         rand = new Random();
@@ -162,10 +125,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         authDialog.setOnCancelListener(this); //다이얼로그를 닫을 때 일어날 일을 정의하기 위해 onCancelListener 설정
                         authDialog.show(); //Dialog를 나타내어 준다.
                         countDownTimer();
-                        ApiUtils.getEmailService().requestEmailAuthentication(userEmail, randNum).enqueue(new Callback<ResponseMailObj>() {
+                        ApiMailUtils.getEmailService().requestEmailAuthentication(userEmail, randNum).enqueue(new Callback<ResponseMailObj>() {
                             @Override
                             public void onResponse(Call<ResponseMailObj> call, Response<ResponseMailObj> response) {
+                                Log.d("RegisterActivity_HTTP_CONFIRMEMAIL", "HTTP Transfer Success");
                                 if (response.isSuccessful()) {
+                                    Log.d("RegisterActivity_HTTP_CONFIRMEMAIL", "HTTP response Success");
                                     ResponseMailObj body = response.body();
                                     if (body.getState() == 0) {
                                         Toast.makeText(RegisterActivity.this, "Email not Send!", Toast.LENGTH_SHORT).show();
@@ -174,14 +139,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                     }
                                 }
                             }
-
                             @Override
                             public void onFailure(Call<ResponseMailObj> call, Throwable t) {
-                                Log.d("RegisterActivity_ERROR", t.getMessage() + " <<");
+                                Log.d("RegisterActivity_HTTP_CONFIRMEMAIL", "HTTP Transfer Fail");
                             }
                         });
                     }
-                }else{
+                } else {
                     Toast.makeText(RegisterActivity.this, "Please enter a valid email format.", Toast.LENGTH_SHORT).show();
                 }
                 break;
@@ -189,48 +153,91 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 try {
                     int user_answer = Integer.parseInt(emailAuthNumber.getText().toString());
                     if (user_answer == randNum) {
-                        Toast.makeText(this, "이메일 인증 성공", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Email authentication successful", Toast.LENGTH_SHORT).show();
                         confirmEmail = true;
                         countDownTimer.cancel();
                         authDialog.cancel();
                     } else {
-                        Toast.makeText(this, "이메일 인증 실패", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Email authentication failed", Toast.LENGTH_SHORT).show();
                         confirmEmail = false;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                } finally {
-                    break;
                 }
+                break;
             case R.id.register_button_join: //Join 버튼 클릭시
                 String userPassword = edtPW.getText().toString();
-                if (userPassword.isEmpty() || userPassword.length() < 6) {
-                    Toast.makeText(RegisterActivity.this, "The PW field requires at least six characters.", Toast.LENGTH_SHORT).show();
+                if (!confirmID) {
+                    Toast.makeText(RegisterActivity.this, "Please check your ID", Toast.LENGTH_SHORT).show();
+                } else if (!confirmEmail) {
+                    Toast.makeText(RegisterActivity.this, "Please check your E-Mail", Toast.LENGTH_SHORT).show();
                 } else {
-                    if (confirmID) {
-                        ApiUtils.getUserService().requestRegister(edtID.getText().toString(), edtPW.getText().toString(), edtEmail.getText().toString()).enqueue(retrofitCallback);
-                    } else {
-                        Toast.makeText(RegisterActivity.this, "ID 확인 요망", Toast.LENGTH_SHORT).show();
+                    if (userPassword.isEmpty() || userPassword.length() < 6) {
+                        Toast.makeText(RegisterActivity.this, "The PW field requires at least six characters.", Toast.LENGTH_SHORT).show();
+                        break;
                     }
+                    ApiUtils.getUserService().requestRegister(edtID.getText().toString(), edtPW.getText().toString(), edtEmail.getText().toString()).enqueue(new Callback<ResponseRegisterObj>() {
+                        @Override
+                        public void onResponse(Call<ResponseRegisterObj> call, Response<ResponseRegisterObj> response) {
+                            Log.d("RegisterActivity_HTTP_JOIN", "HTTP Transfer Success");
+                            Toast.makeText(RegisterActivity.this, "You have successfully signed up.", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseRegisterObj> call, Throwable t) {
+                            Log.d("RegisterActivity_HTTP_JOIN", "HTTP Transfer Fail");
+                            Toast.makeText(RegisterActivity.this, "You have been unsuccessfully signed up.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
                 break;
             case R.id.register_button_confirm_id:   //ID 확인
                 String userID = edtID.getText().toString();
-                if(userID.isEmpty() || userID.length() < 4){
+                if (userID.isEmpty() || userID.length() < 4) {
                     Toast.makeText(RegisterActivity.this, "The ID field requires at least four characters.", Toast.LENGTH_SHORT).show();
-                }else{
-                    ApiUtils.getUserService().requestConfirmID(userID).enqueue(retrofitCallback);
+                } else {
+                    ApiUtils.getUserService().requestConfirmID(userID).enqueue(new Callback<ResponseRegisterObj>() {
+                        @Override
+                        public void onResponse(Call<ResponseRegisterObj> call, Response<ResponseRegisterObj> response) {
+                            Log.d("RegisterActivity_HTTP_CONFIRMID", "HTTP Transfer Success");
+                            if (response.isSuccessful()) {
+                                ResponseRegisterObj body = response.body();
+                                if (body.getState() == 0) {
+                                    Toast.makeText(RegisterActivity.this, "Available ID", Toast.LENGTH_SHORT).show();
+                                    confirmID = true;
+                                } else if (body.getState() == 1) {
+                                    Toast.makeText(RegisterActivity.this, "Already in use", Toast.LENGTH_SHORT).show();
+                                    confirmID = false;
+                                } else if (body.getState() == 2) {
+                                    emailTest = edtEmail.getText().toString();
+                                    passwordTest = edtPW.getText().toString();
+                                    userRegist(emailTest, passwordTest);
+                                    Toast.makeText(RegisterActivity.this, "Successful Sign Up", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                                    finish();
+                                } else if (body.getState() == 3) {
+                                    Toast.makeText(RegisterActivity.this, "HTTP_ERROR", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseRegisterObj> call, Throwable t) {
+                            Log.d("RegisterActivity_HTTP_CONFIRMID", "HTTP Transfer Fail");
+                        }
+                    });
                 }
                 break;
         }
     }
 
     public void countDownTimer() { //카운트 다운 메소드
-        timeCounter = (TextView) dialogLayout.findViewById(R.id.emailAuth_time_counter);
+        timeCounter = dialogLayout.findViewById(R.id.emailAuth_time_counter);
         //줄어드는 시간을 나타내는 TextView
-        emailAuthNumber = (EditText) dialogLayout.findViewById(R.id.emailAuth_number);
+        emailAuthNumber = dialogLayout.findViewById(R.id.emailAuth_number);
         //사용자 인증 번호 입력창
-        btnEmailAuth = (Button) dialogLayout.findViewById(R.id.emailAuth_btn);
+        btnEmailAuth = dialogLayout.findViewById(R.id.emailAuth_btn);
         //인증하기 버튼
         countDownTimer = new CountDownTimer(MILLISINFUTURE, COUNT_DOWN_INTERVAL) {
             @Override
@@ -258,7 +265,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onCancel(DialogInterface dialog) {
         countDownTimer.cancel();
     }
-    public void init(){
+
+    public void init() {
         edtID = findViewById(R.id.register_edittext_id);
         edtPW = findViewById(R.id.register_edittext_pwd);
         edtEmail = findViewById(R.id.register_edittext_email);
@@ -268,6 +276,5 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         btnConfirmEmail.setOnClickListener(this);
         btnConfirmID.setOnClickListener(this);
         btnJoin.setOnClickListener(this);
-
     }
 }

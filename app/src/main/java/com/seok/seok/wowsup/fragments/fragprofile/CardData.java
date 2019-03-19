@@ -7,13 +7,15 @@ public class CardData {
     private String title;
     private String body;
     private String cntLike;
+    private String imageURL;
 
-    public CardData(String storyID, String userID, String title, String body, String cntLike) {
+    public CardData(String storyID, String userID, String title, String body, String cntLike, String imageURL) {
         this.storyID = storyID;
         this.userID = userID;
         this.title = title;
         this.body = body;
         this.cntLike = cntLike;
+        this.imageURL = imageURL;
     }
 
     public String getStoryID() {
@@ -54,5 +56,13 @@ public class CardData {
 
     public void setCntLike(String cntLike) {
         this.cntLike = cntLike;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 }

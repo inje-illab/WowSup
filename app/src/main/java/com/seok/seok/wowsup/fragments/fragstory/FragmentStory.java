@@ -81,7 +81,7 @@ public class FragmentStory extends Fragment {
                                     for (int i = 0; i < body.size(); i++) {
                                         cardViewData.add(new CardData(body.get(i).getStoryID() + "",
                                                 body.get(i).getUserID() + "", body.get(i).getTitle() + "",
-                                                body.get(i).getBody() + "", body.get(i).getCntLike() + ""));
+                                                body.get(i).getBody() + "", body.get(i).getCntLike() + "", body.get(i).getImageURL()));
                                         Log.d("cardView StoryID: ", body.get(i).getStoryID() + "");
                                         Log.d("cardView UserID: ", body.get(i).getUserID() + "");
                                         Log.d("cardView Title: ", body.get(i).getTitle() + "");
@@ -120,12 +120,7 @@ public class FragmentStory extends Fragment {
                     for(int i = 0;  i< body.size(); i++){
                         cardViewData.add(new CardData(body.get(i).getStoryID()+"",
                                 body.get(i).getUserID()+"", body.get(i).getTitle()+"",
-                                body.get(i).getBody()+"", body.get(i).getCntLike()+""));
-                        Log.d("cardView StoryID: " , body.get(i).getStoryID()+"");
-                        Log.d("cardView UserID: " , body.get(i).getUserID()+"");
-                        Log.d("cardView Title: " , body.get(i).getTitle()+"");
-                        Log.d("cardView Body: " , body.get(i).getBody()+"");
-                        Log.d("cardView Like: " , body.get(i).getCntLike()+"");
+                                body.get(i).getBody()+"", body.get(i).getCntLike()+"", body.get(i).getImageURL()));
                         if(mAdapter.getItemCount() == body.size()){
                             Log.d("asdfasdf", mAdapter.getItemCount()+"");
                             mRecyclerView.setAdapter(mAdapter);

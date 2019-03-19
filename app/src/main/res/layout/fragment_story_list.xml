@@ -5,14 +5,13 @@
     android:id="@+id/layout_story_background"
     android:layout_width="120dp"
     android:layout_height="120dp"
+    android:layout_margin="5dp"
     android:background="#f0f4f4"
     android:gravity="center">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5dp"
-        android:background="@drawable/test"
         android:orientation="horizontal">
 
         <LinearLayout
