@@ -49,7 +49,6 @@ public class FragmentProfile extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         cardViewData = new ArrayList<>();
-        cardViewData.add(new CardData("","","","",""));
         mAdapter = new CardAdapter(cardViewData, this.getContext());
         initDataSet();
     }
@@ -102,6 +101,7 @@ public class FragmentProfile extends Fragment {
     }
 
     private void initDataSet() {
+        cardViewData.add(new CardData("","","","","", ""));
         ApiUtils.getProfileService().requestMyStory(GlobalWowToken.getInstance().getId()).enqueue(new Callback<List<ResponseStoryObj>>() {
             @Override
             public void onResponse(Call<List<ResponseStoryObj>> call, Response<List<ResponseStoryObj>> response) {
@@ -111,12 +111,7 @@ public class FragmentProfile extends Fragment {
                     for (int i = 0; i <body.size(); i++) {
                         cardViewData.add(new CardData(body.get(i).getStoryID() + "",
                                 body.get(i).getUserID() + "", body.get(i).getTitle() + "",
-                                body.get(i).getBody() + "", body.get(i).getCntLike() + ""));
-                        Log.d("cardView ProfileID: ", body.get(i).getStoryID() + "");
-                        Log.d("cardView UserID: ", body.get(i).getUserID() + "");
-                        Log.d("cardView Title: ", body.get(i).getTitle() + "");
-                        Log.d("cardView Body: ", body.get(i).getBody() + "");
-                        Log.d("cardView Like: ", body.get(i).getCntLike() + "");
+                                body.get(i).getBody() + "", body.get(i).getCntLike() + "", body.get(i).getImageURL()));
                         if (mAdapter.getItemCount()-1 == body.size()) {
                             Log.d("profile Adapter : ", mAdapter.getItemCount() + "");
                             mRecyclerView.setAdapter(mAdapter);

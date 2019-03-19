@@ -4,22 +4,22 @@
 
     <item
         android:id="@+id/navigation_menu1"
-        android:icon="@android:drawable/ic_menu_call"
-        android:title="My Profile" />
+        android:icon="@mipmap/me_non_click"
+        android:title=""/>
 
     <item
         android:id="@+id/navigation_menu2"
-        android:icon="@android:drawable/ic_menu_camera"
-        android:title="Chat" />
+        android:icon="@mipmap/btn_talk1"
+        android:title=""/>
 
     <item
         android:id="@+id/navigation_menu3"
-        android:icon="@android:drawable/ic_menu_edit"
-        android:title="Story" />
+        android:icon="@mipmap/hashtags_non_click"
+        android:title=""/>
 
     <item
         android:id="@+id/navigation_menu4"
-        android:icon="@android:drawable/ic_menu_help"
-        android:title="Help" />
+        android:icon="@mipmap/logo_sup_noclolor"
+        android:title="" />
 
 </menu>

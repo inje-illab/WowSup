@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.seok.seok.wowsup"
-        minSdkVersion 21
+        minSdkVersion 26
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -63,5 +63,11 @@ dependencies {
 
     //MaterialTextField
     implementation 'com.github.florent37:materialtextfield:1.0.7'
+
+    //BoomMenu
+    implementation 'com.nightonke:boommenu:2.1.1'
+
+    //MPAndroidChart
+    implementation 'com.github.PhilJay:MPAndroidChart:v2.0.9'
 }
 apply plugin: 'com.google.gms.google-services'

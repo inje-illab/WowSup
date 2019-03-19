@@ -3,7 +3,6 @@ package com.seok.seok.wowsup.retrofit.remote;
 public class ApiUtils {
     //Server /var/www/html 의 주소
     public static final String BASE_URL = "http://www.heywowsup.com/wowsup/";
-    public static final String BASE_MAIL_URL = "http://www.heywowsup.com/awsSES/";
     public static LoginService getUserService(){
         return RetrofitClient.getClient(BASE_URL).create(LoginService.class);
     }
@@ -27,8 +26,5 @@ public class ApiUtils {
     }
     public static ChatWordChart getWordService(){
         return RetrofitClient.getClient(BASE_URL).create(ChatWordChart.class);
-    }
-    public static MailService getEmailService(){
-        return RetrofitClient.getClient(BASE_MAIL_URL).create(MailService.class);
     }
 }
