@@ -2,15 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="right"
-    android:gravity="right">
+    android:layout_gravity="left"
+    android:gravity="left"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
         android:layout_marginLeft="5dp"
-        android:background="@mipmap/i_say"
+        android:background="@mipmap/friend_say"
         android:gravity="left"
         android:orientation="horizontal">
 
@@ -19,12 +20,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center|left"
-            android:inputType="textMultiLine"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:text="TextView"
             android:textColor="@android:color/black"
-            android:textSize="13.7sp" />
+            android:textSize="17sp" />
     </LinearLayout>
 
 </LinearLayout>

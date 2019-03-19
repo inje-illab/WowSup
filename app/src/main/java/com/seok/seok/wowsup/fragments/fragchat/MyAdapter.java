@@ -1,6 +1,5 @@
 package com.seok.seok.wowsup.fragments.fragchat;
 
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,7 +59,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
         else
         {
             v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.my_text_view, parent, false);
+                    .inflate(R.layout.left_text_view, parent, false);
         }
 
         MyViewHolder vh = new MyViewHolder(v);

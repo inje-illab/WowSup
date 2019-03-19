@@ -207,7 +207,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 if (userPassword.isEmpty() || userPassword.length() < 6) {
                     Toast.makeText(RegisterActivity.this, "The PW field requires at least six characters.", Toast.LENGTH_SHORT).show();
                 } else {
-                    if (confirmID && confirmEmail) {
+                    if (confirmID) {
                         ApiUtils.getUserService().requestRegister(edtID.getText().toString(), edtPW.getText().toString(), edtEmail.getText().toString()).enqueue(retrofitCallback);
                     } else {
                         Toast.makeText(RegisterActivity.this, "ID 확인 요망", Toast.LENGTH_SHORT).show();
