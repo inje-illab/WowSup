@@ -26,6 +26,7 @@ import com.seok.seok.wowsup.utilities.GlobalWowToken;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+
 import java.util.Hashtable;
 import java.util.List;
 
@@ -38,6 +39,7 @@ public class ChatActivity extends AppCompatActivity {
     private String email, strUid, strFriendUid;
     private FirebaseDatabase database;
     private List<Chat> mChat;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,10 +50,14 @@ public class ChatActivity extends AppCompatActivity {
         final Intent intent  = getIntent();
         strFriendUid = intent.getStringExtra("friendUid");
 
-        if (user != null) {
+        /*if (user != null) {
             email = user.getEmail();
             strUid = user.getUid();
-        }
+        }*/
+
+        email = GlobalWowToken.getInstance().getUserEmail();
+        strUid = GlobalWowToken.getInstance().getId();
+
         //UserInfomation
         txtText = (EditText)findViewById(R.id.txtText);
         btnTrans = (Button)findViewById(R.id.btnTrans);

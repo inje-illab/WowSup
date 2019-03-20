@@ -16,6 +16,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -58,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         //sein test
+
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -119,9 +121,11 @@ public class LoginActivity extends AppCompatActivity {
                                 if (body.getState() == 1) {
                                     //sein Test
 
-                                    emailTest = body.getEmail();//이거 이메일로 바꿔서 집어넣어야 돌아감 이거찾느라 뒤질뻔
+                                    emailTest = GlobalWowToken.getInstance().getUserEmail() ;
+                                    //이거 이메일로 바꿔서 집어넣어야 돌아감 이거찾느라 뒤질뻔
                                     passwordTest = edtPW.getText().toString();
-                                    userLogin(emailTest, passwordTest);
+                                    Log.d("bbb",emailTest +"시발"+ passwordTest);
+                                    //userLogin(emailTest, passwordTest);
 
 
                                     Toast.makeText(LoginActivity.this, "Login 성공", Toast.LENGTH_SHORT).show();
@@ -202,7 +206,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void userLogin(String email, String password)
+    public void userLogin(final String email, final String password)
     {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -211,6 +215,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("aaa", "signInWithEmail:success");
+
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
                         } else {
