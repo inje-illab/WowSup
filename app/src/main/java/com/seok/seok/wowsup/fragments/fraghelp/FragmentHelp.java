@@ -41,19 +41,6 @@ public class FragmentHelp extends Fragment {
     private OnFragmentInteractionListener mListener;
     private PieChart globalHitWordChart;
 
-    public static final int[] MY_COLORS = {
-            Color.parseColor("#c9dff1"),
-            Color.parseColor("#efe7cc"),
-            Color.parseColor("#ffffff"),
-            Color.parseColor("#808183"),
-            Color.parseColor("#efbfa8"),
-            Color.parseColor("#dad3ce"),
-            Color.parseColor("#64757a"),
-            Color.parseColor("#94b6bb"),
-            Color.parseColor("#b7bbbd"),
-            Color.parseColor("#f6e0d1")
-    };
-
     public FragmentHelp() {
         wordMap = new HashMap<>();
         wordCount = 0;
@@ -78,33 +65,6 @@ public class FragmentHelp extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_fragment_help, container, false);
-        editText = view.findViewById(R.id.fragment_help_edit_word);
-        button = view.findViewById(R.id.fragment_help_btn_word);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String[] words = editText.getText().toString().replaceAll("[^a-zA-Z]", " ").split(delimiter);
-                for (String word : words) {
-                    if (!word.equals("")) {
-                        wordMap.put((wordCount++) + "", word);
-                    }
-                }
-
-                ApiUtils.getWordService().requestChatWord(wordMap).enqueue(new Callback<List<ResponseChatWordObj>>() {
-                    @Override
-                    public void onResponse(Call<List<ResponseChatWordObj>> call, Response<List<ResponseChatWordObj>> response) {
-                        Log.d("mapTrans", "map trans success");
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<ResponseChatWordObj>> call, Throwable t) {
-                        Log.d("mapTrans", t.getMessage());
-                    }
-                });
-                wordCount = 0;
-                wordMap.clear();
-            }
-        });
         initChart();
         return view;
     }
@@ -124,8 +84,23 @@ public class FragmentHelp extends Fragment {
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
+
+    public static final int[] MY_COLORS = {
+            Color.rgb(201,223,241),
+            Color.rgb(239,231,204),
+            Color.rgb(0,0,0),
+            Color.rgb(126,128,130),
+            Color.rgb(239,191,168),
+            Color.rgb(218,211,206),
+            Color.rgb(100,117,122),
+            Color.rgb(146,182,187),
+            Color.rgb(183,187,189),
+            Color.rgb(246,224,209)
+
+    };
+
     public void initChart() {
-        final PieChart pieChart = view.findViewById(R.id.fragment_help_chart);
+        globalHitWordChart = view.findViewById(R.id.fragment_help_chart);
         final ArrayList<Entry> wordValueList = new ArrayList<>();
         final ArrayList<String> wordList = new ArrayList<>();
         final ArrayList<Integer> colors = new ArrayList<>();
@@ -143,7 +118,7 @@ public class FragmentHelp extends Fragment {
                     }
                     PieDataSet dataSet = new PieDataSet(wordValueList, "This week's word fashion graph");
                     PieData data = new PieData(wordList, dataSet);
-                    pieChart.setData(data);
+                    globalHitWordChart.setData(data);
                     for (int c : MY_COLORS)
                         colors.add(c);
                     dataSet.setColors(colors);
@@ -155,6 +130,6 @@ public class FragmentHelp extends Fragment {
                 Log.d("FragmentHelp_HTTP_CHART", "HTTP Transfer Failed");
             }
         });
-        pieChart.animateXY(5000, 5000);
+        globalHitWordChart.animateXY(3000, 3000);
     }
 }

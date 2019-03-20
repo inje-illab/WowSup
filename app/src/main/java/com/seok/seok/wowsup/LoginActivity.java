@@ -59,7 +59,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         //sein test
-
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -206,7 +205,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void userLogin(final String email, final String password)
+    public void userLogin(String email, String password)
     {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -225,7 +224,6 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
-
                         // ...
                     }
          });

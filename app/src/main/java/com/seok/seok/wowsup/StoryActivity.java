@@ -34,7 +34,7 @@ public class StoryActivity extends AppCompatActivity {
     private TextView storyTextBody, storyTextTag1, storyTextTag2, storyTextTag3, storyTextTag4, storyTextTag5, storyTextCntLike;
     private BoomMenuButton boomMenuButton;
     private LinearLayout storyLayoutBackground;
-    private ImageView iBtnBack;
+    private ImageView iBtnBack, iBtnLike;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +56,27 @@ public class StoryActivity extends AppCompatActivity {
                     break;
                 case R.id.story_ibtn_back:
                     finish();
+                case R.id.story_ibtn_like:
+                    ApiUtils.getStoryService().requestStoryLike(GlobalWowToken.getInstance().getId(),storyID).enqueue(new Callback<ResponseStoryObj>() {
+                        @Override
+                        public void onResponse(Call<ResponseStoryObj> call, Response<ResponseStoryObj> response) {
+                            Log.d("RegisterActivity_HTTP_LIKE", "HTTP Transfer Success");
+                            if(response.isSuccessful()){
+                                ResponseStoryObj body = response.body();
+                                if(body.getState()==0){
+                                    iBtnLike.setImageResource(R.mipmap.unllike_icon);
+                                }else if(body.getState()==1){
+                                    iBtnLike.setImageResource(R.mipmap.like_icon);
+                                }
+                                storyTextCntLike.setText(body.getCntLike()+"");
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<ResponseStoryObj> call, Throwable t) {
+                            Log.d("RegisterActivity_HTTP_LIKE", "HTTP Transfer Failed");
+                        }
+                    });
+                    break;
             }
         }
     };
@@ -93,7 +114,7 @@ public class StoryActivity extends AppCompatActivity {
         Intent intent = getIntent();
         storyID = intent.getStringExtra("storyID");
 
-        ApiUtils.getStoryService().requestOneStoryView(storyID).enqueue(new Callback<ResponseStoryObj>() {
+        ApiUtils.getStoryService().requestPickStoryView(storyID, GlobalWowToken.getInstance().getId()).enqueue(new Callback<ResponseStoryObj>() {
             @Override
             public void onResponse(Call<ResponseStoryObj> call, Response<ResponseStoryObj> response) {
                 ResponseStoryObj body = response.body();
@@ -107,6 +128,12 @@ public class StoryActivity extends AppCompatActivity {
                         storyTextTag4.setText(body.getTag4());
                         storyTextTag5.setText(body.getTag5());
                         storyTextCntLike.setText(body.getCntLike() + "");
+                        Log.d("StoryActivity_HTTP_CONFIRMDATA", "getState : "+body.getState());
+                        if(body.getState()==0){
+                            iBtnLike.setImageResource(R.mipmap.unllike_icon);
+                        }else if(body.getState()== 1){
+                            iBtnLike.setImageResource(R.mipmap.like_icon);
+                        }
                         if (!body.getImageURL().equals(null)) {
                             Glide.with(getApplicationContext()).load(body.getImageURL()).into(new SimpleTarget<GlideDrawable>() {
                                 @Override
@@ -144,7 +171,9 @@ public class StoryActivity extends AppCompatActivity {
         storyTextCntLike = findViewById(R.id.story_text_cntlike);
         boomMenuButton = findViewById(R.id.story_menu);
         iBtnBack = findViewById(R.id.story_ibtn_back);
+        iBtnLike = findViewById(R.id.story_ibtn_like);
         storyLayoutBackground.setOnClickListener(onClickListener);
         iBtnBack.setOnClickListener(onClickListener);
+        iBtnLike.setOnClickListener(onClickListener);
     }
 }

@@ -18,8 +18,14 @@ public interface StoryService {
     Call<List<ResponseStoryObj>> requestStoryTagView(@Query("text") String text);
 
     @GET("Story/pickStory.php")
-    Call<ResponseStoryObj> requestOneStoryView(@Query("storyID") String storyID);
+    Call<ResponseStoryObj> requestPickStoryView(@Query("storyID") String storyID,
+                                                @Query("userID") String userID);
 
     @GET("Story/recommendTag.php")
     Call<ResponseStoryObj> requestRecommendTag(@Query("number") int number);
+
+    @GET("Story/likeStroy.php")
+    Call<ResponseStoryObj> requestStoryLike(@Query("userID") String userID,
+                                            @Query("storyID") String storyID);
+
 }

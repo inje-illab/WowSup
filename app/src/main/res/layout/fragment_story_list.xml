@@ -17,18 +17,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="20dp"
+            android:layout_margin="12dp"
             android:gravity="center"
             android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/layout_story_title"
-                android:layout_width="250dp"
-                android:layout_height="100dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/com_facebook_device_auth_text"
+                android:background="@mipmap/short_button_dark"
                 android:gravity="center"
                 android:orientation="vertical">
 

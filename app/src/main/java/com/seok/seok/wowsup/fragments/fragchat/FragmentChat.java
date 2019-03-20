@@ -101,7 +101,7 @@ public class FragmentChat extends Fragment {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
             recyclerView.setLayoutManager(linearLayoutManager);
             recyclerView.setHasFixedSize(true);
-            ApiUtils.getProfileService().requestImageURL(GlobalWowToken.getInstance().getId()).enqueue(new Callback<ResponseProfileObj>() {
+            ApiUtils.getProfileService().requestMyProfile(GlobalWowToken.getInstance().getId()).enqueue(new Callback<ResponseProfileObj>() {
                 @Override
                 public void onResponse(Call<ResponseProfileObj> call, Response<ResponseProfileObj> response) {
                     if(response.isSuccessful()){

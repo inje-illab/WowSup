@@ -12,8 +12,8 @@ import retrofit2.http.Query;
 public interface ProfileService {
     //서버 요청 URL
 
-    @GET("Profile/profileImage.php")
-    Call<ResponseProfileObj> requestImageURL(@Query("ID") String id);
+    @GET("Profile/myProfile.php")
+    Call<ResponseProfileObj> requestMyProfile(@Query("userID") String id);
 
     @GET("Profile/myStory.php")
     Call<List<ResponseStoryObj>> requestMyStory(@Query("ID") String id);

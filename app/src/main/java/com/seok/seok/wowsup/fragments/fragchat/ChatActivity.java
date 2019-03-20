@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,14 +22,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.seok.seok.wowsup.R;
 import com.seok.seok.wowsup.TranslateActivity;
+import com.seok.seok.wowsup.retrofit.model.ResponseChatWordObj;
+import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 import com.seok.seok.wowsup.utilities.GlobalWowToken;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ChatActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
@@ -36,7 +44,9 @@ public class ChatActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private Button btnTrans, btnSend, btnBack;
     public static EditText txtText;
-    private String email, strUid, strFriendUid;
+    private String email, strUid, strFriendUid, delimiter;
+    private int wordCount;
+    private Map<String, String> wordMap;
     private FirebaseDatabase database;
     private List<Chat> mChat;
 
@@ -44,6 +54,10 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        wordMap = new HashMap<>();
+        wordCount = 0;
+        delimiter = " ";
 
         database = FirebaseDatabase.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -82,6 +96,8 @@ public class ChatActivity extends AppCompatActivity {
                 }
                 else
                 {
+                    sentenceSend(strText);
+
                     Calendar c = Calendar.getInstance();
                     System.out.println("Current time => " + c.getTime());
 
@@ -99,7 +115,6 @@ public class ChatActivity extends AppCompatActivity {
                     myRef1.setValue(chat);
 
                     txtText.setText("");
-
                 }
             }
         });
@@ -159,5 +174,27 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+    }
+    public void sentenceSend(String sentence){
+        String[] words = sentence.replaceAll("[^a-zA-Z]", " ").split(delimiter);
+        for (String word : words) {
+            if (!word.equals("")) {
+                wordMap.put((wordCount++) + "", word);
+            }
+        }
+
+        ApiUtils.getWordService().requestChatWord(wordMap).enqueue(new Callback<List<ResponseChatWordObj>>() {
+            @Override
+            public void onResponse(Call<List<ResponseChatWordObj>> call, Response<List<ResponseChatWordObj>> response) {
+                Log.d("mapTrans", "map trans success");
+            }
+
+            @Override
+            public void onFailure(Call<List<ResponseChatWordObj>> call, Throwable t) {
+                Log.d("mapTrans", t.getMessage());
+            }
+        });
+        wordCount = 0;
+        wordMap.clear();
     }
 }
