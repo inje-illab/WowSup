@@ -11,9 +11,12 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,11 +25,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.seok.seok.wowsup.fragments.fragprofile.MySpinnerAdapter;
+import com.seok.seok.wowsup.retrofit.model.ResponseCountry;
 import com.seok.seok.wowsup.retrofit.model.ResponseMailObj;
 import com.seok.seok.wowsup.retrofit.model.ResponseRegisterObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiMailUtils;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import retrofit2.Call;
@@ -34,6 +40,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, Dialog.OnCancelListener {
+
+    private MySpinnerAdapter mySpinnerAdapter;
 
     private int randNum = 106254;
     private Random rand;
@@ -70,7 +78,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         mAuth = FirebaseAuth.getInstance();
         init();
-
+        CountryList();
     }
 
     @Override
@@ -276,5 +284,37 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         btnConfirmEmail.setOnClickListener(this);
         btnConfirmID.setOnClickListener(this);
         btnJoin.setOnClickListener(this);
+    }
+
+
+    private void CountryList(){
+        ArrayList<ResponseCountry> countries = new ArrayList<ResponseCountry>();
+
+        countries.add(new ResponseCountry("Korea", R.drawable.korea));
+        countries.add(new ResponseCountry("unitedkingdom", R.drawable.unitedkingdom));
+        countries.add(new ResponseCountry("Italy", R.drawable.italy));
+
+        mySpinnerAdapter = new MySpinnerAdapter(getApplicationContext(),countries);
+        Spinner spinner = (Spinner)findViewById(R.id.spinner);
+        spinner.setAdapter(mySpinnerAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.countryset, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -12,15 +12,18 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.utils.ValueFormatter;
 import com.seok.seok.wowsup.R;
 import com.seok.seok.wowsup.retrofit.model.ResponseChatWordObj;
 import com.seok.seok.wowsup.retrofit.model.ResponseMailObj;
 import com.seok.seok.wowsup.retrofit.model.ResponseWordChartObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -88,7 +91,7 @@ public class FragmentHelp extends Fragment {
     public static final int[] MY_COLORS = {
             Color.rgb(201,223,241),
             Color.rgb(239,231,204),
-            Color.rgb(0,0,0),
+            Color.rgb(255,255,255),
             Color.rgb(126,128,130),
             Color.rgb(239,191,168),
             Color.rgb(218,211,206),
@@ -96,11 +99,16 @@ public class FragmentHelp extends Fragment {
             Color.rgb(146,182,187),
             Color.rgb(183,187,189),
             Color.rgb(246,224,209)
-
     };
 
     public void initChart() {
         globalHitWordChart = view.findViewById(R.id.fragment_help_chart);
+
+        globalHitWordChart.setUsePercentValues(true);
+        globalHitWordChart.setDescription("");
+
+        globalHitWordChart.setRotationEnabled(true);
+
         final ArrayList<Entry> wordValueList = new ArrayList<>();
         final ArrayList<String> wordList = new ArrayList<>();
         final ArrayList<Integer> colors = new ArrayList<>();
@@ -117,19 +125,48 @@ public class FragmentHelp extends Fragment {
                         wordList.add(body.get(i).getWord());
                     }
                     PieDataSet dataSet = new PieDataSet(wordValueList, "This week's word fashion graph");
+                    dataSet.setSliceSpace(3);
+                    dataSet.setSelectionShift(5);
+
                     PieData data = new PieData(wordList, dataSet);
                     globalHitWordChart.setData(data);
+
+                    //글짜 크기 하고 색
+                    data.setValueFormatter(new MyValueFormatter());
+                    data.setValueTextSize(20f);
+                    data.setValueTextColor(Color.RED);
+
                     for (int c : MY_COLORS)
                         colors.add(c);
                     dataSet.setColors(colors);
+
+                    Legend l = globalHitWordChart.getLegend();
+                    l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+                    l.setXEntrySpace(7);
+                    l.setYEntrySpace(5);
+
+                    globalHitWordChart.setData(data);
+                    globalHitWordChart.highlightValues(null);
+                    globalHitWordChart.invalidate();
+                    globalHitWordChart.animateXY(3000, 3000);
                 }
             }
-
             @Override
             public void onFailure(Call<List<ResponseWordChartObj>> call, Throwable t) {
                 Log.d("FragmentHelp_HTTP_CHART", "HTTP Transfer Failed");
             }
         });
-        globalHitWordChart.animateXY(3000, 3000);
+    }
+    public class MyValueFormatter implements ValueFormatter {
+        private DecimalFormat mFormat;
+        public MyValueFormatter() {
+            // use one decimal if needed
+            mFormat = new DecimalFormat("###,###,##0");
+        }
+        @Override
+        public String getFormattedValue(float value) {
+            // e.g. append a dollar-sign
+            return mFormat.format(value) + "";
+        }
     }
 }
