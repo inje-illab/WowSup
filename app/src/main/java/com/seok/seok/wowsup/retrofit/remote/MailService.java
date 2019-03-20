@@ -12,7 +12,6 @@ public interface MailService {
     @GET("emailAuthentication.php")
     Call<ResponseMailObj> requestEmailAuthentication(@Query("userEmail") String email,
                                                      @Query("rand") int rand);
-
     @GET("forgetID.php")
     Call<ResponseMailObj> requestFindID(@Query("userEmail") String email);
 
