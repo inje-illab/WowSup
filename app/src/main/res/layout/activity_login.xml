@@ -125,7 +125,10 @@
                     android:layout_height="50dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="5.5"
-                    android:background="@mipmap/throgh_sns" />
+                    android:background="@mipmap/short_button"
+                    android:text="Throgh SNS"
+                    android:textColor="#808183"
+                    android:textSize="21sp" />
 
                 <Button
                     android:id="@+id/login_button_lost"
@@ -133,7 +136,10 @@
                     android:layout_height="50dp"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="5.5"
-                    android:background="@mipmap/lost_id_pw" />
+                    android:background="@mipmap/short_button"
+                    android:text="Lost ID / PW"
+                    android:textColor="#808183"
+                    android:textSize="21sp" />
 
                 <com.kakao.usermgmt.LoginButton
                     android:id="@+id/btn_kakao_login"

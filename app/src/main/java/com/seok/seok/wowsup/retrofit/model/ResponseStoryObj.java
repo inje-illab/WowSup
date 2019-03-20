@@ -12,6 +12,7 @@ public class ResponseStoryObj {
     private String tag4;
     private String tag5;
     private String imageURL;
+    private int state;
 
     public int getStoryID() {
         return storyID;
@@ -99,5 +100,13 @@ public class ResponseStoryObj {
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 }

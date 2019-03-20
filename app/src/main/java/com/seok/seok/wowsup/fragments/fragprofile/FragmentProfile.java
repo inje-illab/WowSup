@@ -1,7 +1,6 @@
 package com.seok.seok.wowsup.fragments.fragprofile;
 
 import android.content.Intent;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -13,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -34,6 +34,7 @@ import retrofit2.Response;
 public class FragmentProfile extends Fragment {
     private View view;
     private Button btnNotice;
+    private TextView textLike, textFriend;
     // Card 관련
     private RecyclerView mRecyclerView;
     private CardAdapter mAdapter;
@@ -60,8 +61,9 @@ public class FragmentProfile extends Fragment {
             mRecyclerView = (RecyclerView) view.findViewById(R.id.fragment_profile_view);
             mRecyclerView.setAdapter(mAdapter);
             profileImage = view.findViewById(R.id.fragment_profile_image);
-
-            btnNotice = view.findViewById(R.id.fragment_profile_btn_notice);   // 알림 버튼 눌르기 구현
+            btnNotice = view.findViewById(R.id.fragment_profile_btn_notice);
+            textLike = view.findViewById(R.id.fragment_profile_text_like);
+            textFriend = view.findViewById(R.id.fragment_profile_text_firend);
             btnNotice.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -70,26 +72,22 @@ public class FragmentProfile extends Fragment {
             });
 
             //서버에서 이미지 받아올것
-            ApiUtils.getProfileService().requestImageURL(GlobalWowToken.getInstance().getId()).enqueue(new Callback<ResponseProfileObj>() {
+            ApiUtils.getProfileService().requestMyProfile(GlobalWowToken.getInstance().getId()).enqueue(new Callback<ResponseProfileObj>() {
                 @Override
                 public void onResponse(Call<ResponseProfileObj> call, Response<ResponseProfileObj> response) {
+                    Log.d("ProfileFragment_HTTP_GETPROFILE", "HTTP Transfer Success");
                     if(response.isSuccessful()){
+                        Log.d("ProfileFragment_HTTP_GETPROFILE", "HTTP Response Success");
                         ResponseProfileObj body = response.body();
-                        if(response.isSuccessful()){
-                            try {
-                                if (!body.getImageURL().equals(null)) {
-                                    Glide.with(getActivity()).load(body.getImageURL()).centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).override(300, 300).into(profileImage);
-                                }
-                            }catch (Exception e){
-                                Glide.with(getActivity()).load(Common.USER_IMAGE_BASE_URL+"basic.png").bitmapTransform(new CropCircleTransformation(getActivity())).into(profileImage);
-                                //Glide.with(getActivity()).load(Common.USER_IMAGE_BASE_URL+"basic.png").centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).override(300, 300).into(profileImage);
-                            }
-                        }
+                        textLike.setText(body.getCntLike()+"");
+                        textFriend.setText(body.getCntFriend()+"");
+                        btnNotice.setText(body.getCntNotice()+"");
+                        Glide.with(getActivity()).load(body.getImageURL()).centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).override(300, 300).into(profileImage);
                     }
                 }
                 @Override
                 public void onFailure(Call<ResponseProfileObj> call, Throwable t) {
-
+                    Log.d("ProfileFragment_HTTP_GETPROFILE", "HTTP Transfer Failed");
                 }
             });
             mRecyclerView.setHasFixedSize(true);

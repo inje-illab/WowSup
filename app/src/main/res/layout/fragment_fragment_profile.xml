@@ -40,7 +40,9 @@
                 android:layout_height="40dp"
                 android:layout_marginRight="10dp"
                 android:background="@mipmap/me_notice"
-                android:text="0" />
+                android:text="0"
+                android:textColor="#808183"
+                android:textSize="11.8sp" />
 
         </LinearLayout>
 
