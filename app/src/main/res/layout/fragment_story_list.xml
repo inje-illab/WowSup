@@ -27,6 +27,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@mipmap/short_button_dark"
+                android:alpha="0.5"
                 android:gravity="center"
                 android:orientation="vertical">
 
