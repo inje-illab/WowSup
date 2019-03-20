@@ -46,22 +46,13 @@ public class LoginActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
     private Button btnLogin, btnLost;
     private EditText edtID, edtPW;
-    private String user_id,email, strUid;
-    //sein test
-    private String emailTest, passwordTest;
-    private String TAG = "LoginActivity";
-    private FirebaseAuth mAuth;
-    private FirebaseDatabase database;
-    private FirebaseUser user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //sein test
-        mAuth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
-        user = FirebaseAuth.getInstance().getCurrentUser();
+
 
         // Layout에서 id 값 받아오기
         btnLogin = findViewById(R.id.login_button_login);
@@ -118,18 +109,8 @@ public class LoginActivity extends AppCompatActivity {
                                 GlobalWowToken.getInstance().setId(body.getId());
                                 GlobalWowToken.getInstance().setUserEmail(body.getEmail());
                                 if (body.getState() == 1) {
-                                    //sein Test
-
-                                    emailTest = GlobalWowToken.getInstance().getUserEmail() ;
-                                    //이거 이메일로 바꿔서 집어넣어야 돌아감 이거찾느라 뒤질뻔
-                                    passwordTest = edtPW.getText().toString();
-                                    Log.d("bbb",emailTest +"시발"+ passwordTest);
-                                    //userLogin(emailTest, passwordTest);
-
-
                                     Toast.makeText(LoginActivity.this, "Login 성공", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
-
 
                                     Common.setTabFlag();
                                     //finish();
@@ -147,14 +128,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-        //회원가입 버튼을 눌렀을 경우
-        /*btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-                //finish();
-            }
-        });*/
+
+        //Lost ID, Password
         btnLost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -192,40 +167,5 @@ public class LoginActivity extends AppCompatActivity {
         }
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
-    }
-    private void updateUI(FirebaseUser currentUser) {
-
-    }
-
-    public void userLogin(String email, String password)
-    {
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("aaa", "signInWithEmail:success");
-
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("aaa", "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
-                        // ...
-                    }
-         });
     }
 }
