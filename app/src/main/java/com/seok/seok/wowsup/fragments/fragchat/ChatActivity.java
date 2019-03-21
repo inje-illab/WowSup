@@ -44,11 +44,12 @@ public class ChatActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private Button btnTrans, btnSend, btnBack;
     public static EditText txtText;
-    private String email, strUid, strFriendUid, delimiter;
+    private String email, strFriendUid, delimiter;
     private int wordCount;
     private Map<String, String> wordMap;
     private FirebaseDatabase database;
     private List<Chat> mChat;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,14 +60,12 @@ public class ChatActivity extends AppCompatActivity {
         delimiter = " ";
 
         database = FirebaseDatabase.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final Intent intent  = getIntent();
-        strFriendUid = intent.getStringExtra("friendUid");
 
-        if (user != null) {
-            email = user.getEmail();
-            strUid = user.getUid();
-        }
+        //선택된 포지션의 친구아이디, 유저아이디    FireBase Hashtable NullPoint발생시 확인요망
+        strFriendUid = intent.getStringExtra("friendUid");
+        email = GlobalWowToken.getInstance().getUserEmail();
+
         //UserInfomation
         txtText = (EditText)findViewById(R.id.txtText);
         btnTrans = (Button)findViewById(R.id.btnTrans);
@@ -98,7 +97,6 @@ public class ChatActivity extends AppCompatActivity {
 
                     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     String formattedDate = df.format(c.getTime());
-
 
                     DatabaseReference myRef = database.getReference("users").child(GlobalWowToken.getInstance().getId()).child("friends").child(strFriendUid).child("chat").child(formattedDate);
                     DatabaseReference myRef1 = database.getReference("users").child(strFriendUid).child("friends").child(GlobalWowToken.getInstance().getId()).child("chat").child(formattedDate);

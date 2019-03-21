@@ -10,7 +10,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="10dp"
         android:background="@mipmap/friend_say"
         android:gravity="left"
         android:orientation="horizontal">
@@ -24,7 +24,7 @@
             android:paddingEnd="10dp"
             android:text="TextView"
             android:textColor="@android:color/black"
-            android:textSize="17sp" />
+            android:textSize="13.7sp" />
     </LinearLayout>
 
 </LinearLayout>

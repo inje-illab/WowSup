@@ -10,7 +10,7 @@ import com.seok.seok.wowsup.R;
 
 public class ChatViewHolder extends RecyclerView.ViewHolder {
 
-    public ImageView chatFriendImage;
+    public ImageView chatFriendImage, chatFriendCountry;
     public TextView chatFriend;
     public Button chatFriendOption;
 
@@ -19,5 +19,6 @@ public class ChatViewHolder extends RecyclerView.ViewHolder {
         this.chatFriendImage = itemView.findViewById(R.id.fragment_chat_firend_image);
         this.chatFriend = itemView.findViewById(R.id.fragment_chat_firend);
         this.chatFriendOption = itemView.findViewById(R.id.fragment_chat_firend_option);
+        this.chatFriendCountry = itemView.findViewById(R.id.fragment_chat_country);
     }
 }

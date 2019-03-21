@@ -1,7 +1,6 @@
 package com.seok.seok.wowsup.fragments.fragprofile;
 
 import android.content.Intent;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -13,10 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.seok.seok.wowsup.R;
+import com.seok.seok.wowsup.SupPeopleInformationActivity;
 import com.seok.seok.wowsup.retrofit.model.ResponseProfileObj;
 import com.seok.seok.wowsup.retrofit.model.ResponseStoryObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
@@ -33,11 +34,11 @@ import retrofit2.Response;
 
 public class FragmentProfile extends Fragment {
     private View view;
-    private Button button;
+    private Button btnNotice;
+    private TextView textLike, textFriend;
     // Card 관련
     private RecyclerView mRecyclerView;
     private CardAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
     private ImageView profileImage;
     private ArrayList<CardData> cardViewData;
 
@@ -57,57 +58,42 @@ public class FragmentProfile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (Common.fragmentProfileTab) {
             view = inflater.inflate(R.layout.fragment_fragment_profile, container, false);
-            mRecyclerView = (RecyclerView) view.findViewById(R.id.fragment_profile_view);
-            mRecyclerView.setAdapter(mAdapter);
-            profileImage = view.findViewById(R.id.fragment_profile_image);
-
-            button = view.findViewById(R.id.button2);   // 알림 버튼 눌르기 구현
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(getActivity().getApplication(), NoticeActivity.class));
-                }
-            });
-
-            //서버에서 이미지 받아올것
-            ApiUtils.getProfileService().requestImageURL(GlobalWowToken.getInstance().getId()).enqueue(new Callback<ResponseProfileObj>() {
-                @Override
-                public void onResponse(Call<ResponseProfileObj> call, Response<ResponseProfileObj> response) {
-                    if(response.isSuccessful()){
-                        ResponseProfileObj body = response.body();
-                        if(response.isSuccessful()){
-                            try {
-                                if (!body.getImageURL().equals(null)) {
-                                    Glide.with(getActivity()).load(body.getImageURL()).centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).override(300, 300).into(profileImage);
-                                }
-                            }catch (Exception e){
-                                Glide.with(getActivity()).load(Common.USER_IMAGE_BASE_URL+"basic.png").centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).override(300, 300).into(profileImage);
-                            }
-                        }
-                    }
-                }
-                @Override
-                public void onFailure(Call<ResponseProfileObj> call, Throwable t) {
-
-                }
-            });
+            initFindViewID();
             mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
             mRecyclerView.scrollToPosition(0);
             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+            ApiUtils.getProfileService().requestMyProfile(GlobalWowToken.getInstance().getId()).enqueue(new Callback<ResponseProfileObj>() {
+                @Override
+                public void onResponse(Call<ResponseProfileObj> call, Response<ResponseProfileObj> response) {
+                    Log.d("ProfileFragment_HTTP_GETPROFILE", "HTTP Transfer Success");
+                    if(response.isSuccessful()){
+                        Log.d("ProfileFragment_HTTP_GETPROFILE", "HTTP Response Success");
+                        ResponseProfileObj body = response.body();
+                        textLike.setText(body.getCntLike()+"");
+                        textFriend.setText(body.getCntFriend()+"");
+                        btnNotice.setText(body.getCntNotice()+"");
+                        Glide.with(getActivity()).load(body.getImageURL()).centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).into(profileImage);
+                    }
+                }
+                @Override
+                public void onFailure(Call<ResponseProfileObj> call, Throwable t) {
+                    Log.d("ProfileFragment_HTTP_GETPROFILE", "HTTP Transfer Failed");
+                }
+            });
             Common.fragmentProfileTab = false;
         }
         return view;
     }
 
     private void initDataSet() {
+        Log.d("ProfileFragment_INITDATASET", "DATE_SET Success");
         cardViewData.add(new CardData("","","","","", ""));
-        ApiUtils.getProfileService().requestMyStory(GlobalWowToken.getInstance().getId()).enqueue(new Callback<List<ResponseStoryObj>>() {
+        ApiUtils.getStoryService().requestMyStory(GlobalWowToken.getInstance().getId()).enqueue(new Callback<List<ResponseStoryObj>>() {
             @Override
             public void onResponse(Call<List<ResponseStoryObj>> call, Response<List<ResponseStoryObj>> response) {
                 if (response.isSuccessful()) {
                     List<ResponseStoryObj> body = response.body();
-                    Log.d("fragment_Profile : ", body.size() + "");
                     for (int i = 0; i <body.size(); i++) {
                         cardViewData.add(new CardData(body.get(i).getStoryID() + "",
                                 body.get(i).getUserID() + "", body.get(i).getTitle() + "",
@@ -121,7 +107,6 @@ public class FragmentProfile extends Fragment {
                     Log.d("FILE", "server contact failed");
                 }
             }
-
             @Override
             public void onFailure(Call<List<ResponseStoryObj>> call, Throwable t) {
                 Toast.makeText(getActivity(), "통신오류", Toast.LENGTH_SHORT).show();
@@ -133,5 +118,29 @@ public class FragmentProfile extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.fragment_profile_btn_notice:
+                    startActivity(new Intent(getActivity().getApplication(), NoticeActivity.class));
+                    break;
+                case R.id.fragment_profile_image:
+                    startActivity(new Intent(getActivity().getApplication(), SupPeopleInformationActivity.class));
+                    break;
+            }
+        }
+    };
+
+    public void initFindViewID(){
+        mRecyclerView = view.findViewById(R.id.fragment_profile_view);
+        profileImage = view.findViewById(R.id.fragment_profile_image);
+        btnNotice = view.findViewById(R.id.fragment_profile_btn_notice);
+        textLike = view.findViewById(R.id.fragment_profile_text_like);
+        textFriend = view.findViewById(R.id.fragment_profile_text_firend);
+        btnNotice.setOnClickListener(onClickListener);
+        profileImage.setOnClickListener(onClickListener);
     }
 }

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -32,7 +33,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     private ViewHolder viewHolder;
     private TextView title;
     private TextView like;
-    private LinearLayout layoutStoryTitle, layoutStoryBackground;
+    private LinearLayout layoutStoryBackground, layoutStoryTitle;
+    private RelativeLayout layoutBackTitle;
+    private ImageView imgheart;
     public CardAdapter(ArrayList<CardData> DataSet, Context context){
         items = DataSet;
         this.context = context;
@@ -41,10 +44,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     @Override
     public CardAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_story_list, parent, false);
-//        title = view.findViewById(R.id.story_view_title);
-//        like = view.findViewById(R.id.story_view_like);
-//        layoutStoryTitle = view.findViewById(R.id.layout_story_title);
-//        layoutStoryBackground = view.findViewById(R.id.layout_story_background);
         viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -53,17 +52,20 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         title = viewHolder.itemView.findViewById(R.id.story_view_title);
         like =  viewHolder.itemView.findViewById(R.id.story_view_like);
-        layoutStoryTitle = viewHolder.itemView.findViewById(R.id.layout_story_title);
+        imgheart = viewHolder.itemView.findViewById(R.id.layout_story_img_like);
+        layoutBackTitle =viewHolder.itemView.findViewById(R.id.layout_story_title);
+        layoutStoryTitle = viewHolder.itemView.findViewById(R.id.layout_story_btn_plus);
         layoutStoryBackground = viewHolder.itemView.findViewById(R.id.layout_story_background);
         final CardData item = items.get(position);
         // 서버에서 받아온 테스트 데이터 삽입
         title.setText(item.getTitle() + "\n" +  item.getStoryID());
         like.setText(item.getCntLike());
-        if(position == 0 && items.get(position).getStoryID().equals("")){
+        if(position == 0){
             layoutStoryBackground.setBackgroundColor(Color.WHITE);
-            layoutStoryTitle.setBackgroundResource(R.drawable.createstory);
+            layoutBackTitle.setBackgroundColor(Color.WHITE);
+            imgheart.setAlpha(0);
+            layoutStoryTitle.setBackgroundResource(R.mipmap.write);
         }else{
-            Log.d("asdfasdf", items.get(position).getImageURL());
             Glide.with(viewHolder.itemView.getRootView().getContext())
                     .load(items.get(position).getImageURL())
                     .into(new ViewTarget<LinearLayout, GlideDrawable>((LinearLayout) viewHolder.itemView) {
@@ -74,7 +76,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
                     });
         }
         //레이아웃 제목을 클릭할 경우 해당 storyID 값을 다음 엑티비티에 넘겨줌
-        layoutStoryTitle.setOnClickListener(new View.OnClickListener() {
+        layoutStoryBackground.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(item.getStoryID().equals("")) {
