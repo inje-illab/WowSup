@@ -30,7 +30,7 @@
                     android:id="@+id/fragment_chat_user_image"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:background="@mipmap/wowsup_crown"
+                    android:background="@mipmap/wowsup_crown_4_th"
                     android:padding="5dp" />
 
             </LinearLayout>
