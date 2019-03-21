@@ -22,6 +22,7 @@ import com.seok.seok.wowsup.retrofit.model.ResponseChatWordObj;
 import com.seok.seok.wowsup.retrofit.model.ResponseMailObj;
 import com.seok.seok.wowsup.retrofit.model.ResponseWordChartObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
+import com.seok.seok.wowsup.utilities.Common;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -140,7 +141,7 @@ public class FragmentHelp extends Fragment {
                     //글짜 크기 하고 색
                     data.setValueFormatter(new MyValueFormatter());
                     data.setValueTextSize(20f);
-                    data.setValueTextColor(Color.BLUE);
+                    data.setValueTextColor(Common.NONPICK_BANNER[2]);
 
 
 

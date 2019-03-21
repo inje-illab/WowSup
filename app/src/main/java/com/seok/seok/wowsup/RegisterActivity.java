@@ -290,9 +290,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private void CountryList(){
         ArrayList<ResponseCountry> countries = new ArrayList<ResponseCountry>();
 
-        countries.add(new ResponseCountry("Korea", R.drawable.korea));
-        countries.add(new ResponseCountry("unitedkingdom", R.drawable.unitedkingdom));
-        countries.add(new ResponseCountry("Italy", R.drawable.italy));
+//        countries.add(new ResponseCountry("Korea", R.drawable.korea));
+//        countries.add(new ResponseCountry("unitedkingdom", R.drawable.unitedkingdom));
+//        countries.add(new ResponseCountry("Italy", R.drawable.italy));
 
         mySpinnerAdapter = new MySpinnerAdapter(getApplicationContext(),countries);
         Spinner spinner = (Spinner)findViewById(R.id.spinner);

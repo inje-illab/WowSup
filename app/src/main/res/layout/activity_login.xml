@@ -78,8 +78,8 @@
                         android:ems="10"
                         android:hint="ID"
                         android:inputType="textPersonName"
-                        android:text="msno"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        tools:text="asd" />
 
                     <EditText
                         android:id="@+id/login_edittext_pwd"
@@ -88,8 +88,8 @@
                         android:ems="10"
                         android:hint="PW"
                         android:inputType="textPersonName"
-                        android:text="msnomsno"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        tools:text="ewqr" />
 
                 </LinearLayout>
 

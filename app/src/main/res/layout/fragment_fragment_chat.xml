@@ -58,12 +58,6 @@
                         android:textColor="#ffffff"
                         android:textSize="22.2sp" />
 
-                    <ImageView
-                        android:id="@+id/fragment_chat_user_country"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        app:srcCompat="@drawable/korea" />
                 </LinearLayout>
 
                 <LinearLayout
