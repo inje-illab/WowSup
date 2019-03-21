@@ -55,7 +55,7 @@ public class FragmentStory extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if(Common.fragmentStoryTab) {
             view = inflater.inflate(R.layout.fragment_fragment_story, container, false);
-            mRecyclerView = (RecyclerView) view.findViewById(R.id.fragment_story_view);
+            mRecyclerView = view.findViewById(R.id.fragment_story_view);
             layoutTagTitle = view.findViewById(R.id.fragment_story_layout_topic);
             textTagTitle = view.findViewById(R.id.fragment_story_textview_topic);
             mRecyclerView.setHasFixedSize(true);
@@ -68,12 +68,14 @@ public class FragmentStory extends Fragment {
                 @Override
                 public void onClick(View v) {
                     cardViewData.clear();
+                    mRecyclerView.invalidate();
                     ApiUtils.getStoryService().requestStoryTagView(editTextSearch.getText().toString()).enqueue(new Callback<List<ResponseStoryObj>>() {
                         @Override
                         public void onResponse(Call<List<ResponseStoryObj>> call, Response<List<ResponseStoryObj>> response) {
-                            if (response.isSuccessful()) {
+                            Log.d("StoryFragment_HTTP_GETSTORY", "HTTP Transfer Success");
+                            if(response.isSuccessful()){
+                                Log.d("StoryFragment_HTTP_GETSTORY", "HTTP Response Success");
                                 List<ResponseStoryObj> body = response.body();
-                                Log.d("DataSize", body.size() + "");
                                 if(body.size()==0){
                                     textTagTitle.setText("Topic Tag : # " + Common.searchTagText);
                                     layoutTagTitle.setVisibility(View.VISIBLE);
@@ -82,13 +84,7 @@ public class FragmentStory extends Fragment {
                                         cardViewData.add(new CardData(body.get(i).getStoryID() + "",
                                                 body.get(i).getUserID() + "", body.get(i).getTitle() + "",
                                                 body.get(i).getBody() + "", body.get(i).getCntLike() + "", body.get(i).getImageURL()));
-                                        Log.d("cardView StoryID: ", body.get(i).getStoryID() + "");
-                                        Log.d("cardView UserID: ", body.get(i).getUserID() + "");
-                                        Log.d("cardView Title: ", body.get(i).getTitle() + "");
-                                        Log.d("cardView Body: ", body.get(i).getBody() + "");
-                                        Log.d("cardView Like: ", body.get(i).getCntLike() + "");
                                         if (mAdapter.getItemCount() == body.size()) {
-                                            Log.d("asdfasdf", mAdapter.getItemCount() + "");
                                             mRecyclerView.setAdapter(mAdapter);
                                         }
                                     }

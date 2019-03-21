@@ -107,13 +107,7 @@ public class FragmentChat extends Fragment {
                     if(response.isSuccessful()){
                         ResponseProfileObj body = response.body();
                         if(response.isSuccessful()){
-                            try {
-                                if (!body.getImageURL().equals(null)) {
-                                    Glide.with(getActivity()).load(body.getImageURL()).centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).override(300, 300).into(chatUserImage);
-                                }
-                            }catch (Exception e){
-                                Glide.with(getActivity()).load(Common.USER_IMAGE_BASE_URL+"basic.png").centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).override(300, 300).into(chatUserImage);
-                            }
+                            Glide.with(getActivity()).load(body.getImageURL()).centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).into(chatUserImage);
                             chatUserID.setText("User ID : " + GlobalWowToken.getInstance().getId());
                         }
                     }

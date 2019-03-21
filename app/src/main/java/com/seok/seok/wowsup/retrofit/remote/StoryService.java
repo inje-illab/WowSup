@@ -24,8 +24,11 @@ public interface StoryService {
     @GET("Story/recommendTag.php")
     Call<ResponseStoryObj> requestRecommendTag(@Query("number") int number);
 
-    @GET("Story/likeStroy.php")
+    @GET("Story/likeStory.php")
     Call<ResponseStoryObj> requestStoryLike(@Query("userID") String userID,
                                             @Query("storyID") String storyID);
+
+    @GET("Story/myStory.php")
+    Call<List<ResponseStoryObj>> requestMyStory(@Query("userID") String id);
 
 }

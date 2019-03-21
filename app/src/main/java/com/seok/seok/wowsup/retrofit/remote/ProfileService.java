@@ -15,7 +15,4 @@ public interface ProfileService {
     @GET("Profile/myProfile.php")
     Call<ResponseProfileObj> requestMyProfile(@Query("userID") String id);
 
-    @GET("Profile/myStory.php")
-    Call<List<ResponseStoryObj>> requestMyStory(@Query("ID") String id);
-
 }

@@ -16,6 +16,8 @@ import com.seok.seok.wowsup.utilities.Common;
 
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
+
 public class ChatAdapter extends RecyclerView.Adapter<ChatViewHolder> {
     private Context context;
 
@@ -34,16 +36,10 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatViewHolder> {
 
     @Override
     public void onBindViewHolder(ChatViewHolder holder, final int position) {
-        final ResponseChatObj apiObject = chatApiObject.get(position);
-        try {
-            if (!apiObject.getImageURL().equals(null))
-                Glide.with(context.getApplicationContext()).load(apiObject.getImageURL()).into(holder.chatFriendImage);
-        }catch (Exception e){
-            Glide.with(context.getApplicationContext()).load(Common.USER_IMAGE_BASE_URL).into(holder.chatFriendImage);
-        }
-        holder.chatFriend.setText(apiObject.getFriendNick());
-        holder.chatFriendOption.setText(apiObject.getFriend());
-
+        final ResponseChatObj body = chatApiObject.get(position);
+        Glide.with(context.getApplicationContext()).load(body.getImageURL()).centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(context.getApplicationContext())).into(holder.chatFriendImage);
+        // holder.chatFriendOption.setText(body.getFriend());
+        holder.chatFriend.setText(body.getFriendNick());
         holder.chatFriendOption.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

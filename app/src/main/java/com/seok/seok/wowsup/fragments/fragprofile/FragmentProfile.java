@@ -39,7 +39,6 @@ public class FragmentProfile extends Fragment {
     // Card 관련
     private RecyclerView mRecyclerView;
     private CardAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
     private ImageView profileImage;
     private ArrayList<CardData> cardViewData;
 
@@ -59,9 +58,11 @@ public class FragmentProfile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (Common.fragmentProfileTab) {
             view = inflater.inflate(R.layout.fragment_fragment_profile, container, false);
-
             initFindViewID();
-
+            mRecyclerView.setHasFixedSize(true);
+            mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+            mRecyclerView.scrollToPosition(0);
+            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
             ApiUtils.getProfileService().requestMyProfile(GlobalWowToken.getInstance().getId()).enqueue(new Callback<ResponseProfileObj>() {
                 @Override
                 public void onResponse(Call<ResponseProfileObj> call, Response<ResponseProfileObj> response) {
@@ -80,23 +81,19 @@ public class FragmentProfile extends Fragment {
                     Log.d("ProfileFragment_HTTP_GETPROFILE", "HTTP Transfer Failed");
                 }
             });
-            mRecyclerView.setHasFixedSize(true);
-            mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-            mRecyclerView.scrollToPosition(0);
-            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
             Common.fragmentProfileTab = false;
         }
         return view;
     }
 
     private void initDataSet() {
+        Log.d("ProfileFragment_INITDATASET", "DATE_SET Success");
         cardViewData.add(new CardData("","","","","", ""));
-        ApiUtils.getProfileService().requestMyStory(GlobalWowToken.getInstance().getId()).enqueue(new Callback<List<ResponseStoryObj>>() {
+        ApiUtils.getStoryService().requestMyStory(GlobalWowToken.getInstance().getId()).enqueue(new Callback<List<ResponseStoryObj>>() {
             @Override
             public void onResponse(Call<List<ResponseStoryObj>> call, Response<List<ResponseStoryObj>> response) {
                 if (response.isSuccessful()) {
                     List<ResponseStoryObj> body = response.body();
-                    Log.d("fragment_Profile : ", body.size() + "");
                     for (int i = 0; i <body.size(); i++) {
                         cardViewData.add(new CardData(body.get(i).getStoryID() + "",
                                 body.get(i).getUserID() + "", body.get(i).getTitle() + "",
@@ -139,7 +136,6 @@ public class FragmentProfile extends Fragment {
 
     public void initFindViewID(){
         mRecyclerView = view.findViewById(R.id.fragment_profile_view);
-        mRecyclerView.setAdapter(mAdapter);
         profileImage = view.findViewById(R.id.fragment_profile_image);
         btnNotice = view.findViewById(R.id.fragment_profile_btn_notice);
         textLike = view.findViewById(R.id.fragment_profile_text_like);

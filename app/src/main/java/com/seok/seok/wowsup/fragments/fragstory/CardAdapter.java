@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -25,7 +26,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     private ViewHolder viewHolder;
     private TextView title;
     private TextView like;
-    private LinearLayout layoutStoryTitle, layoutStoryBackground;
+    private LinearLayout layoutStoryBackground;
+    private RelativeLayout layoutStoryTitle;
     public CardAdapter(ArrayList<CardData> DataSet, Context context){
         items = DataSet;
         this.context = context;
