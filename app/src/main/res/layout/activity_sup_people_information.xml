@@ -79,7 +79,7 @@
                         android:id="@+id/info_img_profile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@mipmap/wowsup_crown"
+                        android:background="@mipmap/wowsup_crown_4_th"
                         android:padding="8dp" />
                 </LinearLayout>
 

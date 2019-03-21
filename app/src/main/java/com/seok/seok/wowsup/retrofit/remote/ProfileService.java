@@ -15,4 +15,12 @@ public interface ProfileService {
     @GET("Profile/myProfile.php")
     Call<ResponseProfileObj> requestMyProfile(@Query("userID") String id);
 
+    @GET("Profile/updateProfile.php")
+    Call<ResponseProfileObj> requestUpdateMyProfile(@Query("userID") String userID,
+                                                    @Query("selfish") String userSelfish,
+                                                    @Query("age") int userAge,
+                                                    @Query("gender") String userGender,
+                                                    @Query("country") String userCountry,
+                                                    @Query("banner") int userBanner);
+
 }
