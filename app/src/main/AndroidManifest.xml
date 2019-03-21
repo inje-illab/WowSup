@@ -24,7 +24,6 @@
             android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".StoryActivity" />
         <activity android:name=".TranslateActivity" />
-        <activity android:name=".StoryActivity" />
         <activity
             android:name=".fragments.fragchat.ChatActivity"
             android:windowSoftInputMode="adjustPan" />

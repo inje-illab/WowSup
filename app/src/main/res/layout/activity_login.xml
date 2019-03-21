@@ -129,7 +129,8 @@
                     android:background="@mipmap/short_button"
                     android:text="Throgh SNS"
                     android:textColor="#808183"
-                    android:textSize="21sp" />
+                    android:textSize="21sp"
+                    android:visibility="invisible" />
 
                 <Button
                     android:id="@+id/login_button_lost"
