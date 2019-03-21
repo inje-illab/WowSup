@@ -42,7 +42,7 @@ public class FragmentHelp extends Fragment {
     private int wordCount;
     private Map<String, String> wordMap;
     private OnFragmentInteractionListener mListener;
-    private PieChart globalHitWordChart,globalTitleMessge;
+    private PieChart globalHitWordChart;
 
     public FragmentHelp() {
         wordMap = new HashMap<>();
@@ -103,7 +103,6 @@ public class FragmentHelp extends Fragment {
 
     public void initChart() {
         globalHitWordChart = view.findViewById(R.id.fragment_help_chart);
-        globalTitleMessge = view.findViewById(R.id.fragment_help_chart);
 
         globalHitWordChart.setUsePercentValues(true);
         globalHitWordChart.setDescription("");
@@ -127,7 +126,6 @@ public class FragmentHelp extends Fragment {
                     PieDataSet dataSet = new PieDataSet(wordValueList, "");
                     //This week's word fashion graph
 
-                    PieDataSet titleSet = new PieDataSet(null, "This week's word fashion graph");
 
 
                     //그래프 크기 조절
@@ -138,20 +136,13 @@ public class FragmentHelp extends Fragment {
                     PieData data = new PieData(wordList, dataSet);
                     globalHitWordChart.setData(data);
 
-                    PieData data1 = new PieData(wordList, titleSet);
-                    globalTitleMessge.setData(data);
-
-                    Legend l1 = globalTitleMessge.getLegend();
-                    l1.setPosition(Legend.LegendPosition.PIECHART_CENTER); // 범
-
 
                     //글짜 크기 하고 색
                     data.setValueFormatter(new MyValueFormatter());
                     data.setValueTextSize(20f);
                     data.setValueTextColor(Color.BLUE);
 
-                    //data.setValueFormatter(new DefaultValueFormatter());
-                    //data.setValueFormatter(new PercentFormatter());
+
 
                     for (int c : MY_COLORS)
                         colors.add(c);
@@ -159,20 +150,18 @@ public class FragmentHelp extends Fragment {
 
                     //밑에꺼 건들기.
                     Legend l = globalHitWordChart.getLegend();
-                    l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER); // 범례 위치조정
-                    l.setForm(Legend.LegendForm.CIRCLE);
-                    l.setStackSpace(20);
-                            //setWordWrapEnable(boolean enabled)
-                    l.setFormToTextSpace(5); //범례 레이블과 해당 범례 양식 사이의 간격을 설정합니다.
-                    l.setXEntrySpace(7); // x 축에서 범례 항목 사이의 공백을 설정
-                    l.setYEntrySpace(5); // y 축에서 범례 항목 사이의 공백을 설정
-                    l.setTextSize(12f);  // 글짜 크기조절
-                    l.setFormSize (12f); // 도형의 크기 조절
 
-                    globalHitWordChart.setData(data);
-                    globalHitWordChart.setHighlightEnabled( true ); // DataSet의 강조 표시 허용
-                    globalHitWordChart.highlightValues(null);
-                    globalHitWordChart.invalidate();
+                    l.setEnabled(false);
+/*                    l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER); // 범례 위치조정
+                    l.setForm(Legend.LegendForm.CIRCLE);
+                    l.setStackSpace(5);
+                            //setWordWrapEnable(boolean enabled)
+                    l.setFormToTextSpace(3); //범례 레이블과 해당 범례 양식 사이의 간격을 설정합니다.
+                    l.setXEntrySpace(5); // x 축에서 범례 항목 사이의 공백을 설정
+                    l.setYEntrySpace(3); // y 축에서 범례 항목 사이의 공백을 설정
+                    l.setTextSize(12f);  // 글짜 크기조절
+                    l.setFormSize (12f); // 도형의 크기 조절*/
+
                     globalHitWordChart.animateXY(3000, 3000);
                 }
             }
