@@ -6,10 +6,14 @@ public class ResponseProfileObj {
     private int cntNotice;
     private int state;
     private int age;
+    private int banner;
+    private int change;
     private String imageURL;
     private String nick;
     private String gender;
     private String nationality;
+    private String selfish;
+    private String userMessage;
 
     public int getCntLike() {
         return cntLike;
@@ -81,5 +85,37 @@ public class ResponseProfileObj {
 
     public void setNationality(String nationality) {
         this.nationality = nationality;
+    }
+
+    public int getBanner() {
+        return banner;
+    }
+
+    public void setBanner(int banner) {
+        this.banner = banner;
+    }
+
+    public String getSelfish() {
+        return selfish;
+    }
+
+    public void setSelfish(String selfish) {
+        this.selfish = selfish;
+    }
+
+    public int getChange() {
+        return change;
+    }
+
+    public void setChange(int change) {
+        this.change = change;
+    }
+
+    public String getUserMessage() {
+        return userMessage;
+    }
+
+    public void setUserMessage(String userMessage) {
+        this.userMessage = userMessage;
     }
 }

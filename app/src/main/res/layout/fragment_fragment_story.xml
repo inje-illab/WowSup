@@ -54,13 +54,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingTop="1dp"
+                android:paddingBottom="1dp">
 
                 <Button
                     android:id="@+id/fragment_story_button_search"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="search" />
+                    android:background="@mipmap/go_button"
+                    android:text="Go"
+                    android:textColor="#ffffff" />
             </LinearLayout>
         </LinearLayout>
 
