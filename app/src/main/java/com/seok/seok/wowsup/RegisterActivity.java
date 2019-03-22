@@ -277,6 +277,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         btnLogin = findViewById(R.id.register_button_login);
         btnConfirmID = findViewById(R.id.register_button_confirm_id);
         btnConfirmEmail = findViewById(R.id.register_button_confirm_email);
+        btnLogin.setOnClickListener(this);
         btnConfirmEmail.setOnClickListener(this);
         btnConfirmID.setOnClickListener(this);
         btnJoin.setOnClickListener(this);
