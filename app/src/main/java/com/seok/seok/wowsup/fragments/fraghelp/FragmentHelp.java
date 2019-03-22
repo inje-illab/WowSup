@@ -18,17 +18,13 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.ValueFormatter;
 import com.seok.seok.wowsup.R;
-import com.seok.seok.wowsup.retrofit.model.ResponseChatWordObj;
-import com.seok.seok.wowsup.retrofit.model.ResponseMailObj;
 import com.seok.seok.wowsup.retrofit.model.ResponseWordChartObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -125,23 +121,29 @@ public class FragmentHelp extends Fragment {
                     }
                     PieDataSet dataSet = new PieDataSet(wordValueList, "");
                     //This week's word fashion graph
-
-
+                    dataSet.setValueTextSize(6f);
 
                     //그래프 크기 조절
                     dataSet.setSliceSpace(3f);
-                    dataSet.setSelectionShift(5f);
                     dataSet.setSelectionShift(10f);
+
+
 
                     PieData data = new PieData(wordList, dataSet);
                     globalHitWordChart.setData(data);
+                    globalHitWordChart.invalidate();
+                    globalHitWordChart.getLegend ().setEnabled ( false );
+
 
 
                     //글짜 크기 하고 색
                     data.setValueFormatter(new MyValueFormatter());
-                    data.setValueTextSize(20f);
-                    data.setValueTextColor(Color.BLUE);
+                    data.setValueTextSize(30f);
+                    data.setValueTextColor(Color.WHITE);
 
+
+
+                    //globalHitWordChart.getPaint (Chart.PAINT_INFO) .setTextSize (Utils.convertDpToPixel (30f));
 
 
                     for (int c : MY_COLORS)
@@ -183,4 +185,5 @@ public class FragmentHelp extends Fragment {
             return mFormat.format(value) + "";
         }
     }
+
 }

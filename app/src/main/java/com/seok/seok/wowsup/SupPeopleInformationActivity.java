@@ -4,19 +4,29 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.seok.seok.wowsup.fragments.fragprofile.MySpinnerAdapter;
+import com.seok.seok.wowsup.retrofit.model.ResponseCountry;
 import com.seok.seok.wowsup.retrofit.model.ResponseProfileObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 import com.seok.seok.wowsup.utilities.Common;
 import com.seok.seok.wowsup.utilities.GlobalWowToken;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import retrofit2.Call;
@@ -25,6 +35,7 @@ import retrofit2.Response;
 
 public class SupPeopleInformationActivity extends AppCompatActivity {
 
+    private MySpinnerAdapter mySpinnerAdapter;
     private LinearLayout[] layoutSet;
     private ImageView profileImage, iBtnBack;
     private TextView textUserID;
@@ -38,6 +49,11 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
 
         initFindViewID();
         initData();
+
+
+        AgeList();
+        GenderList();
+        CountryList();
 
     }
 
@@ -145,7 +161,6 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
                                 finish();
                             }
                         }
-
                         @Override
                         public void onFailure(Call<ResponseProfileObj> call, Throwable t) {
                             Log.d("SupPeopleInformationActivity_HTTP_UPDATE", "HTTP Transfer Fail");
@@ -165,4 +180,69 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
             }
         }
     }
+
+    private void AgeList() {
+        ArrayList age = new ArrayList<Integer>();
+        for (int i = 1; i <= 100; i++) {
+            age.add(Integer.toString(i));
+        }
+        ArrayAdapter<Integer> spinnerArrayAdapter = new ArrayAdapter<Integer>(
+                this, android.R.layout.simple_spinner_item, age);
+        spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
+
+        Spinner spinner = (Spinner)findViewById(R.id.agespinner);
+        spinner.setAdapter(spinnerArrayAdapter);
+    }
+
+    private ArrayList<String> GetGenderList()
+    {
+        String[] gender = {"Man","Woman"};
+
+        return  new ArrayList<String>(Arrays.asList(gender));
+    }
+
+    private void GenderList() {
+        ArrayList<String> genderList = GetGenderList();
+        ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, genderList);
+        //  arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner spinner = (Spinner)findViewById(R.id.genderspinner);
+        spinner.setAdapter(arrayAdapter);
+    }
+
+    private void CountryList(){
+        ArrayList<ResponseCountry> countries = new ArrayList<ResponseCountry>();
+
+        countries.add(new ResponseCountry("Korea", R.drawable.korea));
+        countries.add(new ResponseCountry("UnitedKingdom(UK)", R.drawable.flag_uk));
+        countries.add(new ResponseCountry("United States of America(USA)", R.drawable.flag_usa));
+        countries.add(new ResponseCountry("Japan", R.drawable.flag_japan));
+        countries.add(new ResponseCountry("China", R.drawable.flag_china));
+        countries.add(new ResponseCountry("Taiwan", R.drawable.flag_taiwan));
+        countries.add(new ResponseCountry("Canada", R.drawable.flag_canada));
+
+        mySpinnerAdapter = new MySpinnerAdapter(getApplicationContext(),countries);
+
+        Spinner spinner = (Spinner)findViewById(R.id.countryspinner);
+        spinner.setAdapter(mySpinnerAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.countryset, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

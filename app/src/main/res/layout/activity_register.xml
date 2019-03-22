@@ -185,26 +185,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="10"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Country"/>
-
-                <Spinner
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:spinnerMode="dropdown"
-                    android:id="@+id/spinner"
-                    android:prompt="@string/custom_spinner"/>
-
-            </LinearLayout>
-
         </LinearLayout>
 
         <LinearLayout

@@ -169,6 +169,13 @@
                                 android:textColor="#808183"
                                 android:textSize="16.7sp" />
 
+                            <Spinner
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:spinnerMode="dropdown"
+                                android:id="@+id/agespinner"
+                                android:prompt="@string/custom_spinner"/>
+
                             <TextView
                                 android:id="@+id/textView18"
                                 android:layout_width="wrap_content"
@@ -176,6 +183,14 @@
                                 android:text="Gender"
                                 android:textColor="#808183"
                                 android:textSize="16.7sp" />
+
+                            <Spinner
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:spinnerMode="dropdown"
+                                android:id="@+id/genderspinner"
+                                android:prompt="@string/custom_spinner"/>
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -198,6 +213,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/korea" />
+
+                            <Spinner
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:spinnerMode="dropdown"
+                                android:id="@+id/countryspinner"
+                                android:prompt="@string/custom_spinner"/>
+
                         </LinearLayout>
                     </LinearLayout>
 
