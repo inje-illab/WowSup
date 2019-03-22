@@ -213,6 +213,7 @@
                                 android:text="Country"
                                 android:textColor="#808183"
                                 android:textSize="16.7sp" />
+
                             <Spinner
                                 android:id="@+id/countryspinner"
                                 android:layout_width="wrap_content"

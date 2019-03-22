@@ -1,28 +1,28 @@
 package com.seok.seok.wowsup.utilities;
 
 public class ResponseCountry {
-    private String _name;
-    private int _flagId;
+    private String name;
+    private int flagId;
 
     public ResponseCountry(String name, int flagId)
     {
-        _name = name;
-        _flagId = flagId;
+        this.name = name;
+        this.flagId = flagId;
     }
 
     public String getName() {
-        return _name;
+        return name;
     }
 
-    public void setName(String _name) {
-        this._name = _name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getFlagId() {
-        return _flagId;
+        return flagId;
     }
 
-    public void setFlagId(int _flagId) {
-        this._flagId = _flagId;
+    public void setFlagId(int flagId) {
+        this.flagId = flagId;
     }
 }

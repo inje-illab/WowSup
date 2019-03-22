@@ -13,13 +13,13 @@ import com.seok.seok.wowsup.R;
 import java.util.ArrayList;
 
 public class SpinnerAdapter extends BaseAdapter {
-    Context context;
-    ArrayList<ResponseCountry> list;
+    private Context context;
+    private ArrayList<ResponseCountry> list;
 
     public SpinnerAdapter(Context context, ArrayList<ResponseCountry> list)
     {
-        context = context;
-        list = list;
+        this.context = context;
+        this.list = list;
     }
 
     @Override
@@ -41,8 +41,7 @@ public class SpinnerAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         if(view == null)
         {
-            LayoutInflater inflater = (LayoutInflater)context.getSystemService(
-                    Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.custom_spinner_item,viewGroup,false);
         }
         ResponseCountry country = list.get(i);

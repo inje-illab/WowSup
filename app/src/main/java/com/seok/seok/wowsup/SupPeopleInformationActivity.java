@@ -97,9 +97,13 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
         textUserID = findViewById(R.id.info_text_userid);
         editInfo = findViewById(R.id.info_edit_info);
         btnModify = findViewById(R.id.info_btn_modify);
+
         genderGroup=findViewById(R.id.gendergroup);
+
         spinnerAge = findViewById(R.id.agespinner);
         spinnerCountry = findViewById(R.id.countryspinner);
+
+
         btnModify.setOnClickListener(onBtnClickListener);
         iBtnBack.setOnClickListener(onBtnClickListener);
         for (int i = 0; i < layoutSet.length; i++) {
@@ -194,10 +198,7 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
         ArrayAdapter<Integer> spinnerArrayAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_item, age);
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        final Spinner spinner = (Spinner)findViewById(R.id.agespinner);
-        spinner.setAdapter(spinnerArrayAdapter);
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerAge.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int postion, long l) {
                 ResponseAge ag = new ResponseAge(postion);
@@ -241,31 +242,28 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
         sAdapterCountry = new SpinnerAdapter(getApplicationContext(), countries);
 
         spinnerCountry.setAdapter(sAdapterCountry);
+/*
         spinnerCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 ResponseCountry b = (ResponseCountry)sAdapterCountry.getItem(position);
                 Toast.makeText(SupPeopleInformationActivity.this, b.getName(), Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
+*/
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.countryset, menu);
+        getMenuInflater().inflate(R.menu.countryset,menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
