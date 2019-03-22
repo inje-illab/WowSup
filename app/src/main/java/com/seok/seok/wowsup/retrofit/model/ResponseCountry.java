@@ -10,19 +10,19 @@ public class ResponseCountry {
         _flagId = flagId;
     }
 
-    public String get_name() {
+    public String getName() {
         return _name;
     }
 
-    public void set_name(String _name) {
+    public void setName(String _name) {
         this._name = _name;
     }
 
-    public int get_flagId() {
+    public int getFlagId() {
         return _flagId;
     }
 
-    public void set_flagId(int _flagId) {
+    public void setFlagId(int _flagId) {
         this._flagId = _flagId;
     }
 }

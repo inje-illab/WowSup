@@ -1,6 +1,5 @@
 package com.seok.seok.wowsup;
 
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,9 +24,9 @@ import com.seok.seok.wowsup.retrofit.model.ResponseProfileObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 import com.seok.seok.wowsup.utilities.Common;
 import com.seok.seok.wowsup.utilities.GlobalWowToken;
+import com.seok.seok.wowsup.utilities.ResponseAge;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import retrofit2.Call;
@@ -42,6 +42,7 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
     private EditText editInfo;
     private Button btnModify;
     private int setColor;
+    private RadioGroup genderGroup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +51,8 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
         initFindViewID();
         initData();
 
-
         AgeList();
-        GenderList();
+        GenderType();
         CountryList();
 
     }
@@ -96,12 +96,17 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
         textUserID = findViewById(R.id.info_text_userid);
         editInfo = findViewById(R.id.info_edit_info);
         btnModify = findViewById(R.id.info_btn_modify);
+        genderGroup=findViewById(R.id.gendergroup);
+
         btnModify.setOnClickListener(onBtnClickListener);
         iBtnBack.setOnClickListener(onBtnClickListener);
+        //genderGroup.setOnCheckedChangeListener(onRadioGroupClickListener);
+
         for (int i = 0; i < layoutSet.length; i++) {
             layoutSet[i].setOnClickListener(onClickListener);
         }
     }
+
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
@@ -180,7 +185,7 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
             }
         }
     }
-
+    // 나이
     private void AgeList() {
         ArrayList age = new ArrayList<Integer>();
         for (int i = 1; i <= 100; i++) {
@@ -190,30 +195,42 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
                 this, android.R.layout.simple_spinner_item, age);
         spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
 
-        Spinner spinner = (Spinner)findViewById(R.id.agespinner);
+        final Spinner spinner = (Spinner)findViewById(R.id.agespinner);
         spinner.setAdapter(spinnerArrayAdapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int postion, long l) {
+                ResponseAge ag = new ResponseAge(postion);
+                Spinner spinner = (Spinner)findViewById(R.id.agespinner);
+                if(spinner.getSelectedItem() != null) {
+                    Toast.makeText(getApplicationContext(), "age :" + spinner.getItemAtPosition(ag.getAge()), Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
     }
 
-    private ArrayList<String> GetGenderList()
-    {
-        String[] gender = {"Man","Woman"};
-
-        return  new ArrayList<String>(Arrays.asList(gender));
+    private void GenderType(){
+        if (genderGroup != null) {
+            genderGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    String text = "You selected: ";
+                    text += (R.id.male == checkedId) ? "male" : "female";
+                    Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
-
-    private void GenderList() {
-        ArrayList<String> genderList = GetGenderList();
-        ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, genderList);
-        //  arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner spinner = (Spinner)findViewById(R.id.genderspinner);
-        spinner.setAdapter(arrayAdapter);
-    }
-
+    //나이
     private void CountryList(){
         ArrayList<ResponseCountry> countries = new ArrayList<ResponseCountry>();
 
-        //여기 넣을때만 ㅇㅇㅇㅇㅇ ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
-       countries.add(new ResponseCountry("Korea", R.drawable.flag_south_korea));
+        countries.add(new ResponseCountry("Korea", R.drawable.flag_south_korea));
         countries.add(new ResponseCountry("UnitedKingdom(UK)", R.drawable.flag_uk));
         countries.add(new ResponseCountry("United States of America(USA)", R.drawable.flag_usa));
         countries.add(new ResponseCountry("Japan", R.drawable.flag_japan));
@@ -236,9 +253,6 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
