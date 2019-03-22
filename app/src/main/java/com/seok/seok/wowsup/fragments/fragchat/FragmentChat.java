@@ -30,16 +30,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
-/**
- * 단순한 하위 클래스.
- *   * 이 단편을 포함하는 활동은
- *   * FragmentChat.OnFragmentInteractionListener 인터페이스
- *   * 상호 작용 이벤트를 처리합니다.
- *   * FragmentChat # newInstance 팩토리 메소드를 사용해,
- *   * 이 조각의 인스턴스를 만듭니다.
- */
-
 public class FragmentChat extends Fragment {
 
     private View view;
@@ -50,9 +40,7 @@ public class FragmentChat extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     public FragmentChat() {
-        // 필수 public 생성자
-        // 제일 처음 로그인 했을때 뜨는 인터넷 연결 창 해야함
-        Log.d("Fragments__", "<< FragmentChat");
+
     }
 
     @Override
@@ -62,15 +50,12 @@ public class FragmentChat extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (Common.fragmentChatTab) {
-            Log.d("Fragments__", "<< onCreateViewFragments");
             view = inflater.inflate(R.layout.fragment_fragment_chat, container, false);
 
             initFindViewID();
             initDataSet();
 
             Common.fragmentChatTab = false;
-        }
         return view;
     }
     public void onButtonPressed(Uri uri) {
@@ -103,6 +88,7 @@ public class FragmentChat extends Fragment {
         ApiUtils.getProfileService().requestMyProfile(GlobalWowToken.getInstance().getId()).enqueue(new Callback<ResponseProfileObj>() {
             @Override
             public void onResponse(Call<ResponseProfileObj> call, Response<ResponseProfileObj> response) {
+                Log.d("FragmentChat_HTTP_MYPROFILE", "HTTP Transfer Success");
                 if(response.isSuccessful()){
                     ResponseProfileObj body = response.body();
                     if(response.isSuccessful()){
@@ -115,7 +101,7 @@ public class FragmentChat extends Fragment {
 
             @Override
             public void onFailure(Call<ResponseProfileObj> call, Throwable t) {
-
+                Log.d("FragmentChat_HTTP_MYPROFILE", "HTTP Transfer Failed");
             }
         });
         ApiUtils.getChatService().requestChatFriend(GlobalWowToken.getInstance().getId()).enqueue(new Callback<List<ResponseChatObj>>() {

@@ -104,7 +104,8 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="7dp"
                         android:layout_marginRight="7dp"
-                        app:met_hideUnderline="true" />
+                        android:singleLine="true"
+                        app:met_hideUnderline="true"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -171,7 +172,7 @@
                                 android:layout_marginRight="3dp"
                                 android:adjustViewBounds="true"
                                 android:scaleType="fitCenter"
-                                app:srcCompat="@mipmap/unclick_color_1_st" />
+                                app:srcCompat="@drawable/unclick_color_1_st" />
 
                             <ImageView
                                 android:id="@+id/story_write_imageview_back1"
@@ -181,7 +182,7 @@
                                 android:layout_marginRight="3dp"
                                 android:adjustViewBounds="true"
                                 android:scaleType="fitCenter"
-                                app:srcCompat="@mipmap/basic_image_1_st" />
+                                app:srcCompat="@drawable/basic_image_1_st" />
 
 
                             <ImageView
@@ -192,7 +193,7 @@
                                 android:layout_marginRight="3dp"
                                 android:adjustViewBounds="true"
                                 android:scaleType="fitCenter"
-                                app:srcCompat="@mipmap/basic_image_2_nd" />
+                                app:srcCompat="@drawable/basic_image_2_nd" />
 
 
                             <ImageView
@@ -203,7 +204,7 @@
                                 android:layout_marginRight="3dp"
                                 android:adjustViewBounds="true"
                                 android:scaleType="fitCenter"
-                                app:srcCompat="@mipmap/basic_image_3_rd" />
+                                app:srcCompat="@drawable/basic_image_3_rd" />
 
                             <ImageView
                                 android:id="@+id/story_write_imageview_back4"
@@ -213,7 +214,7 @@
                                 android:layout_marginRight="5dp"
                                 android:adjustViewBounds="true"
                                 android:scaleType="fitCenter"
-                                app:srcCompat="@mipmap/basic_image_4_th" />
+                                app:srcCompat="@drawable/basic_image_4_th" />
 
                         </LinearLayout>
                     </HorizontalScrollView>
