@@ -18,7 +18,7 @@
             android:id="@+id/mTextView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center|left"
+            android:gravity="center_vertical"
             android:inputType="textMultiLine"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"

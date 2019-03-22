@@ -78,7 +78,6 @@
                         android:ems="10"
                         android:hint="ID"
                         android:inputType="textPersonName"
-                        android:text="riunnate"
                         android:textSize="18sp" />
 
                     <EditText
@@ -88,7 +87,6 @@
                         android:ems="10"
                         android:hint="PW"
                         android:inputType="textPersonName"
-                        android:text="tpdls6187"
                         android:textSize="18sp" />
 
                 </LinearLayout>
