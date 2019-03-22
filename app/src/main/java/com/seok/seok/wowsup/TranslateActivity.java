@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -19,7 +20,8 @@ import static com.seok.seok.wowsup.fragments.fragchat.ChatActivity.txtText;
 
 public class TranslateActivity extends AppCompatActivity {
 
-    private Button btnTrans, btnSendtext, btnBack;
+    private Button btnTrans, btnSendtext;
+    private ImageView btnBack;
     private EditText editText;
     private TextView textView;
     private String clientId = "_8DFZRFsspTZCrfikUzn";//애플리케이션 클라이언트 아이디값";
@@ -29,16 +31,16 @@ public class TranslateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_translate);editText = (EditText)findViewById(R.id.editText);
-        textView = (TextView)findViewById(R.id.txtTrans);
+        textView = findViewById(R.id.txtTrans);
 
-        btnBack = (Button)findViewById(R.id.translate_btn_back);
+        btnBack = findViewById(R.id.translate_btn_back);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-        btnSendtext = (Button)findViewById(R.id.btnSendtext);
+        btnSendtext = findViewById(R.id.btnSendtext);
         btnSendtext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +48,7 @@ public class TranslateActivity extends AppCompatActivity {
                 finish();
             }
         });
-        btnTrans = (Button)findViewById(R.id.btnTrans);
+        btnTrans = findViewById(R.id.btnTrans);
         btnTrans.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

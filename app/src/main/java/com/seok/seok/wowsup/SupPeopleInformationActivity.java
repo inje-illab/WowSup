@@ -1,13 +1,11 @@
 package com.seok.seok.wowsup;
 
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,8 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.seok.seok.wowsup.fragments.fragprofile.MySpinnerAdapter;
-import com.seok.seok.wowsup.retrofit.model.ResponseCountry;
+import com.seok.seok.wowsup.utilities.SpinnerAdapter;
+import com.seok.seok.wowsup.utilities.ResponseCountry;
 import com.seok.seok.wowsup.retrofit.model.ResponseProfileObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 import com.seok.seok.wowsup.utilities.Common;
@@ -35,13 +33,15 @@ import retrofit2.Response;
 
 public class SupPeopleInformationActivity extends AppCompatActivity {
 
-    private MySpinnerAdapter mySpinnerAdapter;
+    private SpinnerAdapter sAdapterAge, sAdapterGender, sAdapterCountry;
+    private Spinner spinnerAge, spinnerGender, spinnerCountry;
     private LinearLayout[] layoutSet;
     private ImageView profileImage, iBtnBack;
     private TextView textUserID;
     private EditText editInfo;
     private Button btnModify;
     private int setColor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,10 +50,9 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
         initFindViewID();
         initData();
 
-
-        AgeList();
-        GenderList();
-        CountryList();
+        ageList();
+        genderList();
+        countryList();
 
     }
 
@@ -96,6 +95,9 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
         textUserID = findViewById(R.id.info_text_userid);
         editInfo = findViewById(R.id.info_edit_info);
         btnModify = findViewById(R.id.info_btn_modify);
+        spinnerGender = findViewById(R.id.genderspinner);
+        spinnerAge = findViewById(R.id.agespinner);
+        spinnerCountry = findViewById(R.id.countryspinner);
         btnModify.setOnClickListener(onBtnClickListener);
         iBtnBack.setOnClickListener(onBtnClickListener);
         for (int i = 0; i < layoutSet.length; i++) {
@@ -149,18 +151,19 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
                     finish();
                     break;
                 case R.id.info_btn_modify:
-                    ApiUtils.getProfileService().requestUpdateMyProfile(GlobalWowToken.getInstance().getId(),editInfo.getText().toString(),
-                            24,"Man","Korea",setColor).enqueue(new Callback<ResponseProfileObj>() {
+                    ApiUtils.getProfileService().requestUpdateMyProfile(GlobalWowToken.getInstance().getId(), editInfo.getText().toString(),
+                            24, "Man", "Korea", setColor).enqueue(new Callback<ResponseProfileObj>() {
                         @Override
                         public void onResponse(Call<ResponseProfileObj> call, Response<ResponseProfileObj> response) {
                             Log.d("SupPeopleInformationActivity_HTTP_UPDATE", "HTTP Transfer Success");
-                            if(response.isSuccessful()){
+                            if (response.isSuccessful()) {
                                 Log.d("SupPeopleInformationActivity_HTTP_UPDATE", "HTTP Response Success");
                                 ResponseProfileObj body = response.body();
                                 Toast.makeText(SupPeopleInformationActivity.this, body.getUserMessage(), Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                         }
+
                         @Override
                         public void onFailure(Call<ResponseProfileObj> call, Throwable t) {
                             Log.d("SupPeopleInformationActivity_HTTP_UPDATE", "HTTP Transfer Fail");
@@ -171,49 +174,42 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
         }
     };
 
-    public void setLayoutSet(int layoutNum){
-        for(int i = 0 ; i< layoutSet.length;i++){
-            if(i == layoutNum){
+    public void setLayoutSet(int layoutNum) {
+        for (int i = 0; i < layoutSet.length; i++) {
+            if (i == layoutNum) {
                 layoutSet[i].setBackgroundResource(Common.PICK_BANNER[i]);
-            }else{
+            } else {
                 layoutSet[i].setBackgroundColor(Common.NONPICK_BANNER[i]);
             }
         }
     }
 
-    private void AgeList() {
+    private void ageList() {
         ArrayList age = new ArrayList<Integer>();
-        for (int i = 1; i <= 100; i++) {
+        for (int i = 1; i <= 80; i++) {
             age.add(Integer.toString(i));
         }
-        ArrayAdapter<Integer> spinnerArrayAdapter = new ArrayAdapter<Integer>(
-                this, android.R.layout.simple_spinner_item, age);
-        spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
+        ArrayAdapter<Integer> spinnerArrayAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_item, age);
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        Spinner spinner = (Spinner)findViewById(R.id.agespinner);
-        spinner.setAdapter(spinnerArrayAdapter);
+        spinnerAge.setAdapter(spinnerArrayAdapter);
     }
 
-    private ArrayList<String> GetGenderList()
-    {
-        String[] gender = {"Man","Woman"};
-
-        return  new ArrayList<String>(Arrays.asList(gender));
+    private ArrayList<String> getGenderList() {
+        String[] gender = {"Man", "Woman"};
+        return new ArrayList<String>(Arrays.asList(gender));
     }
 
-    private void GenderList() {
-        ArrayList<String> genderList = GetGenderList();
+    private void genderList() {
+        ArrayList<String> genderList = getGenderList();
         ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, genderList);
         //  arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner spinner = (Spinner)findViewById(R.id.genderspinner);
-        spinner.setAdapter(arrayAdapter);
+        spinnerGender.setAdapter(arrayAdapter);
     }
 
-    private void CountryList(){
-        ArrayList<ResponseCountry> countries = new ArrayList<ResponseCountry>();
-
-        //여기 넣을때만 ㅇㅇㅇㅇㅇ ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
-       countries.add(new ResponseCountry("Korea", R.drawable.flag_south_korea));
+    private void countryList() {
+        ArrayList<ResponseCountry> countries = new ArrayList<>();
+        countries.add(new ResponseCountry("Korea", R.drawable.flag_south_korea));
         countries.add(new ResponseCountry("UnitedKingdom(UK)", R.drawable.flag_uk));
         countries.add(new ResponseCountry("United States of America(USA)", R.drawable.flag_usa));
         countries.add(new ResponseCountry("Japan", R.drawable.flag_japan));
@@ -221,10 +217,8 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
         countries.add(new ResponseCountry("Taiwan", R.drawable.flag_taiwan));
         countries.add(new ResponseCountry("Canada", R.drawable.flag_canada));
 
-        mySpinnerAdapter = new MySpinnerAdapter(getApplicationContext(),countries);
-
-        Spinner spinner = (Spinner)findViewById(R.id.countryspinner);
-        spinner.setAdapter(mySpinnerAdapter);
+        sAdapterGender = new SpinnerAdapter(getApplicationContext(), countries);
+        spinnerCountry.setAdapter(sAdapterGender);
     }
 
     @Override

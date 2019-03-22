@@ -11,12 +11,9 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,14 +22,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.seok.seok.wowsup.fragments.fragprofile.MySpinnerAdapter;
-import com.seok.seok.wowsup.retrofit.model.ResponseCountry;
 import com.seok.seok.wowsup.retrofit.model.ResponseMailObj;
 import com.seok.seok.wowsup.retrofit.model.ResponseRegisterObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiMailUtils;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import retrofit2.Call;
@@ -46,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     final int MILLISINFUTURE = 300 * 1000; //총 시간 (300초 = 5분)
     final int COUNT_DOWN_INTERVAL = 1000; //onTick 메소드를 호출할 간격 (1초)
 
-    private Button btnJoin, btnConfirmID, btnConfirmEmail;
+    private Button btnJoin, btnConfirmID, btnConfirmEmail, btnLogin;
     private EditText edtID, edtPW, edtEmail;
     private boolean confirmID = false;
     private boolean confirmEmail = false;
@@ -235,6 +229,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     });
                 }
                 break;
+            case R.id.register_button_login:
+                finish();
+                break;
         }
     }
 
@@ -277,6 +274,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         edtPW = findViewById(R.id.register_edittext_pwd);
         edtEmail = findViewById(R.id.register_edittext_email);
         btnJoin = findViewById(R.id.register_button_join);
+        btnLogin = findViewById(R.id.register_button_login);
         btnConfirmID = findViewById(R.id.register_button_confirm_id);
         btnConfirmEmail = findViewById(R.id.register_button_confirm_email);
         btnConfirmEmail.setOnClickListener(this);

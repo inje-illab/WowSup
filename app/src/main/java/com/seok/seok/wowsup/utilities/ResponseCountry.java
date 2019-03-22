@@ -1,4 +1,4 @@
-package com.seok.seok.wowsup.retrofit.model;
+package com.seok.seok.wowsup.utilities;
 
 public class ResponseCountry {
     private String _name;

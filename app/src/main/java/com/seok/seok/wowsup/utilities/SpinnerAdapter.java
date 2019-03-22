@@ -1,4 +1,4 @@
-package com.seok.seok.wowsup.fragments.fragprofile;
+package com.seok.seok.wowsup.utilities;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,15 +9,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.seok.seok.wowsup.R;
-import com.seok.seok.wowsup.retrofit.model.ResponseCountry;
 
 import java.util.ArrayList;
 
-public class MySpinnerAdapter extends BaseAdapter {
+public class SpinnerAdapter extends BaseAdapter {
     Context _context;
     ArrayList<ResponseCountry> _list;
 
-    public MySpinnerAdapter(Context context, ArrayList<ResponseCountry> list)
+    public SpinnerAdapter(Context context, ArrayList<ResponseCountry> list)
     {
         _context = context;
         _list = list;
@@ -48,8 +47,8 @@ public class MySpinnerAdapter extends BaseAdapter {
         }
         ResponseCountry country = _list.get(i);
 
-        TextView txtTitle = (TextView)view.findViewById(R.id.txtTitle);
-        ImageView imgView = (ImageView)view.findViewById(R.id.imageView);
+        TextView txtTitle = view.findViewById(R.id.txtTitle);
+        ImageView imgView = view.findViewById(R.id.imageView);
         txtTitle.setText(country.get_name());
         imgView.setImageResource(country.get_flagId());
         return view;
