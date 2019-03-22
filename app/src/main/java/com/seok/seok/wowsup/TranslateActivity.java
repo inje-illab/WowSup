@@ -52,7 +52,7 @@ public class TranslateActivity extends AppCompatActivity {
         btnTrans.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                textView.setText("");
                 new Thread(){
                     public void run()
                     {
@@ -87,7 +87,10 @@ public class TranslateActivity extends AppCompatActivity {
                             }
                             br.close();
                             strTrans = parsing(response.toString());
-                            textView.setText(strTrans);
+
+                            String strTransReplace = strTrans.replace("\\n", "");
+
+                            textView.setText(strTransReplace);
                             System.out.println(response.toString());
                         } catch (Exception e) {
                             System.out.println(e);
