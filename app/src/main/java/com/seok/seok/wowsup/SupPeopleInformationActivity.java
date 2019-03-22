@@ -212,7 +212,8 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
     private void CountryList(){
         ArrayList<ResponseCountry> countries = new ArrayList<ResponseCountry>();
 
-        countries.add(new ResponseCountry("Korea", R.drawable.korea));
+        //여기 넣을때만 ㅇㅇㅇㅇㅇ ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+       countries.add(new ResponseCountry("Korea", R.drawable.flag_south_korea));
         countries.add(new ResponseCountry("UnitedKingdom(UK)", R.drawable.flag_uk));
         countries.add(new ResponseCountry("United States of America(USA)", R.drawable.flag_usa));
         countries.add(new ResponseCountry("Japan", R.drawable.flag_japan));

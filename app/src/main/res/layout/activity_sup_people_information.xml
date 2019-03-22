@@ -207,19 +207,12 @@
                                 android:text="Country"
                                 android:textColor="#808183"
                                 android:textSize="16.7sp" />
-
-                            <ImageView
-                                android:id="@+id/info_img_country"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/korea" />
-
                             <Spinner
-                                android:layout_height="wrap_content"
-                                android:layout_width="wrap_content"
-                                android:spinnerMode="dropdown"
                                 android:id="@+id/countryspinner"
-                                android:prompt="@string/custom_spinner"/>
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:prompt="@string/custom_spinner"
+                                android:spinnerMode="dropdown" />
 
                         </LinearLayout>
                     </LinearLayout>
