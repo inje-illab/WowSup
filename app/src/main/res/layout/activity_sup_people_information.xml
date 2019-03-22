@@ -136,6 +136,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="7dp"
                         android:layout_marginRight="7dp"
+                        android:singleLine="true"
                         app:met_hideUnderline="true" />
                 </LinearLayout>
 

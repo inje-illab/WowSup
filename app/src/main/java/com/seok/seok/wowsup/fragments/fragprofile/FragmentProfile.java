@@ -37,7 +37,7 @@ import retrofit2.Response;
 public class FragmentProfile extends Fragment {
     private View view;
     private Button btnNotice;
-    private TextView textLike, textFriend;
+    private TextView textLike, textFriend,textToken;
     // Card 관련
     private RecyclerView mRecyclerView;
     private CardAdapter mAdapter;
@@ -72,6 +72,7 @@ public class FragmentProfile extends Fragment {
                     textLike.setText(body.getCntLike() + "");
                     textFriend.setText(body.getCntFriend() + "");
                     btnNotice.setText(body.getCntNotice() + "");
+                    textToken.setText(body.getToken()+"");
                     Glide.with(getActivity()).load(body.getImageURL()).centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).into(profileImage);
                 }
             }
@@ -140,6 +141,7 @@ public class FragmentProfile extends Fragment {
         btnNotice = view.findViewById(R.id.fragment_profile_btn_notice);
         textLike = view.findViewById(R.id.fragment_profile_text_like);
         textFriend = view.findViewById(R.id.fragment_profile_text_firend);
+        textToken = view.findViewById(R.id.fragment_profile_text_token);
         iBtnWrite = view.findViewById(R.id.fragment_profile_write);
         iBtnWrite.setOnClickListener(onClickListener);
         btnNotice.setOnClickListener(onClickListener);

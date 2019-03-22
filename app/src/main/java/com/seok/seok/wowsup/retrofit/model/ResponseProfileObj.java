@@ -7,7 +7,7 @@ public class ResponseProfileObj {
     private int state;
     private int age;
     private int banner;
-    private int change;
+    private int token;
     private String imageURL;
     private String nick;
     private String gender;
@@ -103,12 +103,12 @@ public class ResponseProfileObj {
         this.selfish = selfish;
     }
 
-    public int getChange() {
-        return change;
+    public int getToken() {
+        return token;
     }
 
-    public void setChange(int change) {
-        this.change = change;
+    public void setToken(int token) {
+        this.token = token;
     }
 
     public String getUserMessage() {
