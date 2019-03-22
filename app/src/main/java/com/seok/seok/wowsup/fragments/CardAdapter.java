@@ -54,32 +54,22 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         // 서버에서 받아온 테스트 데이터 삽입
         txtTitle.setText(item.getTitle());
         txtLike.setText(item.getCntLike());
-        if (item.getTitle().length() != 0) {
-            Glide.with(viewHolder.itemView.getRootView().getContext())
-                    .load(item.getImageURL())
-                    .into(new ViewTarget<LinearLayout, GlideDrawable>((LinearLayout) viewHolder.itemView) {
-                        @Override
-                        public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
-                            layoutStoryBackground.setBackground(resource);
-                        }
-                    });
-        } else {
-            layoutStoryBackground.setBackgroundColor(Color.WHITE);
-            layoutBackTitle.setBackgroundColor(Color.WHITE);
-            imgHeart.setAlpha(0);
-            layoutStoryTitle.setBackgroundResource(R.mipmap.write);
-        }
+        Glide.with(viewHolder.itemView.getRootView().getContext())
+                .load(item.getImageURL())
+                .into(new ViewTarget<LinearLayout, GlideDrawable>((LinearLayout) viewHolder.itemView) {
+                    @Override
+                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
+                        layoutStoryBackground.setBackground(resource);
+                    }
+                });
+
         //레이아웃 제목을 클릭할 경우 해당 storyID 값을 다음 엑티비티에 넘겨줌
         layoutStoryBackground.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (item.getStoryID().length() == 0) {
-                    context.startActivity(new Intent(view.getContext(), StoryWriteActivity.class));
-                } else {
-                    Intent intent = new Intent(view.getContext(), StoryActivity.class);
-                    intent.putExtra("storyID", item.getStoryID());
-                    context.startActivity(intent);
-                }
+                Intent intent = new Intent(view.getContext(), StoryActivity.class);
+                intent.putExtra("storyID", item.getStoryID());
+                context.startActivity(intent);
             }
         });
     }

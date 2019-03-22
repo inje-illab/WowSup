@@ -13,41 +13,55 @@
         android:layout_height="match_parent"
         android:layout_weight="10"
         android:background="#808183"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:gravity="bottom|left"
+            android:orientation="vertical">
 
-            <Button
+            <ImageView
                 android:id="@+id/btnBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="8"
-                android:background="@mipmap/back" />
-
-            <TextView
-                android:id="@+id/txtFriend"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="9"
-                android:gravity="center"
-                android:text="FRIEND"
-                android:textColor="#ffffff"
-                android:textSize="18sp" />
-
-            <Button
-                android:id="@+id/btnTrans"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:background="@mipmap/help_button" />
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="19dp"
+                android:src="@mipmap/back_button" />
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:gravity="bottom|center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtFriend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="19dp"
+                android:text="FRIEND"
+                android:textColor="#f0f4f4"
+                android:textSize="21sp"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/btnTrans"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="5"
+                app:srcCompat="@mipmap/help" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout

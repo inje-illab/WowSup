@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,6 +25,7 @@ import com.seok.seok.wowsup.R;
 import com.seok.seok.wowsup.TranslateActivity;
 import com.seok.seok.wowsup.retrofit.model.ResponseChatWordObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
+import com.seok.seok.wowsup.utilities.Common;
 import com.seok.seok.wowsup.utilities.GlobalWowToken;
 
 import java.text.SimpleDateFormat;
@@ -42,7 +44,8 @@ public class ChatActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private Button btnTrans, btnSend, btnBack;
+    private Button btnSend;
+    private ImageView btnTrans, btnBack;
     public static EditText txtText;
     private String email, strFriendUid, delimiter;
     private int wordCount;
@@ -60,23 +63,23 @@ public class ChatActivity extends AppCompatActivity {
         delimiter = " ";
 
         database = FirebaseDatabase.getInstance();
-        final Intent intent  = getIntent();
+        final Intent intent = getIntent();
 
         //선택된 포지션의 친구아이디, 유저아이디    FireBase Hashtable NullPoint발생시 확인요망
         strFriendUid = intent.getStringExtra("friendUid");
         email = GlobalWowToken.getInstance().getUserEmail();
 
         //UserInfomation
-        txtText = (EditText)findViewById(R.id.txtText);
-        btnTrans = (Button)findViewById(R.id.btnTrans);
-        btnSend = (Button)findViewById(R.id.btnSend);
-        btnBack =(Button)findViewById(R.id.btnBack);
+        txtText = findViewById(R.id.txtText);
+        btnTrans = findViewById(R.id.btnTrans);
+        btnSend = findViewById(R.id.btnSend);
+        btnBack = findViewById(R.id.btnBack);
 
         btnTrans.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ChatActivity.this, TranslateActivity.class);
-                startActivity(intent);
+                Common.translateOption = 3;
+                startActivity(new Intent(ChatActivity.this, TranslateActivity.class));
             }
         });
 
@@ -84,12 +87,9 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String strText = txtText.getText().toString();
-                if(strText.equals("") || strText.isEmpty())
-                {
+                if (strText.equals("") || strText.isEmpty()) {
                     Toast.makeText(ChatActivity.this, "내용을 입력해 주세요.", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
+                } else {
                     sentenceSend(strText);
 
                     Calendar c = Calendar.getInstance();
@@ -130,7 +130,7 @@ public class ChatActivity extends AppCompatActivity {
 
         // specify an adapter (see also next example)
 
-        mChat= new ArrayList<>();
+        mChat = new ArrayList<>();
         mAdapter = new MyAdapter(mChat, email);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -143,8 +143,8 @@ public class ChatActivity extends AppCompatActivity {
                 Chat chat = dataSnapshot.getValue(Chat.class);
 
                 mChat.add(chat);
-                mRecyclerView.scrollToPosition(mChat.size()-1);
-                mAdapter.notifyItemInserted(mChat.size()-1);
+                mRecyclerView.scrollToPosition(mChat.size() - 1);
+                mAdapter.notifyItemInserted(mChat.size() - 1);
             }
 
             @Override
@@ -168,7 +168,8 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
-    public void sentenceSend(String sentence){
+
+    public void sentenceSend(String sentence) {
         String[] words = sentence.replaceAll("[^a-zA-Z]", " ").split(delimiter);
         for (String word : words) {
             if (!word.equals("")) {

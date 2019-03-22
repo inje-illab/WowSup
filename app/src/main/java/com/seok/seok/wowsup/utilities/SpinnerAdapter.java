@@ -1,4 +1,4 @@
-package com.seok.seok.wowsup.fragments.fragprofile;
+package com.seok.seok.wowsup.utilities;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,15 +9,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.seok.seok.wowsup.R;
-import com.seok.seok.wowsup.retrofit.model.ResponseCountry;
 
 import java.util.ArrayList;
 
-public class MySpinnerAdapter extends BaseAdapter {
+public class SpinnerAdapter extends BaseAdapter {
     Context context;
     ArrayList<ResponseCountry> list;
 
-    public MySpinnerAdapter(Context context, ArrayList<ResponseCountry> list)
+    public SpinnerAdapter(Context context, ArrayList<ResponseCountry> list)
     {
         context = context;
         list = list;

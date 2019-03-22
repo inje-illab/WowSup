@@ -18,8 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.seok.seok.wowsup.fragments.fragprofile.MySpinnerAdapter;
-import com.seok.seok.wowsup.retrofit.model.ResponseCountry;
+import com.seok.seok.wowsup.utilities.SpinnerAdapter;
+import com.seok.seok.wowsup.utilities.ResponseCountry;
 import com.seok.seok.wowsup.retrofit.model.ResponseProfileObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 import com.seok.seok.wowsup.utilities.Common;
@@ -35,7 +35,8 @@ import retrofit2.Response;
 
 public class SupPeopleInformationActivity extends AppCompatActivity {
 
-    private MySpinnerAdapter mySpinnerAdapter;
+    private SpinnerAdapter sAdapterAge, sAdapterGender, sAdapterCountry;
+    private Spinner spinnerAge, spinnerGender, spinnerCountry;
     private LinearLayout[] layoutSet;
     private ImageView profileImage, iBtnBack;
     private TextView textUserID;
@@ -100,13 +101,10 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
 
         btnModify.setOnClickListener(onBtnClickListener);
         iBtnBack.setOnClickListener(onBtnClickListener);
-        //genderGroup.setOnCheckedChangeListener(onRadioGroupClickListener);
-
         for (int i = 0; i < layoutSet.length; i++) {
             layoutSet[i].setOnClickListener(onClickListener);
         }
     }
-
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
@@ -185,15 +183,14 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
             }
         }
     }
-    // 나이
+
     private void AgeList() {
         ArrayList age = new ArrayList<Integer>();
-        for (int i = 1; i <= 100; i++) {
+        for (int i = 1; i <= 80; i++) {
             age.add(Integer.toString(i));
         }
-        ArrayAdapter<Integer> spinnerArrayAdapter = new ArrayAdapter<Integer>(
-                this, android.R.layout.simple_spinner_item, age);
-        spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
+        ArrayAdapter<Integer> spinnerArrayAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_item, age);
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         final Spinner spinner = (Spinner)findViewById(R.id.agespinner);
         spinner.setAdapter(spinnerArrayAdapter);
@@ -238,10 +235,8 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
         countries.add(new ResponseCountry("Taiwan", R.drawable.flag_taiwan));
         countries.add(new ResponseCountry("Canada", R.drawable.flag_canada));
 
-        mySpinnerAdapter = new MySpinnerAdapter(getApplicationContext(),countries);
-
-        Spinner spinner = (Spinner)findViewById(R.id.countryspinner);
-        spinner.setAdapter(mySpinnerAdapter);
+        sAdapterGender = new SpinnerAdapter(getApplicationContext(), countries);
+        spinnerCountry.setAdapter(sAdapterGender);
     }
 
     @Override
@@ -253,6 +248,9 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;

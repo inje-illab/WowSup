@@ -24,7 +24,7 @@
         <activity android:name=".SelectActivity" />
         <activity
             android:name=".fragments.fragprofile.StoryWriteActivity"
-            android:windowSoftInputMode="adjustNothing" />
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".StoryActivity" />
         <activity android:name=".TranslateActivity" />
         <activity
@@ -40,7 +40,7 @@
 
         <activity
             android:name=".LoginActivity"
-            android:windowSoftInputMode="adjustNothing" />
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

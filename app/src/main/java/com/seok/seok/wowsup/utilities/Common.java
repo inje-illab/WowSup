@@ -21,6 +21,7 @@ public class Common {
     public static boolean fragmentHelpTab = true;
 
     public static String searchTagText = null;
+    public static int translateOption = 0;
 
     public static final int[] NONPICK_BANNER = {
             Color.rgb(201,223,241),
@@ -53,6 +54,7 @@ public class Common {
         fragmentStoryTab = true;
         fragmentHelpTab = true;
     }
+
     public static Drawable fixImageSize(Resources resources, Drawable image, int width, int height){
         Bitmap bitmap = ((BitmapDrawable)image).getBitmap();
         return new BitmapDrawable(resources, Bitmap.createScaledBitmap(bitmap, width, height, true));

@@ -9,106 +9,103 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="10"
+        android:layout_height="80dp"
         android:background="#808183"
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="70dp"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:layout_weight="8"
-            android:orientation="horizontal">
+            android:gravity="bottom|left"
+            android:orientation="vertical">
 
-            <Button
+            <ImageView
                 android:id="@+id/translate_btn_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="8"
-                android:background="@mipmap/back" />
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="19dp"
+                android:src="@mipmap/back_button" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:gravity="bottom|center"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="9"
-                android:gravity="center"
-                android:text="Help"
-                android:textColor="#ffffff"
-                android:textSize="21sp" />
-
-            <Button
-                android:id="@+id/story_write_btn_help"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:background="#808183"
-                android:textSize="18sp" />
+                android:layout_marginBottom="19dp"
+                android:text="Help"
+                android:textColor="#f0f4f4"
+                android:textSize="21sp"
+                android:textStyle="normal" />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_margin="20dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="20dp"
-            android:layout_weight="4"
+            android:layout_weight="10"
             android:orientation="vertical">
 
             <EditText
                 android:id="@+id/editText"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
+                android:layout_height="200dp"
                 android:background="@mipmap/text_feild"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="안녕하세요. 제 이름은 세인 입니다." />
+                android:text="안녕하세요? 제 이름은 'SupPeople'입니다."
+                android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/txtTrans"
+            <Button
+                android:id="@+id/btnTrans"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:background="@mipmap/text_feild"
-                android:text="TextView" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@mipmap/translation_button"
+                android:text="Translation"
+                android:textColor="#808183"
+                android:textSize="21sp" />
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="30dp"
             android:layout_weight="10"
+            android:gravity="bottom"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btnTrans"
+            <TextView
+                android:id="@+id/txtTrans"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10sp"
-                android:layout_weight="1"
-                android:background="@mipmap/translation_button"
-                android:text="Translation"
-                android:textColor=" #808183"
-                android:textSize="21sp" />
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"
+                android:background="@mipmap/text_feild"
+                android:gravity="center"
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/btnSendtext"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:background="@mipmap/btn_black_bar"
                 android:text="Post for Chattiing"
                 android:textColor="#f0f4f4"
