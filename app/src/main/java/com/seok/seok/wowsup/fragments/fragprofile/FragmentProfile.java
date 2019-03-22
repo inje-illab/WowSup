@@ -41,7 +41,7 @@ public class FragmentProfile extends Fragment {
     // Card 관련
     private RecyclerView mRecyclerView;
     private CardAdapter mAdapter;
-    private ImageView profileImage;
+    private ImageView profileImage, iBtnWrite;
     private ArrayList<CardData> cardViewData;
 
     public FragmentProfile() {
@@ -88,7 +88,6 @@ public class FragmentProfile extends Fragment {
 
     private void initDataSet() {
         Log.d("ProfileFragment_INITDATASET", "DATE_SET Success");
-        cardViewData.add(new CardData("", "", "", "", "", ""));
         ApiUtils.getStoryService().requestMyStory(GlobalWowToken.getInstance().getId()).enqueue(new Callback<List<ResponseStoryObj>>() {
             @Override
             public void onResponse(Call<List<ResponseStoryObj>> call, Response<List<ResponseStoryObj>> response) {
@@ -99,7 +98,7 @@ public class FragmentProfile extends Fragment {
                                 body.get(i).getUserID() + "", body.get(i).getTitle() + "",
                                 body.get(i).getBody() + "", body.get(i).getCntLike() + "", body.get(i).getImageURL()));
                     }
-                    if (mAdapter.getItemCount() - 1 == body.size()) {
+                    if (mAdapter.getItemCount() == body.size()) {
                         mRecyclerView.setAdapter(mAdapter);
                     }
                 }
@@ -128,6 +127,9 @@ public class FragmentProfile extends Fragment {
                 case R.id.fragment_profile_image:
                     startActivity(new Intent(getActivity().getApplication(), SupPeopleInformationActivity.class));
                     break;
+                case R.id.fragment_profile_write:
+                    startActivity(new Intent(getActivity().getApplication(), StoryWriteActivity.class));
+                    break;
             }
         }
     };
@@ -138,6 +140,8 @@ public class FragmentProfile extends Fragment {
         btnNotice = view.findViewById(R.id.fragment_profile_btn_notice);
         textLike = view.findViewById(R.id.fragment_profile_text_like);
         textFriend = view.findViewById(R.id.fragment_profile_text_firend);
+        iBtnWrite = view.findViewById(R.id.fragment_profile_write);
+        iBtnWrite.setOnClickListener(onClickListener);
         btnNotice.setOnClickListener(onClickListener);
         profileImage.setOnClickListener(onClickListener);
 

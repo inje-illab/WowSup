@@ -140,7 +140,7 @@ public class FragmentHelp extends Fragment {
                     //글짜 크기 하고 색
                     data.setValueFormatter(new MyValueFormatter());
                     data.setValueTextSize(20f);
-                    data.setValueTextColor(Common.NONPICK_BANNER[2]);
+                    data.setValueTextColor(Color.rgb(65,170,112));
 
 
 
