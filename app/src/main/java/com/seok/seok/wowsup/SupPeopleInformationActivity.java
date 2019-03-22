@@ -35,8 +35,8 @@ import retrofit2.Response;
 
 public class SupPeopleInformationActivity extends AppCompatActivity {
 
-    private SpinnerAdapter sAdapterAge, sAdapterGender, sAdapterCountry;
-    private Spinner spinnerAge, spinnerGender, spinnerCountry;
+    private SpinnerAdapter sAdapterAge, sAdapterCountry;
+    private Spinner spinnerAge, spinnerCountry;
     private LinearLayout[] layoutSet;
     private ImageView profileImage, iBtnBack;
     private TextView textUserID;
@@ -98,7 +98,8 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
         editInfo = findViewById(R.id.info_edit_info);
         btnModify = findViewById(R.id.info_btn_modify);
         genderGroup=findViewById(R.id.gendergroup);
-
+        spinnerAge = findViewById(R.id.agespinner);
+        spinnerCountry = findViewById(R.id.countryspinner);
         btnModify.setOnClickListener(onBtnClickListener);
         iBtnBack.setOnClickListener(onBtnClickListener);
         for (int i = 0; i < layoutSet.length; i++) {
@@ -184,6 +185,7 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
         }
     }
 
+
     private void AgeList() {
         ArrayList age = new ArrayList<Integer>();
         for (int i = 1; i <= 80; i++) {
@@ -201,7 +203,9 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
                 ResponseAge ag = new ResponseAge(postion);
                 Spinner spinner = (Spinner)findViewById(R.id.agespinner);
                 if(spinner.getSelectedItem() != null) {
-                    Toast.makeText(getApplicationContext(), "age :" + spinner.getItemAtPosition(ag.getAge()), Toast.LENGTH_SHORT).show();
+                    String a = (String) spinner.getItemAtPosition(ag.getAge());
+                    int b = Integer.parseInt(a);
+                    Toast.makeText(getApplicationContext(), "age :" + a, Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
@@ -216,8 +220,7 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
             genderGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    String text = "You selected: ";
-                    text += (R.id.male == checkedId) ? "male" : "female";
+                    String text = (R.id.male == checkedId) ? "male" : "female";
                     Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
                 }
             });
@@ -235,10 +238,22 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
         countries.add(new ResponseCountry("Taiwan", R.drawable.flag_taiwan));
         countries.add(new ResponseCountry("Canada", R.drawable.flag_canada));
 
-        sAdapterGender = new SpinnerAdapter(getApplicationContext(), countries);
-        spinnerCountry.setAdapter(sAdapterGender);
-    }
+        sAdapterCountry = new SpinnerAdapter(getApplicationContext(), countries);
 
+        spinnerCountry.setAdapter(sAdapterCountry);
+        spinnerCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ResponseCountry b = (ResponseCountry)sAdapterCountry.getItem(position);
+                Toast.makeText(SupPeopleInformationActivity.this, b.getName(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
