@@ -10,7 +10,7 @@ import com.seok.seok.wowsup.R;
 
 public class ChatViewHolder extends RecyclerView.ViewHolder {
 
-    public ImageView chatFriendImage;
+    public ImageView chatFriendImage, chatFriendCountry;
     public TextView chatFriend;
     public Button chatFriendOption;
 

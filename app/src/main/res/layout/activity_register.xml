@@ -122,7 +122,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:mtf_backgroundColor="#808183"
-                    app:mtf_image="@mipmap/id_icon"
+                    app:mtf_image="@mipmap/password_icon"
                     app:mtf_labelColor="#808183">
 
                     <EditText
@@ -182,26 +182,6 @@
                         android:background="@mipmap/short_button"
                         android:text="Overlap" />
                 </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="10"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Country"/>
-
-                <Spinner
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:spinnerMode="dropdown"
-                    android:id="@+id/spinner"
-                    android:prompt="@string/custom_spinner"/>
 
             </LinearLayout>
 

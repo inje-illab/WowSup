@@ -4,6 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.seok.seok.wowsup"
+//        minSdkVersion 22
         minSdkVersion 26
         targetSdkVersion 28
         versionCode 1
@@ -12,6 +13,10 @@ android {
     }
     buildTypes {
         release {
+//            aaptOptions.cruncherEnabled = false
+//            aaptOptions.useNewCruncher = false
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }

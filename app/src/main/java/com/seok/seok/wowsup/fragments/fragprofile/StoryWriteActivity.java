@@ -42,10 +42,10 @@ import retrofit2.Response;
 
 public class StoryWriteActivity extends AppCompatActivity {
     private final String TAG = StoryWriteActivity.class.getName();
-    private ImageView imageView1, imageView2, imageView3, imageView4, imageView5, imgView;
+    private ImageView imageView1, imageView2, imageView3, imageView4, imageView5, imgView, btnBack, btnPickImage;
     private LinearLayout layoutBackground;
     private String imageBackgroundURL = "test_background3.jpg", mediaPath;
-    private Button btnSave, btnUpload, btnPickImage, btnBack;
+    private Button btnSave, btnUpload;
     private EditText editTextTitle, editTextBody;
     private ChipsInputLayout chipsInputLayout;
     private int imageOption = 0;
@@ -59,7 +59,7 @@ public class StoryWriteActivity extends AppCompatActivity {
         requestWritePermission();
 
         btnSave = findViewById(R.id.story_write_btn_save);
-        btnBack = (Button)findViewById(R.id.story_write_btn_back);
+        btnBack = findViewById(R.id.story_write_btn_back);
         editTextTitle = findViewById(R.id.story_write_edit_title);
         editTextBody = findViewById(R.id.story_write_edit_body);
         chipsInputLayout = findViewById(R.id.chips_input);
@@ -123,7 +123,7 @@ public class StoryWriteActivity extends AppCompatActivity {
                 ViewDialog viewDialog = new ViewDialog(StoryWriteActivity.this, 2);
                 viewDialog.setButtonText("No", "Yes");
                 viewDialog.requestStoryUpload(GlobalWowToken.getInstance().getId(), editTextTitle.getText().toString(), editTextBody.getText().toString(),
-                        Common.API_IMAGE_BASE_URL + imageBackgroundURL, tag[0], tag[1], tag[2], tag[3], tag[4], imageOption);
+                        Common.STORY_IMAGE_BASE_URL + imageBackgroundURL, tag[0], tag[1], tag[2], tag[3], tag[4], imageOption);
                 viewDialog.show();
             }
         });
@@ -134,28 +134,28 @@ public class StoryWriteActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.story_write_imageview_back1:
-                    layoutBackground.setBackgroundResource(R.drawable.test_background);
-                    imageBackgroundURL = "test_background.jpg";
+                    layoutBackground.setBackgroundResource(R.drawable.basic_image_1_st);
+                    imageBackgroundURL = "basic_image_1_st.png";
                     imageOption = 0;
                     break;
                 case R.id.story_write_imageview_back2:
-                    layoutBackground.setBackgroundResource(R.drawable.test_background1);
-                    imageBackgroundURL = "test_background1.jpg";
+                    layoutBackground.setBackgroundResource(R.drawable.basic_image_2_nd);
+                    imageBackgroundURL = "basic_image_2_nd.png";
                     imageOption = 0;
                     break;
                 case R.id.story_write_imageview_back3:
-                    layoutBackground.setBackgroundResource(R.drawable.test_background2);
-                    imageBackgroundURL = "test_background2.jpg";
+                    layoutBackground.setBackgroundResource(R.drawable.basic_image_3_rd);
+                    imageBackgroundURL = "basic_image_3_rd.png";
                     imageOption = 0;
                     break;
                 case R.id.story_write_imageview_back4:
-                    layoutBackground.setBackgroundResource(R.drawable.test_background3);
-                    imageBackgroundURL = "test_background3.jpg";
+                    layoutBackground.setBackgroundResource(R.drawable.basic_image_4_th);
+                    imageBackgroundURL = "basic_image_4_th.png";
                     imageOption = 0;
                     break;
                 case R.id.story_write_imageview_back5:
-                    layoutBackground.setBackgroundResource(R.drawable.test);
-                    imageBackgroundURL = "test.png";
+                    layoutBackground.setBackgroundResource(R.drawable.unclick_color_1_st);
+                    imageBackgroundURL = "basic_image_5_th.png";
                     imageOption = 0;
                     break;
                 case R.id.story_write_btn_picture:

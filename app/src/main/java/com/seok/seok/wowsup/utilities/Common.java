@@ -3,8 +3,11 @@ package com.seok.seok.wowsup.utilities;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+
+import com.seok.seok.wowsup.R;
 
 public class Common {
     public static final String API_BASE_URL = "http://www.heywowsup.com/wowsup/";
@@ -19,6 +22,30 @@ public class Common {
 
     public static String searchTagText = null;
 
+    public static final int[] NONPICK_BANNER = {
+            Color.rgb(201,223,241),
+            Color.rgb(239,231,204),
+            Color.rgb(240,244,244),
+            Color.rgb(126,128,130),
+            Color.rgb(239,191,168),
+            Color.rgb(218,211,206),
+            Color.rgb(100,117,122),
+            Color.rgb(146,182,187),
+            Color.rgb(183,187,189),
+            Color.rgb(246,224,209)
+    };
+    public static final int[] PICK_BANNER = {
+            R.mipmap.click_color_1_st,
+            R.mipmap.click_color_2_nd,
+            R.mipmap.click_color_3_rd,
+            R.mipmap.click_color_4_th,
+            R.mipmap.click_color_5_th,
+            R.mipmap.click_color_6_th,
+            R.mipmap.click_color_7_th,
+            R.mipmap.click_color_8_th,
+            R.mipmap.click_color_9_th,
+            R.mipmap.click_color_10_th,
+    };
 
     public static void setTabFlag(){
         fragmentProfileTab = true;
@@ -30,4 +57,5 @@ public class Common {
         Bitmap bitmap = ((BitmapDrawable)image).getBitmap();
         return new BitmapDrawable(resources, Bitmap.createScaledBitmap(bitmap, width, height, true));
     }
+
 }

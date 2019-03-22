@@ -18,17 +18,15 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.ValueFormatter;
 import com.seok.seok.wowsup.R;
-import com.seok.seok.wowsup.retrofit.model.ResponseChatWordObj;
-import com.seok.seok.wowsup.retrofit.model.ResponseMailObj;
 import com.seok.seok.wowsup.retrofit.model.ResponseWordChartObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
+import com.seok.seok.wowsup.utilities.Common;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -106,7 +104,6 @@ public class FragmentHelp extends Fragment {
 
         globalHitWordChart.setUsePercentValues(true);
         globalHitWordChart.setDescription("");
-
         globalHitWordChart.setRotationEnabled(true);
 
         final ArrayList<Entry> wordValueList = new ArrayList<>();
@@ -124,30 +121,47 @@ public class FragmentHelp extends Fragment {
                         wordValueList.add(new Entry(body.get(i).getWordCount(), i));
                         wordList.add(body.get(i).getWord());
                     }
-                    PieDataSet dataSet = new PieDataSet(wordValueList, "This week's word fashion graph");
-                    dataSet.setSliceSpace(3);
-                    dataSet.setSelectionShift(5);
+                    PieDataSet dataSet = new PieDataSet(wordValueList, "");
+                    //This week's word fashion graph
+
+
+
+                    //그래프 크기 조절
+                    dataSet.setSliceSpace(3f);
+                    dataSet.setSelectionShift(10f);
 
                     PieData data = new PieData(wordList, dataSet);
                     globalHitWordChart.setData(data);
+                    globalHitWordChart.invalidate();
+                    globalHitWordChart.getLegend ().setEnabled ( false );
+
+
 
                     //글짜 크기 하고 색
                     data.setValueFormatter(new MyValueFormatter());
                     data.setValueTextSize(20f);
-                    data.setValueTextColor(Color.RED);
+                    data.setValueTextColor(Common.NONPICK_BANNER[2]);
+
+
 
                     for (int c : MY_COLORS)
                         colors.add(c);
                     dataSet.setColors(colors);
 
+                    //밑에꺼 건들기.
                     Legend l = globalHitWordChart.getLegend();
-                    l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
-                    l.setXEntrySpace(7);
-                    l.setYEntrySpace(5);
 
-                    globalHitWordChart.setData(data);
-                    globalHitWordChart.highlightValues(null);
-                    globalHitWordChart.invalidate();
+                    l.setEnabled(false);
+/*                    l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER); // 범례 위치조정
+                    l.setForm(Legend.LegendForm.CIRCLE);
+                    l.setStackSpace(5);
+                            //setWordWrapEnable(boolean enabled)
+                    l.setFormToTextSpace(3); //범례 레이블과 해당 범례 양식 사이의 간격을 설정합니다.
+                    l.setXEntrySpace(5); // x 축에서 범례 항목 사이의 공백을 설정
+                    l.setYEntrySpace(3); // y 축에서 범례 항목 사이의 공백을 설정
+                    l.setTextSize(12f);  // 글짜 크기조절
+                    l.setFormSize (12f); // 도형의 크기 조절*/
+
                     globalHitWordChart.animateXY(3000, 3000);
                 }
             }
