@@ -1,4 +1,4 @@
-package com.seok.seok.wowsup.fragments.fragstory;
+package com.seok.seok.wowsup.fragments;
 
 public class CardData {
 
@@ -17,6 +17,7 @@ public class CardData {
         this.cntLike = cntLike;
         this.imageURL = imageURL;
     }
+
     public String getStoryID() {
         return storyID;
     }
@@ -65,3 +66,4 @@ public class CardData {
         this.imageURL = imageURL;
     }
 }
+

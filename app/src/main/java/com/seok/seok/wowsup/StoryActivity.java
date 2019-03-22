@@ -117,18 +117,18 @@ public class StoryActivity extends AppCompatActivity {
         ApiUtils.getStoryService().requestPickStoryView(storyID, GlobalWowToken.getInstance().getId()).enqueue(new Callback<ResponseStoryObj>() {
             @Override
             public void onResponse(Call<ResponseStoryObj> call, Response<ResponseStoryObj> response) {
+                Log.d("StoryActivity_HTTP_PICK", "HTTP Transfer Success");
                 ResponseStoryObj body = response.body();
                 if (response.isSuccessful()) {
                     try {
                         otherUserID = body.getUserID();
                         storyTextBody.setText(body.getBody());
-                        storyTextTag1.setText(body.getTag1());
-                        storyTextTag2.setText(body.getTag2());
-                        storyTextTag3.setText(body.getTag3());
-                        storyTextTag4.setText(body.getTag4());
-                        storyTextTag5.setText(body.getTag5());
+                        storyTextTag1.setText("# " + body.getTag1());
+                        storyTextTag2.setText("# " + body.getTag2());
+                        storyTextTag3.setText("# " + body.getTag3());
+                        storyTextTag4.setText("# " + body.getTag4());
+                        storyTextTag5.setText("# " + body.getTag5());
                         storyTextCntLike.setText(body.getCntLike() + "");
-                        Log.d("StoryActivity_HTTP_CONFIRMDATA", "getState : "+body.getState());
                         if(body.getState()==0){
                             iBtnLike.setImageResource(R.mipmap.unllike_icon);
                         }else if(body.getState()== 1){
@@ -156,7 +156,7 @@ public class StoryActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseStoryObj> call, Throwable t) {
-                Log.d("StoryFragments_err ", t.getMessage());
+                Log.d("StoryActivity_HTTP_PICK", "HTTP Transfer Failed");
             }
         });
     }

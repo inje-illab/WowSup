@@ -77,9 +77,8 @@
                         android:layout_height="41.3dp"
                         android:ems="10"
                         android:hint="ID"
-                        android:inputType="textPersonName"
-                        android:textSize="18sp"
-                        tools:text="asd" />
+                        android:text="msno"
+                        android:textSize="18sp" />
 
                     <EditText
                         android:id="@+id/login_edittext_pwd"
@@ -87,9 +86,8 @@
                         android:layout_height="41.3dp"
                         android:ems="10"
                         android:hint="PW"
-                        android:inputType="textPersonName"
-                        android:textSize="18sp"
-                        tools:text="ewqr" />
+                        android:text="msnomsno"
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 

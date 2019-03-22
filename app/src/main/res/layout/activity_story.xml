@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="72dp"
+        android:layout_height="80dp"
         android:background="#808183"
         android:orientation="horizontal">
 
@@ -42,9 +42,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="12dp"
-                app:bmb_normalColor="#ffffff"
                 app:bmb_buttonEnum="ham"
                 app:bmb_buttonPlaceEnum="buttonPlace_ham_2"
+                app:bmb_normalColor="#ffffff"
                 app:bmb_piecePlaceEnum="piecePlace_ham_2" />
 
         </LinearLayout>
@@ -54,12 +54,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="72dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:layout_margin="22dp"
             android:background="@mipmap/text_textbox"
             android:orientation="vertical">
@@ -67,16 +66,18 @@
             <LinearLayout
                 android:id="@+id/story_layout_background"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="300dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/story_text_body"
                     android:layout_width="match_parent"
-                    android:layout_height="272dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="20dp"
+                    android:background="#99000000"
                     android:gravity="center"
                     android:text="text"
-                    android:textColor="@android:color/white"
+                    android:textColor="#f0f4f4"
                     android:textSize="30sp" />
             </LinearLayout>
 
