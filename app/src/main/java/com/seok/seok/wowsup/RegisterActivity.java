@@ -14,8 +14,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -35,7 +33,6 @@ import com.seok.seok.wowsup.retrofit.remote.ApiMailUtils;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 import retrofit2.Call;

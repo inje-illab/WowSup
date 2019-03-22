@@ -20,6 +20,8 @@ import com.github.mikephil.charting.utils.ValueFormatter;
 import com.seok.seok.wowsup.R;
 import com.seok.seok.wowsup.retrofit.model.ResponseWordChartObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
+import com.seok.seok.wowsup.utilities.Common;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -121,13 +123,12 @@ public class FragmentHelp extends Fragment {
                     }
                     PieDataSet dataSet = new PieDataSet(wordValueList, "");
                     //This week's word fashion graph
-                    dataSet.setValueTextSize(6f);
+
+
 
                     //그래프 크기 조절
                     dataSet.setSliceSpace(3f);
                     dataSet.setSelectionShift(10f);
-
-
 
                     PieData data = new PieData(wordList, dataSet);
                     globalHitWordChart.setData(data);
@@ -138,12 +139,9 @@ public class FragmentHelp extends Fragment {
 
                     //글짜 크기 하고 색
                     data.setValueFormatter(new MyValueFormatter());
-                    data.setValueTextSize(30f);
-                    data.setValueTextColor(Color.WHITE);
+                    data.setValueTextSize(20f);
+                    data.setValueTextColor(Common.NONPICK_BANNER[2]);
 
-
-
-                    //globalHitWordChart.getPaint (Chart.PAINT_INFO) .setTextSize (Utils.convertDpToPixel (30f));
 
 
                     for (int c : MY_COLORS)
@@ -185,5 +183,4 @@ public class FragmentHelp extends Fragment {
             return mFormat.format(value) + "";
         }
     }
-
 }
