@@ -242,7 +242,7 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
         sAdapterCountry = new SpinnerAdapter(getApplicationContext(), countries);
 
         spinnerCountry.setAdapter(sAdapterCountry);
-/*
+
         spinnerCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -254,7 +254,7 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
 
             }
         });
-*/
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

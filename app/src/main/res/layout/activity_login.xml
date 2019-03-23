@@ -77,7 +77,6 @@
                         android:layout_height="41.3dp"
                         android:ems="10"
                         android:hint="ID"
-                        android:text="msno"
                         android:textSize="18sp" />
 
                     <EditText
@@ -86,7 +85,6 @@
                         android:layout_height="41.3dp"
                         android:ems="10"
                         android:hint="PW"
-                        android:text="msnomsno"
                         android:textSize="18sp" />
 
                 </LinearLayout>

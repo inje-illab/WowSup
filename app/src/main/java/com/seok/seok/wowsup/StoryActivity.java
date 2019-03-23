@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.ViewTarget;
 import com.nightonke.boommenu.BoomButtons.ButtonPlaceAlignmentEnum;
 import com.nightonke.boommenu.BoomButtons.HamButton;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
@@ -57,20 +58,21 @@ public class StoryActivity extends AppCompatActivity {
                 case R.id.story_ibtn_back:
                     finish();
                 case R.id.story_ibtn_like:
-                    ApiUtils.getStoryService().requestStoryLike(GlobalWowToken.getInstance().getId(),storyID).enqueue(new Callback<ResponseStoryObj>() {
+                    ApiUtils.getStoryService().requestStoryLike(GlobalWowToken.getInstance().getId(), storyID).enqueue(new Callback<ResponseStoryObj>() {
                         @Override
                         public void onResponse(Call<ResponseStoryObj> call, Response<ResponseStoryObj> response) {
                             Log.d("RegisterActivity_HTTP_LIKE", "HTTP Transfer Success");
-                            if(response.isSuccessful()){
+                            if (response.isSuccessful()) {
                                 ResponseStoryObj body = response.body();
-                                if(body.getState()==0){
+                                if (body.getState() == 0) {
                                     iBtnLike.setImageResource(R.mipmap.unllike_icon);
-                                }else if(body.getState()==1){
+                                } else if (body.getState() == 1) {
                                     iBtnLike.setImageResource(R.mipmap.like_icon);
                                 }
-                                storyTextCntLike.setText(body.getCntLike()+"");
+                                storyTextCntLike.setText(body.getCntLike() + "");
                             }
                         }
+
                         @Override
                         public void onFailure(Call<ResponseStoryObj> call, Throwable t) {
                             Log.d("RegisterActivity_HTTP_LIKE", "HTTP Transfer Failed");
@@ -80,7 +82,8 @@ public class StoryActivity extends AppCompatActivity {
             }
         }
     };
-    public void initData(){
+
+    public void initData() {
         for (int i = 0; i < boomMenuButton.getPiecePlaceEnum().pieceNumber(); i++) {
             HamButton.Builder builder = new HamButton.Builder()
                     .normalColorRes(R.color.blockColor)
@@ -89,7 +92,7 @@ public class StoryActivity extends AppCompatActivity {
                     .listener(new OnBMClickListener() {
                         @Override
                         public void onBoomButtonClick(int index) {
-                            if(index == 0) {
+                            if (index == 0) {
                                 ViewDialog applyFriendViewDialog = new ViewDialog(StoryActivity.this, 0);
                                 applyFriendViewDialog.requestApplyFriend(GlobalWowToken.getInstance().getId(), otherUserID);
                                 applyFriendViewDialog.setButtonText("취소", "요청");
@@ -120,37 +123,28 @@ public class StoryActivity extends AppCompatActivity {
                 Log.d("StoryActivity_HTTP_PICK", "HTTP Transfer Success");
                 ResponseStoryObj body = response.body();
                 if (response.isSuccessful()) {
-                    try {
-                        otherUserID = body.getUserID();
-                        storyTextBody.setText(body.getBody());
-                        storyTextTag1.setText("# " + body.getTag1());
-                        storyTextTag2.setText("# " + body.getTag2());
-                        storyTextTag3.setText("# " + body.getTag3());
-                        storyTextTag4.setText("# " + body.getTag4());
-                        storyTextTag5.setText("# " + body.getTag5());
-                        storyTextCntLike.setText(body.getCntLike() + "");
-                        if(body.getState()==0){
-                            iBtnLike.setImageResource(R.mipmap.unllike_icon);
-                        }else if(body.getState()== 1){
-                            iBtnLike.setImageResource(R.mipmap.like_icon);
-                        }
-                        if (!body.getImageURL().equals(null)) {
-                            Glide.with(getApplicationContext()).load(body.getImageURL()).into(new SimpleTarget<GlideDrawable>() {
-                                @Override
-                                public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
-                                    storyLayoutBackground.setBackground(resource);
-                                }
-                            });
-                        }
-                    } catch (Exception e) {
-                        imageURL = Common.STORY_IMAGE_BASE_URL + "test_background.jpg";
-                        Glide.with(getApplicationContext()).load(imageURL).into(new SimpleTarget<GlideDrawable>() {
-                            @Override
-                            public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
-                                storyLayoutBackground.setBackground(resource);
-                            }
-                        });
+                    otherUserID = body.getUserID();
+                    storyTextBody.setText(body.getBody());
+                    storyTextTag1.setText("# " + body.getTag1());
+                    storyTextTag2.setText("# " + body.getTag2());
+                    storyTextTag3.setText("# " + body.getTag3());
+                    storyTextTag4.setText("# " + body.getTag4());
+                    storyTextTag5.setText("# " + body.getTag5());
+                    storyTextCntLike.setText(body.getCntLike() + "");
+                    if (body.getState() == 0) {
+                        iBtnLike.setImageResource(R.mipmap.unllike_icon);
+                    } else if (body.getState() == 1) {
+                        iBtnLike.setImageResource(R.mipmap.like_icon);
                     }
+                    imageURL = body.getImageURL();
+                    Glide.with(getApplicationContext())
+                            .load(body.getImageURL()).into(new SimpleTarget<GlideDrawable>() {
+                        @Override
+                        public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
+                            storyLayoutBackground.setBackground(resource);
+                        }
+                    });
+
                 }
             }
 
@@ -160,6 +154,7 @@ public class StoryActivity extends AppCompatActivity {
             }
         });
     }
+
     public void initFindViewByID() {
         storyLayoutBackground = findViewById(R.id.story_layout_background);
         storyTextBody = findViewById(R.id.story_text_body);
