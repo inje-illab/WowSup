@@ -1,4 +1,4 @@
-package com.seok.seok.wowsup.fragments.fragprofile;
+package com.seok.seok.wowsup.utilities;
 
 public class NoticeData {
 

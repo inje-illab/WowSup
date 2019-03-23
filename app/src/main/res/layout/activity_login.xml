@@ -71,25 +71,23 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
-
-                    <EditText
+                    <com.rengwuxian.materialedittext.MaterialEditText
                         android:id="@+id/login_edittext_id"
                         android:layout_width="match_parent"
                         android:layout_height="41.3dp"
-                        android:ems="10"
-                        android:hint="ID"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="7dp"
+                        android:singleLine="true"
                         android:text="msno"
-                        android:textSize="18sp"
-                        android:fontFamily="@font/hanmaumgodic_m" />
-
-                    <EditText
+                        android:fontFamily="@font/hanmaumgodic_m"/>
+                    <com.rengwuxian.materialedittext.MaterialEditText
                         android:id="@+id/login_edittext_pwd"
                         android:layout_width="match_parent"
                         android:layout_height="41.3dp"
-                        android:ems="10"
-                        android:hint="PW"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="7dp"
+                        android:singleLine="true"
                         android:text="msnomsno"
-                        android:textSize="18sp"
                         android:fontFamily="@font/hanmaumgodic_m"/>
 
                 </LinearLayout>

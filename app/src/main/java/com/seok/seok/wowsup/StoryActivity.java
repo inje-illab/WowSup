@@ -14,16 +14,15 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.target.ViewTarget;
 import com.nightonke.boommenu.BoomButtons.ButtonPlaceAlignmentEnum;
 import com.nightonke.boommenu.BoomButtons.HamButton;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomMenuButton;
 import com.seok.seok.wowsup.retrofit.model.ResponseStoryObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
-import com.seok.seok.wowsup.utilities.ViewDialog;
-import com.seok.seok.wowsup.utilities.Common;
+import com.seok.seok.wowsup.utilities.FriendConfirmDialog;
 import com.seok.seok.wowsup.utilities.GlobalWowToken;
+import com.seok.seok.wowsup.utilities.ViewDialog;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -93,10 +92,9 @@ public class StoryActivity extends AppCompatActivity {
                         @Override
                         public void onBoomButtonClick(int index) {
                             if (index == 0) {
-                                ViewDialog applyFriendViewDialog = new ViewDialog(StoryActivity.this, 0);
-                                applyFriendViewDialog.requestApplyFriend(GlobalWowToken.getInstance().getId(), otherUserID);
-                                applyFriendViewDialog.setButtonText("취소", "요청");
-                                applyFriendViewDialog.show();
+                                FriendConfirmDialog dialog = new FriendConfirmDialog(StoryActivity.this);
+                                dialog.requestApplyFriend(GlobalWowToken.getInstance().getId(), otherUserID);
+                                dialog.show();
                             }
                         }
                     });

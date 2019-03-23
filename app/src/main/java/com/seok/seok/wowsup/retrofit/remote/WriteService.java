@@ -9,7 +9,7 @@ import retrofit2.http.Query;
 
 public interface WriteService {
     @GET("Profile/writeStory.php")
-    Call<ResponseWriteObj> requestWriteStory(@Query("ID") String id,
+    Call<ResponseWriteObj> requestWriteStory(@Query("userID") String id,
                                              @Query("title") String title,
                                              @Query("body") String body,
                                              @Query("image") String image,
