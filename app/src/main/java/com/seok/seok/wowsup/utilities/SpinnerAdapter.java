@@ -13,23 +13,23 @@ import com.seok.seok.wowsup.R;
 import java.util.ArrayList;
 
 public class SpinnerAdapter extends BaseAdapter {
-    Context _context;
-    ArrayList<ResponseCountry> _list;
+    private Context context;
+    private ArrayList<ResponseCountry> list;
 
     public SpinnerAdapter(Context context, ArrayList<ResponseCountry> list)
     {
-        _context = context;
-        _list = list;
+        this.context = context;
+        this.list = list;
     }
 
     @Override
     public int getCount() {
-        return (_list == null)?0:  _list.size();
+        return (list == null)?0:  list.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return _list.get(i);
+        return list.get(i);
     }
 
     @Override
@@ -41,16 +41,15 @@ public class SpinnerAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         if(view == null)
         {
-            LayoutInflater inflater = (LayoutInflater)_context.getSystemService(
-                    Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.custom_spinner_item,viewGroup,false);
         }
-        ResponseCountry country = _list.get(i);
+        ResponseCountry country = list.get(i);
 
-        TextView txtTitle = view.findViewById(R.id.txtTitle);
-        ImageView imgView = view.findViewById(R.id.imageView);
-        txtTitle.setText(country.get_name());
-        imgView.setImageResource(country.get_flagId());
+        TextView txtTitle = (TextView)view.findViewById(R.id.txtTitle);
+        ImageView imgView = (ImageView)view.findViewById(R.id.imageView);
+        txtTitle.setText(country.getName());
+        imgView.setImageResource(country.getFlagId());
         return view;
     }
 }

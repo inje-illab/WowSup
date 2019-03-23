@@ -45,6 +45,17 @@
                 android:textColor="#94b6bb"
                 android:textSize="14sp"
                 android:fontFamily="@font/hanmaumgodic_l"/>
+
+            <Button
+                android:id="@+id/fragment_help_more"
+                android:layout_width="65dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:background="@mipmap/more_button"
+                android:text="More"
+                android:textColor="#f0f4f4"
+                android:textSize="14sp"
+                android:fontFamily="@font/hanmaumgodic_l"/>
         </LinearLayout>
 
     </LinearLayout>

@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.seok.seok.wowsup.R;
+import com.seok.seok.wowsup.TranslateActivity;
 import com.seok.seok.wowsup.retrofit.model.ResponseWriteObj;
 import com.seok.seok.wowsup.retrofit.model.RespsonseImageObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
@@ -42,13 +43,13 @@ import retrofit2.Response;
 
 public class StoryWriteActivity extends AppCompatActivity {
     private final String TAG = StoryWriteActivity.class.getName();
-    private ImageView imageView1, imageView2, imageView3, imageView4, imageView5, imgView, btnBack, btnPickImage;
+    private ImageView imageView1, imageView2, imageView3, imageView4, imageView5,btnHelp, btnBack, btnPickImage;
     private LinearLayout layoutBackground;
-    private String imageBackgroundURL = "test_background3.jpg", mediaPath;
+    private String imageBackgroundURL, mediaPath;
     private Button btnSave, btnUpload;
-    private EditText editTextTitle, editTextBody;
+    public static EditText editTextTitle, editTextBody;
     private ChipsInputLayout chipsInputLayout;
-    private int imageOption = 0;
+    private int imageOption, editOption;
     private static int RESULT_LOAD_IMAGE=0;
     private static final int WRITE_PERMISSION = 0x01;
 
@@ -66,11 +67,15 @@ public class StoryWriteActivity extends AppCompatActivity {
         btnPickImage = findViewById(R.id.story_write_btn_picture);
         //이미지뷰 아이디값 및 클릭 시 클릭이벤트로 넘어가게 만듬 (익명 클래스로 구현 시 코드 복잡해짐)
         layoutBackground = findViewById(R.id.story_write_layout_back);
+        btnHelp = findViewById(R.id.story_write_btn_help);
         imageView1 = findViewById(R.id.story_write_imageview_back1);
         imageView2 = findViewById(R.id.story_write_imageview_back2);
         imageView3 = findViewById(R.id.story_write_imageview_back3);
         imageView4 = findViewById(R.id.story_write_imageview_back4);
         imageView5 = findViewById(R.id.story_write_imageview_back5);
+        editTextTitle.setOnFocusChangeListener(onFocusChangeListener);
+        editTextBody.setOnFocusChangeListener(onFocusChangeListener);
+        btnHelp.setOnClickListener(onClickListener);
         imageView1.setOnClickListener(onClickListener);
         imageView2.setOnClickListener(onClickListener);
         imageView3.setOnClickListener(onClickListener);
@@ -128,8 +133,23 @@ public class StoryWriteActivity extends AppCompatActivity {
             }
         });
     }
+    View.OnFocusChangeListener onFocusChangeListener = new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            switch (v.getId()) {
+                case R.id.story_write_edit_title:
+                    if(hasFocus)
+                        Common.translateOption = 1;
+                    break;
+                case R.id.story_write_edit_body:
+                    if(hasFocus)
+                        Common.translateOption = 2;
+                    break;
+            }
+        }
+    };
 
-    ImageView.OnClickListener onClickListener = new ImageView.OnClickListener() {
+    View.OnClickListener onClickListener = new ImageView.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
@@ -161,6 +181,9 @@ public class StoryWriteActivity extends AppCompatActivity {
                 case R.id.story_write_btn_picture:
                     Intent galleryIntent = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE );
+                    break;
+                case R.id.story_write_btn_help:
+                    startActivity(new Intent(StoryWriteActivity.this, TranslateActivity.class));
                     break;
             }
         }

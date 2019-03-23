@@ -133,6 +133,23 @@
                         android:text="0"
                         android:textSize="10sp" />
 
+                    <ImageView
+                        android:id="@+id/fragment_profile_img_token"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="1dp"
+                        app:srcCompat="@mipmap/token_icon" />
+
+                    <TextView
+                        android:id="@+id/fragment_profile_text_token"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="5dp"
+                        android:gravity="center"
+                        android:text="0" />
+
                 </LinearLayout>
 
                 <LinearLayout
