@@ -37,7 +37,8 @@
                 android:gravity="center"
                 android:text="FRIEND"
                 android:textColor="#ffffff"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:fontFamily="@font/hanmaumgodic_b"/>
 
             <Button
                 android:id="@+id/btnTrans"
@@ -68,7 +69,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#f0ffff"
-                android:scrollbars="vertical" />
+                android:scrollbars="vertical"
+                android:fontFamily="@font/hanmaumgodic_m"/>
 
         </LinearLayout>
 
@@ -101,15 +103,18 @@
                         android:background="#ffffff"
                         android:ems="10"
                         android:inputType="textPersonName"
-                        android:text="Name" />
+                        android:text="Name"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/hanmaumgodic_m"/>
 
                     <Button
                         android:id="@+id/btnSend"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="8dp"
                         android:layout_weight="10"
-                        android:background="@mipmap/send_button" />
+                        android:background="@mipmap/send_button"
+                        android:fontFamily="@font/hanmaumgodic_m" />
                 </LinearLayout>
 
             </LinearLayout>

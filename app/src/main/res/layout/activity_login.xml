@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".LoginActivity"
-    android:background="#f0f4f4">
+    android:background="#f0f4f4"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -61,7 +62,8 @@
                         android:gravity="center"
                         android:text="Login"
                         android:textColor="@color/colorPrimaryBlack"
-                        android:textSize="21sp" />
+                        android:textSize="20sp"
+                        android:fontFamily="@font/hanmaumgodic_b"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -78,7 +80,8 @@
                         android:ems="10"
                         android:hint="ID"
                         android:text="msno"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:fontFamily="@font/hanmaumgodic_m" />
 
                     <EditText
                         android:id="@+id/login_edittext_pwd"
@@ -87,7 +90,8 @@
                         android:ems="10"
                         android:hint="PW"
                         android:text="msnomsno"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:fontFamily="@font/hanmaumgodic_m"/>
 
                 </LinearLayout>
 
@@ -128,7 +132,8 @@
                     android:text="Throgh SNS"
                     android:textColor="#808183"
                     android:textSize="21sp"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:fontFamily="@font/hanmaumgodic_m"/>
 
                 <Button
                     android:id="@+id/login_button_lost"
@@ -139,7 +144,9 @@
                     android:background="@mipmap/short_button"
                     android:text="Lost ID / PW"
                     android:textColor="#808183"
-                    android:textSize="21sp" />
+                    android:textSize="18sp"
+                    android:fontFamily="@font/hanmaumgodic_m"
+                    />
 
                 <com.kakao.usermgmt.LoginButton
                     android:id="@+id/btn_kakao_login"
@@ -170,7 +177,8 @@
                     android:background="@mipmap/btn_black_bar"
                     android:text="Login"
                     android:textColor="#f0f4f4"
-                    android:textSize="21sp" />
+                    android:textSize="18sp"
+                    android:fontFamily="@font/hanmaumgodic_m"/>
             </LinearLayout>
 
         </LinearLayout>

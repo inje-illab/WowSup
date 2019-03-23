@@ -24,7 +24,8 @@
             android:paddingEnd="10dp"
             android:text="TextView"
             android:textColor="@android:color/black"
-            android:textSize="13.7sp" />
+            android:textSize="11sp"
+            android:fontFamily="@font/hanmaumgodic_l"/>
     </LinearLayout>
 
 </LinearLayout>

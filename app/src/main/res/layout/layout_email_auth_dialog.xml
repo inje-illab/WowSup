@@ -12,7 +12,8 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:text="Authenticate your email"
-        android:textSize="30sp" />
+        android:textSize="25sp"
+        android:fontFamily="@font/hanmaumgodic_b" />
 
 
     <EditText
@@ -25,24 +26,27 @@
         android:background="#FFFFFF"
         android:hint="Please register your certification number"
         android:paddingLeft="10dp"
-        android:textSize="15sp" />
+        android:textSize="14sp"
+        android:fontFamily="@font/hanmaumgodic_m" />
 
     <TextView
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="20dp"
+        android:layout_margin="18dp"
         android:text="Please include the verification number sent to you by email"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:fontFamily="@font/hanmaumgodic_m"/>
 
     <TextView
         android:id="@+id/emailAuth_time_counter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="3:00"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:layout_marginTop="20dp"
         android:gravity="center"
+        android:fontFamily="@font/hanmaumgodic_m"
         />
 
     <Button
@@ -52,8 +56,9 @@
         android:layout_marginTop="30dp"
         android:background="#FFFFFF"
         android:text="OK"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:layout_marginBottom="30dp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:fontFamily="@font/hanmaumgodic_m"/>
 
 </LinearLayout>

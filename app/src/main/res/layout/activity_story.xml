@@ -78,7 +78,8 @@
                     android:gravity="center"
                     android:text="text"
                     android:textColor="#f0f4f4"
-                    android:textSize="30sp" />
+                    android:textSize="20sp"
+                    android:fontFamily="@font/hanmaumgodic_m"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -119,7 +120,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
                 android:gravity="center"
-                android:text="tag" />
+                android:text="tag"
+                android:fontFamily="@font/hanmaumgodic_l"/>
 
             <TextView
                 android:id="@+id/story_text_tag2"
@@ -127,7 +129,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
                 android:gravity="center"
-                android:text="tag" />
+                android:text="tag"
+                android:fontFamily="@font/hanmaumgodic_l"/>
 
             <TextView
                 android:id="@+id/story_text_tag3"
@@ -135,7 +138,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
                 android:gravity="center"
-                android:text="tag" />
+                android:text="tag"
+                android:fontFamily="@font/hanmaumgodic_l"/>
 
             <TextView
                 android:id="@+id/story_text_tag4"
@@ -143,7 +147,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
                 android:gravity="center"
-                android:text="tag" />
+                android:text="tag"
+                android:fontFamily="@font/hanmaumgodic_l"/>
 
             <TextView
                 android:id="@+id/story_text_tag5"
@@ -151,7 +156,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
                 android:gravity="center"
-                android:text="tag" />
+                android:text="tag"
+                android:fontFamily="@font/hanmaumgodic_l"/>
 
         </LinearLayout>
 

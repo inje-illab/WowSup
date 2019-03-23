@@ -16,7 +16,8 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="글쓰기" />
+            android:text="글쓰기"
+            android:fontFamily="@font/hanmaumgodic_m"/>
 
         <EditText
             android:id="@+id/wirteTest_id"
@@ -32,13 +33,15 @@
             android:layout_height="match_parent"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="TEXT" />
+            android:text="TEXT"
+            android:fontFamily="@font/hanmaumgodic_m"/>
 
         <Button
             android:id="@+id/btnSave"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Save" />
+            android:text="Save"
+            android:fontFamily="@font/hanmaumgodic_m" />
 
     </LinearLayout>
 
@@ -52,13 +55,15 @@
             android:id="@+id/btnGet"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="가져오기" />
+            android:text="가져오기"
+            android:fontFamily="@font/hanmaumgodic_m" />
 
         <ListView
             android:id="@+id/lvWrite"
             android:layout_width="match_parent"
             android:layout_height="407dp"
-            android:visibility="invisible" />
+            android:visibility="invisible"
+            android:fontFamily="@font/hanmaumgodic_m"/>
     </LinearLayout>
 
 </LinearLayout>

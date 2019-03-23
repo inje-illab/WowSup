@@ -18,7 +18,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="TextView"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:fontFamily="@font/hanmaumgodic_m"/>
     </LinearLayout>
 
     <LinearLayout
@@ -32,13 +33,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="Button"
+            android:fontFamily="@font/hanmaumgodic_m"/>
 
         <Button
             android:id="@+id/dialog_confirm_btn_yes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="Button"
+            android:fontFamily="@font/hanmaumgodic_m"/>
     </LinearLayout>
 </LinearLayout>

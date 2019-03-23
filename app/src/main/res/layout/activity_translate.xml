@@ -43,7 +43,8 @@
                 android:text="Help"
                 android:textColor="#f0f4f4"
                 android:textSize="21sp"
-                android:textStyle="normal" />
+                android:textStyle="normal"
+                android:fontFamily="@font/hanmaumgodic_b" />
         </LinearLayout>
 
         <LinearLayout
@@ -67,21 +68,23 @@
             <EditText
                 android:id="@+id/editText"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="180dp"
                 android:background="@mipmap/text_feild"
                 android:ems="10"
+                android:fontFamily="@font/hanmaumgodic_m"
                 android:text="안녕하세요? 제 이름은 'SupPeople'입니다."
-                android:textSize="18sp" />
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/btnTrans"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:background="@mipmap/translation_button"
+                android:fontFamily="@font/hanmaumgodic_m"
                 android:text="Translation"
                 android:textColor="#808183"
-                android:textSize="21sp" />
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -89,27 +92,29 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="10"
-            android:gravity="bottom"
+            android:gravity="center"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txtTrans"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="180dp"
                 android:layout_marginTop="10dp"
                 android:background="@mipmap/text_feild"
+                android:fontFamily="@font/hanmaumgodic_m"
                 android:gravity="center"
-                android:textSize="18sp" />
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/btnSendtext"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:background="@mipmap/btn_black_bar"
+                android:fontFamily="@font/hanmaumgodic_m"
                 android:text="Post for Chattiing"
                 android:textColor="#f0f4f4"
-                android:textSize="21sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 

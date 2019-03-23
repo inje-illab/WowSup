@@ -71,7 +71,8 @@
                             android:layout_marginLeft="7dp"
                             android:text="friendname"
                             android:textColor="#808183"
-                            android:textSize="16.2sp" />
+                            android:textSize="14sp"
+                            android:fontFamily="@font/hanmaumgodic_m"/>
 
 
                     </LinearLayout>
@@ -100,7 +101,8 @@
                         android:layout_height="30dp"
                         android:background="@mipmap/chat_f_notice"
                         android:text="nick"
-                        android:textSize="8sp" />
+                        android:textSize="8sp"
+                        android:fontFamily="@font/hanmaumgodic_m"/>
                 </LinearLayout>
 
             </LinearLayout>
