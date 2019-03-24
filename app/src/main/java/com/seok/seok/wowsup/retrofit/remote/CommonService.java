@@ -23,5 +23,4 @@ public interface CommonService {
     @GET("Common/confirmFriend.php")
     Call<ResponseCommonObj> requestConfirmFriend(@Query("userID1") String userID1,
                                                  @Query("userID2") String userID2);
-
 }

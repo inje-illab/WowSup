@@ -7,6 +7,10 @@ android {
 //        minSdkVersion 19
         // 업데이트시 버전 코드 변경하기
         // 로그인창
+/*
+    업데이트 내용
+    화면전환시 에니메이션 효과 적용
+*/
         minSdkVersion 26
         targetSdkVersion 28
         versionCode 3
