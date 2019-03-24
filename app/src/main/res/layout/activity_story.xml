@@ -43,9 +43,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="12dp"
                 app:bmb_buttonEnum="ham"
-                app:bmb_buttonPlaceEnum="buttonPlace_ham_2"
+                app:bmb_buttonPlaceEnum="buttonPlace_ham_3"
                 app:bmb_normalColor="#ffffff"
-                app:bmb_piecePlaceEnum="piecePlace_ham_2" />
+                app:bmb_piecePlaceEnum="piecePlace_ham_3" />
 
         </LinearLayout>
 
