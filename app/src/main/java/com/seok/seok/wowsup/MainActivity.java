@@ -1,5 +1,6 @@
 package com.seok.seok.wowsup;
 
+
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
@@ -8,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.seok.seok.wowsup.fragments.fragchat.FragmentChat;
 import com.seok.seok.wowsup.fragments.fraghelp.FragmentHelp;
@@ -47,21 +47,31 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
+
                 switch (item.getItemId()) {
                     case R.id.navigation_menu1: {
+                        transaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
+                        transaction.addToBackStack(null);
                         transaction.replace(R.id.frame_layout, menu1Fragment).commitAllowingStateLoss();
                         break;
                     }
                     case R.id.navigation_menu2: {
+                        transaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
+                        transaction.addToBackStack(null);
                         transaction.replace(R.id.frame_layout, menu2Fragment).commitAllowingStateLoss();
                         break;
                     }
                     case R.id.navigation_menu3: {
+                        transaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
+                        transaction.addToBackStack(null);
                         transaction.replace(R.id.frame_layout, menu3Fragment).commitAllowingStateLoss();
                         break;
                     }
                     case R.id.navigation_menu4: {
+                        transaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
+                        transaction.addToBackStack(null);
                         transaction.replace(R.id.frame_layout, menu4Fragment).commitAllowingStateLoss();
                         break;
                     }
@@ -78,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
                     Common.searchTagText = body.getTag1();
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseStoryObj> call, Throwable t) {
                 Log.d("MainActivity_ERROR ", t.getMessage() + " << ");
