@@ -5,6 +5,7 @@ public class ResponseChatObj {
     private String imageURL;
     private String friend;
     private String userID;
+    private String selfish;
 
     public String getFriendNick() {
         return friendNick;
@@ -36,5 +37,13 @@ public class ResponseChatObj {
 
     public void setUserID(String userID) {
         this.userID = userID;
+    }
+
+    public String getSelfish() {
+        return selfish;
+    }
+
+    public void setSelfish(String userSelfish) {
+        this.selfish = userSelfish;
     }
 }

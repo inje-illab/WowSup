@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.seok.seok.wowsup.R;
@@ -35,7 +36,7 @@ public class FragmentChat extends Fragment {
     private View view;
     private RecyclerView recyclerView;
     private ImageView chatUserImage;
-    private TextView chatUserID;
+    private TextView chatUserID, chatUserSelfish;
     private LinearLayout layoutBanner;
     private OnFragmentInteractionListener mListener;
 
@@ -79,6 +80,7 @@ public class FragmentChat extends Fragment {
         chatUserImage = view.findViewById(R.id.fragment_chat_user_image);
         chatUserID = view.findViewById(R.id.fragment_chat_user_id);
         layoutBanner = view.findViewById(R.id.fragment_chat_lay_banner);
+        chatUserSelfish = view.findViewById(R.id.fragment_chat_user_selfish);
         chatUserImage.setOnClickListener(onClickListener);
     }
     public void initDataSet(){
@@ -92,9 +94,14 @@ public class FragmentChat extends Fragment {
                 if(response.isSuccessful()){
                     ResponseProfileObj body = response.body();
                     if(response.isSuccessful()){
-                        Glide.with(getActivity()).load(body.getImageURL()).centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).into(chatUserImage);
-                        layoutBanner.setBackgroundColor(Common.NONPICK_BANNER[body.getBanner()]);
-                        chatUserID.setText("User ID : " + GlobalWowToken.getInstance().getId());
+                        try {
+                            Glide.with(getActivity()).load(body.getImageURL()).centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).into(chatUserImage);
+                            layoutBanner.setBackgroundColor(Common.NONPICK_BANNER[body.getBanner()]);
+                            chatUserID.setText("User ID : " + GlobalWowToken.getInstance().getId());
+                            chatUserSelfish.setText(body.getSelfish());
+                        }catch (Exception e){
+                            Toast.makeText(getContext().getApplicationContext(), "Communication error", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             }

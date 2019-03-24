@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.seok.seok.wowsup.R;
@@ -25,6 +24,7 @@ import com.seok.seok.wowsup.retrofit.model.ResponseStoryObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 import com.seok.seok.wowsup.utilities.Common;
 import com.seok.seok.wowsup.utilities.GlobalWowToken;
+import com.seok.seok.wowsup.utilities.NoticeActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +73,7 @@ public class FragmentProfile extends Fragment {
                     textFriend.setText(body.getCntFriend() + "");
                     btnNotice.setText(body.getCntNotice() + "");
                     textToken.setText(body.getToken()+"");
+                    Common.option = body.getCntNotice();
                     Glide.with(getActivity()).load(body.getImageURL()).centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).into(profileImage);
                 }
             }
@@ -83,7 +84,6 @@ public class FragmentProfile extends Fragment {
             }
         });
         Common.fragmentProfileTab = false;
-
         return view;
     }
 
@@ -107,8 +107,7 @@ public class FragmentProfile extends Fragment {
 
             @Override
             public void onFailure(Call<List<ResponseStoryObj>> call, Throwable t) {
-                Toast.makeText(getActivity(), "통신오류", Toast.LENGTH_SHORT).show();
-                Log.d("fragments_Profile", t.getMessage() + " < ");
+                Log.d("ProfileFragment_INITDATASET", "DATE_SET Transfer Failed");
             }
         });
     }

@@ -43,8 +43,10 @@
                 android:layout_marginBottom="19dp"
                 android:text="Write"
                 android:textColor="#f0f4f4"
-                android:textSize="21sp"
-                android:textStyle="normal" />
+                android:textSize="20sp"
+                android:textStyle="normal"
+                android:fontFamily="@font/hanmaumgodic_b"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -96,7 +98,8 @@
                         android:layout_height="wrap_content"
                         android:text="Title"
                         android:textColor="#808183"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:fontFamily="@font/hanmaumgodic_m"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -115,7 +118,8 @@
                         android:layout_marginLeft="7dp"
                         android:layout_marginRight="7dp"
                         android:singleLine="true"
-                        app:met_hideUnderline="true"/>
+                        app:met_hideUnderline="true"
+                        android:fontFamily="@font/hanmaumgodic_m"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -143,7 +147,8 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         app:met_textColor="#f0f4f4"
-                        app:met_hideUnderline="true" />
+                        app:met_hideUnderline="true"
+                        android:fontFamily="@font/hanmaumgodic_m" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -249,37 +254,44 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical">
-
-                <com.tylersuehr.chips.ChipsInputLayout
-                    android:id="@+id/chips_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Start typing for 5 Tags... "
-                    android:textColor="#212121"
-                    android:textColorHint="#757575"
-                    app:chip_showDetails="true" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:gravity="bottom"
                 android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/story_write_btn_save"
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="match_parent">
 
-                    android:background="@mipmap/save_button"
-                    android:text="Save"
-                    android:textColor="#f0f4f4"
-                    android:textSize="21sp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <com.tylersuehr.chips.ChipsInputLayout
+                            android:id="@+id/chips_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/hanmaumgodic_m"
+                            android:hint="Start typing for 5 Tags... "
+                            android:textColor="#212121"
+                            android:textColorHint="#757575"
+                            app:chip_showDetails="true" />
+
+                        <Button
+                            android:id="@+id/story_write_btn_save"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+
+                            android:background="@mipmap/save_button"
+                            android:fontFamily="@font/hanmaumgodic_m"
+                            android:text="Save"
+                            android:textColor="#f0f4f4"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+                </ScrollView>
+
             </LinearLayout>
 
         </LinearLayout>

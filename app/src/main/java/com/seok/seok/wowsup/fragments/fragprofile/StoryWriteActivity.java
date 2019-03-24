@@ -1,7 +1,6 @@
 package com.seok.seok.wowsup.fragments.fragprofile;
 
 import android.Manifest;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -22,12 +21,11 @@ import android.widget.Toast;
 
 import com.seok.seok.wowsup.R;
 import com.seok.seok.wowsup.TranslateActivity;
-import com.seok.seok.wowsup.retrofit.model.ResponseWriteObj;
 import com.seok.seok.wowsup.retrofit.model.RespsonseImageObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 import com.seok.seok.wowsup.utilities.Common;
+import com.seok.seok.wowsup.utilities.WriteConfirmDialog;
 import com.seok.seok.wowsup.utilities.GlobalWowToken;
-import com.seok.seok.wowsup.utilities.ViewDialog;
 import com.tylersuehr.chips.Chip;
 import com.tylersuehr.chips.ChipDataSource;
 import com.tylersuehr.chips.ChipsInputLayout;
@@ -42,14 +40,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class StoryWriteActivity extends AppCompatActivity {
-    private final String TAG = StoryWriteActivity.class.getName();
     private ImageView imageView1, imageView2, imageView3, imageView4, imageView5,btnHelp, btnBack, btnPickImage;
     private LinearLayout layoutBackground;
     private String imageBackgroundURL, mediaPath;
     private Button btnSave, btnUpload;
     public static EditText editTextTitle, editTextBody;
     private ChipsInputLayout chipsInputLayout;
-    private int imageOption, editOption;
     private static int RESULT_LOAD_IMAGE=0;
     private static final int WRITE_PERMISSION = 0x01;
 
@@ -59,6 +55,7 @@ public class StoryWriteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_story_write);
         requestWritePermission();
 
+        imageBackgroundURL = "basic_image_5_th.png";
         btnSave = findViewById(R.id.story_write_btn_save);
         btnBack = findViewById(R.id.story_write_btn_back);
         editTextTitle = findViewById(R.id.story_write_edit_title);
@@ -125,13 +122,26 @@ public class StoryWriteActivity extends AppCompatActivity {
                 while (tagSize < 5) {
                     tag[tagSize++] = "";
                 }
-                ViewDialog viewDialog = new ViewDialog(StoryWriteActivity.this, 2);
-                viewDialog.setButtonText("No", "Yes");
-                viewDialog.requestStoryUpload(GlobalWowToken.getInstance().getId(), editTextTitle.getText().toString(), editTextBody.getText().toString(),
-                        Common.STORY_IMAGE_BASE_URL + imageBackgroundURL, tag[0], tag[1], tag[2], tag[3], tag[4], imageOption);
-                viewDialog.show();
+                if(writeConfirm()) {
+                    WriteConfirmDialog dialog = new WriteConfirmDialog(StoryWriteActivity.this);
+                    dialog.requestStoryUpload(editTextTitle.getText().toString(), editTextBody.getText().toString(),
+                            Common.STORY_IMAGE_BASE_URL + imageBackgroundURL, tag[0], tag[1], tag[2], tag[3], tag[4]);
+                    dialog.show();
+                }
             }
         });
+    }
+    public boolean writeConfirm(){
+        if(editTextTitle.getText().toString().isEmpty() || editTextTitle.getText().length() == 0){
+            Toast.makeText(this, "The title field is empty.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else if(editTextBody.getText().toString().isEmpty() || editTextBody.getText().length() == 0){
+            Toast.makeText(this, "The contents field is empty.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else
+            return true;
     }
     View.OnFocusChangeListener onFocusChangeListener = new View.OnFocusChangeListener() {
         @Override
@@ -156,27 +166,22 @@ public class StoryWriteActivity extends AppCompatActivity {
                 case R.id.story_write_imageview_back1:
                     layoutBackground.setBackgroundResource(R.drawable.basic_image_1_st);
                     imageBackgroundURL = "basic_image_1_st.png";
-                    imageOption = 0;
                     break;
                 case R.id.story_write_imageview_back2:
                     layoutBackground.setBackgroundResource(R.drawable.basic_image_2_nd);
                     imageBackgroundURL = "basic_image_2_nd.png";
-                    imageOption = 0;
                     break;
                 case R.id.story_write_imageview_back3:
                     layoutBackground.setBackgroundResource(R.drawable.basic_image_3_rd);
                     imageBackgroundURL = "basic_image_3_rd.png";
-                    imageOption = 0;
                     break;
                 case R.id.story_write_imageview_back4:
                     layoutBackground.setBackgroundResource(R.drawable.basic_image_4_th);
                     imageBackgroundURL = "basic_image_4_th.png";
-                    imageOption = 0;
                     break;
                 case R.id.story_write_imageview_back5:
                     layoutBackground.setBackgroundResource(R.drawable.unclick_color_1_st);
                     imageBackgroundURL = "basic_image_5_th.png";
-                    imageOption = 0;
                     break;
                 case R.id.story_write_btn_picture:
                     Intent galleryIntent = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

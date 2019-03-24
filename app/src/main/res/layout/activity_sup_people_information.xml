@@ -43,8 +43,9 @@
                 android:layout_marginBottom="19dp"
                 android:text="Personal Information"
                 android:textColor="#f0f4f4"
-                android:textSize="21sp"
-                android:textStyle="normal" />
+                android:textSize="18sp"
+                android:textStyle="normal"
+                android:fontFamily="@font/hanmaumgodic_b"/>
         </LinearLayout>
 
         <LinearLayout
@@ -95,7 +96,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="User ID" />
+                        android:text="User ID"
+                        android:fontFamily="@font/hanmaumgodic_m" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -118,7 +120,8 @@
                         android:layout_height="wrap_content"
                         android:text="Introduce your self. (Max 50)"
                         android:textColor="#808183"
-                        android:textSize="16.7sp" />
+                        android:textSize="16.7sp"
+                        android:fontFamily="@font/hanmaumgodic_m"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -137,7 +140,9 @@
                         android:layout_marginLeft="7dp"
                         android:layout_marginRight="7dp"
                         android:singleLine="true"
-                        app:met_hideUnderline="true" />
+                        app:met_hideUnderline="true"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/hanmaumgodic_m" />
                 </LinearLayout>
 
                 <RelativeLayout
@@ -168,14 +173,16 @@
                                 android:layout_height="wrap_content"
                                 android:text="Age"
                                 android:textColor="#808183"
-                                android:textSize="16.7sp" />
+                                android:textSize="14sp"
+                                android:fontFamily="@font/hanmaumgodic_m" />
 
                             <Spinner
                                 android:layout_height="wrap_content"
                                 android:layout_width="wrap_content"
                                 android:spinnerMode="dropdown"
                                 android:id="@+id/agespinner"
-                                android:prompt="@string/custom_spinner"/>
+                                android:prompt="@string/custom_spinner"
+                                android:fontFamily="@font/hanmaumgodic_m"/>
 
                             <RadioGroup
                                 android:id="@+id/gendergroup"
@@ -188,14 +195,18 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
-                                    android:text="Femal" />
+                                    android:text="Femal"
+                                    android:textSize="14sp"
+                                    android:fontFamily="@font/hanmaumgodic_m" />
 
                                 <RadioButton
                                     android:id="@+id/male"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Male" />
+                                    android:text="Male"
+                                    android:textSize="14sp"
+                                    android:fontFamily="@font/hanmaumgodic_m"/>
                             </RadioGroup>
 
                         </LinearLayout>
@@ -213,14 +224,15 @@
                                 android:layout_height="wrap_content"
                                 android:text="Country"
                                 android:textColor="#808183"
-                                android:textSize="16.7sp" />
-
+                                android:textSize="14sp"
+                                android:fontFamily="@font/hanmaumgodic_m"/>
                             <Spinner
                                 android:id="@+id/countryspinner"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:prompt="@string/custom_spinner"
-                                android:spinnerMode="dropdown" />
+                                android:spinnerMode="dropdown"
+                                android:fontFamily="@font/hanmaumgodic_m" />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -233,7 +245,8 @@
                         android:background="#f0f4f4"
                         android:text="Choose your information."
                         android:textColor="#808183"
-                        android:textSize="16.7sp" />
+                        android:textSize="16.7sp"
+                        android:fontFamily="@font/hanmaumgodic_m" />
 
                 </RelativeLayout>
 
@@ -366,7 +379,8 @@
                         android:background="#f0f4f4"
                         android:text="Choose your main color."
                         android:textColor="#808183"
-                        android:textSize="16.7sp" />
+                        android:textSize="16.7sp"
+                        android:fontFamily="@font/hanmaumgodic_m" />
 
                 </RelativeLayout>
 
@@ -381,7 +395,8 @@
                     android:background="@mipmap/to_modify_information_button"
                     android:text="To modify information"
                     android:textColor="#f0f4f4"
-                    android:textSize="21sp" />
+                    android:textSize="18sp"
+                    android:fontFamily="@font/hanmaumgodic_m"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

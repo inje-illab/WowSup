@@ -56,7 +56,8 @@
                         android:gravity="center"
                         android:text="ME"
                         android:textColor="#ffffff"
-                        android:textSize="22.2sp" />
+                        android:textSize="20sp"
+                        android:fontFamily="@font/hanmaumgodic_m" />
 
                 </LinearLayout>
 
@@ -64,7 +65,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="10"
-                    android:orientation="vertical"></LinearLayout>
+                    android:gravity="center|left"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="22sp"
+                        android:layout_marginLeft="20dp"
+                        android:background="#ffffff"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/fragment_chat_user_selfish"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#808183"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -86,13 +104,15 @@
             android:layout_marginTop="10dp"
             android:text="LIST"
             android:textColor="#808183"
-            android:textSize="16.7sp" />
+            android:textSize="14sp"
+            android:fontFamily="@font/hanmaumgodic_m"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/fragment_chat_listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="24dp"></android.support.v7.widget.RecyclerView>
+            android:paddingTop="24dp"
+            android:fontFamily="@font/hanmaumgodic_m"></android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 

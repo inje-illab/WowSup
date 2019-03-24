@@ -40,6 +40,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatViewHolder> {
         Glide.with(context.getApplicationContext()).load(body.getImageURL()).centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(context.getApplicationContext())).into(holder.chatFriendImage);
         // holder.chatFriendOption.setText(body.getFriend());
         holder.chatFriend.setText(body.getFriendNick());
+        holder.chatFriendSelfish.setText(body.getSelfish());
         holder.chatFriendOption.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

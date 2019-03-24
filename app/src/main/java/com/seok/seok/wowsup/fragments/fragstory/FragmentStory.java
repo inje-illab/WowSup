@@ -1,6 +1,5 @@
 package com.seok.seok.wowsup.fragments.fragstory;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -17,10 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.seok.seok.wowsup.R;
-import com.seok.seok.wowsup.SupPeopleInformationActivity;
 import com.seok.seok.wowsup.fragments.CardAdapter;
 import com.seok.seok.wowsup.fragments.CardData;
-import com.seok.seok.wowsup.fragments.fragprofile.NoticeActivity;
 import com.seok.seok.wowsup.retrofit.model.ResponseStoryObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 import com.seok.seok.wowsup.utilities.Common;

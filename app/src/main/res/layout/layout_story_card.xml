@@ -66,7 +66,8 @@
                     android:gravity="bottom|center"
                     android:text="0"
                     android:textColor="#ffffff"
-                    android:textSize="12sp" />
+                    android:textSize="10sp"
+                    android:fontFamily="@font/hanmaumgodic_l"/>
 
                 <TextView
                     android:id="@+id/story_view_title"
@@ -75,7 +76,8 @@
                     android:gravity="center"
                     android:text="Card Text"
                     android:textColor="#ffffff"
-                    android:textSize="16.7sp" />
+                    android:textSize="14sp"
+                    android:fontFamily="@font/hanmaumgodic_m"/>
 
             </RelativeLayout>
 

@@ -44,7 +44,9 @@
                 android:background="@mipmap/me_notice"
                 android:text="0"
                 android:textColor="#808183"
-                android:textSize="11.8sp" />
+                android:textSize="11.8sp"
+                android:fontFamily="@font/hanmaumgodic_m"/>
+
 
         </LinearLayout>
 
@@ -107,8 +109,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="1dp"
                         android:layout_marginRight="5dp"
+                        android:fontFamily="@font/hanmaumgodic_l"
                         android:gravity="center"
-                        android:text="0" />
+                        android:text="0"
+                        android:textSize="10sp" />
 
                     <ImageView
                         android:id="@+id/fragment_profile_img_friend"
@@ -124,8 +128,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="1dp"
                         android:layout_marginRight="5dp"
+                        android:fontFamily="@font/hanmaumgodic_l"
                         android:gravity="center"
-                        android:text="0" />
+                        android:text="0"
+                        android:textSize="10sp" />
 
                     <ImageView
                         android:id="@+id/fragment_profile_img_token"
@@ -160,7 +166,8 @@
             android:id="@+id/fragment_profile_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#f0f4f4">
+            android:background="#f0f4f4"
+            android:fontFamily="@font/hanmaumgodic_m">
 
         </android.support.v7.widget.RecyclerView>
     </LinearLayout>

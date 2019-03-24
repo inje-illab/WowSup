@@ -43,7 +43,8 @@
                 android:gravity="center_horizontal"
                 android:text="Sign Up"
                 android:textColor="#808183"
-                android:textSize="21sp" />
+                android:textSize="20sp"
+                android:fontFamily="@font/hanmaumgodic_b"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -88,7 +89,9 @@
                             android:id="@+id/register_edittext_id"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/hanmaumgodic_m"
                             android:hint="Write your ID"
+                            android:singleLine="true"
                             android:textColor="#f0f4f4"
                             android:textSize="15sp" />
 
@@ -106,7 +109,8 @@
                         android:layout_width="97dp"
                         android:layout_height="50dp"
                         android:background="@mipmap/short_button"
-                        android:text="Overlap" />
+                        android:text="Overlap"
+                        android:fontFamily="@font/hanmaumgodic_m"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -129,7 +133,10 @@
                         android:id="@+id/register_edittext_pwd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/hanmaumgodic_m"
                         android:hint="Write your Password"
+                        android:inputType="textPassword"
+                        android:singleLine="true"
                         android:textColor="#f0f4f4"
                         android:textSize="15sp" />
 
@@ -163,8 +170,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Write your E-Mail"
+                            android:singleLine="true"
                             android:textColor="#f0f4f4"
-                            android:textSize="15sp" />
+                            android:textSize="15sp"
+                            android:fontFamily="@font/hanmaumgodic_m"/>
 
                     </com.github.florent37.materialtextfield.MaterialTextField>
                 </LinearLayout>
@@ -180,7 +189,8 @@
                         android:layout_width="97dp"
                         android:layout_height="50dp"
                         android:background="@mipmap/short_button"
-                        android:text="Overlap" />
+                        android:text="Overlap"
+                        android:fontFamily="@font/hanmaumgodic_m"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -202,7 +212,8 @@
                 android:background="@mipmap/short_button"
                 android:text="Login"
                 android:textColor="#808183"
-                android:textSize="21sp" />
+                android:textSize="18sp"
+                android:fontFamily="@font/hanmaumgodic_m"/>
 
             <Button
                 android:id="@+id/register_button_join"
@@ -213,7 +224,8 @@
                 android:background="@mipmap/short_button_dark"
                 android:text="Sign Up"
                 android:textColor="#f0f4f4 "
-                android:textSize="21sp" />
+                android:textSize="18sp"
+                android:fontFamily="@font/hanmaumgodic_m"/>
 
         </LinearLayout>
 

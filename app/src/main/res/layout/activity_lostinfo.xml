@@ -52,7 +52,9 @@
                 android:gravity="center"
                 android:text="Lost ID / Password"
                 android:textColor="#808183"
-                android:textSize="21sp" />
+                android:textSize="20sp"
+                android:fontFamily="@font/hanmaumgodic_b"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -80,7 +82,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:text="Find ID"
-                        android:textSize="15.3sp" />
+                        android:textSize="15.3sp"
+                        android:fontFamily="@font/hanmaumgodic_m"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -121,6 +124,7 @@
                         android:id="@+id/lostinfo_edit_id_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:singleLine="true"
                         android:hint="Write your E-mail"
                         android:textColor="#f0f4f4"
                         android:textSize="15sp" />
@@ -168,7 +172,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:text="Find Password"
-                        android:textSize="15.3sp" />
+                        android:textSize="15.3sp"
+                        android:fontFamily="@font/hanmaumgodic_m"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -211,6 +216,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Write your ID"
+                        android:singleLine="true"
                         android:textColor="#f0f4f4"
                         android:textSize="15sp" />
 
@@ -231,6 +237,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Write your E-mail"
+                        android:singleLine="true"
                         android:textColor="#f0f4f4"
                         android:textSize="15sp" />
 

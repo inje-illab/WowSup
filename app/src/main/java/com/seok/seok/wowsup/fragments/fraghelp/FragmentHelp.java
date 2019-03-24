@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -21,6 +23,7 @@ import com.seok.seok.wowsup.R;
 import com.seok.seok.wowsup.retrofit.model.ResponseWordChartObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 import com.seok.seok.wowsup.utilities.Common;
+import com.seok.seok.wowsup.utilities.DeveloperDialog;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -34,7 +37,7 @@ import retrofit2.Response;
 public class FragmentHelp extends Fragment {
 
     private EditText editText;
-    private Button button;
+    private Button button, iBtnMore;
     private View view;
     private String delimiter;
     private int wordCount;
@@ -66,6 +69,14 @@ public class FragmentHelp extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_fragment_help, container, false);
+        iBtnMore = view.findViewById(R.id.fragment_help_more);
+        iBtnMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DeveloperDialog dialog = new DeveloperDialog(view.getContext());
+                dialog.show();
+            }
+        });
         initChart();
         return view;
     }

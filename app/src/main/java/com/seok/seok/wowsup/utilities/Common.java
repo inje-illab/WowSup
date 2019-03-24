@@ -22,6 +22,7 @@ public class Common {
 
     public static String searchTagText = null;
     public static int translateOption = 0;
+    public static int option = 0;
 
     public static final int[] NONPICK_BANNER = {
             Color.rgb(201,223,241),

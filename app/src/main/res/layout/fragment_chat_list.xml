@@ -71,7 +71,8 @@
                             android:layout_marginLeft="7dp"
                             android:text="friendname"
                             android:textColor="#808183"
-                            android:textSize="16.2sp" />
+                            android:textSize="14sp"
+                            android:fontFamily="@font/hanmaumgodic_m"/>
 
 
                     </LinearLayout>
@@ -80,9 +81,23 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:gravity="center"
+                        android:gravity="center|left"
                         android:orientation="horizontal">
 
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="22sp"
+                            android:layout_marginLeft="7dp"
+                            android:background="#c9dff1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/fragment_chat_friend_selfish"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="#808183"
+                                android:textSize="18sp" />
+                        </LinearLayout>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -100,7 +115,8 @@
                         android:layout_height="30dp"
                         android:background="@mipmap/chat_f_notice"
                         android:text="nick"
-                        android:textSize="8sp" />
+                        android:textSize="8sp"
+                        android:fontFamily="@font/hanmaumgodic_m"/>
                 </LinearLayout>
 
             </LinearLayout>
