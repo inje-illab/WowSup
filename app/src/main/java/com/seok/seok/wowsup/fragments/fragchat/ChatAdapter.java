@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.kakao.auth.helper.StartActivityWrapper;
@@ -48,6 +49,13 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatViewHolder> {
                 Intent intent = new Intent(ChatAdapter.this.context, ChatActivity.class);
                 intent.putExtra("friendUid", stFriendID);
                 context.startActivity(intent);
+            }
+        });
+        holder.chatFriendOption.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Toast.makeText(context, body.getFriend(), Toast.LENGTH_SHORT).show();
+                return true;
             }
         });
     }
