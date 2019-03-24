@@ -124,6 +124,7 @@
                         android:id="@+id/lostinfo_edit_id_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:singleLine="true"
                         android:hint="Write your E-mail"
                         android:textColor="#f0f4f4"
                         android:textSize="15sp" />
@@ -215,6 +216,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Write your ID"
+                        android:singleLine="true"
                         android:textColor="#f0f4f4"
                         android:textSize="15sp" />
 
@@ -235,6 +237,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Write your E-mail"
+                        android:singleLine="true"
                         android:textColor="#f0f4f4"
                         android:textSize="15sp" />
 

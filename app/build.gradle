@@ -4,11 +4,13 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.seok.seok.wowsup"
-//        minSdkVersion 22
+//        minSdkVersion 19
+        // 업데이트시 버전 코드 변경하기
+        // 로그인창
         minSdkVersion 26
         targetSdkVersion 28
-        versionCode 2
-        versionName "1.2.1"
+        versionCode 3
+        versionName "1.3.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

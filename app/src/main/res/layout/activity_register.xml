@@ -89,10 +89,11 @@
                             android:id="@+id/register_edittext_id"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/hanmaumgodic_m"
                             android:hint="Write your ID"
+                            android:singleLine="true"
                             android:textColor="#f0f4f4"
-                            android:textSize="15sp"
-                            android:fontFamily="@font/hanmaumgodic_m"/>
+                            android:textSize="15sp" />
 
                     </com.github.florent37.materialtextfield.MaterialTextField>
                 </LinearLayout>
@@ -132,10 +133,12 @@
                         android:id="@+id/register_edittext_pwd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/hanmaumgodic_m"
                         android:hint="Write your Password"
+                        android:inputType="textPassword"
+                        android:singleLine="true"
                         android:textColor="#f0f4f4"
-                        android:textSize="15sp"
-                        android:fontFamily="@font/hanmaumgodic_m"/>
+                        android:textSize="15sp" />
 
                 </com.github.florent37.materialtextfield.MaterialTextField>
 
@@ -167,6 +170,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Write your E-Mail"
+                            android:singleLine="true"
                             android:textColor="#f0f4f4"
                             android:textSize="15sp"
                             android:fontFamily="@font/hanmaumgodic_m"/>

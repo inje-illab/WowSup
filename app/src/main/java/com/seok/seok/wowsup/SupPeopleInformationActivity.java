@@ -76,12 +76,20 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
                         if (countries.get(i).getName().equals(body.getNationality()))
                             spinnerCountry.setSelection(i);
                     }
+                    if (strCountry.isEmpty() | strCountry.equals("") | strCountry.length() == 0) {
+                        spinnerCountry.setSelection(0);
+                    }
                     if (body.getGender().equals("Male")) {
                         genderGroup.check(R.id.male);
-                    } else {
+                    } else if (body.getGender().equals("Female")) {
                         genderGroup.check(R.id.female);
+                    } else {
+                        genderGroup.check(R.id.male);
                     }
-                    spinnerAge.setSelection(body.getAge() - 1);
+                    if (body.getAge() == 0) {
+                        spinnerAge.setSelection(19);
+                    } else
+                        spinnerAge.setSelection(body.getAge() - 1);
                     setLayoutSet(body.getBanner());
                     Glide.with(getApplicationContext()).load(body.getImageURL()).centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getApplicationContext())).into(profileImage);
                 }
