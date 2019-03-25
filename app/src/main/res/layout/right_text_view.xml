@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
         android:layout_marginLeft="5dp"
-        android:background="@mipmap/i_say"
+        android:background="@drawable/i_say"
         android:gravity="left"
         android:orientation="horizontal">
 

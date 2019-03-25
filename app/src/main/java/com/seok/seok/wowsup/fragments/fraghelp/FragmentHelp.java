@@ -155,7 +155,7 @@ public class FragmentHelp extends Fragment {
 
 
 
-                    for (int c : MY_COLORS)
+                    for (int c : Common.NONPICK_BANNER)
                         colors.add(c);
                     dataSet.setColors(colors);
 
@@ -173,7 +173,7 @@ public class FragmentHelp extends Fragment {
                     l.setTextSize(12f);  // 글짜 크기조절
                     l.setFormSize (12f); // 도형의 크기 조절*/
 
-                    globalHitWordChart.animateXY(3000, 3000);
+                    globalHitWordChart.animateXY(1500, 1500);
                 }
             }
             @Override

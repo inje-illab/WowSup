@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.seok.seok.wowsup.R;
 import com.seok.seok.wowsup.retrofit.model.ResponseCommonObj;
+import com.seok.seok.wowsup.retrofit.model.ResponseStoryObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 
 import retrofit2.Call;
@@ -18,7 +19,7 @@ import retrofit2.Response;
 public class StoryBanDialog extends Dialog implements View.OnClickListener {
     private static int LAYOUT;
     private Context context;
-    private String userID, otherUserID;
+    private String userID, storyID;
     private Button btnYes, btnNo;
     public StoryBanDialog(Context context) {
         super(context);
@@ -29,45 +30,41 @@ public class StoryBanDialog extends Dialog implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(LAYOUT);
-        btnYes = findViewById(R.id.dialog_story_delete_btn_yes);
-        btnNo = findViewById(R.id.dialog_story_delete_btn_no);
+        btnYes = findViewById(R.id.dialog_story_ban_btn_yes);
+        btnNo = findViewById(R.id.dialog_story_ban_btn_no);
         btnYes.setOnClickListener(this);
         btnNo.setOnClickListener(this);
     }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.dialog_friend_btn_yes:
-                ApiUtils.getCommonService().requestApplyFriend(userID, otherUserID).enqueue(new Callback<ResponseCommonObj>() {
+            case R.id.dialog_story_ban_btn_yes:
+                ApiUtils.getStoryService().requestBanStory(userID,storyID).enqueue(new Callback<ResponseStoryObj>() {
                     @Override
-                    public void onResponse(Call<ResponseCommonObj> call, Response<ResponseCommonObj> response) {
+                    public void onResponse(Call<ResponseStoryObj> call, Response<ResponseStoryObj> response) {
                         if (response.isSuccessful()) {
-                            ResponseCommonObj body = response.body();
-                            if (body.getStatus() == 1) {
-                                Toast.makeText(context, "Friend request success!", Toast.LENGTH_SHORT).show();
-                            } else if (body.getStatus() == 0) {
-                                Toast.makeText(context, "You are already a friend request.", Toast.LENGTH_SHORT).show();
-                            }else if(body.getStatus() == 2){
-                                Toast.makeText(context, "It is my own writing.", Toast.LENGTH_SHORT).show();
+                            ResponseStoryObj body = response.body();
+                            if (body.getState() == 1) {
+                                Toast.makeText(context, "Your report has been reported!", Toast.LENGTH_SHORT).show();
                             }
                         }
                         dismiss();
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseCommonObj> call, Throwable t) {
-                        Toast.makeText(context, "Friend request failed", Toast.LENGTH_SHORT).show();
-                        dismiss();
+                    public void onFailure(Call<ResponseStoryObj> call, Throwable t) {
+
                     }
                 });
+
                 break;
-            case R.id.dialog_friend_btn_no:
+            case R.id.dialog_story_ban_btn_no:
                 dismiss();
                 break;
         }
     }
-    public void requestStoryBan(String userID, String otherUserID) {
+    public void requestStoryBan(String userID, String storyID) {
         this.userID = userID;
-        this.otherUserID = otherUserID;
+        this.storyID = storyID;
     }
 }

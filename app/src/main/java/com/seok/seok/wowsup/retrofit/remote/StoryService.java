@@ -34,4 +34,9 @@ public interface StoryService {
     @GET("Story/deleteStory.php")
     Call<ResponseStoryObj> requestDeleteStory(@Query("userID") String userID,
                                                     @Query("storyID") String storyID);
+
+    @GET("Story/banStory.php")
+    Call<ResponseStoryObj> requestBanStory(@Query("userID") String userID,
+                                              @Query("storyID") String storyID);
+
 }

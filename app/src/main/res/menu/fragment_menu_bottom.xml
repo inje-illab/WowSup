@@ -4,22 +4,22 @@
 
     <item
         android:id="@+id/navigation_menu1"
-        android:icon="@mipmap/me_non_click"
+        android:icon="@drawable/me_non_click"
         android:title="ME"/>
 
     <item
         android:id="@+id/navigation_menu2"
-        android:icon="@mipmap/btn_talk1"
+        android:icon="@drawable/btn_talk1"
         android:title="CHAT"/>
 
     <item
         android:id="@+id/navigation_menu3"
-        android:icon="@mipmap/hashtags_non_click"
+        android:icon="@drawable/hashtags_non_click"
         android:title="TAGs"/>
 
     <item
         android:id="@+id/navigation_menu4"
-        android:icon="@mipmap/logo_sup_noclolor"
+        android:icon="@drawable/logo_sup_noclolor"
         android:title="GLOBAL" />
 
 </menu>

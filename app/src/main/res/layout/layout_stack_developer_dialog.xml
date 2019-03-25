@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="27dp"
-        app:srcCompat="@mipmap/logo" />
+        app:srcCompat="@drawable/logo" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -208,5 +208,5 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        app:srcCompat="@mipmap/wowsup_web" />
+        app:srcCompat="@drawable/wowsup_web" />
 </LinearLayout>

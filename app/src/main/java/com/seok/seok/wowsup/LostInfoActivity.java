@@ -63,36 +63,36 @@ public class LostInfoActivity extends AppCompatActivity {
                     break;
                 case R.id.lostinfo_ibtn_id:
                     layoutPW.setVisibility(View.GONE);
-                    layoutPWTitle.setBackgroundResource(R.mipmap.id_tab_block);
-                    iBtnPW.setImageResource(R.mipmap.tab_down_button);
+                    layoutPWTitle.setBackgroundResource(R.drawable.id_tab_block);
+                    iBtnPW.setImageResource(R.drawable.tab_down_button);
                     checkPW = false;
                     if (!checkID) {
                         layoutID.setVisibility(View.VISIBLE);
-                        layoutIDTitle.setBackgroundResource(R.mipmap.find_id_block);
-                        iBtnID.setImageResource(R.mipmap.tab_up_button);
+                        layoutIDTitle.setBackgroundResource(R.drawable.find_id_block);
+                        iBtnID.setImageResource(R.drawable.tab_up_button);
                         checkID = true;
                     } else {
                         layoutID.setVisibility(View.GONE);
-                        layoutIDTitle.setBackgroundResource(R.mipmap.id_tab_block);
-                        iBtnID.setImageResource(R.mipmap.tab_down_button);
+                        layoutIDTitle.setBackgroundResource(R.drawable.id_tab_block);
+                        iBtnID.setImageResource(R.drawable.tab_down_button);
                         checkID = false;
                     }
                     break;
                 case R.id.lostinfo_ibtn_pw:
                     countDownTimer();
                     layoutID.setVisibility(View.GONE);
-                    layoutIDTitle.setBackgroundResource(R.mipmap.id_tab_block);
-                    iBtnID.setImageResource(R.mipmap.tab_down_button);
+                    layoutIDTitle.setBackgroundResource(R.drawable.id_tab_block);
+                    iBtnID.setImageResource(R.drawable.tab_down_button);
                     checkID = false;
                     if (!checkPW) {
                         layoutPW.setVisibility(View.VISIBLE);
-                        layoutPWTitle.setBackgroundResource(R.mipmap.find_password_block);
-                        iBtnPW.setImageResource(R.mipmap.tab_up_button);
+                        layoutPWTitle.setBackgroundResource(R.drawable.find_password_block);
+                        iBtnPW.setImageResource(R.drawable.tab_up_button);
                         checkPW = true;
                     } else {
                         layoutPW.setVisibility(View.GONE);
-                        layoutPWTitle.setBackgroundResource(R.mipmap.id_tab_block);
-                        iBtnPW.setImageResource(R.mipmap.tab_down_button);
+                        layoutPWTitle.setBackgroundResource(R.drawable.id_tab_block);
+                        iBtnPW.setImageResource(R.drawable.tab_down_button);
                         checkPW = false;
                     }
                     break;
@@ -124,8 +124,8 @@ public class LostInfoActivity extends AppCompatActivity {
         iBtnID.setOnClickListener(onClickListener);
         iBtnPW.setOnClickListener(onClickListener);
         iBtnBack.setOnClickListener(onClickListener);
-        iBtnID.setImageResource(R.mipmap.tab_down_button);
-        iBtnPW.setImageResource(R.mipmap.tab_down_button);
+        iBtnID.setImageResource(R.drawable.tab_down_button);
+        iBtnPW.setImageResource(R.drawable.tab_down_button);
 
         // 서버 콜백 메서드 구현 (ResponseMailObj.class)
         retrofitCallBack = new Callback<ResponseMailObj>() {

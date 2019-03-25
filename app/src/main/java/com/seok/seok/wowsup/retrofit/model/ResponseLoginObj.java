@@ -3,6 +3,7 @@ package com.seok.seok.wowsup.retrofit.model;
 public class ResponseLoginObj {
 
     private int state;
+    private int token;
     private String id;
     private String email;
 
@@ -28,5 +29,13 @@ public class ResponseLoginObj {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getToken() {
+        return token;
+    }
+
+    public void setToken(int token) {
+        this.token = token;
     }
 }

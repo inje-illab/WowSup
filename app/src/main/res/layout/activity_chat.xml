@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="19dp"
-                android:src="@mipmap/back_button" />
+                android:src="@drawable/back_button" />
 
         </LinearLayout>
 
@@ -61,7 +61,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="5"
-                app:srcCompat="@mipmap/help" />
+                app:srcCompat="@drawable/help" />
         </LinearLayout>
     </LinearLayout>
 
@@ -116,10 +116,9 @@
                         android:layout_weight="2.5"
                         android:background="#ffffff"
                         android:ems="10"
+                        android:fontFamily="@font/hanmaumgodic_m"
                         android:inputType="textPersonName"
-                        android:text="Name"
-                        android:textSize="12sp"
-                        android:fontFamily="@font/hanmaumgodic_m"/>
+                        android:textSize="12sp" />
 
                     <Button
                         android:id="@+id/btnSend"
@@ -127,8 +126,10 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="8dp"
                         android:layout_weight="10"
-                        android:background="@mipmap/send_button"
-                        android:fontFamily="@font/hanmaumgodic_m" />
+                        android:background="@drawable/chat_send"
+                        android:fontFamily="@font/hanmaumgodic_m"
+                        android:text="SEND"
+                        android:textColor="#808183" />
                 </LinearLayout>
 
             </LinearLayout>

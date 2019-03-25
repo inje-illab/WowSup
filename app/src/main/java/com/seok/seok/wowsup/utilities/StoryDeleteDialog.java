@@ -1,8 +1,10 @@
 package com.seok.seok.wowsup.utilities;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -41,7 +43,7 @@ public class StoryDeleteDialog extends Dialog implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.dialog_friend_btn_yes:
+            case R.id.dialog_story_delete_btn_yes:
                 ApiUtils.getStoryService().requestDeleteStory(userID, storyID).enqueue(new Callback<ResponseStoryObj>() {
                     @Override
                     public void onResponse(Call<ResponseStoryObj> call, Response<ResponseStoryObj> response) {
@@ -49,6 +51,7 @@ public class StoryDeleteDialog extends Dialog implements View.OnClickListener {
                             ResponseStoryObj body = response.body();
                             if(body.getState() == 1){
                                 Toast.makeText(context, "The post has been deleted!", Toast.LENGTH_SHORT).show();
+                                ((Activity)context).finish();
                             }
                         }
                         dismiss();
@@ -60,14 +63,14 @@ public class StoryDeleteDialog extends Dialog implements View.OnClickListener {
                     }
                 });
                 break;
-            case R.id.dialog_friend_btn_no:
+            case R.id.dialog_story_delete_btn_no:
                 dismiss();
                 break;
         }
     }
 
     public boolean requestStoryDelete(String userID, String otherUserID, String storyID) {
-        if (userID == otherUserID) {
+        if (userID.equals(otherUserID)) {
             this.userID = userID;
             this.storyID = storyID;
             return true;

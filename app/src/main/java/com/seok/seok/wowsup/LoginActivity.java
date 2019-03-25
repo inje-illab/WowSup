@@ -107,6 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                             if (response.isSuccessful()) {
                                 ResponseLoginObj body = response.body();
                                 GlobalWowToken.getInstance().setId(body.getId());
+                                GlobalWowToken.getInstance().setToken(body.getToken());
                                 GlobalWowToken.getInstance().setUserEmail(body.getEmail());
                                 if (body.getState() == 1) {
                                     Toast.makeText(LoginActivity.this, "Login 성공", Toast.LENGTH_SHORT).show();
