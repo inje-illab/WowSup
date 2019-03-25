@@ -222,7 +222,7 @@ public class StoryWriteActivity extends AppCompatActivity {
                 cursor.close();
 
             } else {
-                Toast.makeText(this, "이미지선택이 안됨쓰코리아", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "NO image", Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
@@ -230,16 +230,13 @@ public class StoryWriteActivity extends AppCompatActivity {
     }
 
     private void uploadFile() {
-        // Map is used to multipart the file using okhttp3.RequestBody
+
         File file = new File(mediaPath);
-        // Parsing any Media type file
         RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
         MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
         RequestBody filename = RequestBody.create(MediaType.parse("text/plain"), file.getName());
 
         Call<RespsonseImageObj> call = ApiUtils.getImageService().uploadFile(fileToUpload, filename);
-
-
         call.enqueue(new Callback<RespsonseImageObj>() {
             @Override
             public void onResponse(Call<RespsonseImageObj> call, Response<RespsonseImageObj> response) {
