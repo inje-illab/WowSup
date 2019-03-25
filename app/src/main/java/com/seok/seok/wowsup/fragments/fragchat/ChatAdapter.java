@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -57,9 +56,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatViewHolder> {
         holder.chatFriendOption.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                chatOptionDialog.chatOtptionFunction();
-
-                //Toast.makeText(context, body.getFriend(), Toast.LENGTH_SHORT).show();
+                chatOptionDialog.chatOptionFunction();
                 return true;
             }
         });

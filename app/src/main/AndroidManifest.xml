@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.seok.seok.wowsup">
-    <uses-permission android:name="android.permission.INTERNET" />                  <!-- 인터넷 사용 권한 -->
-    <uses-permission android:name="com.android.vending.BILLING" />                  <!-- 구글 인앱 구매 -->
+
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 인터넷 사용 권한 -->
+    <uses-permission android:name="com.android.vending.BILLING" /> <!-- 구글 인앱 구매 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
-    <!-- 카메라 사용 권한
-    <uses-permission android:name="android.permission.CAMERA" />
-    -->
 
     <application
         android:name=".utilities.GlobalApplication"
@@ -19,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StoreActivity"></activity>
+        <activity android:name=".WowsupWebsiteActivity"></activity>
+        <activity android:name=".StoreActivity" />
         <activity android:name=".SupPeopleInformationActivity" />
         <activity android:name=".LostInfoActivity" />
         <activity android:name=".SelectActivity" />

@@ -2,12 +2,14 @@ package com.seok.seok.wowsup.utilities;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.seok.seok.wowsup.R;
+import com.seok.seok.wowsup.WowsupWebsiteActivity;
 
 public class DeveloperDialog extends Dialog implements View.OnClickListener {
     private static int LAYOUT;
@@ -26,7 +28,7 @@ public class DeveloperDialog extends Dialog implements View.OnClickListener {
         iBtnWeb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Coming Soon!", Toast.LENGTH_SHORT).show();
+                context.startActivity(new Intent(context.getApplicationContext(), WowsupWebsiteActivity.class));
             }
         });
     }
