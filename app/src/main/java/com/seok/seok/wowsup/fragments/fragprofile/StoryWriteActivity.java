@@ -19,6 +19,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.ViewTarget;
 import com.seok.seok.wowsup.R;
 import com.seok.seok.wowsup.TranslateActivity;
 import com.seok.seok.wowsup.retrofit.model.RespsonseImageObj;
@@ -40,13 +44,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class StoryWriteActivity extends AppCompatActivity {
-    private ImageView imageView1, imageView2, imageView3, imageView4, imageView5,btnHelp, btnBack, btnPickImage;
+    private ImageView imageView1, imageView2, imageView3, imageView4, imageView5, btnHelp, btnBack, btnPickImage;
     private LinearLayout layoutBackground;
     private String imageBackgroundURL, mediaPath;
     private Button btnSave, btnUpload;
     public static EditText editTextTitle, editTextBody;
     private ChipsInputLayout chipsInputLayout;
-    private static int RESULT_LOAD_IMAGE=0;
+    private static int RESULT_LOAD_IMAGE = 0;
     private static final int WRITE_PERMISSION = 0x01;
 
     @Override
@@ -122,37 +126,41 @@ public class StoryWriteActivity extends AppCompatActivity {
                 while (tagSize < 5) {
                     tag[tagSize++] = "";
                 }
-                if(writeConfirm()) {
+                if (writeConfirm()) {
                     WriteConfirmDialog dialog = new WriteConfirmDialog(StoryWriteActivity.this);
-                    dialog.requestStoryUpload(editTextTitle.getText().toString(), editTextBody.getText().toString(),
-                            Common.STORY_IMAGE_BASE_URL + imageBackgroundURL, tag[0], tag[1], tag[2], tag[3], tag[4]);
+                    if (Common.option == 11)
+                        dialog.requestStoryUpload(editTextTitle.getText().toString(), editTextBody.getText().toString(),
+                                Common.STORY_IMAGE_BASE_URL + imageBackgroundURL, tag[0], tag[1], tag[2], tag[3], tag[4]);
+                    else if (Common.option == 10)
+                        dialog.requestStoryUpload(editTextTitle.getText().toString(), editTextBody.getText().toString(),
+                                mediaPath, tag[0], tag[1], tag[2], tag[3], tag[4]);
                     dialog.show();
                 }
             }
         });
     }
-    public boolean writeConfirm(){
-        if(editTextTitle.getText().toString().isEmpty() || editTextTitle.getText().length() == 0){
+
+    public boolean writeConfirm() {
+        if (editTextTitle.getText().toString().isEmpty() || editTextTitle.getText().length() == 0) {
             Toast.makeText(this, "The title field is empty.", Toast.LENGTH_SHORT).show();
             return false;
-        }
-        else if(editTextBody.getText().toString().isEmpty() || editTextBody.getText().length() == 0){
+        } else if (editTextBody.getText().toString().isEmpty() || editTextBody.getText().length() == 0) {
             Toast.makeText(this, "The contents field is empty.", Toast.LENGTH_SHORT).show();
             return false;
-        }
-        else
+        } else
             return true;
     }
+
     View.OnFocusChangeListener onFocusChangeListener = new View.OnFocusChangeListener() {
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
             switch (v.getId()) {
                 case R.id.story_write_edit_title:
-                    if(hasFocus)
+                    if (hasFocus)
                         Common.translateOption = 1;
                     break;
                 case R.id.story_write_edit_body:
-                    if(hasFocus)
+                    if (hasFocus)
                         Common.translateOption = 2;
                     break;
             }
@@ -162,6 +170,7 @@ public class StoryWriteActivity extends AppCompatActivity {
     View.OnClickListener onClickListener = new ImageView.OnClickListener() {
         @Override
         public void onClick(View v) {
+            Common.option = 11;
             switch (v.getId()) {
                 case R.id.story_write_imageview_back1:
                     layoutBackground.setBackgroundResource(R.drawable.basic_image_1_st);
@@ -184,8 +193,8 @@ public class StoryWriteActivity extends AppCompatActivity {
                     imageBackgroundURL = "basic_image_5_th.png";
                     break;
                 case R.id.story_write_btn_picture:
-                    Intent galleryIntent = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE );
+                    Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
                     break;
                 case R.id.story_write_btn_help:
                     startActivity(new Intent(StoryWriteActivity.this, TranslateActivity.class));
@@ -193,9 +202,10 @@ public class StoryWriteActivity extends AppCompatActivity {
             }
         }
     };
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        if(requestCode == WRITE_PERMISSION){
+        if (requestCode == WRITE_PERMISSION) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 //Log.d(LOG_TAG, "Write Permission Failed");
                 Toast.makeText(this, "You must allow permission write external storage to your mobile device.", Toast.LENGTH_SHORT).show();
@@ -209,7 +219,8 @@ public class StoryWriteActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         try {
             // 이미지 선택할떄.
-            if (requestCode == RESULT_LOAD_IMAGE  && resultCode == RESULT_OK && null != data) {
+            Common.option = 10;
+            if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
                 // 이미지 픽 밑 세부정도 얻어오기
                 Uri selectedImage = data.getData();
                 String[] filePathColumn = {MediaStore.Images.Media.DATA};
@@ -218,57 +229,29 @@ public class StoryWriteActivity extends AppCompatActivity {
 
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 mediaPath = cursor.getString(columnIndex);
-                imageView1.setImageBitmap(BitmapFactory.decodeFile(mediaPath));
+                Glide.with(this)
+                        .load(mediaPath)
+                        .into(new ViewTarget<LinearLayout, GlideDrawable>((LinearLayout) layoutBackground) {
+                            @Override
+                            public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
+                                layoutBackground.setBackground(resource);
+                            }
+                        });
                 cursor.close();
 
             } else {
                 Toast.makeText(this, "NO image", Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
+            Log.d("Stroasoikdfjnoasievj", e.getMessage());
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
         }
     }
 
-    private void uploadFile() {
-
-        File file = new File(mediaPath);
-        RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
-        MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
-        RequestBody filename = RequestBody.create(MediaType.parse("text/plain"), file.getName());
-
-        Call<RespsonseImageObj> call = ApiUtils.getImageService().uploadFile(fileToUpload, filename);
-        call.enqueue(new Callback<RespsonseImageObj>() {
-            @Override
-            public void onResponse(Call<RespsonseImageObj> call, Response<RespsonseImageObj> response) {
-                Log.d("aaa","0-1");
-                RespsonseImageObj serverResponse = response.body();
-                Log.d("aaa","0-2");
-                Log.d("aaa",serverResponse.toString());
-                if (serverResponse != null) {
-                    if (serverResponse.getSuccess()) {
-                        Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                        Log.d("aaa","1");
-                    } else {
-                        Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                        Log.d("aaa","12");
-                    }
-                } else {
-                    assert serverResponse != null;
-                    Log.d("aaa","0-3");
-                    // Log.v("Response", serverResponse.toString());
-                }
-            }
-            @Override
-            public void onFailure(Call<RespsonseImageObj> call, Throwable t) {
-                Toast.makeText(StoryWriteActivity.this,"통신실패",Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }
-    private void requestWritePermission(){
+    private void requestWritePermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
-                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},WRITE_PERMISSION);
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_PERMISSION);
             }
         }
     }

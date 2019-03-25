@@ -4,20 +4,13 @@ import com.google.gson.annotations.SerializedName;
 
 public class RespsonseImageObj {
 
-    @SerializedName("success")
-    boolean success;
-    @SerializedName("message")
-    String message;
+    private int state;
 
-    public String getMessage() {
-        return message;
+    public int getState() {
+        return state;
     }
 
-    public void setMessage(String message){this.message = message;}
-
-    public boolean getSuccess() {
-        return success;
+    public void setState(int state) {
+        this.state = state;
     }
-
-    public void setSuccess(boolean success){this.success=success;}
 }

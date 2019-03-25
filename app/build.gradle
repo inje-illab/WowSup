@@ -11,6 +11,7 @@ android {
 /*
     업데이트 내용
     WowSup WebSite 연결
+    사용자 사진 업로드 가능
 */
         targetSdkVersion 28
         versionCode 7

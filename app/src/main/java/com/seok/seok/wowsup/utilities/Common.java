@@ -14,6 +14,7 @@ public class Common {
     public static final String API_IMAGE_BASE_URL = "http://www.heywowsup.com/wowsup/Image/";
     public static final String USER_IMAGE_BASE_URL = "http://www.heywowsup.com/wowsup/Image/Userprofile/";
     public static final String STORY_IMAGE_BASE_URL = "http://www.heywowsup.com/wowsup/Image/Background/";
+    public static final String STORY_IMAGE_USER_URL = "http://www.heywowsup.com/wowsup/Image/UserStory/";
 
     public static boolean fragmentProfileTab = true;
     public static boolean fragmentChatTab = true;
