@@ -37,16 +37,16 @@ public class Common {
             Color.rgb(246,224,209)
     };
     public static final int[] PICK_BANNER = {
-            R.mipmap.click_color_1_st,
-            R.mipmap.click_color_2_nd,
-            R.mipmap.click_color_3_rd,
-            R.mipmap.click_color_4_th,
-            R.mipmap.click_color_5_th,
-            R.mipmap.click_color_6_th,
-            R.mipmap.click_color_7_th,
-            R.mipmap.click_color_8_th,
-            R.mipmap.click_color_9_th,
-            R.mipmap.click_color_10_th,
+            R.drawable.click_color_1_st,
+            R.drawable.click_color_2_nd,
+            R.drawable.click_color_3_rd,
+            R.drawable.click_color_4_th,
+            R.drawable.click_color_5_th,
+            R.drawable.click_color_6_th,
+            R.drawable.click_color_7_th,
+            R.drawable.click_color_8_th,
+            R.drawable.click_color_9_th,
+            R.drawable.click_color_10_th,
     };
 
     public static void setTabFlag(){

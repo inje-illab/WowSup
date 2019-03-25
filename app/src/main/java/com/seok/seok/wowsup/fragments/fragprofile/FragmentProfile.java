@@ -12,10 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.seok.seok.wowsup.R;
+import com.seok.seok.wowsup.StoreActivity;
 import com.seok.seok.wowsup.SupPeopleInformationActivity;
 import com.seok.seok.wowsup.fragments.CardAdapter;
 import com.seok.seok.wowsup.fragments.CardData;
@@ -42,6 +44,7 @@ public class FragmentProfile extends Fragment {
     private RecyclerView mRecyclerView;
     private CardAdapter mAdapter;
     private ImageView profileImage, iBtnWrite;
+    private LinearLayout layoutStore;
     private ArrayList<CardData> cardViewData;
 
     public FragmentProfile() {
@@ -130,6 +133,9 @@ public class FragmentProfile extends Fragment {
                 case R.id.fragment_profile_write:
                     startActivity(new Intent(getActivity().getApplication(), StoryWriteActivity.class));
                     break;
+                case R.id.layout_store:
+                    startActivity(new Intent(getActivity().getApplication(), StoreActivity.class));
+                    break;
             }
         }
     };
@@ -142,9 +148,11 @@ public class FragmentProfile extends Fragment {
         textFriend = view.findViewById(R.id.fragment_profile_text_firend);
         textToken = view.findViewById(R.id.fragment_profile_text_token);
         iBtnWrite = view.findViewById(R.id.fragment_profile_write);
+        layoutStore = view.findViewById(R.id.layout_store);
         iBtnWrite.setOnClickListener(onClickListener);
         btnNotice.setOnClickListener(onClickListener);
         profileImage.setOnClickListener(onClickListener);
+        layoutStore.setOnClickListener(onClickListener);
 
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));

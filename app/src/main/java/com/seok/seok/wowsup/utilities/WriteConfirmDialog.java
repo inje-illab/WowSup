@@ -3,6 +3,7 @@ package com.seok.seok.wowsup.utilities;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.seok.seok.wowsup.R;
+import com.seok.seok.wowsup.StoreActivity;
 import com.seok.seok.wowsup.retrofit.model.ResponseWriteObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 
@@ -37,22 +39,25 @@ public class WriteConfirmDialog extends Dialog implements View.OnClickListener {
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ApiUtils.getWriteService().requestWriteStory(GlobalWowToken.getInstance().getId(), title, body,image, tag1, tag2, tag3, tag4, tag5).enqueue(new Callback<ResponseWriteObj>() {
-                    @Override
-                    public void onResponse(Call<ResponseWriteObj> call, Response<ResponseWriteObj> response) {
+                if(GlobalWowToken.getInstance().getToken()>=1) {
+                    ApiUtils.getWriteService().requestWriteStory(GlobalWowToken.getInstance().getId(), title, body, image, tag1, tag2, tag3, tag4, tag5).enqueue(new Callback<ResponseWriteObj>() {
+                        @Override
+                        public void onResponse(Call<ResponseWriteObj> call, Response<ResponseWriteObj> response) {
+                            Toast.makeText(context, "Upload successful!", Toast.LENGTH_SHORT).show();
+                            dismiss();
+                            ((Activity) context).finish();
+                        }
 
-                        Toast.makeText(context, "Upload successful!", Toast.LENGTH_SHORT).show();
-                        dismiss();
-                        ((Activity)context).finish();
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseWriteObj> call, Throwable t) {
-                        Toast.makeText(context, "Upload successful!", Toast.LENGTH_SHORT).show();
-                        dismiss();
-                        ((Activity)context).finish();
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<ResponseWriteObj> call, Throwable t) {
+                            Toast.makeText(context, "Upload successful!", Toast.LENGTH_SHORT).show();
+                            dismiss();
+                            ((Activity) context).finish();
+                        }
+                    });
+                }else{
+                    context.startActivity(new Intent(context.getApplicationContext(), StoreActivity.class));
+                }
             }
         });
         btnNo.setOnClickListener(new View.OnClickListener() {

@@ -67,9 +67,9 @@ public class StoryActivity extends AppCompatActivity {
                             if (response.isSuccessful()) {
                                 ResponseStoryObj body = response.body();
                                 if (body.getState() == 0) {
-                                    iBtnLike.setImageResource(R.mipmap.unllike_icon);
+                                    iBtnLike.setImageResource(R.drawable.unllike_icon);
                                 } else if (body.getState() == 1) {
-                                    iBtnLike.setImageResource(R.mipmap.like_icon);
+                                    iBtnLike.setImageResource(R.drawable.like_icon);
                                 }
                                 storyTextCntLike.setText(body.getCntLike() + "");
                             }
@@ -113,7 +113,7 @@ public class StoryActivity extends AppCompatActivity {
                         }
                     });
             if (i == 0) {
-                builder.normalImageRes(R.mipmap.send_icon)
+                builder.normalImageRes(R.drawable.send_icon)
                         .normalText("Friend request")
                         .subNormalText("Send a friend to SupPeople");
             } else if (i == 1) {
@@ -121,7 +121,7 @@ public class StoryActivity extends AppCompatActivity {
                         .normalText("Delete Post")
                         .subNormalText("Delete my posts");
             } else if(i == 2){
-                builder.normalImageRes(R.mipmap.ban_icon)
+                builder.normalImageRes(R.drawable.ban_icon)
                         .normalText("To ban")
                         .subNormalText("Report this post");
             }
@@ -147,9 +147,9 @@ public class StoryActivity extends AppCompatActivity {
                     storyTextTag5.setText("# " + body.getTag5());
                     storyTextCntLike.setText(body.getCntLike() + "");
                     if (body.getState() == 0) {
-                        iBtnLike.setImageResource(R.mipmap.unllike_icon);
+                        iBtnLike.setImageResource(R.drawable.unllike_icon);
                     } else if (body.getState() == 1) {
-                        iBtnLike.setImageResource(R.mipmap.like_icon);
+                        iBtnLike.setImageResource(R.drawable.like_icon);
                     }
                     imageURL = body.getImageURL();
                     Glide.with(getApplicationContext())

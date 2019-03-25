@@ -51,7 +51,7 @@
                 android:layout_width="65dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="10dp"
-                android:background="@mipmap/more_button"
+                android:background="@drawable/more_button"
                 android:text="More"
                 android:textColor="#f0f4f4"
                 android:textSize="14sp"

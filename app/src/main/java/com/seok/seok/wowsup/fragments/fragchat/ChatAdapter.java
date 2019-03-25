@@ -59,7 +59,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatViewHolder> {
             public boolean onLongClick(View view) {
                 chatOptionDialog.chatOtptionFunction();
 
-                Toast.makeText(context, body.getFriend(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, body.getFriend(), Toast.LENGTH_SHORT).show();
                 return true;
             }
         });

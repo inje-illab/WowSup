@@ -11,6 +11,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- 구글 인앱 구매 키값 -->
+    <string name="in_app_license_key">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAornj5fY4IIvM00Di+VTEiiBpo13Awvp+CBn2zZXZSUHAvS824VOU/As/HUO5lB3qMGW8FeptZdqUQDioICpsxZSE1ZbwYMobJOLufRWKWqiV4VKOky5Q4VQYUPEvbLxAyDon4d+OnofLmEmhw6CCpXpXRmnTbG996mmsh4qgzezYXCi2+9amReWbf5QNoqX11jWNuQXGhLfu3IH2+rs8TCpI1cHQkt/iCGHaH0QQGlupaN5gzCpIgfjfzE2sQb0d30X0x4du6vlRNE0d34BZaRuwRkSOAXI8eRtf6xtUUNxmZaRsShNjJjzgZAeoRu/94R9yeruXW4rIlQIXwjFjKQIDAQAB</string>
 
     <string name="action_settings">Settings</string>
     <string name="custom_spinner">Select Country</string>

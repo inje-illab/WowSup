@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="19dp"
-                android:src="@mipmap/back_button" />
+                android:src="@drawable/back_button" />
 
         </LinearLayout>
 
@@ -61,7 +61,7 @@
                 android:layout_height="40dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="19dp"
-                app:srcCompat="@mipmap/help" />
+                app:srcCompat="@drawable/help" />
         </LinearLayout>
     </LinearLayout>
 
@@ -107,7 +107,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="3"
 
-                    android:background="@mipmap/title_feid"
+                    android:background="@drawable/title_feid"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -130,7 +130,7 @@
                 android:layout_height="300dp"
 
                 android:layout_marginTop="10dp"
-                android:background="@mipmap/unclick_color_1_st"
+                android:background="@drawable/unclick_color_1_st"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -158,7 +158,7 @@
                 android:layout_height="60dp"
 
                 android:layout_marginTop="10dp"
-                android:background="@mipmap/title_feid"
+                android:background="@drawable/title_feid"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -247,7 +247,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:visibility="invisible"
-                        app:srcCompat="@mipmap/camera_icon" />
+                        app:srcCompat="@drawable/camera_icon" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -283,7 +283,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
 
-                            android:background="@mipmap/save_button"
+                            android:background="@drawable/save_button"
                             android:fontFamily="@font/hanmaumgodic_m"
                             android:text="Save"
                             android:textColor="#f0f4f4"

@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="11dp"
                 android:layout_marginBottom="11dp"
-                app:srcCompat="@mipmap/back_button" />
+                app:srcCompat="@drawable/back_button" />
 
         </LinearLayout>
 
@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_margin="22dp"
-            android:background="@mipmap/text_textbox"
+            android:background="@drawable/text_textbox"
             android:orientation="vertical">
 
             <LinearLayout
@@ -87,7 +87,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@mipmap/like_block"
+            android:background="@drawable/like_block"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -96,7 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="7dp"
-                app:srcCompat="@mipmap/unllike_icon" />
+                app:srcCompat="@drawable/unllike_icon" />
 
             <TextView
                 android:id="@+id/story_text_cntlike"

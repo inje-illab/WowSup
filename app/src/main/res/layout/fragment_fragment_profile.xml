@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                app:srcCompat="@mipmap/write" />
+                app:srcCompat="@drawable/write" />
         </LinearLayout>
 
         <LinearLayout
@@ -41,7 +41,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginRight="10dp"
-                android:background="@mipmap/me_notice"
+                android:background="@drawable/me_notice"
                 android:text="0"
                 android:textColor="#808183"
                 android:textSize="11.8sp"
@@ -70,7 +70,7 @@
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_marginBottom="7dp"
-                android:background="@mipmap/wowsup_crown_4_th"
+                android:background="@drawable/wowsup_crown_4_th"
                 android:padding="8dp" />
 
             <LinearLayout
@@ -89,9 +89,10 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layout_store"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@mipmap/rect_like_friend"
+                    android:background="@drawable/rect_like_friend"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -101,7 +102,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="1dp"
-                        app:srcCompat="@mipmap/like" />
+                        app:srcCompat="@drawable/like" />
 
                     <TextView
                         android:id="@+id/fragment_profile_text_like"
@@ -120,7 +121,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="1dp"
-                        app:srcCompat="@mipmap/friend" />
+                        app:srcCompat="@drawable/friend" />
 
                     <TextView
                         android:id="@+id/fragment_profile_text_firend"
@@ -139,7 +140,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="1dp"
-                        app:srcCompat="@mipmap/token_icon" />
+                        app:srcCompat="@drawable/token_icon" />
 
                     <TextView
                         android:id="@+id/fragment_profile_text_token"
