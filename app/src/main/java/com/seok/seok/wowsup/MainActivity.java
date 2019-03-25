@@ -49,21 +49,25 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 switch (item.getItemId()) {
+
                     case R.id.navigation_menu1: {
                         transaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
                         transaction.replace(R.id.frame_layout, menu1Fragment).commitAllowingStateLoss();
                         break;
                     }
+
                     case R.id.navigation_menu2: {
                         transaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
                         transaction.replace(R.id.frame_layout, menu2Fragment).commitAllowingStateLoss();
                         break;
                     }
+
                     case R.id.navigation_menu3: {
                         transaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
                         transaction.replace(R.id.frame_layout, menu3Fragment).commitAllowingStateLoss();
                         break;
                     }
+
                     case R.id.navigation_menu4: {
                         transaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
                         transaction.replace(R.id.frame_layout, menu4Fragment).commitAllowingStateLoss();
