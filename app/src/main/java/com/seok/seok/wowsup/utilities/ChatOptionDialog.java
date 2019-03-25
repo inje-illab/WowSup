@@ -22,7 +22,7 @@ public class ChatOptionDialog{
         setFriendNickDialog = new SetFriendNickDialog(context);
     }
 
-    public void chatOtptionFunction()
+    public void chatOptionFunction()
     {
         dlg = new Dialog(context);
         dlg.setContentView(R.layout.layout_chatoption_dialog);

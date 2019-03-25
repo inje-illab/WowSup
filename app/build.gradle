@@ -10,7 +10,7 @@ android {
         // 로그인창
 /*
     업데이트 내용
-
+    WowSup WebSite 연결
 */
         targetSdkVersion 28
         versionCode 7
