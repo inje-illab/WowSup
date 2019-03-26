@@ -39,9 +39,9 @@ public class FragmentChat extends Fragment {
     private TextView chatUserID, chatUserSelfish;
     private LinearLayout layoutBanner;
     private OnFragmentInteractionListener mListener;
+    private Common.ProgressbarDialog progressbarDialog;
 
     public FragmentChat() {
-
     }
 
     @Override
@@ -51,14 +51,16 @@ public class FragmentChat extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            view = inflater.inflate(R.layout.fragment_fragment_chat, container, false);
 
-            initFindViewID();
-            initDataSet();
+        view = inflater.inflate(R.layout.fragment_fragment_chat, container, false);
+        progressbarDialog = new Common.ProgressbarDialog(view.getContext());
+        initFindViewID();
+        initDataSet();
 
-            Common.fragmentChatTab = false;
+        Common.fragmentChatTab = false;
         return view;
     }
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -75,7 +77,7 @@ public class FragmentChat extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void initFindViewID(){
+    public void initFindViewID() {
         recyclerView = view.findViewById(R.id.fragment_chat_listview);
         chatUserImage = view.findViewById(R.id.fragment_chat_user_image);
         chatUserID = view.findViewById(R.id.fragment_chat_user_id);
@@ -83,53 +85,62 @@ public class FragmentChat extends Fragment {
         chatUserSelfish = view.findViewById(R.id.fragment_chat_user_selfish);
         chatUserImage.setOnClickListener(onClickListener);
     }
-    public void initDataSet(){
+
+    public void initDataSet() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
+        progressbarDialog.callFunction();
         ApiUtils.getProfileService().requestMyProfile(GlobalWowToken.getInstance().getId()).enqueue(new Callback<ResponseProfileObj>() {
             @Override
             public void onResponse(Call<ResponseProfileObj> call, Response<ResponseProfileObj> response) {
                 Log.d("FragmentChat_HTTP_MYPROFILE", "HTTP Transfer Success");
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     ResponseProfileObj body = response.body();
-                    if(response.isSuccessful()){
+                    if (response.isSuccessful()) {
                         try {
                             Glide.with(getActivity()).load(body.getImageURL()).centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).into(chatUserImage);
                             layoutBanner.setBackgroundColor(Common.NONPICK_BANNER[body.getBanner()]);
                             chatUserID.setText("User ID : " + GlobalWowToken.getInstance().getId());
                             chatUserSelfish.setText(body.getSelfish());
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             Toast.makeText(getContext().getApplicationContext(), "Communication error", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
+                progressbarDialog.endWork();
             }
 
             @Override
             public void onFailure(Call<ResponseProfileObj> call, Throwable t) {
+                progressbarDialog.endWork();
                 Log.d("FragmentChat_HTTP_MYPROFILE", "HTTP Transfer Failed");
             }
         });
+        progressbarDialog.callFunction();
         ApiUtils.getChatService().requestChatFriend(GlobalWowToken.getInstance().getId()).enqueue(new Callback<List<ResponseChatObj>>() {
             @Override
             public void onResponse(Call<List<ResponseChatObj>> call, Response<List<ResponseChatObj>> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     List<ResponseChatObj> body = response.body();
                     ChatAdapter chatAdapter = new ChatAdapter(getActivity(), body);
                     recyclerView.setAdapter(chatAdapter);
                 }
+                progressbarDialog.endWork();
             }
+
             @Override
             public void onFailure(Call<List<ResponseChatObj>> call, Throwable t) {
                 Log.d("fragmentChat_err : ", t.getMessage() + " < ");
+                progressbarDialog.endWork();
             }
         });
     }
+
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.fragment_chat_user_image:
                     startActivity(new Intent(view.getContext(), SupPeopleInformationActivity.class));
                     break;

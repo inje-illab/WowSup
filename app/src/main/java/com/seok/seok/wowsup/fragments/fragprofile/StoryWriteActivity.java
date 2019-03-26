@@ -25,6 +25,7 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.ViewTarget;
 import com.seok.seok.wowsup.R;
 import com.seok.seok.wowsup.TranslateActivity;
+import com.seok.seok.wowsup.fragments.fragchat.ChatActivity;
 import com.seok.seok.wowsup.retrofit.model.RespsonseImageObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 import com.seok.seok.wowsup.utilities.Common;
@@ -58,7 +59,6 @@ public class StoryWriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story_write);
         requestWritePermission();
-
         imageBackgroundURL = "basic_image_5_th.png";
         btnSave = findViewById(R.id.story_write_btn_save);
         btnBack = findViewById(R.id.story_write_btn_back);
@@ -141,14 +141,27 @@ public class StoryWriteActivity extends AppCompatActivity {
     }
 
     public boolean writeConfirm() {
+        boolean titleResult, bodyResult;
         if (editTextTitle.getText().toString().isEmpty() || editTextTitle.getText().length() == 0) {
             Toast.makeText(this, "The title field is empty.", Toast.LENGTH_SHORT).show();
             return false;
         } else if (editTextBody.getText().toString().isEmpty() || editTextBody.getText().length() == 0) {
             Toast.makeText(this, "The contents field is empty.", Toast.LENGTH_SHORT).show();
             return false;
-        } else
-            return true;
+        } else {
+            titleResult = editTextTitle.getText().toString().matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*");
+            bodyResult = editTextBody.getText().toString().matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*");
+            if(titleResult){
+                Toast.makeText(StoryWriteActivity.this, "The title contains non-English words.", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            if (bodyResult) {
+                Toast.makeText(StoryWriteActivity.this, "The contents contains non-English words.", Toast.LENGTH_SHORT).show();
+                return false;
+            }else{
+                return true;
+            }
+        }
     }
 
     View.OnFocusChangeListener onFocusChangeListener = new View.OnFocusChangeListener() {

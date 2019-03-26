@@ -75,25 +75,25 @@
                     <com.rengwuxian.materialedittext.MaterialEditText
                         android:id="@+id/login_edittext_id"
                         android:layout_width="match_parent"
-                        android:layout_height="41.3dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="7dp"
                         android:layout_marginRight="7dp"
                         android:fontFamily="@font/hanmaumgodic_m"
-                        android:text="msno"
                         android:hint="ID"
-                        android:singleLine="true" />
+                        android:singleLine="true"
+                        android:text="" />
 
                     <com.rengwuxian.materialedittext.MaterialEditText
                         android:id="@+id/login_edittext_pwd"
                         android:layout_width="match_parent"
-                        android:layout_height="41.3dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="7dp"
                         android:layout_marginRight="7dp"
                         android:fontFamily="@font/hanmaumgodic_m"
-                        android:text="msnomsno"
                         android:hint="PW"
                         android:inputType="textPassword"
-                        android:singleLine="true" />
+                        android:singleLine="true"
+                        android:text="" />
 
                 </LinearLayout>
 

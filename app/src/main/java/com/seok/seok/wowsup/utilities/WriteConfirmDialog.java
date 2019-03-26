@@ -33,6 +33,7 @@ public class WriteConfirmDialog extends Dialog implements View.OnClickListener {
     private Context context;
     private Button btnYes, btnNo;
     private String title, body, image, tag1, tag2, tag3, tag4, tag5;    // 스토리 업로드
+    private Common.ProgressbarDialog progressbarDialog;
 
     public WriteConfirmDialog(Context context) {
         super(context);
@@ -44,19 +45,22 @@ public class WriteConfirmDialog extends Dialog implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(LAYOUT);
+        progressbarDialog = new Common.ProgressbarDialog(context);
         btnYes = findViewById(R.id.dialog_notice_btn_yes);
         btnNo = findViewById(R.id.dialog_notice_btn_no);
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (GlobalWowToken.getInstance().getToken() >= 1) {
-                    if (Common.option == 11)
+                    if (Common.option == 11) {
+                        progressbarDialog.callFunction();
                         ApiUtils.getWriteService().requestWriteStory(GlobalWowToken.getInstance().getId(), title, body, image, tag1, tag2, tag3, tag4, tag5).enqueue(new Callback<ResponseWriteObj>() {
                             @Override
                             public void onResponse(Call<ResponseWriteObj> call, Response<ResponseWriteObj> response) {
                                 Toast.makeText(context, "Upload successful!", Toast.LENGTH_SHORT).show();
                                 dismiss();
                                 ((Activity) context).finish();
+                                progressbarDialog.endWork();
                             }
 
                             @Override
@@ -64,9 +68,10 @@ public class WriteConfirmDialog extends Dialog implements View.OnClickListener {
                                 Toast.makeText(context, "Upload successful!", Toast.LENGTH_SHORT).show();
                                 dismiss();
                                 ((Activity) context).finish();
+                                progressbarDialog.endWork();
                             }
                         });
-                    else if(Common.option == 10){
+                    } else if (Common.option == 10) {
                         uploadFile();
                     }
                 } else {
@@ -99,6 +104,7 @@ public class WriteConfirmDialog extends Dialog implements View.OnClickListener {
     }
 
     public void uploadFile() {
+        progressbarDialog.callFunction();
         File file = new File(this.image);
         RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
         MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", GlobalWowToken.getInstance().getId() + file.getName(), requestBody);
@@ -113,12 +119,14 @@ public class WriteConfirmDialog extends Dialog implements View.OnClickListener {
                     Log.d("WriteConfirmDialog_HTTP_UPLOAD", "HTTP Response Success");
                     ResponseWriteObj body = response.body();
                     if (body.getState() == 1) {
-                        Toast.makeText(getApplicationContext(), "성공", Toast.LENGTH_SHORT).show();
-                        Log.d("asdf", body.getMe());
+                        Toast.makeText(context, "Upload successful!", Toast.LENGTH_SHORT).show();
+                        dismiss();
+                        ((Activity) context).finish();
+                        progressbarDialog.endWork();
                     } else if (body.getState() == 0) {
                         Toast.makeText(getApplicationContext(), body.getMe(), Toast.LENGTH_SHORT).show();
                     } else if (body.getState() == 2) {
-                        Toast.makeText(getApplicationContext(), "실패", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Upload Failed!", Toast.LENGTH_SHORT).show();
                     }
                 }
                 dismiss();
@@ -127,6 +135,7 @@ public class WriteConfirmDialog extends Dialog implements View.OnClickListener {
             @Override
             public void onFailure(Call<ResponseWriteObj> call, Throwable t) {
                 Log.d("WriteConfirmDialog_HTTP_UPLOAD", "HTTP Transfer Failed");
+                progressbarDialog.endWork();
             }
         });
     }

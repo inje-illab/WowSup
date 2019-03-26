@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -47,6 +48,8 @@ public class FragmentProfile extends Fragment {
     private LinearLayout layoutStore;
     private ArrayList<CardData> cardViewData;
 
+    private Common.ProgressbarDialog progressbarDialog;
+
     public FragmentProfile() {
         // Required empty public constructor
     }
@@ -61,6 +64,7 @@ public class FragmentProfile extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_fragment_profile, container, false);
+        progressbarDialog = new Common.ProgressbarDialog(view.getContext());
         initDataSet();
         initFindViewID();
 
@@ -92,6 +96,7 @@ public class FragmentProfile extends Fragment {
 
     private void initDataSet() {
         Log.d("ProfileFragment_INITDATASET", "DATE_SET Success");
+        progressbarDialog.callFunction();
         ApiUtils.getStoryService().requestMyStory(GlobalWowToken.getInstance().getId()).enqueue(new Callback<List<ResponseStoryObj>>() {
             @Override
             public void onResponse(Call<List<ResponseStoryObj>> call, Response<List<ResponseStoryObj>> response) {
@@ -104,6 +109,7 @@ public class FragmentProfile extends Fragment {
                     }
                     if (mAdapter.getItemCount() == body.size()) {
                         mRecyclerView.setAdapter(mAdapter);
+                        progressbarDialog.endWork();
                     }
                 }
             }
@@ -111,6 +117,7 @@ public class FragmentProfile extends Fragment {
             @Override
             public void onFailure(Call<List<ResponseStoryObj>> call, Throwable t) {
                 Log.d("ProfileFragment_INITDATASET", "DATE_SET Transfer Failed");
+                progressbarDialog.endWork();
             }
         });
     }

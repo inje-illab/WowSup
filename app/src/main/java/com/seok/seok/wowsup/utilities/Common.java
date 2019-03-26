@@ -1,10 +1,13 @@
 package com.seok.seok.wowsup.utilities;
 
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 
 import com.seok.seok.wowsup.R;
@@ -62,4 +65,25 @@ public class Common {
         return new BitmapDrawable(resources, Bitmap.createScaledBitmap(bitmap, width, height, true));
     }
 
+    public static class ProgressbarDialog {
+        private Context context;
+        final Dialog dlg;
+        public ProgressbarDialog(Context context)
+        {
+            this.context = context;
+            dlg= new Dialog(this.context);
+            dlg.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dlg.setCanceledOnTouchOutside(false);
+        }
+
+        public void callFunction()
+        {
+            dlg.setContentView(R.layout.progresbar_dialog);
+            dlg.show();
+        }
+        public void endWork()
+        {
+            dlg.dismiss();
+        }
+    }
 }
