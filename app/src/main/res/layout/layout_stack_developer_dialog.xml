@@ -34,7 +34,8 @@
                 android:layout_height="wrap_content"
                 android:text="Development Staff"
                 android:textColor="#000000"
-                android:textSize="18sp" />
+                android:textSize="14sp"
+                android:fontFamily="@font/hanmaumgodic_m"/>
         </LinearLayout>
 
         <LinearLayout
@@ -57,8 +58,9 @@
                     android:layout_height="wrap_content"
                     android:text="Developer Main"
                     android:textColor="#70a2a9"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/hanmaumgodic_m"/>
             </LinearLayout>
 
             <LinearLayout
@@ -75,8 +77,9 @@
                     android:layout_height="wrap_content"
                     android:text="Kim Myeong-seok"
                     android:textColor="#70a2a9"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/hanmaumgodic_l"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -101,7 +104,8 @@
                     android:layout_height="wrap_content"
                     android:text="Sub"
                     android:textColor="#70a2a9"
-                    android:textSize="14sp" />
+                    android:textSize="12sp"
+                    android:fontFamily="@font/hanmaumgodic_m"/>
             </LinearLayout>
 
             <LinearLayout
@@ -118,7 +122,8 @@
                     android:layout_height="wrap_content"
                     android:text="Lee Jeong-hyeon"
                     android:textColor="#70a2a9"
-                    android:textSize="14sp" />
+                    android:textSize="12sp"
+                    android:fontFamily="@font/hanmaumgodic_l"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -149,9 +154,10 @@
                     android:id="@+id/textView24"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Jeong Se-in"
+                    android:text="Jung Se-in"
                     android:textColor="#70a2a9"
-                    android:textSize="14sp" />
+                    android:textSize="12sp"
+                    android:fontFamily="@font/hanmaumgodic_l"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -176,8 +182,9 @@
                     android:layout_height="wrap_content"
                     android:text="Designer Main"
                     android:textColor="#70a2a9"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/hanmaumgodic_m"/>
             </LinearLayout>
 
             <LinearLayout
@@ -194,8 +201,9 @@
                     android:layout_height="wrap_content"
                     android:text="Dang Hyeon-a"
                     android:textColor="#70a2a9"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/hanmaumgodic_l"/>
             </LinearLayout>
 
         </LinearLayout>
