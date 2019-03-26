@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/dialog_setfriend_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:layout_marginBottom="13dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/hanmaumgodic_m"
+            android:onClick="onClick"
+            android:text="Set your friend alias"
+            android:textColor="#808183"
+            android:textSize="15.3sp" />
+
+        <Button
+            android:id="@+id/dialog_chat_delete_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:layout_marginBottom="13dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/hanmaumgodic_m"
+            android:onClick="onClick"
+            android:text=" Get out of chat"
+            android:textColor="#808183"
+            android:textSize="15.3sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

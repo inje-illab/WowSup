@@ -36,14 +36,17 @@ import retrofit2.Response;
 public class SupPeopleInformationActivity extends AppCompatActivity {
 
     private SpinnerAdapter sAdapterAge, sAdapterCountry;
+    private ArrayList<ResponseCountry> countries;
     private Spinner spinnerAge, spinnerCountry;
     private LinearLayout[] layoutSet;
     private ImageView profileImage, iBtnBack;
     private TextView textUserID;
     private EditText editInfo;
     private Button btnModify;
-    private int setColor;
+    private String strGender, strCountry;
+    private int setColor, intAge;
     private RadioGroup genderGroup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +71,25 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
                     Log.d("SupPeopleInfoActivity_HTTP_GETPROFILE", "HTTP Response Success");
                     ResponseProfileObj body = response.body();
                     editInfo.setText(body.getSelfish());
+                    strCountry = body.getNationality();
+                    for (int i = 0; i < countries.size(); i++) {
+                        if (countries.get(i).getName().equals(body.getNationality()))
+                            spinnerCountry.setSelection(i);
+                    }
+                    if (strCountry.isEmpty() | strCountry.equals("") | strCountry.length() == 0) {
+                        spinnerCountry.setSelection(0);
+                    }
+                    if (body.getGender().equals("Male")) {
+                        genderGroup.check(R.id.male);
+                    } else if (body.getGender().equals("Female")) {
+                        genderGroup.check(R.id.female);
+                    } else {
+                        genderGroup.check(R.id.male);
+                    }
+                    if (body.getAge() == 0) {
+                        spinnerAge.setSelection(19);
+                    } else
+                        spinnerAge.setSelection(body.getAge() - 1);
                     setLayoutSet(body.getBanner());
                     Glide.with(getApplicationContext()).load(body.getImageURL()).centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getApplicationContext())).into(profileImage);
                 }
@@ -98,7 +120,7 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
         editInfo = findViewById(R.id.info_edit_info);
         btnModify = findViewById(R.id.info_btn_modify);
 
-        genderGroup=findViewById(R.id.gendergroup);
+        genderGroup = findViewById(R.id.gendergroup);
 
         spinnerAge = findViewById(R.id.agespinner);
         spinnerCountry = findViewById(R.id.countryspinner);
@@ -157,18 +179,19 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
                     finish();
                     break;
                 case R.id.info_btn_modify:
-                    ApiUtils.getProfileService().requestUpdateMyProfile(GlobalWowToken.getInstance().getId(),editInfo.getText().toString(),
-                            24,"Man","Korea",setColor).enqueue(new Callback<ResponseProfileObj>() {
+                    ApiUtils.getProfileService().requestUpdateMyProfile(GlobalWowToken.getInstance().getId(), editInfo.getText().toString(),
+                            intAge, strGender, strCountry, setColor).enqueue(new Callback<ResponseProfileObj>() {
                         @Override
                         public void onResponse(Call<ResponseProfileObj> call, Response<ResponseProfileObj> response) {
                             Log.d("SupPeopleInformationActivity_HTTP_UPDATE", "HTTP Transfer Success");
-                            if(response.isSuccessful()){
+                            if (response.isSuccessful()) {
                                 Log.d("SupPeopleInformationActivity_HTTP_UPDATE", "HTTP Response Success");
                                 ResponseProfileObj body = response.body();
                                 Toast.makeText(SupPeopleInformationActivity.this, body.getUserMessage(), Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                         }
+
                         @Override
                         public void onFailure(Call<ResponseProfileObj> call, Throwable t) {
                             Log.d("SupPeopleInformationActivity_HTTP_UPDATE", "HTTP Transfer Fail");
@@ -179,11 +202,11 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
         }
     };
 
-    public void setLayoutSet(int layoutNum){
-        for(int i = 0 ; i< layoutSet.length;i++){
-            if(i == layoutNum){
+    public void setLayoutSet(int layoutNum) {
+        for (int i = 0; i < layoutSet.length; i++) {
+            if (i == layoutNum) {
                 layoutSet[i].setBackgroundResource(Common.PICK_BANNER[i]);
-            }else{
+            } else {
                 layoutSet[i].setBackgroundColor(Common.NONPICK_BANNER[i]);
             }
         }
@@ -202,35 +225,33 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int postion, long l) {
                 ResponseAge ag = new ResponseAge(postion);
-                Spinner spinner = (Spinner)findViewById(R.id.agespinner);
-                if(spinner.getSelectedItem() != null) {
-                    String a = (String) spinner.getItemAtPosition(ag.getAge());
-                    int b = Integer.parseInt(a);
-                    Toast.makeText(getApplicationContext(), "age :" + a, Toast.LENGTH_SHORT).show();
+                Spinner spinner = findViewById(R.id.agespinner);
+                if (spinner.getSelectedItem() != null) {
+                    intAge = Integer.parseInt((String) spinner.getItemAtPosition(ag.getAge()));
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
-
+        spinnerAge.setAdapter(spinnerArrayAdapter);
     }
 
-    private void GenderType(){
+    private void GenderType() {
         if (genderGroup != null) {
             genderGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    String text = (R.id.male == checkedId) ? "male" : "female";
-                    Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+                    strGender = (R.id.male == checkedId) ? "Male" : "Female";
                 }
             });
         }
     }
-    //나이
-    private void CountryList(){
-        ArrayList<ResponseCountry> countries = new ArrayList<ResponseCountry>();
 
+    //나이
+    private void CountryList() {
+        countries = new ArrayList<>();
         countries.add(new ResponseCountry("Korea", R.drawable.flag_south_korea));
         countries.add(new ResponseCountry("UnitedKingdom(UK)", R.drawable.flag_uk));
         countries.add(new ResponseCountry("United States of America(USA)", R.drawable.flag_usa));
@@ -240,15 +261,14 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
         countries.add(new ResponseCountry("Canada", R.drawable.flag_canada));
 
         sAdapterCountry = new SpinnerAdapter(getApplicationContext(), countries);
-
         spinnerCountry.setAdapter(sAdapterCountry);
-
         spinnerCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ResponseCountry b = (ResponseCountry)sAdapterCountry.getItem(position);
-                Toast.makeText(SupPeopleInformationActivity.this, b.getName(), Toast.LENGTH_SHORT).show();
+                ResponseCountry countryName = (ResponseCountry) sAdapterCountry.getItem(position);
+                strCountry = countryName.getName();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -256,9 +276,10 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
         });
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.countryset,menu);
+        getMenuInflater().inflate(R.menu.countryset, menu);
         return true;
     }
 

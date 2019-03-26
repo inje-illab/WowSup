@@ -44,7 +44,7 @@ public class FragmentHelp extends Fragment {
     private Map<String, String> wordMap;
     private OnFragmentInteractionListener mListener;
     private PieChart globalHitWordChart;
-
+    private Common.ProgressbarDialog progressbarDialog;
     public FragmentHelp() {
         wordMap = new HashMap<>();
         wordCount = 0;
@@ -61,14 +61,12 @@ public class FragmentHelp extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_fragment_help, container, false);
+        progressbarDialog = new Common.ProgressbarDialog(view.getContext());
         iBtnMore = view.findViewById(R.id.fragment_help_more);
         iBtnMore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,19 +95,6 @@ public class FragmentHelp extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public static final int[] MY_COLORS = {
-            Color.rgb(201,223,241),
-            Color.rgb(239,231,204),
-            Color.rgb(255,255,255),
-            Color.rgb(126,128,130),
-            Color.rgb(239,191,168),
-            Color.rgb(218,211,206),
-            Color.rgb(100,117,122),
-            Color.rgb(146,182,187),
-            Color.rgb(183,187,189),
-            Color.rgb(246,224,209)
-    };
-
     public void initChart() {
         globalHitWordChart = view.findViewById(R.id.fragment_help_chart);
 
@@ -121,6 +106,7 @@ public class FragmentHelp extends Fragment {
         final ArrayList<String> wordList = new ArrayList<>();
         final ArrayList<Integer> colors = new ArrayList<>();
 
+        progressbarDialog.callFunction();
         ApiUtils.getWordService().requestWordChart().enqueue(new Callback<List<ResponseWordChartObj>>() {
             @Override
             public void onResponse(Call<List<ResponseWordChartObj>> call, Response<List<ResponseWordChartObj>> response) {
@@ -135,8 +121,6 @@ public class FragmentHelp extends Fragment {
                     PieDataSet dataSet = new PieDataSet(wordValueList, "");
                     //This week's word fashion graph
 
-
-
                     //그래프 크기 조절
                     dataSet.setSliceSpace(3f);
                     dataSet.setSelectionShift(10f);
@@ -146,39 +130,35 @@ public class FragmentHelp extends Fragment {
                     globalHitWordChart.invalidate();
                     globalHitWordChart.getLegend ().setEnabled ( false );
 
-
-
                     //글짜 크기 하고 색
                     data.setValueFormatter(new MyValueFormatter());
-                    data.setValueTextSize(20f);
+                    data.setValueTextSize(15f);
                     data.setValueTextColor(Color.rgb(65,170,112));
 
-
-
-                    for (int c : MY_COLORS)
+                    for (int c : Common.NONPICK_BANNER)
                         colors.add(c);
                     dataSet.setColors(colors);
 
+                    /*
                     //밑에꺼 건들기.
-                    Legend l = globalHitWordChart.getLegend();
-
-                    l.setEnabled(false);
-/*                    l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER); // 범례 위치조정
+                     Legend l = globalHitWordChart.getLegend();
+                    l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER); // 범례 위치조정
                     l.setForm(Legend.LegendForm.CIRCLE);
                     l.setStackSpace(5);
-                            //setWordWrapEnable(boolean enabled)
                     l.setFormToTextSpace(3); //범례 레이블과 해당 범례 양식 사이의 간격을 설정합니다.
                     l.setXEntrySpace(5); // x 축에서 범례 항목 사이의 공백을 설정
                     l.setYEntrySpace(3); // y 축에서 범례 항목 사이의 공백을 설정
                     l.setTextSize(12f);  // 글짜 크기조절
-                    l.setFormSize (12f); // 도형의 크기 조절*/
-
-                    globalHitWordChart.animateXY(3000, 3000);
+                    l.setFormSize (12f); // 도형의 크기 조절
+                    */
+                    globalHitWordChart.animateXY(1500, 1500);
                 }
+                progressbarDialog.endWork();
             }
             @Override
             public void onFailure(Call<List<ResponseWordChartObj>> call, Throwable t) {
                 Log.d("FragmentHelp_HTTP_CHART", "HTTP Transfer Failed");
+                progressbarDialog.endWork();
             }
         });
     }
@@ -191,7 +171,7 @@ public class FragmentHelp extends Fragment {
         @Override
         public String getFormattedValue(float value) {
             // e.g. append a dollar-sign
-            return mFormat.format(value) + "";
+            return mFormat.format(value) + "%";
         }
     }
 }

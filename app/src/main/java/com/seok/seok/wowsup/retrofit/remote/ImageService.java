@@ -11,7 +11,7 @@ import retrofit2.http.Part;
 
 public interface ImageService {
     @Multipart
-    @POST("Test/ljh/TestUpload.php")
+    @POST("Story/uploadStroy.php")
     Call<RespsonseImageObj> uploadFile(@Part MultipartBody.Part file,
                                        @Part("file") RequestBody name);
 }

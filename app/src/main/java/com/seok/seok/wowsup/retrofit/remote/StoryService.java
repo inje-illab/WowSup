@@ -31,4 +31,12 @@ public interface StoryService {
     @GET("Story/myStory.php")
     Call<List<ResponseStoryObj>> requestMyStory(@Query("userID") String id);
 
+    @GET("Story/deleteStory.php")
+    Call<ResponseStoryObj> requestDeleteStory(@Query("userID") String userID,
+                                                    @Query("storyID") String storyID);
+
+    @GET("Story/banStory.php")
+    Call<ResponseStoryObj> requestBanStory(@Query("userID") String userID,
+                                              @Query("storyID") String storyID);
+
 }

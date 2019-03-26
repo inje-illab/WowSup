@@ -87,27 +87,32 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String strText = txtText.getText().toString();
+                boolean result = strText.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*");
                 if (strText.equals("") || strText.isEmpty()) {
-                    Toast.makeText(ChatActivity.this, "내용을 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChatActivity.this, "Please enter your details.", Toast.LENGTH_SHORT).show();
                 } else {
-                    sentenceSend(strText);
+                    if(result){
+                        Toast.makeText(ChatActivity.this, "Contains non-English characters.", Toast.LENGTH_SHORT).show();
+                    }else {
+                        sentenceSend(strText);
 
-                    Calendar c = Calendar.getInstance();
-                    System.out.println("Current time => " + c.getTime());
+                        Calendar c = Calendar.getInstance();
+                        System.out.println("Current time => " + c.getTime());
 
-                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    String formattedDate = df.format(c.getTime());
+                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        String formattedDate = df.format(c.getTime());
 
-                    DatabaseReference myRef = database.getReference("users").child(GlobalWowToken.getInstance().getId()).child("friends").child(strFriendUid).child("chat").child(formattedDate);
-                    DatabaseReference myRef1 = database.getReference("users").child(strFriendUid).child("friends").child(GlobalWowToken.getInstance().getId()).child("chat").child(formattedDate);
-                    Hashtable<String, String> chat = new Hashtable<String, String>();
-                    chat.put("email", email);
-                    chat.put("text", strText);
+                        DatabaseReference myRef = database.getReference("users").child(GlobalWowToken.getInstance().getId()).child("friends").child(strFriendUid).child("chat").child(formattedDate);
+                        DatabaseReference myRef1 = database.getReference("users").child(strFriendUid).child("friends").child(GlobalWowToken.getInstance().getId()).child("chat").child(formattedDate);
+                        Hashtable<String, String> chat = new Hashtable<String, String>();
+                        chat.put("email", email);
+                        chat.put("text", strText);
 
-                    myRef.setValue(chat);
-                    myRef1.setValue(chat);
+                        myRef.setValue(chat);
+                        myRef1.setValue(chat);
 
-                    txtText.setText("");
+                        txtText.setText("");
+                    }
                 }
             }
         });

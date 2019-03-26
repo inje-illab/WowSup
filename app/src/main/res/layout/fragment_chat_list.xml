@@ -16,7 +16,7 @@
             android:layout_marginTop="22dp"
             android:layout_marginBottom="22dp"
             android:layout_weight="10"
-            android:background="@mipmap/list_back"
+            android:background="@drawable/list_back"
             android:orientation="horizontal"></LinearLayout>
 
         <LinearLayout
@@ -38,7 +38,7 @@
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_gravity="center"
-                    android:background="@mipmap/friend_pic"
+                    android:background="@drawable/friend_pic"
                     android:padding="7dp" />
 
             </LinearLayout>
@@ -81,9 +81,23 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:gravity="center"
+                        android:gravity="center|left"
                         android:orientation="horizontal">
 
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="22sp"
+                            android:layout_marginLeft="7dp"
+                            android:background="#c9dff1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/fragment_chat_friend_selfish"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="#808183"
+                                android:textSize="18sp" />
+                        </LinearLayout>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -99,7 +113,7 @@
                         android:id="@+id/fragment_chat_firend_option"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:background="@mipmap/chat_f_notice"
+                        android:background="@drawable/chat_f_notice"
                         android:text="nick"
                         android:textSize="8sp"
                         android:fontFamily="@font/hanmaumgodic_m"/>

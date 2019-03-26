@@ -23,4 +23,7 @@ public interface ProfileService {
                                                     @Query("country") String userCountry,
                                                     @Query("banner") int userBanner);
 
+    @GET("Profile/updateToken.php")
+    Call<ResponseProfileObj> requestPurchaseToken(@Query("userID") String id,
+                                                  @Query("token") int token);
 }

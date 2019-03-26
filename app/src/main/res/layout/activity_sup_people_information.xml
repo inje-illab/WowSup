@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="19dp"
-                android:src="@mipmap/back_button" />
+                android:src="@drawable/back_button" />
 
         </LinearLayout>
 
@@ -80,7 +80,7 @@
                         android:id="@+id/info_img_profile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@mipmap/wowsup_crown_4_th"
+                        android:background="@drawable/wowsup_crown_4_th"
                         android:padding="8dp" />
                 </LinearLayout>
 
@@ -88,7 +88,7 @@
                     android:layout_width="160dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="8dp"
-                    android:background="@mipmap/id_pannel"
+                    android:background="@drawable/id_pannel"
                     android:orientation="vertical">
 
                     <TextView
@@ -130,7 +130,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginRight="20dp"
-                    android:background="@mipmap/text_box"
+                    android:background="@drawable/text_box"
                     android:orientation="horizontal">
 
                     <com.rengwuxian.materialedittext.MaterialEditText
@@ -157,7 +157,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="105dp"
                         android:layout_marginTop="9dp"
-                        android:background="@mipmap/information_box"
+                        android:background="@drawable/information_box"
                         android:orientation="vertical">
 
                         <LinearLayout
@@ -262,7 +262,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="140dp"
                         android:layout_marginTop="9dp"
-                        android:background="@mipmap/information_box"
+                        android:background="@drawable/information_box"
                         android:orientation="vertical" >
 
                         <LinearLayout
@@ -392,7 +392,7 @@
                     android:layout_marginTop="12dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="20dp"
-                    android:background="@mipmap/to_modify_information_button"
+                    android:background="@drawable/to_modify_information_button"
                     android:text="To modify information"
                     android:textColor="#f0f4f4"
                     android:textSize="18sp"

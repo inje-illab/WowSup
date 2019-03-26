@@ -46,13 +46,13 @@ public class LoginActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
     private Button btnLogin, btnLost;
     private EditText edtID, edtPW;
-
+    private Common.ProgressbarDialog progressbarDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        progressbarDialog = new Common.ProgressbarDialog(this);
 
         // Layout에서 id 값 받아오기
         btnLogin = findViewById(R.id.login_button_login);
@@ -100,6 +100,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (validateLogin(edtID.getText().toString(), edtPW.getText().toString())) {
+                    progressbarDialog.callFunction();
                     ApiUtils.getUserService().requestLogin(edtID.getText().toString(), edtPW.getText().toString()).enqueue(new Callback<ResponseLoginObj>() {
                         @Override
                         public void onResponse(Call<ResponseLoginObj> call, Response<ResponseLoginObj> response) {
@@ -107,21 +108,24 @@ public class LoginActivity extends AppCompatActivity {
                             if (response.isSuccessful()) {
                                 ResponseLoginObj body = response.body();
                                 GlobalWowToken.getInstance().setId(body.getId());
+                                GlobalWowToken.getInstance().setToken(body.getToken());
                                 GlobalWowToken.getInstance().setUserEmail(body.getEmail());
                                 if (body.getState() == 1) {
                                     Toast.makeText(LoginActivity.this, "Login 성공", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
-
                                     Common.setTabFlag();
+                                    progressbarDialog.endWork();
                                     //finish();
                                 } else if (body.getState() == 2) {
                                     Toast.makeText(LoginActivity.this, "Login 실패", Toast.LENGTH_SHORT).show();
+                                    progressbarDialog.endWork();
                                 }
                             }
                         }
                         @Override
                         public void onFailure(Call<ResponseLoginObj> call, Throwable t) {
                             Toast.makeText(LoginActivity.this, "통신오류", Toast.LENGTH_SHORT).show();
+                            progressbarDialog.endWork();
                             Log.d("login_err", t.getMessage() + " < ");
                         }
                     });

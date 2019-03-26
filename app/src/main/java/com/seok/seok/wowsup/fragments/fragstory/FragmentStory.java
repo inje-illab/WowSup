@@ -1,6 +1,5 @@
 package com.seok.seok.wowsup.fragments.fragstory;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -17,10 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.seok.seok.wowsup.R;
-import com.seok.seok.wowsup.SupPeopleInformationActivity;
 import com.seok.seok.wowsup.fragments.CardAdapter;
 import com.seok.seok.wowsup.fragments.CardData;
-import com.seok.seok.wowsup.fragments.fragprofile.NoticeActivity;
 import com.seok.seok.wowsup.retrofit.model.ResponseStoryObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 import com.seok.seok.wowsup.utilities.Common;
@@ -43,7 +40,7 @@ public class FragmentStory extends Fragment {
     private RecyclerView mRecyclerView;
     private CardAdapter mAdapter;
     private ArrayList<CardData> cardViewData;
-
+    private Common.ProgressbarDialog progressbarDialog;
     public FragmentStory() {
         // Required empty public constructor
     }
@@ -58,6 +55,7 @@ public class FragmentStory extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_fragment_story, container, false);
+        progressbarDialog = new Common.ProgressbarDialog(view.getContext());
         initDataSet();
         initFindViewID();
         mRecyclerView.setAdapter(mAdapter);
@@ -65,6 +63,7 @@ public class FragmentStory extends Fragment {
     }
 
     private void initDataSet() {
+        progressbarDialog.callFunction();
         ApiUtils.getStoryService().requestStoryView().enqueue(new Callback<List<ResponseStoryObj>>() {
             @Override
             public void onResponse(Call<List<ResponseStoryObj>> call, Response<List<ResponseStoryObj>> response) {
@@ -78,13 +77,16 @@ public class FragmentStory extends Fragment {
                     }
                     if (mAdapter.getItemCount() == body.size()) {
                         mRecyclerView.setAdapter(mAdapter);
+                        progressbarDialog.endWork();
                     }
                 }
+                progressbarDialog.endWork();
             }
 
             @Override
             public void onFailure(Call<List<ResponseStoryObj>> call, Throwable t) {
                 Toast.makeText(getActivity(), "통신오류", Toast.LENGTH_SHORT).show();
+                progressbarDialog.endWork();
                 Log.d("fragments_Story", t.getMessage() + " < ");
             }
         });

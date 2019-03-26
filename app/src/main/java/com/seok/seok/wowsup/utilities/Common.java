@@ -1,10 +1,13 @@
 package com.seok.seok.wowsup.utilities;
 
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 
 import com.seok.seok.wowsup.R;
@@ -14,6 +17,7 @@ public class Common {
     public static final String API_IMAGE_BASE_URL = "http://www.heywowsup.com/wowsup/Image/";
     public static final String USER_IMAGE_BASE_URL = "http://www.heywowsup.com/wowsup/Image/Userprofile/";
     public static final String STORY_IMAGE_BASE_URL = "http://www.heywowsup.com/wowsup/Image/Background/";
+    public static final String STORY_IMAGE_USER_URL = "http://www.heywowsup.com/wowsup/Image/UserStory/";
 
     public static boolean fragmentProfileTab = true;
     public static boolean fragmentChatTab = true;
@@ -22,6 +26,7 @@ public class Common {
 
     public static String searchTagText = null;
     public static int translateOption = 0;
+    public static int option = 0;
 
     public static final int[] NONPICK_BANNER = {
             Color.rgb(201,223,241),
@@ -36,16 +41,16 @@ public class Common {
             Color.rgb(246,224,209)
     };
     public static final int[] PICK_BANNER = {
-            R.mipmap.click_color_1_st,
-            R.mipmap.click_color_2_nd,
-            R.mipmap.click_color_3_rd,
-            R.mipmap.click_color_4_th,
-            R.mipmap.click_color_5_th,
-            R.mipmap.click_color_6_th,
-            R.mipmap.click_color_7_th,
-            R.mipmap.click_color_8_th,
-            R.mipmap.click_color_9_th,
-            R.mipmap.click_color_10_th,
+            R.drawable.click_color_1_st,
+            R.drawable.click_color_2_nd,
+            R.drawable.click_color_3_rd,
+            R.drawable.click_color_4_th,
+            R.drawable.click_color_5_th,
+            R.drawable.click_color_6_th,
+            R.drawable.click_color_7_th,
+            R.drawable.click_color_8_th,
+            R.drawable.click_color_9_th,
+            R.drawable.click_color_10_th,
     };
 
     public static void setTabFlag(){
@@ -60,4 +65,25 @@ public class Common {
         return new BitmapDrawable(resources, Bitmap.createScaledBitmap(bitmap, width, height, true));
     }
 
+    public static class ProgressbarDialog {
+        private Context context;
+        final Dialog dlg;
+        public ProgressbarDialog(Context context)
+        {
+            this.context = context;
+            dlg= new Dialog(this.context);
+            dlg.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dlg.setCanceledOnTouchOutside(false);
+        }
+
+        public void callFunction()
+        {
+            dlg.setContentView(R.layout.progresbar_dialog);
+            dlg.show();
+        }
+        public void endWork()
+        {
+            dlg.dismiss();
+        }
+    }
 }

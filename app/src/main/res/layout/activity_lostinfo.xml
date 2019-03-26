@@ -21,7 +21,7 @@
             android:id="@+id/lostinfo_ibtn_back"
             android:layout_width="14dp"
             android:layout_height="25dp"
-            app:srcCompat="@mipmap/back_button" />
+            app:srcCompat="@drawable/back_button" />
     </LinearLayout>
 
     <LinearLayout
@@ -41,7 +41,7 @@
                 android:id="@+id/imageView5"
                 android:layout_width="136dp"
                 android:layout_height="175dp"
-                android:src="@mipmap/logo_540" />
+                android:src="@drawable/logo_540" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -61,7 +61,7 @@
             android:id="@+id/lostinfo_layout_id_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@mipmap/id_tab_block"
+            android:background="@drawable/id_tab_block"
             android:orientation="vertical">
 
             <LinearLayout
@@ -98,7 +98,7 @@
                         android:layout_width="20dp"
                         android:layout_height="17dp"
                         android:layout_marginRight="18dp"
-                        app:srcCompat="@mipmap/tab_up_button" />
+                        app:srcCompat="@drawable/tab_up_button" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -117,13 +117,14 @@
                     android:layout_marginRight="15dp"
                     android:layout_marginBottom="5dp"
                     app:mtf_backgroundColor="#808183"
-                    app:mtf_image="@mipmap/mail_icon"
+                    app:mtf_image="@drawable/mail_icon"
                     app:mtf_labelColor="#808183">
 
                     <EditText
                         android:id="@+id/lostinfo_edit_id_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:singleLine="true"
                         android:hint="Write your E-mail"
                         android:textColor="#f0f4f4"
                         android:textSize="15sp" />
@@ -137,7 +138,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginBottom="15dp"
-                    android:background="@mipmap/short_button"
+                    android:background="@drawable/short_button"
                     android:text="Send Mail"
                     android:textColor="#808183"
                     android:textSize="17sp" />
@@ -149,7 +150,7 @@
             android:id="@+id/lostinfo_layout_pw_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@mipmap/id_tab_block"
+            android:background="@drawable/id_tab_block"
             android:orientation="vertical"
             android:visibility="visible">
 
@@ -187,7 +188,7 @@
                         android:layout_width="20dp"
                         android:layout_height="17dp"
                         android:layout_marginRight="18dp"
-                        app:srcCompat="@mipmap/tab_up_button" />
+                        app:srcCompat="@drawable/tab_up_button" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -207,7 +208,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_marginBottom="5dp"
                     app:mtf_backgroundColor="#808183"
-                    app:mtf_image="@mipmap/id_icon"
+                    app:mtf_image="@drawable/id_icon"
                     app:mtf_labelColor="#808183">
 
                     <EditText
@@ -215,6 +216,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Write your ID"
+                        android:singleLine="true"
                         android:textColor="#f0f4f4"
                         android:textSize="15sp" />
 
@@ -227,7 +229,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_marginBottom="5dp"
                     app:mtf_backgroundColor="#808183"
-                    app:mtf_image="@mipmap/mail_icon"
+                    app:mtf_image="@drawable/mail_icon"
                     app:mtf_labelColor="#808183">
 
                     <EditText
@@ -235,6 +237,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Write your E-mail"
+                        android:singleLine="true"
                         android:textColor="#f0f4f4"
                         android:textSize="15sp" />
 
@@ -247,7 +250,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginBottom="15dp"
-                    android:background="@mipmap/short_button"
+                    android:background="@drawable/short_button"
                     android:text="Send Mail"
                     android:textColor="#808183" />
             </LinearLayout>

@@ -9,21 +9,23 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.target.ViewTarget;
 import com.nightonke.boommenu.BoomButtons.ButtonPlaceAlignmentEnum;
 import com.nightonke.boommenu.BoomButtons.HamButton;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomMenuButton;
 import com.seok.seok.wowsup.retrofit.model.ResponseStoryObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
-import com.seok.seok.wowsup.utilities.ViewDialog;
-import com.seok.seok.wowsup.utilities.Common;
+import com.seok.seok.wowsup.utilities.FriendConfirmDialog;
 import com.seok.seok.wowsup.utilities.GlobalWowToken;
+import com.seok.seok.wowsup.utilities.StoryBanDialog;
+import com.seok.seok.wowsup.utilities.StoryDeleteDialog;
+import com.seok.seok.wowsup.utilities.ViewDialog;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,7 +38,7 @@ public class StoryActivity extends AppCompatActivity {
     private BoomMenuButton boomMenuButton;
     private LinearLayout storyLayoutBackground;
     private ImageView iBtnBack, iBtnLike;
-
+    private HamButton.Builder builder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,9 +67,9 @@ public class StoryActivity extends AppCompatActivity {
                             if (response.isSuccessful()) {
                                 ResponseStoryObj body = response.body();
                                 if (body.getState() == 0) {
-                                    iBtnLike.setImageResource(R.mipmap.unllike_icon);
+                                    iBtnLike.setImageResource(R.drawable.unllike_icon);
                                 } else if (body.getState() == 1) {
-                                    iBtnLike.setImageResource(R.mipmap.like_icon);
+                                    iBtnLike.setImageResource(R.drawable.like_icon);
                                 }
                                 storyTextCntLike.setText(body.getCntLike() + "");
                             }
@@ -85,7 +87,7 @@ public class StoryActivity extends AppCompatActivity {
 
     public void initData() {
         for (int i = 0; i < boomMenuButton.getPiecePlaceEnum().pieceNumber(); i++) {
-            HamButton.Builder builder = new HamButton.Builder()
+            builder = new HamButton.Builder()
                     .normalColorRes(R.color.blockColor)
                     .textSize(17)
                     .imagePadding(new Rect(30, 30, 30, 30))
@@ -93,26 +95,39 @@ public class StoryActivity extends AppCompatActivity {
                         @Override
                         public void onBoomButtonClick(int index) {
                             if (index == 0) {
-                                ViewDialog applyFriendViewDialog = new ViewDialog(StoryActivity.this, 0);
-                                applyFriendViewDialog.requestApplyFriend(GlobalWowToken.getInstance().getId(), otherUserID);
-                                applyFriendViewDialog.setButtonText("취소", "요청");
-                                applyFriendViewDialog.show();
+                                FriendConfirmDialog friendConfirmDialog = new FriendConfirmDialog(StoryActivity.this);
+                                friendConfirmDialog.requestApplyFriend(GlobalWowToken.getInstance().getId(), otherUserID);
+                                friendConfirmDialog.show();
+                            }else if(index==1){
+                                StoryDeleteDialog storyDeleteDialog = new StoryDeleteDialog(StoryActivity.this);
+                                if(storyDeleteDialog.requestStoryDelete(GlobalWowToken.getInstance().getId(), otherUserID, storyID))
+                                    storyDeleteDialog.show();
+                                else
+                                    Toast.makeText(StoryActivity.this, "Other 'SupPeople's writings.", Toast.LENGTH_SHORT).show();
+                            }
+                            else if(index == 2){
+                                StoryBanDialog storyBanDialog = new StoryBanDialog(StoryActivity.this);
+                                storyBanDialog.requestStoryBan(GlobalWowToken.getInstance().getId(), storyID);
+                                storyBanDialog.show();
                             }
                         }
                     });
             if (i == 0) {
-                builder.normalImageRes(R.mipmap.send_icon)
+                builder.normalImageRes(R.drawable.send_icon)
                         .normalText("Friend request")
                         .subNormalText("Send a friend to SupPeople");
             } else if (i == 1) {
-                builder.normalImageRes(R.mipmap.ban_icon)
+                builder.normalImageRes(R.drawable.delete)
+                        .normalText("Delete Post")
+                        .subNormalText("Delete my posts");
+            } else if(i == 2){
+                builder.normalImageRes(R.drawable.ban_icon)
                         .normalText("To ban")
                         .subNormalText("Report this post");
             }
             boomMenuButton.setButtonPlaceAlignmentEnum(ButtonPlaceAlignmentEnum.Top);
             boomMenuButton.addBuilder(builder);
         }
-
 
         Intent intent = getIntent();
         storyID = intent.getStringExtra("storyID");
@@ -132,9 +147,9 @@ public class StoryActivity extends AppCompatActivity {
                     storyTextTag5.setText("# " + body.getTag5());
                     storyTextCntLike.setText(body.getCntLike() + "");
                     if (body.getState() == 0) {
-                        iBtnLike.setImageResource(R.mipmap.unllike_icon);
+                        iBtnLike.setImageResource(R.drawable.unllike_icon);
                     } else if (body.getState() == 1) {
-                        iBtnLike.setImageResource(R.mipmap.like_icon);
+                        iBtnLike.setImageResource(R.drawable.like_icon);
                     }
                     imageURL = body.getImageURL();
                     Glide.with(getApplicationContext())

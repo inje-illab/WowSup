@@ -8,15 +8,17 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.seok.seok.wowsup.R;
+import com.seok.seok.wowsup.StoreActivity;
 import com.seok.seok.wowsup.SupPeopleInformationActivity;
 import com.seok.seok.wowsup.fragments.CardAdapter;
 import com.seok.seok.wowsup.fragments.CardData;
@@ -25,6 +27,7 @@ import com.seok.seok.wowsup.retrofit.model.ResponseStoryObj;
 import com.seok.seok.wowsup.retrofit.remote.ApiUtils;
 import com.seok.seok.wowsup.utilities.Common;
 import com.seok.seok.wowsup.utilities.GlobalWowToken;
+import com.seok.seok.wowsup.utilities.NoticeActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +45,10 @@ public class FragmentProfile extends Fragment {
     private RecyclerView mRecyclerView;
     private CardAdapter mAdapter;
     private ImageView profileImage, iBtnWrite;
+    private LinearLayout layoutStore;
     private ArrayList<CardData> cardViewData;
+
+    private Common.ProgressbarDialog progressbarDialog;
 
     public FragmentProfile() {
         // Required empty public constructor
@@ -58,6 +64,7 @@ public class FragmentProfile extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_fragment_profile, container, false);
+        progressbarDialog = new Common.ProgressbarDialog(view.getContext());
         initDataSet();
         initFindViewID();
 
@@ -73,6 +80,7 @@ public class FragmentProfile extends Fragment {
                     textFriend.setText(body.getCntFriend() + "");
                     btnNotice.setText(body.getCntNotice() + "");
                     textToken.setText(body.getToken()+"");
+                    Common.option = body.getCntNotice();
                     Glide.with(getActivity()).load(body.getImageURL()).centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).into(profileImage);
                 }
             }
@@ -83,12 +91,12 @@ public class FragmentProfile extends Fragment {
             }
         });
         Common.fragmentProfileTab = false;
-
         return view;
     }
 
     private void initDataSet() {
         Log.d("ProfileFragment_INITDATASET", "DATE_SET Success");
+        progressbarDialog.callFunction();
         ApiUtils.getStoryService().requestMyStory(GlobalWowToken.getInstance().getId()).enqueue(new Callback<List<ResponseStoryObj>>() {
             @Override
             public void onResponse(Call<List<ResponseStoryObj>> call, Response<List<ResponseStoryObj>> response) {
@@ -101,14 +109,15 @@ public class FragmentProfile extends Fragment {
                     }
                     if (mAdapter.getItemCount() == body.size()) {
                         mRecyclerView.setAdapter(mAdapter);
+                        progressbarDialog.endWork();
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<List<ResponseStoryObj>> call, Throwable t) {
-                Toast.makeText(getActivity(), "통신오류", Toast.LENGTH_SHORT).show();
-                Log.d("fragments_Profile", t.getMessage() + " < ");
+                Log.d("ProfileFragment_INITDATASET", "DATE_SET Transfer Failed");
+                progressbarDialog.endWork();
             }
         });
     }
@@ -131,6 +140,9 @@ public class FragmentProfile extends Fragment {
                 case R.id.fragment_profile_write:
                     startActivity(new Intent(getActivity().getApplication(), StoryWriteActivity.class));
                     break;
+                case R.id.layout_store:
+                    startActivity(new Intent(getActivity().getApplication(), StoreActivity.class));
+                    break;
             }
         }
     };
@@ -143,9 +155,11 @@ public class FragmentProfile extends Fragment {
         textFriend = view.findViewById(R.id.fragment_profile_text_firend);
         textToken = view.findViewById(R.id.fragment_profile_text_token);
         iBtnWrite = view.findViewById(R.id.fragment_profile_write);
+        layoutStore = view.findViewById(R.id.layout_store);
         iBtnWrite.setOnClickListener(onClickListener);
         btnNotice.setOnClickListener(onClickListener);
         profileImage.setOnClickListener(onClickListener);
+        layoutStore.setOnClickListener(onClickListener);
 
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));

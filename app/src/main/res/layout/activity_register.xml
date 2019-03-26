@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@mipmap/frist_logo" />
+                app:srcCompat="@drawable/frist_logo" />
         </LinearLayout>
 
         <LinearLayout
@@ -82,17 +82,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         app:mtf_backgroundColor="#808183"
-                        app:mtf_image="@mipmap/id_icon"
+                        app:mtf_image="@drawable/id_icon"
                         app:mtf_labelColor="#808183">
 
                         <EditText
                             android:id="@+id/register_edittext_id"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/hanmaumgodic_m"
                             android:hint="Write your ID"
+                            android:singleLine="true"
                             android:textColor="#f0f4f4"
-                            android:textSize="15sp"
-                            android:fontFamily="@font/hanmaumgodic_m"/>
+                            android:textSize="15sp" />
 
                     </com.github.florent37.materialtextfield.MaterialTextField>
                 </LinearLayout>
@@ -107,7 +108,7 @@
                         android:id="@+id/register_button_confirm_id"
                         android:layout_width="97dp"
                         android:layout_height="50dp"
-                        android:background="@mipmap/short_button"
+                        android:background="@drawable/short_button"
                         android:text="Overlap"
                         android:fontFamily="@font/hanmaumgodic_m"/>
                 </LinearLayout>
@@ -125,17 +126,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:mtf_backgroundColor="#808183"
-                    app:mtf_image="@mipmap/password_icon"
+                    app:mtf_image="@drawable/password_icon"
                     app:mtf_labelColor="#808183">
 
                     <EditText
                         android:id="@+id/register_edittext_pwd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/hanmaumgodic_m"
                         android:hint="Write your Password"
+                        android:inputType="textPassword"
+                        android:singleLine="true"
                         android:textColor="#f0f4f4"
-                        android:textSize="15sp"
-                        android:fontFamily="@font/hanmaumgodic_m"/>
+                        android:textSize="15sp" />
 
                 </com.github.florent37.materialtextfield.MaterialTextField>
 
@@ -159,7 +162,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         app:mtf_backgroundColor="#808183"
-                        app:mtf_image="@mipmap/mail_icon"
+                        app:mtf_image="@drawable/mail_icon"
                         app:mtf_labelColor="#808183">
 
                         <EditText
@@ -167,6 +170,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Write your E-Mail"
+                            android:singleLine="true"
                             android:textColor="#f0f4f4"
                             android:textSize="15sp"
                             android:fontFamily="@font/hanmaumgodic_m"/>
@@ -184,7 +188,7 @@
                         android:id="@+id/register_button_confirm_email"
                         android:layout_width="97dp"
                         android:layout_height="50dp"
-                        android:background="@mipmap/short_button"
+                        android:background="@drawable/short_button"
                         android:text="Overlap"
                         android:fontFamily="@font/hanmaumgodic_m"/>
                 </LinearLayout>
@@ -205,7 +209,7 @@
                 android:layout_height="50dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="10"
-                android:background="@mipmap/short_button"
+                android:background="@drawable/short_button"
                 android:text="Login"
                 android:textColor="#808183"
                 android:textSize="18sp"
@@ -217,7 +221,7 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="10"
-                android:background="@mipmap/short_button_dark"
+                android:background="@drawable/short_button_dark"
                 android:text="Sign Up"
                 android:textColor="#f0f4f4 "
                 android:textSize="18sp"

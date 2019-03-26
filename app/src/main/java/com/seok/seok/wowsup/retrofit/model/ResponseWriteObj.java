@@ -2,6 +2,8 @@ package com.seok.seok.wowsup.retrofit.model;
 
 public class ResponseWriteObj {
     private int storyID;
+    private int state;
+    private String me;
     private String storyTitle;
     private String storyBody;
     private String storyImage;
@@ -17,6 +19,14 @@ public class ResponseWriteObj {
 
     public void setStoryID(int storyID) {
         this.storyID = storyID;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 
     public String getStoryTitle() {
@@ -81,5 +91,13 @@ public class ResponseWriteObj {
 
     public void setStoryTag5(String storyTag5) {
         this.storyTag5 = storyTag5;
+    }
+
+    public String getMe() {
+        return me;
+    }
+
+    public void setMe(String me) {
+        this.me = me;
     }
 }

@@ -19,6 +19,7 @@ import com.bumptech.glide.request.target.ViewTarget;
 import com.seok.seok.wowsup.R;
 import com.seok.seok.wowsup.StoryActivity;
 import com.seok.seok.wowsup.fragments.fragprofile.StoryWriteActivity;
+import com.seok.seok.wowsup.utilities.Common;
 
 import java.util.ArrayList;
 
@@ -30,7 +31,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     private LinearLayout layoutStoryBackground, layoutStoryTitle;
     private RelativeLayout layoutBackTitle;
     private ImageView imgHeart;
-
     public CardAdapter(ArrayList<CardData> DataSet, Context context) {
         items = DataSet;
         this.context = context;

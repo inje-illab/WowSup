@@ -4,6 +4,7 @@ import android.util.Log;
 
 public class GlobalWowToken {
     private static GlobalWowToken globalWowToken = new GlobalWowToken();
+    private int token;
     private String id;
     private String userEmail;
     private String imageURL;
@@ -38,5 +39,13 @@ public class GlobalWowToken {
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
+    }
+
+    public int getToken() {
+        return token;
+    }
+
+    public void setToken(int token) {
+        this.token = token;
     }
 }

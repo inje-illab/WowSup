@@ -26,7 +26,7 @@ public class LauncherActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
-        mHandler.sendEmptyMessageDelayed(0, 500);
+        mHandler.sendEmptyMessageDelayed(0, 1000);
         mContext = getApplicationContext();
 
 

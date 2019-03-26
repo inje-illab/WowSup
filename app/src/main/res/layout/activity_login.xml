@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@mipmap/frist_logo" />
+                app:srcCompat="@drawable/frist_logo" />
         </LinearLayout>
 
         <LinearLayout
@@ -72,25 +72,28 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <EditText
+                    <com.rengwuxian.materialedittext.MaterialEditText
                         android:id="@+id/login_edittext_id"
                         android:layout_width="match_parent"
-                        android:layout_height="41.3dp"
-                        android:ems="10"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="7dp"
+                        android:fontFamily="@font/hanmaumgodic_m"
                         android:hint="ID"
-                        android:text="msno"
-                        android:textSize="18sp"
-                        android:fontFamily="@font/hanmaumgodic_m" />
+                        android:singleLine="true"
+                        android:text="" />
 
-                    <EditText
+                    <com.rengwuxian.materialedittext.MaterialEditText
                         android:id="@+id/login_edittext_pwd"
                         android:layout_width="match_parent"
-                        android:layout_height="41.3dp"
-                        android:ems="10"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="7dp"
+                        android:fontFamily="@font/hanmaumgodic_m"
                         android:hint="PW"
-                        android:text="msnomsno"
-                        android:textSize="18sp"
-                        android:fontFamily="@font/hanmaumgodic_m"/>
+                        android:inputType="textPassword"
+                        android:singleLine="true"
+                        android:text="" />
 
                 </LinearLayout>
 
@@ -127,7 +130,7 @@
                     android:layout_height="50dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="5.5"
-                    android:background="@mipmap/short_button"
+                    android:background="@drawable/short_button"
                     android:text="Throgh SNS"
                     android:textColor="#808183"
                     android:textSize="21sp"
@@ -140,7 +143,7 @@
                     android:layout_height="50dp"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="5.5"
-                    android:background="@mipmap/short_button"
+                    android:background="@drawable/short_button"
                     android:text="Lost ID / PW"
                     android:textColor="#808183"
                     android:textSize="18sp"
@@ -173,7 +176,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:background="@mipmap/btn_black_bar"
+                    android:background="@drawable/btn_black_bar"
                     android:text="Login"
                     android:textColor="#f0f4f4"
                     android:textSize="18sp"
