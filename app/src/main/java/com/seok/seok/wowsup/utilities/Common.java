@@ -12,22 +12,28 @@ import android.graphics.drawable.Drawable;
 
 import com.seok.seok.wowsup.R;
 
+// 프로젝트에 공통적으로 필요에 의한 클래스
 public class Common {
+
+    //서버 기본 주소
     public static final String API_BASE_URL = "http://www.heywowsup.com/wowsup/";
     public static final String API_IMAGE_BASE_URL = "http://www.heywowsup.com/wowsup/Image/";
     public static final String USER_IMAGE_BASE_URL = "http://www.heywowsup.com/wowsup/Image/Userprofile/";
     public static final String STORY_IMAGE_BASE_URL = "http://www.heywowsup.com/wowsup/Image/Background/";
     public static final String STORY_IMAGE_USER_URL = "http://www.heywowsup.com/wowsup/Image/UserStory/";
 
+    //탭을 클릭한 필드값
     public static boolean fragmentProfileTab = true;
     public static boolean fragmentChatTab = true;
     public static boolean fragmentStoryTab = true;
     public static boolean fragmentHelpTab = true;
 
+    //검색 및 번역에 필요한 필드값
     public static String searchTagText = null;
     public static int translateOption = 0;
     public static int option = 0;
 
+    //기본적인 10개 색
     public static final int[] NONPICK_BANNER = {
             Color.rgb(201,223,241),
             Color.rgb(239,231,204),
@@ -40,6 +46,8 @@ public class Common {
             Color.rgb(183,187,189),
             Color.rgb(246,224,209)
     };
+
+    // 업데이트시 변경되어야할 배너 색
     public static final int[] PICK_BANNER = {
             R.drawable.click_color_1_st,
             R.drawable.click_color_2_nd,
@@ -53,6 +61,7 @@ public class Common {
             R.drawable.click_color_10_th,
     };
 
+    // 탭 선택 플래그 함수수
     public static void setTabFlag(){
         fragmentProfileTab = true;
         fragmentChatTab = true;
@@ -60,11 +69,13 @@ public class Common {
         fragmentHelpTab = true;
     }
 
+    // 이미지 사이즈 구하는 함수
     public static Drawable fixImageSize(Resources resources, Drawable image, int width, int height){
         Bitmap bitmap = ((BitmapDrawable)image).getBitmap();
         return new BitmapDrawable(resources, Bitmap.createScaledBitmap(bitmap, width, height, true));
     }
 
+    // 서버통신시 실행되어야할 프로그래스 바 클래스
     public static class ProgressbarDialog {
         private Context context;
         final Dialog dlg;

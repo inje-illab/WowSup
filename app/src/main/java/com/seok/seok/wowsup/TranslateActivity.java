@@ -22,6 +22,7 @@ import static com.seok.seok.wowsup.fragments.fragchat.ChatActivity.txtText;
 import static com.seok.seok.wowsup.fragments.fragprofile.StoryWriteActivity.editTextTitle;
 import static com.seok.seok.wowsup.fragments.fragprofile.StoryWriteActivity.editTextBody;
 
+//번역 클래스 엑티비티
 public class TranslateActivity extends AppCompatActivity {
 
     private Button btnTrans, btnSendtext;
@@ -32,6 +33,7 @@ public class TranslateActivity extends AppCompatActivity {
     private String clientSecret = "XLgmPOQ04n";//애플리케이션 클라이언트 시크릿값";
     private String strTrans;
 
+    //레이아웃엑티비티 생성
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +61,7 @@ public class TranslateActivity extends AppCompatActivity {
             }
         });
         btnTrans = findViewById(R.id.btnTrans);
+        //번역버튼을 눌렀을경우 쓰레드 돌림
         btnTrans.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,6 +115,7 @@ public class TranslateActivity extends AppCompatActivity {
 
     }
 
+    //서버에서 받아온 데이터값 바꾸기
     public String parsing(String txtTrans) {
         String strReturn = txtTrans;
         String array1[] = strReturn.split(":");

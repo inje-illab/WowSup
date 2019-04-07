@@ -16,6 +16,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//친구신청온 것을 확인하는 다이얼로그
 public class FriendConfirmDialog extends Dialog implements View.OnClickListener {
     private static int LAYOUT;
     private Context context;
@@ -39,6 +40,7 @@ public class FriendConfirmDialog extends Dialog implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.dialog_friend_btn_yes:
+                //YES 버튼을 눌렀을 경우 친구요청 서버 통신
                 ApiUtils.getCommonService().requestApplyFriend(userID, otherUserID).enqueue(new Callback<ResponseCommonObj>() {
                     @Override
                     public void onResponse(Call<ResponseCommonObj> call, Response<ResponseCommonObj> response) {
@@ -63,6 +65,7 @@ public class FriendConfirmDialog extends Dialog implements View.OnClickListener 
                 });
                 break;
             case R.id.dialog_friend_btn_no:
+                //NO 버튼을 눌렀을 경우 다이얼로그 닫기
                 dismiss();
                 break;
         }

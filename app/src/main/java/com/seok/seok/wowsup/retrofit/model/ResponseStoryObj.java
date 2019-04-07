@@ -1,6 +1,7 @@
 package com.seok.seok.wowsup.retrofit.model;
 
 public class ResponseStoryObj {
+    //스토리에 들어갈 모델 클래스
     private int storyID;
     private String userID;
     private String title;

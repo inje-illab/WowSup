@@ -1,7 +1,7 @@
 package com.seok.seok.wowsup.retrofit.model;
 
 public class ResponseLoginObj {
-
+    //로그인 페이지에 들어갈 모델 클래스
     private int state;
     private int token;
     private String id;

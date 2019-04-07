@@ -21,25 +21,28 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//알림 어댑터 리싸이클러뷰를 이용한 클래스
 public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder> {
+    // 어댑터에 들어갈 필드값
     private Context context;
     private ArrayList<NoticeData> items;
     private View view;
     private ViewHolder viewHolder;
     private TextView userID;
     private Button btnYes, btnNo;
+    //어댑터생성자
     public NoticeAdapter(ArrayList<NoticeData> DataSet, Context context){
         items = DataSet;
         this.context = context;
     }
-
+    //레이아웃과 연결시키기위한 함수
     @Override
     public NoticeAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_notice_dialog, parent, false);
         viewHolder = new ViewHolder(view);
         return viewHolder;
     }
-
+    //레이아웃에 있는 UI 연동시킬 아이디값
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, int position) {
         userID = viewHolder.itemView.findViewById(R.id.dialog_confirm_text_userid);
@@ -49,12 +52,14 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
         if(item.getStatus()==1) {
             userID.setText(item.getUserID());
         }
+        //no 버튼을 눌렀을 경우
         btnNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((Activity)context).finish();
             }
         });
+        //yes 버튼을 눌렀을 경우 서버 통신
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

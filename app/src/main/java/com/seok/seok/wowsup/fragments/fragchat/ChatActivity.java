@@ -39,7 +39,7 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+//채팅 엑티비티
 public class ChatActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -75,6 +75,7 @@ public class ChatActivity extends AppCompatActivity {
         btnSend = findViewById(R.id.btnSend);
         btnBack = findViewById(R.id.btnBack);
 
+        //채팅시 모르는 어휘가 나왔을 경우 번역페이지로 이동
         btnTrans.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,10 +83,11 @@ public class ChatActivity extends AppCompatActivity {
                 startActivity(new Intent(ChatActivity.this, TranslateActivity.class));
             }
         });
-
+        //채팅 보내기
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //채팅에 어떤 언어를 쳤는지 데이터베이스에 넣기위한 알고리즘
                 String strText = txtText.getText().toString();
                 boolean result = strText.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*");
                 if (strText.equals("") || strText.isEmpty()) {
@@ -101,10 +103,11 @@ public class ChatActivity extends AppCompatActivity {
 
                         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         String formattedDate = df.format(c.getTime());
-
+                        //파이어베이스 연동
                         DatabaseReference myRef = database.getReference("users").child(GlobalWowToken.getInstance().getId()).child("friends").child(strFriendUid).child("chat").child(formattedDate);
                         DatabaseReference myRef1 = database.getReference("users").child(strFriendUid).child("friends").child(GlobalWowToken.getInstance().getId()).child("chat").child(formattedDate);
                         Hashtable<String, String> chat = new Hashtable<String, String>();
+                        //이메일과 텍스트를 넘김
                         chat.put("email", email);
                         chat.put("text", strText);
 
@@ -116,7 +119,7 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
         });
-
+        //뒤로가기 버튼튼
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,12 +142,12 @@ public class ChatActivity extends AppCompatActivity {
         mAdapter = new MyAdapter(mChat, email);
         mRecyclerView.setAdapter(mAdapter);
 
-
+        //파이어베이스에 넣기위한 응답
         DatabaseReference myRef = database.getReference("users").child(GlobalWowToken.getInstance().getId()).child("friends").child(strFriendUid).child("chat");
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+                //채팅이 하나 늘었을 경우
                 Chat chat = dataSnapshot.getValue(Chat.class);
 
                 mChat.add(chat);
@@ -154,34 +157,35 @@ public class ChatActivity extends AppCompatActivity {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+                //채팅이 하나 바뀌었을경우
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
+                //삭제했을 경우
             }
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+                //옮겨졌을 경우
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                //취소했을 경우
             }
         });
     }
 
     public void sentenceSend(String sentence) {
+        //a-Z 까지 알파벳이아닌경우 잘라내어 서버에 등록
         String[] words = sentence.replaceAll("[^a-zA-Z]", " ").split(delimiter);
         for (String word : words) {
             if (!word.equals("")) {
                 wordMap.put((wordCount++) + "", word);
             }
         }
-
+        // 서버등록 통신
         ApiUtils.getWordService().requestChatWord(wordMap).enqueue(new Callback<List<ResponseChatWordObj>>() {
             @Override
             public void onResponse(Call<List<ResponseChatWordObj>> call, Response<List<ResponseChatWordObj>> response) {

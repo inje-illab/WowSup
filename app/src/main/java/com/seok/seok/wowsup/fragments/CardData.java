@@ -1,14 +1,14 @@
 package com.seok.seok.wowsup.fragments;
 
 public class CardData {
-
+    //스토리에 넣을 필드값
     private String storyID;
     private String userID;
     private String title;
     private String body;
     private String cntLike;
     private String imageURL;
-
+    //어댑터에서 생성자로 다음 내용 삽입
     public CardData(String storyID, String userID, String title, String body, String cntLike, String imageURL) {
         this.storyID = storyID;
         this.userID = userID;

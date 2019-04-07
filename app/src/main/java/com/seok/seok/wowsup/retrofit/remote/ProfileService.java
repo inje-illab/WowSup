@@ -9,6 +9,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
+//프로필 서비스 인터페이스
 public interface ProfileService {
     //서버 요청 URL
 

@@ -28,6 +28,7 @@ import retrofit2.Response;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
+//스토리를 업로드 하기위한 다이얼로그 클래스
 public class WriteConfirmDialog extends Dialog implements View.OnClickListener {
     private static int LAYOUT;
     private Context context;
@@ -45,9 +46,11 @@ public class WriteConfirmDialog extends Dialog implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(LAYOUT);
+        // 프로그래스 바 생성
         progressbarDialog = new Common.ProgressbarDialog(context);
         btnYes = findViewById(R.id.dialog_notice_btn_yes);
         btnNo = findViewById(R.id.dialog_notice_btn_no);
+        // Yes 버튼을 눌렀을 경우 서버와 통신 시작
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +82,7 @@ public class WriteConfirmDialog extends Dialog implements View.OnClickListener {
                 }
             }
         });
+        //No 버튼을 눌렀을 경우 다이얼로그 종료
         btnNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,6 +96,7 @@ public class WriteConfirmDialog extends Dialog implements View.OnClickListener {
 
     }
 
+    //업로드를 하기위해 필드값에 데이터 저장
     public void requestStoryUpload(String title, String body, String image, String tag1, String tag2, String tag3, String tag4, String tag5) {
         this.title = title;
         this.body = body;
@@ -104,12 +109,14 @@ public class WriteConfirmDialog extends Dialog implements View.OnClickListener {
     }
 
     public void uploadFile() {
+        // 사진 업로드를 하기위함
         progressbarDialog.callFunction();
         File file = new File(this.image);
+        //사진 업로드 생성
         RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
         MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", GlobalWowToken.getInstance().getId() + file.getName(), requestBody);
         RequestBody filename = RequestBody.create(MediaType.parse("text/plain"), file.getName());
-
+        //서버 통신 시작
         Call<ResponseWriteObj> call = ApiUtils.getWriteService().requestImageWriteStory(GlobalWowToken.getInstance().getId(), title, body, tag1, tag2, tag3, tag4, tag5, fileToUpload, filename);
         call.enqueue(new Callback<ResponseWriteObj>() {
             @Override

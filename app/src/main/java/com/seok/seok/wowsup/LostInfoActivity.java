@@ -19,7 +19,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//아이디 패스워드 찾는 액티비티
 public class LostInfoActivity extends AppCompatActivity {
+    //아이디 패스워드를 찾기위한 필드값
     private EditText editIDEmail, editPWID, editPWEmail;
     private Button btnID, btnPW;
     private Callback retrofitCallBack;
@@ -37,6 +39,7 @@ public class LostInfoActivity extends AppCompatActivity {
 
     }
 
+    // 버튼을 클릭했을경우
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -79,7 +82,6 @@ public class LostInfoActivity extends AppCompatActivity {
                     }
                     break;
                 case R.id.lostinfo_ibtn_pw:
-                    countDownTimer();
                     layoutID.setVisibility(View.GONE);
                     layoutIDTitle.setBackgroundResource(R.drawable.id_tab_block);
                     iBtnID.setImageResource(R.drawable.tab_down_button);
@@ -103,6 +105,7 @@ public class LostInfoActivity extends AppCompatActivity {
         }
     };
 
+    //초기 UI 아이디값 가져오기
     public void init() {
         checkID = false;
         checkPW = false;

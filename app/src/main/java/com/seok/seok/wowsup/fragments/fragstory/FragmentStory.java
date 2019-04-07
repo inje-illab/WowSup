@@ -28,8 +28,9 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+//Story 프레그먼트 클래스
 public class FragmentStory extends Fragment {
+    //스토리 페이지 프레그먼트 구성하기위한 필드값
     private View view;
     private EditText editTextSearch;
     private Button buttonSearch;
@@ -51,7 +52,7 @@ public class FragmentStory extends Fragment {
         cardViewData = new ArrayList<>();
         mAdapter = new CardAdapter(cardViewData, this.getContext());
     }
-
+    //스토리 프레그먼트 레이아웃 연결
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_fragment_story, container, false);
@@ -61,7 +62,7 @@ public class FragmentStory extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
         return view;
     }
-
+    //서버에있는 스토리 모두 들고오기
     private void initDataSet() {
         progressbarDialog.callFunction();
         ApiUtils.getStoryService().requestStoryView().enqueue(new Callback<List<ResponseStoryObj>>() {
@@ -69,7 +70,6 @@ public class FragmentStory extends Fragment {
             public void onResponse(Call<List<ResponseStoryObj>> call, Response<List<ResponseStoryObj>> response) {
                 if (response.isSuccessful()) {
                     List<ResponseStoryObj> body = response.body();
-                    Log.d("asdf", body.size() + "");
                     for (int i = 0; i < body.size(); i++) {
                         cardViewData.add(new CardData(body.get(i).getStoryID() + "",
                                 body.get(i).getUserID() + "", body.get(i).getTitle() + "",
@@ -96,7 +96,7 @@ public class FragmentStory extends Fragment {
     public void onDetach() {
         super.onDetach();
     }
-
+    //UI와 레이아웃 필드값 연결
     public void initFindViewID() {
         mRecyclerView = view.findViewById(R.id.fragment_story_view);
         layoutTagTitle = view.findViewById(R.id.fragment_story_layout_topic);
@@ -108,13 +108,14 @@ public class FragmentStory extends Fragment {
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         mRecyclerView.scrollToPosition(0);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-
+        //검색버튼을 눌렀을 경우
         buttonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 cardViewData.clear();
                 mAdapter.setItems(cardViewData);
                 mRecyclerView.setAdapter(mAdapter);
+                //해당 해쉬태그로 서버통신시작
                 ApiUtils.getStoryService().requestStoryTagView(editTextSearch.getText().toString()).enqueue(new Callback<List<ResponseStoryObj>>() {
                     @Override
                     public void onResponse(Call<List<ResponseStoryObj>> call, Response<List<ResponseStoryObj>> response) {
@@ -138,6 +139,7 @@ public class FragmentStory extends Fragment {
                         }
                     }
 
+                    //서버통신 실패
                     @Override
                     public void onFailure(Call<List<ResponseStoryObj>> call, Throwable t) {
                         Toast.makeText(getActivity(), "통신오류", Toast.LENGTH_SHORT).show();

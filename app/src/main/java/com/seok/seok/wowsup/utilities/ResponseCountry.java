@@ -1,5 +1,6 @@
 package com.seok.seok.wowsup.utilities;
 
+//국가를 받아올 클래스
 public class ResponseCountry {
     private String name;
     private int flagId;

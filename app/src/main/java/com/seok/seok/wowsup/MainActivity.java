@@ -24,6 +24,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//메인엑티비티에 프래그먼트 4개를 넣음
 public class MainActivity extends AppCompatActivity {
     private Random randTag;
     private FragmentManager fragmentManager = getSupportFragmentManager();
@@ -49,25 +50,25 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 switch (item.getItemId()) {
-
+                    //프로필 프레그먼트 이동
                     case R.id.navigation_menu1: {
                         transaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
                         transaction.replace(R.id.frame_layout, menu1Fragment).commitAllowingStateLoss();
                         break;
                     }
-
+                    //채팅 프레그먼트 이동
                     case R.id.navigation_menu2: {
                         transaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
                         transaction.replace(R.id.frame_layout, menu2Fragment).commitAllowingStateLoss();
                         break;
                     }
-
+                    //스토리 프레그먼트 이동
                     case R.id.navigation_menu3: {
                         transaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
                         transaction.replace(R.id.frame_layout, menu3Fragment).commitAllowingStateLoss();
                         break;
                     }
-
+                    // 글로벌 프레그먼트 이동
                     case R.id.navigation_menu4: {
                         transaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
                         transaction.replace(R.id.frame_layout, menu4Fragment).commitAllowingStateLoss();

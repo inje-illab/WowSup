@@ -34,8 +34,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//Global 프레그먼트 클래스
 public class FragmentHelp extends Fragment {
-
+    //글로벌 페이지 프레그먼트 구성하기위한 필드값
     private EditText editText;
     private Button button, iBtnMore;
     private View view;
@@ -45,10 +46,9 @@ public class FragmentHelp extends Fragment {
     private OnFragmentInteractionListener mListener;
     private PieChart globalHitWordChart;
     private Common.ProgressbarDialog progressbarDialog;
+
     public FragmentHelp() {
         wordMap = new HashMap<>();
-        wordCount = 0;
-        delimiter = " ";
     }
 
     public static FragmentHelp newInstance(String param1, String param2) {
@@ -63,11 +63,13 @@ public class FragmentHelp extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    //글로벌 프레그먼트 레이아웃 연결
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_fragment_help, container, false);
         progressbarDialog = new Common.ProgressbarDialog(view.getContext());
         iBtnMore = view.findViewById(R.id.fragment_help_more);
+        //개발자 스택을 보여주기위한 다이얼로그 생성
         iBtnMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +96,7 @@ public class FragmentHelp extends Fragment {
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
-
+    //파이차트 세팅함수
     public void initChart() {
         globalHitWordChart = view.findViewById(R.id.fragment_help_chart);
 
@@ -107,6 +109,7 @@ public class FragmentHelp extends Fragment {
         final ArrayList<Integer> colors = new ArrayList<>();
 
         progressbarDialog.callFunction();
+        //서버에서 데이터 받아와서 파이차트에 세팅
         ApiUtils.getWordService().requestWordChart().enqueue(new Callback<List<ResponseWordChartObj>>() {
             @Override
             public void onResponse(Call<List<ResponseWordChartObj>> call, Response<List<ResponseWordChartObj>> response) {
@@ -162,6 +165,8 @@ public class FragmentHelp extends Fragment {
             }
         });
     }
+
+    //파이차트에 들어갈 포멧팅
     public class MyValueFormatter implements ValueFormatter {
         private DecimalFormat mFormat;
         public MyValueFormatter() {

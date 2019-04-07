@@ -12,6 +12,7 @@ import com.seok.seok.wowsup.R;
 
 import java.util.ArrayList;
 
+//드롭박스 어댑터
 public class SpinnerAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<ResponseCountry> list;

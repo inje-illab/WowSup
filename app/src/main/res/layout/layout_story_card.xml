@@ -12,76 +12,70 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_margin="12dp"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/layout_story_title"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="12dp"
-            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:alpha="0.7"
+            android:background="@drawable/card_view_bg_pannel"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:id="@+id/layout_story_title"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:alpha="0.7"
-                android:background="@drawable/card_view_bg_pannel"
+                android:layout_height="match_parent"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:id="@+id/layout_story_btn_plus"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:orientation="vertical"></LinearLayout>
+            </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/layout_story_btn_plus"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:orientation="vertical"></LinearLayout>
-                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="3dp"
+                android:gravity="bottom"
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="3dp"
-                    android:gravity="bottom"
-                    android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/layout_story_img_like"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginLeft="10dp"
+                    app:srcCompat="@drawable/heart" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:id="@+id/layout_story_img_like"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_marginLeft="10dp"
-                        app:srcCompat="@drawable/heart" />
-                </LinearLayout>
+            <TextView
+                android:id="@+id/story_view_like"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="3dp"
+                android:fontFamily="@font/hanmaumgodic_l"
+                android:gravity="bottom|center"
+                android:text="0"
+                android:textColor="#ffffff"
+                android:textSize="10sp" />
 
-                <TextView
-                    android:id="@+id/story_view_like"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="3dp"
-                    android:gravity="bottom|center"
-                    android:text="0"
-                    android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:fontFamily="@font/hanmaumgodic_l"/>
+            <TextView
+                android:id="@+id/story_view_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/hanmaumgodic_m"
+                android:gravity="center"
+                android:text="Card Text"
+                android:textColor="#ffffff"
+                android:textSize="14sp" />
 
-                <TextView
-                    android:id="@+id/story_view_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="Card Text"
-                    android:textColor="#ffffff"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/hanmaumgodic_m"/>
+        </RelativeLayout>
 
-            </RelativeLayout>
-
-        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

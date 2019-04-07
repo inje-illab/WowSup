@@ -9,6 +9,7 @@ import com.kakao.auth.ISessionConfig;
 import com.kakao.auth.KakaoAdapter;
 import com.kakao.auth.KakaoSDK;
 
+//카카오톡 SNS로그인
 public class GlobalApplication extends Application {
     private static GlobalApplication instance;
     public static GlobalApplication getGlobalApplicationContext() {

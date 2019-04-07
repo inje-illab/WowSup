@@ -19,6 +19,7 @@ import java.security.NoSuchAlgorithmException;
 
 import static com.kakao.util.helper.Utility.getPackageInfo;
 
+//런처 엑티비티 클래스
 public class LauncherActivity extends AppCompatActivity {
     private Context mContext;
 
@@ -26,10 +27,12 @@ public class LauncherActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
+        //1초 뒤에 다음페이지로 넘김
         mHandler.sendEmptyMessageDelayed(0, 1000);
         mContext = getApplicationContext();
 
 
+        //해쉬코드 받기
         try{
             PackageInfo info = getPackageManager().getPackageInfo("com.seok.seok.wowsup",PackageManager.GET_SIGNATURES);
             for(Signature signature : info.signatures){
@@ -42,6 +45,7 @@ public class LauncherActivity extends AppCompatActivity {
         }
     }
 
+    //핸들러 변경
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {

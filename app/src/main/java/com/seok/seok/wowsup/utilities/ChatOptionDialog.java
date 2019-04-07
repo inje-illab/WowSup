@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.seok.seok.wowsup.R;
-
+//채팅 다이얼로그 클래스
 public class ChatOptionDialog{
 
     private Context context;
@@ -29,7 +29,7 @@ public class ChatOptionDialog{
 
         dlg.show();
 
-
+        //이름변경 버튼 클릭
         btnSetfriendName = (Button)dlg.findViewById(R.id.dialog_setfriend_btn);
         btnSetfriendName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,7 +38,7 @@ public class ChatOptionDialog{
             }
         });
 
-
+        //친구 삭제 버튼 클릭
         btnDeleteChat = (Button) dlg.findViewById(R.id.dialog_chat_delete_btn);
         btnDeleteChat.setOnClickListener(new View.OnClickListener() {
             @Override

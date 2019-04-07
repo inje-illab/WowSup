@@ -22,8 +22,10 @@ import com.seok.seok.wowsup.fragments.fragprofile.StoryWriteActivity;
 import com.seok.seok.wowsup.utilities.Common;
 
 import java.util.ArrayList;
-
+//스토리를 뿌려주기위한 어댑터 클래스
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
+
+    //어댑터에 넣을 필드값
     private Context context;
     private ArrayList<CardData> items;
     private View view;
@@ -36,12 +38,14 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         this.context = context;
     }
 
+
+    //레이아웃과 연결한 바인딩 뷰
     @Override
     public CardAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_story_card, parent, false);
         return new ViewHolder(view);
     }
-
+    //본 함수에서 연결한 레이아웃과 필드값 연결
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         txtTitle = viewHolder.itemView.findViewById(R.id.story_view_title);

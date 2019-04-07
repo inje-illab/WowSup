@@ -5,7 +5,7 @@ import com.seok.seok.wowsup.retrofit.model.ResponseMailObj;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-
+//메일 서비스 인터페이스
 public interface MailService {
     //서버 요청 URL
 

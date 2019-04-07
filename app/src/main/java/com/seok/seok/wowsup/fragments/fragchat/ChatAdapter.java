@@ -18,25 +18,26 @@ import java.util.List;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
+//채팅에 필요한 어댑터 구성
 public class ChatAdapter extends RecyclerView.Adapter<ChatViewHolder> {
     private static int LAYOUT;
     private Context context;
     private ChatOptionDialog chatOptionDialog;
     private List<ResponseChatObj> chatApiObject;
-
-
+    //채팅 어댑터 생성자
     public ChatAdapter(Context context, List<ResponseChatObj> apiObjects) {
         this.context = context;
         this.chatApiObject = apiObjects;
         chatOptionDialog = new ChatOptionDialog(context);
     }
 
+    //채팅 어댑터 생성 바인딩 그룹
     @Override
     public ChatViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_chat_list, parent, false);
         return new ChatViewHolder(view);
     }
-
+    //레이아웃에서 필요한 UI를 관리 및 구현
     @Override
     public void onBindViewHolder(ChatViewHolder holder, final int position) {
         final ResponseChatObj body = chatApiObject.get(position);

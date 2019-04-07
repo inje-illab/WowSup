@@ -15,7 +15,7 @@ import com.seok.seok.wowsup.retrofit.remote.LoginService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+//카카오톡 콜백세션 클래스
 public class SessionCallbackKakaoTalk implements ISessionCallback {
 
     private boolean loginSuccess = false;

@@ -36,8 +36,9 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+//Profile 프레그먼트 클래스
 public class FragmentProfile extends Fragment {
+    //프로필 페이지 프레그먼트 구성하기위한 필드값
     private View view;
     private Button btnNotice;
     private TextView textLike, textFriend,textToken;
@@ -60,7 +61,7 @@ public class FragmentProfile extends Fragment {
         cardViewData = new ArrayList<>();
         mAdapter = new CardAdapter(cardViewData, this.getContext());
     }
-
+    //프로필 프레그먼트 레이아웃 연결
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_fragment_profile, container, false);
@@ -69,6 +70,7 @@ public class FragmentProfile extends Fragment {
         initFindViewID();
 
         mRecyclerView.setAdapter(mAdapter);
+        //프로필에 필요한 서버 통신
         ApiUtils.getProfileService().requestMyProfile(GlobalWowToken.getInstance().getId()).enqueue(new Callback<ResponseProfileObj>() {
             @Override
             public void onResponse(Call<ResponseProfileObj> call, Response<ResponseProfileObj> response) {
@@ -84,7 +86,7 @@ public class FragmentProfile extends Fragment {
                     Glide.with(getActivity()).load(body.getImageURL()).centerCrop().crossFade().bitmapTransform(new CropCircleTransformation(getActivity())).into(profileImage);
                 }
             }
-
+            //서버통신 실패
             @Override
             public void onFailure(Call<ResponseProfileObj> call, Throwable t) {
                 Log.d("ProfileFragment_HTTP_GETPROFILE", "HTTP Transfer Failed");
@@ -93,10 +95,11 @@ public class FragmentProfile extends Fragment {
         Common.fragmentProfileTab = false;
         return view;
     }
-
+    //초기 데이터 설정 (스토리)
     private void initDataSet() {
         Log.d("ProfileFragment_INITDATASET", "DATE_SET Success");
         progressbarDialog.callFunction();
+        //내가쓴 스토리 서버 통신
         ApiUtils.getStoryService().requestMyStory(GlobalWowToken.getInstance().getId()).enqueue(new Callback<List<ResponseStoryObj>>() {
             @Override
             public void onResponse(Call<List<ResponseStoryObj>> call, Response<List<ResponseStoryObj>> response) {
@@ -113,7 +116,7 @@ public class FragmentProfile extends Fragment {
                     }
                 }
             }
-
+            //서버통신 실패
             @Override
             public void onFailure(Call<List<ResponseStoryObj>> call, Throwable t) {
                 Log.d("ProfileFragment_INITDATASET", "DATE_SET Transfer Failed");
@@ -127,26 +130,28 @@ public class FragmentProfile extends Fragment {
         super.onDetach();
     }
 
+
+    //각 버튼에대한 리스너
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.fragment_profile_btn_notice:
+                case R.id.fragment_profile_btn_notice://친구 친성 알림
                     startActivity(new Intent(getActivity().getApplication(), NoticeActivity.class));
                     break;
-                case R.id.fragment_profile_image:
+                case R.id.fragment_profile_image://프로필 관리 페이지 이동
                     startActivity(new Intent(getActivity().getApplication(), SupPeopleInformationActivity.class));
                     break;
-                case R.id.fragment_profile_write:
+                case R.id.fragment_profile_write://스토리 쓰기 페이지 이동
                     startActivity(new Intent(getActivity().getApplication(), StoryWriteActivity.class));
                     break;
-                case R.id.layout_store:
+                case R.id.layout_store://스토어로 이동
                     startActivity(new Intent(getActivity().getApplication(), StoreActivity.class));
                     break;
             }
         }
     };
-
+    //프로필 UI를 관리하기위해 필드값 레이아웃과 연결
     public void initFindViewID() {
         mRecyclerView = view.findViewById(R.id.fragment_profile_view);
         profileImage = view.findViewById(R.id.fragment_profile_image);

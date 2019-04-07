@@ -1,6 +1,7 @@
 package com.seok.seok.wowsup.retrofit.model;
 
 public class ResponseWordChartObj {
+    //글로벌 프레그먼트에 들어갈 모델 클래스
     private int wordID;
     private String word;
     private int wordCount;

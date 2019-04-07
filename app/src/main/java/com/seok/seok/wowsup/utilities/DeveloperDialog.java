@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.seok.seok.wowsup.R;
 import com.seok.seok.wowsup.WowsupWebsiteActivity;
 
+//개발자 정보를 올려놓을 다이얼로그
 public class DeveloperDialog extends Dialog implements View.OnClickListener {
     private static int LAYOUT;
     private Context context;
@@ -25,6 +26,7 @@ public class DeveloperDialog extends Dialog implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(LAYOUT);
         iBtnWeb = findViewById(R.id.dialog_ibtn_web);
+        //웹 페이지로 이동
         iBtnWeb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

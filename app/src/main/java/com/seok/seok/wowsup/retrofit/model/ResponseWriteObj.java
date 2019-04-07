@@ -1,6 +1,7 @@
 package com.seok.seok.wowsup.retrofit.model;
 
 public class ResponseWriteObj {
+    //서버에 글을 쓸 들어갈 모델 클래스
     private int storyID;
     private int state;
     private String me;

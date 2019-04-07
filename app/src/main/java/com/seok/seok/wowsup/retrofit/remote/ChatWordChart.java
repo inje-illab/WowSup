@@ -11,7 +11,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
-
+//채팅 단어 서비스 인터페이스
 public interface ChatWordChart {
     //서버 요청 URL
 

@@ -1,6 +1,7 @@
 package com.seok.seok.wowsup.retrofit.remote;
 
 public class ApiUtils {
+    //데이터를 보내어 서버와 통신할 빌드 클래스
     //Server /var/www/html 의 주소
     public static final String BASE_URL = "http://www.heywowsup.com/wowsup/";
     public static LoginService getUserService(){

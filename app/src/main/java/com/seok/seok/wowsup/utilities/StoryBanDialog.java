@@ -16,11 +16,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//글 신고하기 다이얼로그 클래스
 public class StoryBanDialog extends Dialog implements View.OnClickListener {
     private static int LAYOUT;
     private Context context;
     private String userID, storyID;
     private Button btnYes, btnNo;
+
     public StoryBanDialog(Context context) {
         super(context);
         LAYOUT = R.layout.layout_story_ban_dialog;
@@ -39,6 +41,7 @@ public class StoryBanDialog extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.dialog_story_ban_btn_yes:
+                //서버통신 시작
                 ApiUtils.getStoryService().requestBanStory(userID,storyID).enqueue(new Callback<ResponseStoryObj>() {
                     @Override
                     public void onResponse(Call<ResponseStoryObj> call, Response<ResponseStoryObj> response) {

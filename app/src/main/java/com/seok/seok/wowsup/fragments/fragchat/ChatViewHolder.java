@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.seok.seok.wowsup.R;
 
 public class ChatViewHolder extends RecyclerView.ViewHolder {
-
+    //채팅 바인딩 뷰 홀더 클래스 리사이클러 뷰에 뿌리기위함
     public ImageView chatFriendImage, chatFriendCountry;
     public TextView chatFriend, chatFriendSelfish;
     public Button chatFriendOption;

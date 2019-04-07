@@ -1,6 +1,7 @@
 package com.seok.seok.wowsup.retrofit.model;
 
 public class ResponseChatWordObj {
+    //글로벌 프래그먼트에 들어갈 모델 클래스
     private String key;
     private String value;
 

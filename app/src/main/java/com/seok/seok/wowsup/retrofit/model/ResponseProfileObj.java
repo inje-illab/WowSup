@@ -1,6 +1,7 @@
 package com.seok.seok.wowsup.retrofit.model;
 
 public class ResponseProfileObj {
+    //프로필 프레그먼트 에 들어갈 모델 클래스
     private int cntLike;
     private int cntFriend;
     private int cntNotice;

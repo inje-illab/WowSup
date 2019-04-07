@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 
 import com.seok.seok.wowsup.R;
 
+//서버통신을 하기시작할때 실행되는 프로그래스 바 클래스
 public class ProgressbarDialog {
     private Context context;
     final Dialog dlg;

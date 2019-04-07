@@ -44,7 +44,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//스토리 작성 클래스
 public class StoryWriteActivity extends AppCompatActivity {
+    //스토리를 쓰기위한 필드값
     private ImageView imageView1, imageView2, imageView3, imageView4, imageView5, btnHelp, btnBack, btnPickImage;
     private LinearLayout layoutBackground;
     private String imageBackgroundURL, mediaPath;
@@ -54,6 +56,8 @@ public class StoryWriteActivity extends AppCompatActivity {
     private static int RESULT_LOAD_IMAGE = 0;
     private static final int WRITE_PERMISSION = 0x01;
 
+
+    //생성과 동시에 필요한 UI와 레이아웃과 연결
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -140,6 +144,7 @@ public class StoryWriteActivity extends AppCompatActivity {
         });
     }
 
+    //작성완료 함수 한글이 포함되어있을 경우 생각완료
     public boolean writeConfirm() {
         boolean titleResult, bodyResult;
         if (editTextTitle.getText().toString().isEmpty() || editTextTitle.getText().length() == 0) {
@@ -163,7 +168,7 @@ public class StoryWriteActivity extends AppCompatActivity {
             }
         }
     }
-
+    //포커스 체인지 시 다음 리스너 사용
     View.OnFocusChangeListener onFocusChangeListener = new View.OnFocusChangeListener() {
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
@@ -179,7 +184,7 @@ public class StoryWriteActivity extends AppCompatActivity {
             }
         }
     };
-
+    // 각버튼에 대한 리스너
     View.OnClickListener onClickListener = new ImageView.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -215,7 +220,7 @@ public class StoryWriteActivity extends AppCompatActivity {
             }
         }
     };
-
+    //카메라 권한 콜백함수
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         if (requestCode == WRITE_PERMISSION) {
@@ -226,7 +231,7 @@ public class StoryWriteActivity extends AppCompatActivity {
             }
         }
     }
-
+    //콜백함수 결과값에대한 코드
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -260,7 +265,7 @@ public class StoryWriteActivity extends AppCompatActivity {
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
         }
     }
-
+    //쓰기권한 함수
     private void requestWritePermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {

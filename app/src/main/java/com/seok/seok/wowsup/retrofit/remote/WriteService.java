@@ -10,7 +10,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
-
+//글쓰기 서비스 인터페이스
 public interface WriteService {
     @GET("Profile/writeStory.php")
     Call<ResponseWriteObj> requestWriteStory(@Query("userID") String id,

@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import com.seok.seok.wowsup.R;
 
+//친구목록 닉네임 변경 다이얼로그 클래스
 public class SetFriendNickDialog {
     private Context context;
     private Dialog dlg;

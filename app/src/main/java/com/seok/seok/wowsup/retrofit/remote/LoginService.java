@@ -7,7 +7,7 @@ import com.seok.seok.wowsup.retrofit.model.ResponseRegisterObj;
 import retrofit2.Call;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
-
+//로그인 서비스 인터페이스
 public interface LoginService {
     //서버 요청 URL
 

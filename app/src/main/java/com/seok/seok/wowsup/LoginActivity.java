@@ -38,6 +38,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//로그인 액티비티 클래스
 public class LoginActivity extends AppCompatActivity {
     private Context mContext;
     private Button btnCustomKakaoLogin, btnCustomFacebookLogin;

@@ -14,6 +14,7 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.ViewTarget;
 import com.seok.seok.wowsup.R;
 
+//스토리 백그라운드 눌렀을 경우 백그라운드 보여주기
 public class ViewDialog extends Dialog implements View.OnClickListener {
     private static int LAYOUT;
     private Context context;
@@ -29,6 +30,7 @@ public class ViewDialog extends Dialog implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(LAYOUT);
+        //글라이드 라이브러리를 사용해서 백그라운드 사진을 입힘
         imgBackground = findViewById(R.id.dialog_background);
         Glide.with(context.getApplicationContext()).load(imgURL).into(imgBackground);
     }

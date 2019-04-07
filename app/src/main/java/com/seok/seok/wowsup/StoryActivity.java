@@ -31,14 +31,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//스토리를 보여줄 엑티비티
 public class StoryActivity extends AppCompatActivity {
 
+    //스토리 데이터관련 필드
     private String storyID, imageURL, otherUserID;
     private TextView storyTextBody, storyTextTag1, storyTextTag2, storyTextTag3, storyTextTag4, storyTextTag5, storyTextCntLike;
     private BoomMenuButton boomMenuButton;
     private LinearLayout storyLayoutBackground;
     private ImageView iBtnBack, iBtnLike;
     private HamButton.Builder builder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +51,7 @@ public class StoryActivity extends AppCompatActivity {
         initData();
 
     }
-
+    //UI를 눌렀을경우
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -60,6 +63,7 @@ public class StoryActivity extends AppCompatActivity {
                 case R.id.story_ibtn_back:
                     finish();
                 case R.id.story_ibtn_like:
+                    // 좋아요 버튼을 눌렀을 경우
                     ApiUtils.getStoryService().requestStoryLike(GlobalWowToken.getInstance().getId(), storyID).enqueue(new Callback<ResponseStoryObj>() {
                         @Override
                         public void onResponse(Call<ResponseStoryObj> call, Response<ResponseStoryObj> response) {
@@ -86,6 +90,7 @@ public class StoryActivity extends AppCompatActivity {
     };
 
     public void initData() {
+        // 글을 삭제할지 친구요청을 보낼시, 글을 신고할지를 선택할수 있는 메뉴 빌드
         for (int i = 0; i < boomMenuButton.getPiecePlaceEnum().pieceNumber(); i++) {
             builder = new HamButton.Builder()
                     .normalColorRes(R.color.blockColor)
@@ -94,18 +99,18 @@ public class StoryActivity extends AppCompatActivity {
                     .listener(new OnBMClickListener() {
                         @Override
                         public void onBoomButtonClick(int index) {
-                            if (index == 0) {
+                            if (index == 0) {//친구신청
                                 FriendConfirmDialog friendConfirmDialog = new FriendConfirmDialog(StoryActivity.this);
                                 friendConfirmDialog.requestApplyFriend(GlobalWowToken.getInstance().getId(), otherUserID);
                                 friendConfirmDialog.show();
-                            }else if(index==1){
+                            }else if(index==1){//글삭제
                                 StoryDeleteDialog storyDeleteDialog = new StoryDeleteDialog(StoryActivity.this);
                                 if(storyDeleteDialog.requestStoryDelete(GlobalWowToken.getInstance().getId(), otherUserID, storyID))
                                     storyDeleteDialog.show();
                                 else
                                     Toast.makeText(StoryActivity.this, "Other 'SupPeople's writings.", Toast.LENGTH_SHORT).show();
                             }
-                            else if(index == 2){
+                            else if(index == 2){//글 신고하기
                                 StoryBanDialog storyBanDialog = new StoryBanDialog(StoryActivity.this);
                                 storyBanDialog.requestStoryBan(GlobalWowToken.getInstance().getId(), storyID);
                                 storyBanDialog.show();
@@ -131,7 +136,7 @@ public class StoryActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         storyID = intent.getStringExtra("storyID");
-
+        //해쉬태그가 있다면 데이터 값 들고오기
         ApiUtils.getStoryService().requestPickStoryView(storyID, GlobalWowToken.getInstance().getId()).enqueue(new Callback<ResponseStoryObj>() {
             @Override
             public void onResponse(Call<ResponseStoryObj> call, Response<ResponseStoryObj> response) {

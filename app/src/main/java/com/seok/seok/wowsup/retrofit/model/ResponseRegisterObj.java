@@ -1,6 +1,7 @@
 package com.seok.seok.wowsup.retrofit.model;
 
 public class ResponseRegisterObj {
+    //회원가입 페이지에 들어갈 모델 클래스
     private int state;
     private String id;
 

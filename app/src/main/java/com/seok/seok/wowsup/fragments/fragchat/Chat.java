@@ -1,6 +1,7 @@
 package com.seok.seok.wowsup.fragments.fragchat;
 
 public class Chat {
+    //채팅에 필요한 모델 클래스
     public String email;
     public String text;
 
@@ -8,7 +9,7 @@ public class Chat {
         //Default
     }
 
-    public Chat(String email, String text){
+    public Chat(String email, String text) {
         this.email = email;
         this.text = text;
     }

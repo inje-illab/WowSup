@@ -13,9 +13,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//페이스북 콜백 클래스
 public class SessionCallbackFacebook implements FacebookCallback<LoginResult> {
     private boolean loginSuccess = false;
 
+    //콜백 함수 성공 함수
     @Override
     public void onSuccess(LoginResult loginResult) {
         Log.e("SessionCallback :: ", "onSuccess");

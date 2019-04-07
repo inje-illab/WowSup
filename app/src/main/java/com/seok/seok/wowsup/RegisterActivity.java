@@ -33,8 +33,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
+//회원가입 엑티비티 클래스
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, Dialog.OnCancelListener {
 
+    //랜덤 번호 관련
     private int randNum = 106254;
     private Random rand;
     final int MILLISINFUTURE = 300 * 1000; //총 시간 (300초 = 5분)

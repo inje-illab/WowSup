@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+//로그인시 선택할수있는 액티비티
 public class SelectActivity extends AppCompatActivity {
 
     private Button btnLogin, btnSignup;
@@ -15,6 +16,7 @@ public class SelectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select);
 
 
+        //로그인 버튼을 눌렀을 경우
         btnLogin = (Button)findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -22,6 +24,7 @@ public class SelectActivity extends AppCompatActivity {
                 startActivity(new Intent(SelectActivity.this, LoginActivity.class));
             }
         });
+        //회원가입 버튼을 눌렀을 경우
         btnSignup = (Button)findViewById(R.id.btnSignup);
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -18,6 +18,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//스토리를 삭제하려하는지 묻는 다이얼로그 클래스
 public class StoryDeleteDialog extends Dialog implements View.OnClickListener {
     private static int LAYOUT;
     private Context context;
@@ -44,6 +45,7 @@ public class StoryDeleteDialog extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.dialog_story_delete_btn_yes:
+                //서버통신 시작
                 ApiUtils.getStoryService().requestDeleteStory(userID, storyID).enqueue(new Callback<ResponseStoryObj>() {
                     @Override
                     public void onResponse(Call<ResponseStoryObj> call, Response<ResponseStoryObj> response) {
@@ -69,6 +71,7 @@ public class StoryDeleteDialog extends Dialog implements View.OnClickListener {
         }
     }
 
+    //글쓴 아이디와 스토리아이디가 같으면 지워지지않게 코드구성
     public boolean requestStoryDelete(String userID, String otherUserID, String storyID) {
         if (userID.equals(otherUserID)) {
             this.userID = userID;

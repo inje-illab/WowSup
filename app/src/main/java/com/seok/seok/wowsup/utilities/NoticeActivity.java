@@ -20,6 +20,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//알림 엑티비티 다이얼로그로 띄우기위한 클래스
 public class NoticeActivity extends AppCompatActivity {
     private LinearLayout background;
     private RecyclerView recyclerView;
@@ -37,6 +38,7 @@ public class NoticeActivity extends AppCompatActivity {
             background.setBackgroundResource(R.drawable.no_alarms_arrived);
             Common.option++;
         }
+        //서버에서 받아올 친구목록
         ApiUtils.getCommonService().requestApplyedFriend(GlobalWowToken.getInstance().getId()).enqueue(new Callback<List<ResponseCommonObj>>() {
             @Override
             public void onResponse(Call<List<ResponseCommonObj>> call, Response<List<ResponseCommonObj>> response) {
@@ -53,7 +55,7 @@ public class NoticeActivity extends AppCompatActivity {
                     }
                 }
             }
-
+            //통신 실패
             @Override
             public void onFailure(Call<List<ResponseCommonObj>> call, Throwable t) {
 

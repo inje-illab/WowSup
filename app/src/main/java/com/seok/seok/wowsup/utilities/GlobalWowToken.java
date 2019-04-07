@@ -2,6 +2,8 @@ package com.seok.seok.wowsup.utilities;
 
 import android.util.Log;
 
+//프로그램에서 저장되어야할 싱글톤 패턴의 클래스
+
 public class GlobalWowToken {
     private static GlobalWowToken globalWowToken = new GlobalWowToken();
     private int token;

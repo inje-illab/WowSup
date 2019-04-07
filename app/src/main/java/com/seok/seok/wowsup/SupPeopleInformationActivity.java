@@ -33,8 +33,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//회원정보 수정하기 위한 엑티비티
 public class SupPeopleInformationActivity extends AppCompatActivity {
 
+    //회원정보를 나타낼 필드값
     private SpinnerAdapter sAdapterAge, sAdapterCountry;
     private ArrayList<ResponseCountry> countries;
     private Spinner spinnerAge, spinnerCountry;
@@ -62,6 +64,7 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
     }
 
     public void initData() {
+        //유저 아이디값을 통해 서버와 통신하여 개별 정보를 뿌려줌
         textUserID.setText(GlobalWowToken.getInstance().getId());
         ApiUtils.getProfileService().requestMyProfile(GlobalWowToken.getInstance().getId()).enqueue(new Callback<ResponseProfileObj>() {
             @Override
@@ -103,6 +106,7 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
     }
 
     public void initFindViewID() {
+        //배너 변경을 위한 ID값
         layoutSet = new LinearLayout[10];
         layoutSet[0] = findViewById(R.id.info_layout_set1);
         layoutSet[1] = findViewById(R.id.info_layout_set2);
@@ -171,6 +175,7 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
             setLayoutSet(setColor);
         }
     };
+    //버튼을 클릭했을 경우 리스너
     View.OnClickListener onBtnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -202,6 +207,7 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
         }
     };
 
+    //레이아웃 선택했을 경우
     public void setLayoutSet(int layoutNum) {
         for (int i = 0; i < layoutSet.length; i++) {
             if (i == layoutNum) {
@@ -213,6 +219,7 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
     }
 
 
+    //나이데이터 삽입
     private void AgeList() {
         ArrayList age = new ArrayList<Integer>();
         for (int i = 1; i <= 80; i++) {
@@ -237,7 +244,7 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
         });
         spinnerAge.setAdapter(spinnerArrayAdapter);
     }
-
+    //성별 데이터 삽입
     private void GenderType() {
         if (genderGroup != null) {
             genderGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -249,7 +256,7 @@ public class SupPeopleInformationActivity extends AppCompatActivity {
         }
     }
 
-    //나이
+    //국가 데이터 삽입
     private void CountryList() {
         countries = new ArrayList<>();
         countries.add(new ResponseCountry("Korea", R.drawable.flag_south_korea));
