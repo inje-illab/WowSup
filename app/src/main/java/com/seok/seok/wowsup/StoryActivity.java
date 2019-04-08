@@ -47,6 +47,7 @@ public class StoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story);
 
+        //초기 데이터 삽입
         initFindViewByID();
         initData();
 

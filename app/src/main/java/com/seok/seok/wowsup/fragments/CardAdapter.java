@@ -3,6 +3,7 @@ package com.seok.seok.wowsup.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,10 @@ import com.seok.seok.wowsup.fragments.fragprofile.StoryWriteActivity;
 import com.seok.seok.wowsup.utilities.Common;
 
 import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 //스토리를 뿌려주기위한 어댑터 클래스
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
@@ -47,28 +52,22 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     }
     //본 함수에서 연결한 레이아웃과 필드값 연결
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        txtTitle = viewHolder.itemView.findViewById(R.id.story_view_title);
-        txtLike = viewHolder.itemView.findViewById(R.id.story_view_like);
-        imgHeart = viewHolder.itemView.findViewById(R.id.layout_story_img_like);
-        layoutBackTitle = viewHolder.itemView.findViewById(R.id.layout_story_title);
-        layoutStoryTitle = viewHolder.itemView.findViewById(R.id.layout_story_btn_plus);
-        layoutStoryBackground = viewHolder.itemView.findViewById(R.id.layout_story_background);
-        final CardData item = items.get(position);
+    public void onBindViewHolder(@NonNull final CardAdapter.ViewHolder viewHolder, int i) {
+        final CardData item = items.get(i);
         // 서버에서 받아온 테스트 데이터 삽입
-        txtTitle.setText(item.getTitle());
-        txtLike.setText(item.getCntLike());
+        viewHolder.txtTitle.setText(item.getTitle());
+        viewHolder.txtLike.setText(item.getCntLike());
         Glide.with(viewHolder.itemView.getRootView().getContext())
                 .load(item.getImageURL())
                 .into(new ViewTarget<LinearLayout, GlideDrawable>((LinearLayout) viewHolder.itemView) {
                     @Override
                     public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
-                        layoutStoryBackground.setBackground(resource);
+                        viewHolder.layoutStoryBackground.setBackground(resource);
                     }
                 });
 
         //레이아웃 제목을 클릭할 경우 해당 storyID 값을 다음 엑티비티에 넘겨줌
-        layoutStoryBackground.setOnClickListener(new View.OnClickListener() {
+        viewHolder.layoutStoryBackground.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(view.getContext(), StoryActivity.class);
@@ -88,8 +87,13 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.story_view_like) TextView txtLike;
+        @BindView(R.id.story_view_title) TextView txtTitle;
+        @BindView(R.id.layout_story_img_like) ImageView imgHeart;
+        @BindView(R.id.layout_story_background) LinearLayout layoutStoryBackground;
         ViewHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this,itemView);
         }
     }
 }

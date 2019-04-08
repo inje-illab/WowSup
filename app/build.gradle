@@ -5,13 +5,11 @@ android {
     defaultConfig {
         applicationId "com.seok.seok.wowsup"
         minSdkVersion 19
-//        minSdkVersion 22
         // 업데이트시 버전 코드 변경하기
         // 로그인창
-/*
-    업데이트 내용
-
-*/
+        /*
+            업데이트 내용
+        */
         targetSdkVersion 28
         versionCode 8
         versionName "1.7.2"
@@ -19,12 +17,13 @@ android {
     }
     buildTypes {
         release {
+            //구글 플레이 올리기전 디버깅 릴리즈 코드
             aaptOptions.cruncherEnabled = false
             aaptOptions.useNewCruncher = false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//            minifyEnabled false
-//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // minifyEnabled false
+            // proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }
@@ -35,59 +34,46 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.android.support:support-v4:28.0.0'
-
+    // Butter Knife
+    implementation 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     //Google inApp purchase
     implementation 'com.anjlab.android.iab.v3:library:1.0.44'
-
     //FireBase
     implementation 'com.google.firebase:firebase-database:16.0.1'
     implementation 'com.google.firebase:firebase-auth:16.0.1'
-
-
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
     //Fragments 라이브러리
     implementation 'com.android.support:design:28.0.0'
-
     //KaKaoTalk, FaceBook 로그인 라이브러리
     implementation group: project.KAKAO_SDK_GROUP, name: 'usermgmt', version: project.KAKAO_SDK_VERSION
     implementation 'com.facebook.android:facebook-android-sdk:4.+'
-
     //Retrofit2 HTTP 통신 라이브러리
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.google.code.gson:gson:2.8.0'
-
     //RecyclerView, CardView
     implementation 'com.android.support:appcompat-v7:28.0.0-rc02'
     implementation "com.android.support:recyclerview-v7:28.0.0-rc02"
     implementation "com.android.support:cardview-v7:28.0.0-rc02"
     implementation 'com.android.support:recyclerview-v7:28.0.0'
-
     //Glide
     implementation "com.github.bumptech.glide:glide:3.7.0"
     implementation "jp.wasabeef:glide-transformations:2.0.1"
-
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
-
     //MaterialChips
     implementation 'com.github.tylersuehr7:chips-input-layout:2.3'
-
     //MaterialTextField
     implementation 'com.github.florent37:materialtextfield:1.0.7'
-
     //BoomMenu
     implementation 'com.nightonke:boommenu:2.1.1'
-
     //MPAndroidChart
     implementation 'com.github.PhilJay:MPAndroidChart:v2.0.9'
-
     //MaterialEditText
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
-
     //ProgressBar
     implementation 'com.wang.avi:library:2.1.3'
 }

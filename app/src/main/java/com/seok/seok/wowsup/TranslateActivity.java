@@ -29,8 +29,10 @@ public class TranslateActivity extends AppCompatActivity {
     private ImageView btnBack;
     private EditText editText;
     private TextView textView;
-    private String clientId = "_8DFZRFsspTZCrfikUzn";//애플리케이션 클라이언트 아이디값";
-    private String clientSecret = "XLgmPOQ04n";//애플리케이션 클라이언트 시크릿값";
+    //애플리케이션 클라이언트 아이디값";
+    private String clientId = "_8DFZRFsspTZCrfikUzn";
+    //애플리케이션 클라이언트 시크릿값";
+    private String clientSecret = "XLgmPOQ04n";
     private String strTrans;
 
     //레이아웃엑티비티 생성
@@ -41,6 +43,7 @@ public class TranslateActivity extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.editText);
         textView = findViewById(R.id.txtTrans);
         btnBack = findViewById(R.id.translate_btn_back);
+        //뒤로가기 버튼 클릭시 액티비티 종료
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,6 +51,7 @@ public class TranslateActivity extends AppCompatActivity {
             }
         });
         btnSendtext = findViewById(R.id.btnSendtext);
+        //인덱스 값으로 어느 페이지에서 Help 창을 열었는지 판별
         btnSendtext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +74,7 @@ public class TranslateActivity extends AppCompatActivity {
                     public void run() {
                         String strText = editText.getText().toString();
                         try {
+                            //해당 API를 받아오기위해 다음 코드 작성
                             String text = URLEncoder.encode(strText, "UTF-8");
                             String apiURL = "https://openapi.naver.com/v1/language/translate";
                             URL url = new URL(apiURL);
@@ -111,10 +116,7 @@ public class TranslateActivity extends AppCompatActivity {
                 }.start();
             }
         });
-
-
     }
-
     //서버에서 받아온 데이터값 바꾸기
     public String parsing(String txtTrans) {
         String strReturn = txtTrans;
